@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.mobilepunch;
+package edu.cnm.deepdive.mobilepunch.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +9,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.view.fragments.ClientFragment;
+import edu.cnm.deepdive.mobilepunch.view.fragments.EquipmentFragment;
+import edu.cnm.deepdive.mobilepunch.view.fragments.EventFragment;
+import edu.cnm.deepdive.mobilepunch.view.fragments.ProjectFragment;
 
 public class BottomNav extends AppCompatActivity {
 
