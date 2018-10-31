@@ -1,11 +1,14 @@
 package edu.cnm.deepdive.mobilepunch;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.strictmode.CleartextNetworkViolation;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -13,7 +16,6 @@ import android.widget.TextView;
 public class BottomNav extends AppCompatActivity {
 
   private TextView mTextMessage;
-
   private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
       = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -21,25 +23,27 @@ public class BottomNav extends AppCompatActivity {
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
       switch (item.getItemId()) {
         case R.id.event:
-          switchFragment((Fragment)new EventFragment(), false, null);
+          switchFragment(new EventFragment(), false, null);
           mTextMessage.setText(R.string.title_home);
           return true;
         case R.id.project:
-          switchFragment((Fragment) new ClientFragment(), false, null);
+          switchFragment(new ClientFragment(), false, null);
           mTextMessage.setText(R.string.title_dashboard);
           return true;
         case R.id.client:
-          switchFragment((Fragment) new ProjectFragment(), false, null);
+          switchFragment(new ProjectFragment(), false, null);
           mTextMessage.setText(R.string.title_notifications);
           return true;
         case R.id.equipment:
-          switchFragment((Fragment) new EquipmentFragment(), false, null);
+          switchFragment(new EquipmentFragment(), false, null);
           mTextMessage.setText(R.string.title_notifications);
           return true;
       }
       return false;
     }
   };
+  private BottomNavigationView navigation;
+
   private void switchFragment(Fragment fragment, boolean useStack, String variant) {
     FragmentManager manager = getSupportFragmentManager();
     String tag = fragment.getClass().getSimpleName() + ((variant != null) ? variant : "");
@@ -60,8 +64,29 @@ public class BottomNav extends AppCompatActivity {
     setContentView(R.layout.activity_bottom_nav);
 
     mTextMessage = (TextView) findViewById(R.id.message);
-    BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+    navigation = (BottomNavigationView) findViewById(R.id.navigation);
     navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    fromMain();
   }
 
+  public void fromMain(){
+    Bundle b = getIntent().getExtras();
+    int value = -1; // or other values
+    if(b != null)
+      value = b.getInt("key");
+    switch (value){
+      case 1:
+        navigation.setSelectedItemId(R.id.event);
+        break;
+      case 2:
+        navigation.setSelectedItemId(R.id.project);
+        break;
+      case 3:
+        navigation.setSelectedItemId(R.id.client);
+        break;
+      case 4:
+        navigation.setSelectedItemId(R.id.equipment);
+        break;
+    }
+  }
 }
