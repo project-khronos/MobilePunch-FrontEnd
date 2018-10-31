@@ -29,19 +29,19 @@ public class BottomNav extends AppCompatActivity {
       switch (item.getItemId()) {
         case R.id.event:
           switchFragment(new EventFragment(), false, null);
-          mTextMessage.setText(R.string.title_home);
+          mTextMessage.setText(R.string.event);
           return true;
         case R.id.project:
-          switchFragment(new ClientFragment(), false, null);
-          mTextMessage.setText(R.string.title_dashboard);
+          switchFragment(new ProjectFragment(), false, null);
+          mTextMessage.setText(R.string.project);
           return true;
         case R.id.client:
-          switchFragment(new ProjectFragment(), false, null);
-          mTextMessage.setText(R.string.title_notifications);
+          switchFragment(new ClientFragment(), false, null);
+          mTextMessage.setText(R.string.project);
           return true;
         case R.id.equipment:
           switchFragment(new EquipmentFragment(), false, null);
-          mTextMessage.setText(R.string.title_notifications);
+          mTextMessage.setText(R.string.equipment);
           return true;
       }
       return false;
@@ -67,7 +67,8 @@ public class BottomNav extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_bottom_nav);
-
+    ActionBar actionBar = getSupportActionBar();
+    actionBar.hide();
     mTextMessage = (TextView) findViewById(R.id.message);
     navigation = (BottomNavigationView) findViewById(R.id.navigation);
     navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
