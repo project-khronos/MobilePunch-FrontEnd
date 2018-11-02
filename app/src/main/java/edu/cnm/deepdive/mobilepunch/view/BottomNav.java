@@ -1,8 +1,6 @@
 package edu.cnm.deepdive.mobilepunch.view;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.strictmode.CleartextNetworkViolation;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -11,15 +9,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
+import edu.cnm.deepdive.mobilepunch.FragmentSwitcherActivity;
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.view.fragments.ClientFragment;
 import edu.cnm.deepdive.mobilepunch.view.fragments.EquipmentFragment;
 import edu.cnm.deepdive.mobilepunch.view.fragments.EventFragment;
 import edu.cnm.deepdive.mobilepunch.view.fragments.ProjectFragment;
 
-public class BottomNav extends AppCompatActivity {
+public class BottomNav extends FragmentSwitcherActivity{
 
   private TextView mTextMessage;
 
@@ -51,19 +50,6 @@ public class BottomNav extends AppCompatActivity {
   };
   private BottomNavigationView navigation;
 
-  private void switchFragment(Fragment fragment, boolean useStack, String variant) {
-    FragmentManager manager = getSupportFragmentManager();
-    String tag = fragment.getClass().getSimpleName() + ((variant != null) ? variant : "");
-    if (manager.findFragmentByTag(tag) != null) {
-      manager.popBackStackImmediate(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-    }
-    FragmentTransaction transaction = manager.beginTransaction();
-    transaction.replace(R.id.fragment_container, fragment, tag);
-    if (useStack) {
-      transaction.addToBackStack(tag);
-    }
-    transaction.commit();
-  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -75,14 +61,15 @@ public class BottomNav extends AppCompatActivity {
     navigation = (BottomNavigationView) findViewById(R.id.navigation);
     navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     fromMain();
-    }
+  }
 
-  public void fromMain(){
+  public void fromMain() {
     Bundle b = getIntent().getExtras();
     int value = -1; // or other values
-    if(b != null)
+    if (b != null) {
       value = b.getInt("key");
-    switch (value){
+    }
+    switch (value) {
       case 1:
         navigation.setSelectedItemId(R.id.event);
         break;
@@ -97,4 +84,5 @@ public class BottomNav extends AppCompatActivity {
         break;
     }
   }
+
 }

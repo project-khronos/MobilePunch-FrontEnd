@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.mobilepunch.view;
+package edu.cnm.deepdive.mobilepunch.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,23 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
-
-  private void switchFragment(Fragment fragment, boolean useStack, String variant) {
-    FragmentManager manager = getSupportFragmentManager();
-    String tag = fragment.getClass().getSimpleName() + ((variant != null) ? variant : "");
-    if (manager.findFragmentByTag(tag) != null) {
-      manager.popBackStackImmediate(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-    }
-    FragmentTransaction transaction = manager.beginTransaction();
-    transaction.replace(R.id.fragment_container, fragment, tag);
-    if (useStack) {
-      transaction.addToBackStack(tag);
-    }
-    transaction.commit();
-  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

@@ -10,26 +10,31 @@
   tools:context=".view.BottomNav">
 
 
-<TextView
-  android:id="@+id/rate"
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content"
-  android:textSize="40sp"
-  android:text="Rate:"/>
 
+<android.support.design.widget.TextInputLayout
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content">
   <android.support.v7.widget.AppCompatEditText
+    android:id="@+id/rate"
     app:layout_constraintLeft_toRightOf="@id/rate"
     app:layout_constraintBottom_toBottomOf="@id/rate"
+    android:hint="Rate"
     android:inputType="numberDecimal"
     android:layout_width="100dp"
     android:layout_height="40sp"/>
-
-
   <Button
     android:id="@+id/save"
-    app:layout_constraintBottom_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="#FFAAFFAA"
     android:text="Save"/>
+
+</android.support.design.widget.TextInputLayout>
+
+
+
+
+
 </android.support.constraint.ConstraintLayout>
