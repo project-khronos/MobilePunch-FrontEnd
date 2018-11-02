@@ -1,8 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".ProjectFragment">
+  android:visibility="visible"
+  android:background="#FFFFFF"
+  tools:context=".view.BottomNav">
 
-</FrameLayout>
+
+<TextView
+  android:id="@+id/rate"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:textSize="40sp"
+  android:text="Rate:"/>
+
+  <android.support.v7.widget.AppCompatEditText
+    app:layout_constraintLeft_toRightOf="@id/rate"
+    app:layout_constraintBottom_toBottomOf="@id/rate"
+    android:inputType="numberDecimal"
+    android:layout_width="100dp"
+    android:layout_height="40sp"/>
+
+
+  <Button
+    android:id="@+id/save"
+    app:layout_constraintBottom_toTopOf="parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#FFAAFFAA"
+    android:text="Save"/>
+</android.support.constraint.ConstraintLayout>

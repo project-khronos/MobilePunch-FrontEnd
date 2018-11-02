@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.view.fragments.ClientFragment;
@@ -21,6 +22,7 @@ import edu.cnm.deepdive.mobilepunch.view.fragments.ProjectFragment;
 public class BottomNav extends AppCompatActivity {
 
   private TextView mTextMessage;
+
   private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
       = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -37,7 +39,7 @@ public class BottomNav extends AppCompatActivity {
           return true;
         case R.id.client:
           switchFragment(new ClientFragment(), false, null);
-          mTextMessage.setText(R.string.project);
+          mTextMessage.setText(R.string.client);
           return true;
         case R.id.equipment:
           switchFragment(new EquipmentFragment(), false, null);
@@ -73,7 +75,7 @@ public class BottomNav extends AppCompatActivity {
     navigation = (BottomNavigationView) findViewById(R.id.navigation);
     navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     fromMain();
-  }
+    }
 
   public void fromMain(){
     Bundle b = getIntent().getExtras();

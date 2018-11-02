@@ -18,6 +18,7 @@
   <item
     android:id="@+id/equipment"
     android:icon="@drawable/ic_equipment"
+    android:titleCondensed="@string/equipment"
     android:title="@string/equipment"/>
 
 </menu>
