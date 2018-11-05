@@ -3,22 +3,17 @@ package edu.cnm.deepdive.mobilepunch.view;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 import edu.cnm.deepdive.mobilepunch.FragmentSwitcherActivity;
 import edu.cnm.deepdive.mobilepunch.R;
-import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.view.fragments.ClientFragment;
 import edu.cnm.deepdive.mobilepunch.view.fragments.EquipmentFragment;
 import edu.cnm.deepdive.mobilepunch.view.fragments.EventFragment;
 import edu.cnm.deepdive.mobilepunch.view.fragments.ProjectFragment;
 
-public class BottomNav extends FragmentSwitcherActivity{
+public class BottomNav extends FragmentSwitcherActivity {
 
   private TextView mTextMessage;
 
