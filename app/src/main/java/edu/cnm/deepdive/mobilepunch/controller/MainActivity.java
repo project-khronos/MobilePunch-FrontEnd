@@ -3,6 +3,9 @@ package edu.cnm.deepdive.mobilepunch.controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,11 +13,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import edu.cnm.deepdive.mobilepunch.FragmentSwitcherActivity;
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
+import edu.cnm.deepdive.mobilepunch.view.fragments.Retrotest;
+import retrofit2.Retrofit;
+import retrofit2.Retrofit.Builder;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
+
+  private MobilePunchService service;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +49,7 @@ public class MainActivity extends AppCompatActivity
   @Override
   public void onBackPressed() {
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
     if (drawer.isDrawerOpen(GravityCompat.START)) {
       drawer.closeDrawer(GravityCompat.START);
     } else {
@@ -59,11 +73,17 @@ public class MainActivity extends AppCompatActivity
 
     //noinspection SimplifiableIfStatement
     if (id == R.id.action_settings) {
+      FragmentManager manager = getSupportFragmentManager();
+      FragmentTransaction transaction = manager.beginTransaction();
+      transaction.replace(R.id.fragment_container, Retrotest.newInstance(), "");
+      transaction.commit();
+    }
+
       return true;
     }
 
-    return super.onOptionsItemSelected(item);
-  }
+
+
 
   @SuppressWarnings("StatementWithEmptyBody")
   @Override
@@ -101,4 +121,17 @@ public class MainActivity extends AppCompatActivity
     drawer.closeDrawer(GravityCompat.START);
     return true;
   }
+
+  private void setupService() {
+//    Gson gson = new GsonBuilder()
+//        .excludeFieldsWithoutExposeAnnotation()
+//        .create();
+    Retrofit retrofit = new Builder()
+        // TODO change base_url value.
+        .baseUrl(getString(R.string.base_url))
+//        .addConverterFactory(GsonConverterFactory.create(gson))
+        .build();
+    service = retrofit.create(MobilePunchService.class);
+  }
+
 }

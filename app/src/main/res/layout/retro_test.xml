@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/test_layout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="16dp">
+
+  <EditText
+    android:id="@+id/key_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Enter key to store value" />
+
+  <EditText
+    android:id="@+id/value_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/key_text"
+    android:layout_marginTop="16dp"
+    android:gravity="bottom"
+    android:hint="Enter String value associated with key"/>
+
+  <Button
+    android:id="@+id/post_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/value_text"
+    android:layout_marginTop="8dp"
+    android:text="Post" />
+
+  <TextView
+    android:id="@+id/repsonse"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/post_button"
+    android:text="response"
+    android:layout_marginTop="8dp"/>
+
+  <EditText
+    android:id="@+id/get_key"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/repsonse"
+    android:layout_marginTop="16dp"
+    android:gravity="bottom"
+    android:hint="Enter key"/>
+
+  <Button
+    android:id="@+id/get_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/get_key"
+    android:layout_marginTop="8dp"
+    android:text="get" />
+
+
+</RelativeLayout>
