@@ -12,8 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
+import retrofit2.Retrofit;
+import retrofit2.Retrofit.Builder;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Retrotest extends Fragment {
 
@@ -64,5 +70,16 @@ public class Retrotest extends Fragment {
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+//    Gson gson = new GsonBuilder()
+//        .excludeFieldsWithoutExposeAnnotation()
+//        .create();
+    Retrofit retrofit = new Builder()
+//        // TODO change base_url value.
+       .baseUrl(getString(R.string.base_url))
+//       .addConverterFactory(GsonConverterFactory.create(gson))
+        .build();
+    service = retrofit.create(MobilePunchService.class);
   }
-}
+
+  }
+

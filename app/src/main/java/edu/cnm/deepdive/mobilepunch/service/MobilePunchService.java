@@ -12,7 +12,7 @@ public interface MobilePunchService {
   Call<String> get(String key);
 
   @POST
-  Call<String> post(String key, String value);
+  Call<String> post(@Query("posts") String key, @Query("post") String value);
 
 
 }
