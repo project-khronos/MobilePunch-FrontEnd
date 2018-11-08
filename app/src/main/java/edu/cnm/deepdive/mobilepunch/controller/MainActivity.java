@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity
         .create();
     Retrofit retrofit = new Builder()
         // TODO change base_url value.
-        .baseUrl(getString(R.string.base_url))
+        .baseUrl("https://jsonplaceholder.typicode.com")
        .addConverterFactory(GsonConverterFactory.create(gson))
         .build();
     service = retrofit.create(MobilePunchService.class);
