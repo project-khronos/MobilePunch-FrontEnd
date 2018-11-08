@@ -52,7 +52,7 @@ public class Retrotest extends Fragment {
 
        String key = keyText.getText().toString();
        String value = valueText.getText().toString();
-       service.post(key, value);
+//       service.post(key, value);
       }
     });
 
@@ -61,7 +61,7 @@ public class Retrotest extends Fragment {
       @Override
       public void onClick(View v) {
       String key = keyText.getText().toString();
-      service.get(key);
+//      service.get(key);
       }
     });
     return view;

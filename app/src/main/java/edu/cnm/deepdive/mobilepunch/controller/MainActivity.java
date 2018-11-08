@@ -123,13 +123,13 @@ public class MainActivity extends AppCompatActivity
   }
 
   private void setupService() {
-//    Gson gson = new GsonBuilder()
-//        .excludeFieldsWithoutExposeAnnotation()
-//        .create();
+    Gson gson = new GsonBuilder()
+        .excludeFieldsWithoutExposeAnnotation()
+        .create();
     Retrofit retrofit = new Builder()
         // TODO change base_url value.
         .baseUrl(getString(R.string.base_url))
-//       .addConverterFactory(GsonConverterFactory.create(gson))
+       .addConverterFactory(GsonConverterFactory.create(gson))
         .build();
     service = retrofit.create(MobilePunchService.class);
   }
