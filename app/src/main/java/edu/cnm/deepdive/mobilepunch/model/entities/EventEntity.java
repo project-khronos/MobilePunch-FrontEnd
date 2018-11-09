@@ -2,6 +2,7 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import java.util.Date;
 
 @Entity(
     primaryKeys = {"project_id"},
@@ -24,8 +25,52 @@ import android.arch.persistence.room.ForeignKey;
             onDelete = ForeignKey.CASCADE
         )}
 )
+
 public class EventEntity {
 
+  private String mExpenses;
+  private String mLocation;
+  private String mIncome;
+  private Date eventDate;
+
+
+  public EventEntity() {
+
+    eventDate = new Date();
+
+  }
+
+  public String getExpenses() {
+    return mExpenses;
+  }
+
+  public void setExpenses(String expenses) {
+    mExpenses = expenses;
+  }
+
+  public String getLocation() {
+    return mLocation;
+  }
+
+  public void setLocation(String location) {
+    mLocation = location;
+  }
+
+  public String getIncome() {
+    return mIncome;
+  }
+
+  public void setIncome(String income) {
+    mIncome = income;
+  }
+
+  public Date getEventDate() {
+    return eventDate;
+  }
+
+  public void setEventDate(Date eventDate) {
+    this.eventDate = eventDate;
+  }
 
   public long project_id;
 
