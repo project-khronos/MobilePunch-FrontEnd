@@ -25,19 +25,19 @@ public class BottomNav extends FragmentSwitcherActivity {
       switch (item.getItemId()) {
         case R.id.event:
           switchFragment(new EventFragment(), false, null);
-          mTextMessage.setText(R.string.event);
+
           return true;
         case R.id.project:
           switchFragment(new ProjectFragment(), false, null);
-          mTextMessage.setText(R.string.project);
+
           return true;
         case R.id.client:
           switchFragment(new ClientFragment(), false, null);
-          mTextMessage.setText(R.string.client);
+
           return true;
         case R.id.equipment:
           switchFragment(new EquipmentFragment(), false, null);
-          mTextMessage.setText(R.string.equipment);
+
           return true;
       }
       return false;
