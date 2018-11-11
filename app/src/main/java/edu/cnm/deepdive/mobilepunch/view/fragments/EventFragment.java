@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import edu.cnm.deepdive.mobilepunch.R;
-import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 
 public class EventFragment extends Fragment {
@@ -33,7 +32,7 @@ public class EventFragment extends Fragment {
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_event, container, false);
-      mExpensesField = (EditText) view.findViewById(R.id.expenses);
+    mExpensesField = view.findViewById(R.id.expenses);
       mExpensesField.addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -50,7 +49,7 @@ public class EventFragment extends Fragment {
 
         }
       });
-      mLocationField = (EditText) view.findViewById(R.id.location);
+    mLocationField = view.findViewById(R.id.location);
       mLocationField.addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -67,7 +66,7 @@ public class EventFragment extends Fragment {
 
         }
       });
-      mIncomeField = (EditText) view.findViewById(R.id.income);
+    mIncomeField = view.findViewById(R.id.income);
       mIncomeField.addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -85,7 +84,7 @@ public class EventFragment extends Fragment {
         }
       });
 
-      eventDateButton = (Button) view.findViewById(R.id.event_date);
+    eventDateButton = view.findViewById(R.id.event_date);
       eventDateButton.setText(mEvent.getEventDate().toString());
       eventDateButton.setEnabled(false);
 

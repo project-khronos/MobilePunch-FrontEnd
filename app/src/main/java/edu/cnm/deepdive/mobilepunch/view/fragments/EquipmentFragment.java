@@ -16,17 +16,17 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 
 public class EquipmentFragment extends Fragment {
 
-  private EquipmentEntity mEquipment;
-  private EditText mMakeField;
-  private EditText mModelField;
-  private EditText mYearField;
-  private Button mDateButton;
+  private EquipmentEntity equipment;
+  private EditText makeField;
+  private EditText modelField;
+  private EditText yearField;
+  private Button dateButton;
 
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    mEquipment = new EquipmentEntity();
+    equipment = new EquipmentEntity();
 
 
   }
@@ -36,8 +36,8 @@ public class EquipmentFragment extends Fragment {
       Bundle savedInstanceState) {
 
     View view = inflater.inflate(R.layout.fragment_equipment, container, false);
-    mMakeField = (EditText) view.findViewById(R.id.make);
-    mMakeField.addTextChangedListener(new TextWatcher() {
+    makeField = view.findViewById(R.id.make);
+    makeField.addTextChangedListener(new TextWatcher() {
       @Override
       public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -45,7 +45,7 @@ public class EquipmentFragment extends Fragment {
 
       @Override
       public void onTextChanged(CharSequence s, int start, int before, int count) {
-        mEquipment.setMake(s.toString());
+        equipment.setMake(s.toString());
       }
 
       @Override
@@ -53,8 +53,8 @@ public class EquipmentFragment extends Fragment {
 
       }
     });
-    mModelField = (EditText) view.findViewById(R.id.model);
-    mModelField.addTextChangedListener(new TextWatcher() {
+    modelField = view.findViewById(R.id.model);
+    modelField.addTextChangedListener(new TextWatcher() {
       @Override
       public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -62,7 +62,7 @@ public class EquipmentFragment extends Fragment {
 
       @Override
       public void onTextChanged(CharSequence s, int start, int before, int count) {
-        mEquipment.setModel(s.toString());
+        equipment.setModel(s.toString());
       }
 
       @Override
@@ -70,8 +70,8 @@ public class EquipmentFragment extends Fragment {
 
       }
     });
-    mYearField = (EditText) view.findViewById(R.id.year);
-    mYearField.addTextChangedListener(new TextWatcher() {
+    yearField = view.findViewById(R.id.year);
+    yearField.addTextChangedListener(new TextWatcher() {
       @Override
       public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -79,7 +79,7 @@ public class EquipmentFragment extends Fragment {
 
       @Override
       public void onTextChanged(CharSequence s, int start, int before, int count) {
-        mEquipment.setYear(s.toString());
+        equipment.setYear(s.toString());
       }
 
       @Override
@@ -88,9 +88,9 @@ public class EquipmentFragment extends Fragment {
       }
     });
 
-    mDateButton = (Button) view.findViewById(R.id.equipment_date);
-    mDateButton.setText(mEquipment.getDate().toString());
-    mDateButton.setEnabled(false);
+    dateButton = view.findViewById(R.id.equipment_date);
+    dateButton.setText(equipment.getDate().toString());
+    dateButton.setEnabled(false);
 
     return view;
   }
