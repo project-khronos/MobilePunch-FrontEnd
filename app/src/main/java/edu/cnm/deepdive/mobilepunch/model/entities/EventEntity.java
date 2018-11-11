@@ -29,9 +29,9 @@ import java.util.Date;
 
 public class EventEntity {
 
-  private String mExpenses;
-  private String mLocation;
-  private String mIncome;
+  private String expenses;
+  private String location;
+  private String income;
   private Date eventDate;
 
 
@@ -42,27 +42,27 @@ public class EventEntity {
   }
 
   public String getExpenses() {
-    return mExpenses;
+    return expenses;
   }
 
   public void setExpenses(String expenses) {
-    mExpenses = expenses;
+    this.expenses = expenses;
   }
 
   public String getLocation() {
-    return mLocation;
+    return location;
   }
 
   public void setLocation(String location) {
-    mLocation = location;
+    this.location = location;
   }
 
   public String getIncome() {
-    return mIncome;
+    return income;
   }
 
   public void setIncome(String income) {
-    mIncome = income;
+    this.income = income;
   }
 
   public Date getEventDate() {

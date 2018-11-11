@@ -13,13 +13,13 @@ public class EquipmentEntity {
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "equipment_id")
   private long id;
-  private String mMake;
-  private String mModel;
-  private String mYear;
-  private Date mDate;
+  private String make;
+  private String model;
+  private String year;
+  private Date date;
   public EquipmentEntity() {
 
-    mDate = new Date();
+    date = new Date();
 
   }
 
@@ -32,35 +32,35 @@ public class EquipmentEntity {
   }
 
   public String getMake() {
-    return mMake;
+    return make;
   }
 
   public void setMake(String make) {
-    mMake = make;
+    this.make = make;
   }
 
   public String getModel() {
-    return mModel;
+    return model;
   }
 
   public void setModel(String model) {
-    mModel = model;
+    this.model = model;
   }
 
   public String getYear() {
-    return mYear;
+    return year;
   }
 
   public void setYear(String year) {
-    mYear = year;
+    this.year = year;
   }
 
   public Date getDate() {
-    return mDate;
+    return date;
   }
 
   public void setDate(Date date) {
-    mDate = date;
+    this.date = date;
   }
 
 
