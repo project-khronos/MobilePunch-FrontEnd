@@ -52,8 +52,8 @@ public class BottomNav extends FragmentSwitcherActivity {
     setContentView(R.layout.activity_bottom_nav);
     ActionBar actionBar = getSupportActionBar();
     actionBar.hide();
-    mTextMessage = (TextView) findViewById(R.id.message);
-    navigation = (BottomNavigationView) findViewById(R.id.navigation);
+    mTextMessage = findViewById(R.id.message);
+    navigation = findViewById(R.id.navigation);
     navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     fromMain();
   }
