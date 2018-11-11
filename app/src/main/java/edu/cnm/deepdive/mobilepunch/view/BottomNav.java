@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.widget.TextView;
+import com.google.common.collect.Maps;
 import edu.cnm.deepdive.mobilepunch.FragmentSwitcherActivity;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.view.fragments.ClientFragment;
@@ -44,7 +45,6 @@ public class BottomNav extends FragmentSwitcherActivity {
     }
   };
   private BottomNavigationView navigation;
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
