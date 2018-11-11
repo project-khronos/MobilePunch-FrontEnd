@@ -3,7 +3,6 @@ package edu.cnm.deepdive.mobilepunch.controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -15,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import edu.cnm.deepdive.mobilepunch.FragmentSwitcherActivity;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
@@ -130,10 +128,11 @@ public class MainActivity extends AppCompatActivity
         .create();
     Retrofit retrofit = new Builder()
         // TODO change base_url value.
-        .baseUrl("https://jsonplaceholder.typicode.com")
+        .baseUrl("https://jsonplaceholder.typicode.com/")
        .addConverterFactory(GsonConverterFactory.create(gson))
         .build();
     service = retrofit.create(MobilePunchService.class);
   }
+
 
 }
