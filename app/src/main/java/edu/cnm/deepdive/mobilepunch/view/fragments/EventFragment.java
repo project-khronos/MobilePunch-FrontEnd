@@ -14,17 +14,17 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 
 public class EventFragment extends Fragment {
 
-  private EventEntity mEvent;
-  private EditText mExpensesField;
-  private EditText mLocationField;
-  private EditText mIncomeField;
+  private EventEntity event;
+  private EditText expensesField;
+  private EditText locationField;
+  private EditText incomeField;
   private Button eventDateButton;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    mEvent = new EventEntity();
+    event = new EventEntity();
 
   }
   @Override
@@ -32,8 +32,8 @@ public class EventFragment extends Fragment {
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_event, container, false);
-    mExpensesField = view.findViewById(R.id.expenses);
-      mExpensesField.addTextChangedListener(new TextWatcher() {
+    expensesField = view.findViewById(R.id.expenses);
+    expensesField.addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -41,7 +41,7 @@ public class EventFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-          mEvent.setExpenses(s.toString());
+          event.setExpenses(s.toString());
         }
 
         @Override
@@ -49,8 +49,8 @@ public class EventFragment extends Fragment {
 
         }
       });
-    mLocationField = view.findViewById(R.id.location);
-      mLocationField.addTextChangedListener(new TextWatcher() {
+    locationField = view.findViewById(R.id.location);
+    locationField.addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -58,7 +58,7 @@ public class EventFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-          mEvent.setLocation(s.toString());
+          event.setLocation(s.toString());
         }
 
         @Override
@@ -66,8 +66,8 @@ public class EventFragment extends Fragment {
 
         }
       });
-    mIncomeField = view.findViewById(R.id.income);
-      mIncomeField.addTextChangedListener(new TextWatcher() {
+    incomeField = view.findViewById(R.id.income);
+    incomeField.addTextChangedListener(new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -75,7 +75,7 @@ public class EventFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-          mEvent.setIncome(s.toString());
+          event.setIncome(s.toString());
         }
 
         @Override
@@ -85,7 +85,7 @@ public class EventFragment extends Fragment {
       });
 
     eventDateButton = view.findViewById(R.id.event_date);
-      eventDateButton.setText(mEvent.getEventDate().toString());
+    eventDateButton.setText(event.getEventDate().toString());
       eventDateButton.setEnabled(false);
 
       return view;
