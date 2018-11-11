@@ -13,6 +13,15 @@ public class EquipmentEntity {
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "equipment_id")
   private long id;
+  private String mMake;
+  private String mModel;
+  private String mYear;
+  private Date mDate;
+  public EquipmentEntity() {
+
+    mDate = new Date();
+
+  }
 
   public long getId() {
     return id;
@@ -21,19 +30,6 @@ public class EquipmentEntity {
   public void setId(long id) {
     this.id = id;
   }
-
-  private String mMake;
-  private String mModel;
-  private String mYear;
-  private Date mDate;
-
-
-  public EquipmentEntity() {
-
-    mDate = new Date();
-
-  }
-
 
   public String getMake() {
     return mMake;

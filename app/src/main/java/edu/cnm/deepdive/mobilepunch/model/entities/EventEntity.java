@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.mobilepunch.model.entities;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import java.util.Date;
@@ -72,33 +73,37 @@ public class EventEntity {
     this.eventDate = eventDate;
   }
 
-  public long project_id;
+  @ColumnInfo(name = "project_id", index = true)
+  private long projectId;
 
-  public long client_id;
+  @ColumnInfo(name = "client_id")
+  private long clientId;
 
-  public long equipment_id;
+  @ColumnInfo(name = "equipment_id")
+  private long equipmentId;
 
-  public long getProject_id() {
-    return project_id;
+
+  public long getProjectId() {
+    return projectId;
   }
 
-  public void setProject_id(long project_id) {
-    this.project_id = project_id;
+  public void setProjectId(long projectId) {
+    this.projectId = projectId;
   }
 
-  public long getClient_id() {
-    return client_id;
+  public long getClientId() {
+    return clientId;
   }
 
-  public void setClient_id(long client_id) {
-    this.client_id = client_id;
+  public void setClientId(long clientId) {
+    this.clientId = clientId;
   }
 
-  public long getEquipment_id() {
-    return equipment_id;
+  public long getEquipmentId() {
+    return equipmentId;
   }
 
-  public void setEquipment_id(long equipment_id) {
-    this.equipment_id = equipment_id;
+  public void setEquipmentId(long equipmentId) {
+    this.equipmentId = equipmentId;
   }
 }
