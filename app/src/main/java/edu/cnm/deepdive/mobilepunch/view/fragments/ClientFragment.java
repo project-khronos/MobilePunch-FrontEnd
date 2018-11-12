@@ -3,11 +3,13 @@ package edu.cnm.deepdive.mobilepunch.view.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -22,12 +24,13 @@ public class ClientFragment extends Fragment {
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     final View view = inflater.inflate(R.layout.fragment_client, container, false);
-    CheckBox alt = view.findViewById(R.id.alt_num);
+    final ConstraintLayout constraintLayout = view.findViewById(R.id.fragment_client);
+    final CheckBox alt = view.findViewById(R.id.alt_num);
     alt.setOnCheckedChangeListener(new OnCheckedChangeListener() {
       @Override
       public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if(isChecked){
-
+       
         }else{
         }
 
