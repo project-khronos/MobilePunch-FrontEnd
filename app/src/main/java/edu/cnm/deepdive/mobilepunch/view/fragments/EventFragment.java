@@ -27,6 +27,7 @@ public class EventFragment extends Fragment {
     event = new EventEntity();
 
   }
+
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
@@ -34,61 +35,61 @@ public class EventFragment extends Fragment {
     View view = inflater.inflate(R.layout.fragment_event, container, false);
     expensesField = view.findViewById(R.id.expenses);
     expensesField.addTextChangedListener(new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+      @Override
+      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        }
+      }
 
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-          event.setExpenses(s.toString());
-        }
+      @Override
+      public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-        @Override
-        public void afterTextChanged(Editable s) {
+      }
 
-        }
-      });
+      @Override
+      public void afterTextChanged(Editable s) {
+
+      }
+    });
     locationField = view.findViewById(R.id.location);
     locationField.addTextChangedListener(new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+      @Override
+      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        }
+      }
 
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-          event.setLocation(s.toString());
-        }
+      @Override
+      public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-        @Override
-        public void afterTextChanged(Editable s) {
+      }
 
-        }
-      });
+      @Override
+      public void afterTextChanged(Editable s) {
+
+      }
+    });
     incomeField = view.findViewById(R.id.income);
     incomeField.addTextChangedListener(new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+      @Override
+      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        }
+      }
 
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-          event.setIncome(s.toString());
-        }
+      @Override
+      public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-        @Override
-        public void afterTextChanged(Editable s) {
+      }
 
-        }
-      });
+      @Override
+      public void afterTextChanged(Editable s) {
+
+      }
+    });
 
     eventDateButton = view.findViewById(R.id.event_date);
-    eventDateButton.setText(event.getEventDate().toString());
-      eventDateButton.setEnabled(false);
 
-      return view;
-    }
+    eventDateButton.setEnabled(false);
 
+    return view;
   }
+
+}
