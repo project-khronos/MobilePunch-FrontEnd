@@ -6,61 +6,58 @@ import android.arch.persistence.room.PrimaryKey;
 import java.util.Date;
 
 
-@Entity
+@Entity(
+ primaryKeys = {
+     "equipment_id1", "equipment_id2"
+ }
+)
 public class EquipmentEntity {
 
 
-  @PrimaryKey(autoGenerate = true)
-  @ColumnInfo(name = "equipment_id")
-  private long id;
+
+  @ColumnInfo(name = "equipment_id1")
+  private long id1;
+  @ColumnInfo(name = "equipment_id2")
+  private long id2;
   private String make;
   private String model;
-  private String year;
-  private Date date;
-  public EquipmentEntity() {
+  private long year;
+  private long date;
+  @ColumnInfo(name = "desc_or_name")
+  private String descOrName;
+  @ColumnInfo(name = "license_plate")
+  private String licensePlate;
 
-    date = new Date();
-
+  public long getId1() {
+    return id1;
   }
 
-  public long getId() {
-    return id;
+  public void setId1(long id1) {
+    this.id1 = id1;
   }
 
-  public void setId(long id) {
-    this.id = id;
+  public long getId2() {
+    return id2;
   }
 
-  public String getMake() {
-    return make;
+  public void setId2(long id2) {
+    this.id2 = id2;
   }
 
-  public void setMake(String make) {
-    this.make = make;
-  }
-
-  public String getModel() {
-    return model;
-  }
-
-  public void setModel(String model) {
-    this.model = model;
-  }
-
-  public String getYear() {
-    return year;
-  }
-
-  public void setYear(String year) {
+  public void setYear(long year) {
     this.year = year;
   }
 
-  public Date getDate() {
-    return date;
+  public void setDate(long date) {
+    this.date = date;
   }
 
-  public void setDate(Date date) {
-    this.date = date;
+  public String getLicensePlate() {
+    return licensePlate;
+  }
+
+  public void setLicensePlate(String licensePlate) {
+    this.licensePlate = licensePlate;
   }
 
 
