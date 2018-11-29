@@ -16,7 +16,7 @@ import edu.cnm.deepdive.mobilepunch.view.fragments.ProjectFragment;
 
 public class BottomNav extends FragmentSwitcherActivity {
 
-  private TextView mTextMessage;
+  private TextView textMessage;
 
   private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
       = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -52,8 +52,9 @@ public class BottomNav extends FragmentSwitcherActivity {
     setContentView(R.layout.activity_bottom_nav);
     ActionBar actionBar = getSupportActionBar();
     actionBar.hide();
-    mTextMessage = findViewById(R.id.message);
+    textMessage = findViewById(R.id.message);
     navigation = findViewById(R.id.navigation);
+    navigation.setItemIconTintList(null);
     navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     fromMain();
   }

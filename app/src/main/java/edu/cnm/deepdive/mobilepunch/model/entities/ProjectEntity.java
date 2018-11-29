@@ -9,6 +9,15 @@ import android.arch.persistence.room.PrimaryKey;
 )
 public class ProjectEntity {
 
+  @ColumnInfo(name = "project_id1")
+  private long id1;
+  @ColumnInfo(name = "project_id2")
+  private long id2;
+  @ColumnInfo(name = "start_date")
+  private long startDate;
+  @ColumnInfo(name = "end_date")
+  private long endDate;
+
   public long getId1() {
     return id1;
   }
@@ -40,14 +49,4 @@ public class ProjectEntity {
   public void setEndDate(long endDate) {
     this.endDate = endDate;
   }
-
-  @ColumnInfo(name = "project_id1")
-  private long id1;
-  @ColumnInfo(name = "project_id2")
-  private long id2;
-
-  @ColumnInfo(name = "start_date")
-  private long startDate;
-  @ColumnInfo(name = "end_date")
-  private long endDate;
 }
