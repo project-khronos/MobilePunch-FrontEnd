@@ -30,4 +30,5 @@
   <string name="serial_number">Serial Number</string>
   <string name="save">Save</string>
   <string name="description_or_name">Description</string>
+  <string name="address">Address</string>
 </resources>
