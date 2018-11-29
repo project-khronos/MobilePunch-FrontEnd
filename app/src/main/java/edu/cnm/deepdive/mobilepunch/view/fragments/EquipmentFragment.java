@@ -20,6 +20,8 @@ public class EquipmentFragment extends Fragment {
   private EditText makeField;
   private EditText modelField;
   private EditText yearField;
+  private EditText licenseField;
+  private EditText serialNumberField;
   private Button dateButton;
 
 
@@ -37,60 +39,12 @@ public class EquipmentFragment extends Fragment {
 
     View view = inflater.inflate(R.layout.fragment_equipment, container, false);
     makeField = view.findViewById(R.id.make);
-    makeField.addTextChangedListener(new TextWatcher() {
-      @Override
-      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-      }
-
-      @Override
-      public void onTextChanged(CharSequence s, int start, int before, int count) {
-        equipment.setMake(s.toString());
-      }
-
-      @Override
-      public void afterTextChanged(Editable s) {
-
-      }
-    });
     modelField = view.findViewById(R.id.model);
-    modelField.addTextChangedListener(new TextWatcher() {
-      @Override
-      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-      }
-
-      @Override
-      public void onTextChanged(CharSequence s, int start, int before, int count) {
-        equipment.setModel(s.toString());
-      }
-
-      @Override
-      public void afterTextChanged(Editable s) {
-
-      }
-    });
     yearField = view.findViewById(R.id.year);
-    yearField.addTextChangedListener(new TextWatcher() {
-      @Override
-      public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-      }
-
-      @Override
-      public void onTextChanged(CharSequence s, int start, int before, int count) {
-        equipment.setYear(s.toString());
-      }
-
-      @Override
-      public void afterTextChanged(Editable s) {
-
-      }
-    });
-
+    licenseField = view.findViewById(R.id.license);
+    serialNumberField = view.findViewById(R.id.serial_number);
     dateButton = view.findViewById(R.id.equipment_date);
-    dateButton.setText(equipment.getDate().toString());
-    dateButton.setEnabled(false);
+
 
     return view;
   }
