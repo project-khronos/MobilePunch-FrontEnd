@@ -8,32 +8,75 @@
   android:background="@color/rallyBackground"
   android:visibility="visible"
   android:orientation="vertical"
-  tools:context=".view.BottomNav">
+  tools:context=".view.BottomNav"
+  android:padding="40dp">
 
     <EditText
       android:id="@+id/project_name"
-      android:layout_width="100dp"
-      android:layout_height="40sp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
       android:hint="@string/project_name"
       android:textColor="@color/rallyGreen"
       android:textColorHint="@color/rallyBlue"
-      android:inputType="text"/>
+      android:inputType="text"
+      android:background="@drawable/edit_text_style"
+      android:paddingBottom="24sp"/>
 
     <EditText
       android:id="@+id/description"
-      android:layout_width="100dp"
-      android:layout_height="40sp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
       android:hint="@string/description"
       android:textColor="@color/rallyGreen"
       android:textColorHint="@color/rallyBlue"
-      android:inputType="text"/>
+      android:inputType="textMultiLine"
+      android:paddingBottom="100dp"
+      android:background="@drawable/edit_text_style"/>
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:orientation="horizontal"
+      android:gravity="center"
+      android:paddingTop="24dp"
+      android:layout_height="wrap_content">
+        <Button
+          android:id="@+id/start_date"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="START"
+          android:background="@color/rallyGreen"
+          android:layout_marginRight="10dp"/>
+        <Button
+          android:id="@+id/end_date"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="END"
+          android:background="@color/rallyGreen"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"/>
 
-    <Button
-      android:id="@+id/save"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:background="@color/rallyGreen"
-      android:text="Save"/>
+        <Button
+          android:id="@+id/deadline-date"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="DEADLINE"
+          android:background="@color/rallyGreen"
+          android:layout_marginLeft="10dp"/>
+
+    </LinearLayout>
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:paddingBottom="28dp"
+      android:gravity="bottom|center">
+        <Button
+          android:id="@+id/save"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@color/rallyGreen"
+          android:text="SAVE"/>
+
+    </LinearLayout>
+
 
 
 
