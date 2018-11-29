@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#ff1111</color>
-  <color name="colorPrimaryDark">#dd1111</color>
-  <color name="colorAccent">#FF4081</color>
+  <color name="colorPrimary">#3F51B5</color>
+  <color name="colorPrimaryDark">#303F9F</color>
+  <color name="colorAccent">#6574C4</color>
+
+  <color name="rallyGreen">#1EB980</color>
+  <color name="rallyDarkGreen">#045D56</color>
+  <color name="rallyOrange">#FF6859</color>
+  <color name="rallyYellow">#FFCF44</color>
+  <color name="rallyPurple">#B15DFF</color>
+  <color name="rallyBlue">#72DEFF</color>
+  <color name="rallyBackground">#1c1c1c</color>
 </resources>

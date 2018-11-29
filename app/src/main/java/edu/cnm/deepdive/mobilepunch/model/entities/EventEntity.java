@@ -18,6 +18,9 @@ private long id2;
 @ColumnInfo(name = "event_id2")
 private long id1;
 
+
+
+
   public long getId2() {
     return id2;
   }

@@ -31,4 +31,6 @@
   <string name="save">Save</string>
   <string name="description_or_name">Description</string>
   <string name="address">Address</string>
+  <string name="description">Description</string>
+  <string name="project_name">Name</string>
 </resources>

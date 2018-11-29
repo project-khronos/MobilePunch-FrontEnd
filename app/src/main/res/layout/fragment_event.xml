@@ -4,7 +4,8 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  tools:context=".EventFragment">
+  tools:context=".EventFragment"
+  android:background="@color/rallyBackground">
 
 
   <LinearLayout
@@ -22,7 +23,10 @@
       android:layout_width="100dp"
       android:layout_height="40sp"
       android:hint="@string/expenses"
-      android:inputType="text"/>
+      android:inputType="text"
+      android:textColor="@color/rallyGreen"
+      android:textColorHint="@color/rallyBlue"/>
+
 
     <android.support.design.widget.TextInputLayout
       android:layout_width="match_parent"
@@ -33,7 +37,10 @@
       android:layout_width="100dp"
       android:layout_height="40sp"
       android:hint="@string/location"
-      android:inputType="text"/>
+      android:inputType="text"
+      android:textColor="@color/rallyGreen"
+      android:textColorHint="@color/rallyBlue"/>
+
 
     <android.support.design.widget.TextInputLayout
       android:layout_width="match_parent"
@@ -45,7 +52,10 @@
         android:layout_width="100dp"
         android:layout_height="40sp"
         android:hint="@string/income"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:textColor="@color/rallyGreen"
+        android:textColorHint="@color/rallyBlue"/>
+
 
       <Button
         android:id="@+id/event_date"

@@ -5,7 +5,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="#FFFFFF"
+  android:background="@color/rallyBackground"
   android:visibility="visible"
   android:orientation="vertical"
   tools:context=".view.BottomNav">
@@ -17,7 +17,9 @@
     android:layout_width="100dp"
     android:layout_height="40sp"
     android:hint="@string/make"
-    android:inputType="text"/>
+    android:inputType="text"
+    android:textColor="@color/rallyGreen"
+    android:textColorHint="@color/rallyBlue"/>
 
   <android.support.v7.widget.AppCompatEditText
     android:id="@+id/model"
@@ -25,7 +27,9 @@
     android:layout_width="100dp"
     android:layout_height="40sp"
     android:hint="@string/model"
-    android:inputType="text"/>
+    android:inputType="text"
+    android:textColor="@color/rallyGreen"
+    android:textColorHint="@color/rallyBlue"/>
 
   <android.support.v7.widget.AppCompatEditText
     android:id="@+id/year"
@@ -33,7 +37,9 @@
     android:layout_width="100dp"
     android:layout_height="40sp"
     android:hint="@string/year"
-    android:inputType="number"/>
+    android:inputType="number"
+    android:textColor="@color/rallyGreen"
+    android:textColorHint="@color/rallyBlue"/>
 
   <android.support.v7.widget.AppCompatEditText
     android:id="@+id/descOrName"
@@ -41,7 +47,9 @@
     android:layout_width="100dp"
     android:layout_height="40sp"
     android:hint="@string/description_or_name"
-    android:inputType="text"/>
+    android:inputType="text"
+    android:textColor="@color/rallyGreen"
+    android:textColorHint="@color/rallyBlue"/>
 
 
   <android.support.v7.widget.AppCompatEditText
@@ -50,7 +58,9 @@
     android:layout_width="100dp"
     android:layout_height="40sp"
     android:hint="@string/license"
-    android:inputType="number"/>
+    android:inputType="number"
+    android:textColor="@color/rallyGreen"
+    android:textColorHint="@color/rallyBlue"/>
 
   <android.support.v7.widget.AppCompatEditText
     android:id="@+id/serial_number"
@@ -58,7 +68,9 @@
     android:layout_width="100dp"
     android:layout_height="40sp"
     android:hint="@string/serial_number"
-    android:inputType="text"/>
+    android:inputType="text"
+    android:textColor="@color/rallyGreen"
+    android:textColorHint="@color/rallyBlue"/>
 
 
   <Button
@@ -71,7 +83,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="100dp"
-    android:background="#FFAAFFAA"
+    android:background="@color/rallyGreen"
     android:text="@string/save"
     android:layout_gravity="bottom"
     app:layout_constraintBottom_toBottomOf="parent"
