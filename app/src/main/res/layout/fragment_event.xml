@@ -1,73 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  tools:context=".EventFragment"
-  android:background="@color/rallyBackground">
+  tools:context=".view.fragments.EventFragment"
+  android:background="@color/rallyBackground"
+  android:orientation="vertical"
+  android:padding="20dp">
 
 
-  <LinearLayout
+  <android.support.v7.widget.AppCompatEditText
+    android:id="@+id/expenses"
+    style="?android:listSeparatorTextViewStyle"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="40sp"
+    android:hint="@string/expenses"
+    android:inputType="text"
+    android:textColor="@color/rallyGreen"
+    android:textColorHint="@color/rallyBlue"
+    android:background="@drawable/edit_text_style"
+    android:layout_marginBottom="10dp"/>
 
-    android:orientation="vertical">
 
-    <android.support.design.widget.TextInputLayout
+  <android.support.v7.widget.AppCompatEditText
+    android:id="@+id/location"
+    style="?android:listSeparatorTextViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="40sp"
+    android:hint="@string/location"
+    android:inputType="text"
+    android:textColor="@color/rallyGreen"
+    android:textColorHint="@color/rallyBlue"
+    android:background="@drawable/edit_text_style"
+    android:layout_marginBottom="10dp"/>
+
+
+  <android.support.v7.widget.AppCompatEditText
+    android:id="@+id/income"
+    style="?android:listSeparatorTextViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="40sp"
+    android:hint="@string/income"
+    android:inputType="text"
+    android:textColor="@color/rallyGreen"
+    android:textColorHint="@color/rallyBlue"
+    android:background="@drawable/edit_text_style"
+    android:layout_marginBottom="10dp"/>
+
+
+  <Button
+    android:id="@+id/event_start_date"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+
+  <Button
+    android:id="@+id/event_expected_date"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+
+  <Button
+    android:id="@+id/event_end_date"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+
+
+  <android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.google.android.gms.maps.MapView
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:id="@+id/map"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"/>
-    <android.support.v7.widget.AppCompatEditText
-      android:id="@+id/expenses"
-      style="?android:listSeparatorTextViewStyle"
-      android:layout_width="100dp"
-      android:layout_height="40sp"
-      android:hint="@string/expenses"
-      android:inputType="text"
-      android:textColor="@color/rallyGreen"
-      android:textColorHint="@color/rallyBlue"/>
-
-
-    <android.support.design.widget.TextInputLayout
+      android:layout_height="match_parent"
+      app:layout_constraintBottom_toTopOf="@id/save"/>
+    <Button
+      android:id="@+id/save"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"/>
-    <android.support.v7.widget.AppCompatEditText
-      android:id="@+id/location"
-      style="?android:listSeparatorTextViewStyle"
-      android:layout_width="100dp"
-      android:layout_height="40sp"
-      android:hint="@string/location"
-      android:inputType="text"
-      android:textColor="@color/rallyGreen"
-      android:textColorHint="@color/rallyBlue"/>
+      android:layout_height="wrap_content"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:layout_marginBottom="@dimen/nav_bottom_height"
+      android:background="@color/rallyGreen"
+      android:text="SAVE"
+      />
 
 
-    <android.support.design.widget.TextInputLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
-
-      <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/income"
-        style="?android:listSeparatorTextViewStyle"
-        android:layout_width="100dp"
-        android:layout_height="40sp"
-        android:hint="@string/income"
-        android:inputType="text"
-        android:textColor="@color/rallyGreen"
-        android:textColorHint="@color/rallyBlue"/>
+  </android.support.constraint.ConstraintLayout>
 
 
-      <Button
-        android:id="@+id/event_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-
-    </android.support.design.widget.TextInputLayout>
-  </LinearLayout>
+</LinearLayout>
 
 
 
 
-
-</FrameLayout>

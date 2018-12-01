@@ -5,11 +5,11 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical"
-  android:padding="20dp"
   android:id="@+id/fragment_client"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   tools:context=".ClientFragment"
-  android:background="@color/rallyBackground">
+  android:background="@color/rallyBackground"
+  android:padding="20dp">
 
   <EditText
     android:id="@+id/client_name"

@@ -14,6 +14,7 @@ public class EventEntity {
 @NonNull
 @ColumnInfo(name = "event_id1")
 private long id2;
+
 @NonNull
 @ColumnInfo(name = "event_id2")
 private long id1;
@@ -35,8 +36,5 @@ private long id1;
 
   public void setId1(long id1) {
     this.id1 = id1;
-  }
-
-  public EventEntity() {
   }
 }
