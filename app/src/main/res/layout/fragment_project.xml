@@ -9,7 +9,7 @@
   android:visibility="visible"
   android:orientation="vertical"
   tools:context=".view.BottomNav"
-  android:padding="40dp">
+  android:padding="20dp">
 
     <EditText
       android:id="@+id/project_name"
