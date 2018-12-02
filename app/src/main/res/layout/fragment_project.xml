@@ -31,38 +31,34 @@
       android:textColorHint="@color/rallyBlue"
       android:inputType="textMultiLine"
       android:paddingBottom="100dp"
-      android:background="@drawable/edit_text_style"/>
-    <LinearLayout
-      android:layout_width="match_parent"
-      android:orientation="horizontal"
-      android:gravity="center"
-      android:paddingTop="24dp"
-      android:layout_height="wrap_content">
+      android:background="@drawable/edit_text_style"
+      android:layout_marginTop="10dp"/>
+
         <Button
           android:id="@+id/start_date"
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:text="START"
           android:background="@color/rallyGreen"
-          android:layout_marginRight="10dp"/>
+          android:layout_marginTop="10dp"/>
         <Button
           android:id="@+id/end_date"
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:text="END"
           android:background="@color/rallyGreen"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"/>
+          android:layout_marginTop="10dp"
+          />
 
         <Button
           android:id="@+id/deadline-date"
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:text="DEADLINE"
           android:background="@color/rallyGreen"
-          android:layout_marginLeft="10dp"/>
+          android:layout_marginTop="10dp"/>
 
-    </LinearLayout>
+
     <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
@@ -70,10 +66,11 @@
       android:gravity="bottom|center">
         <Button
           android:id="@+id/save"
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:background="@color/rallyGreen"
-          android:text="SAVE"/>
+          android:text="SAVE"
+          android:layout_marginBottom="20dp"/>
 
     </LinearLayout>
 
