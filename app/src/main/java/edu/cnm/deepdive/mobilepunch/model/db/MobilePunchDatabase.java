@@ -96,10 +96,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
         EventEntity event = events.get(i);
         ClientEntity client = clients.get(i);
         List<EquipmentEntity> equipmentList = event.getEquipmentList();
-        for (int k = 0; k < equipmentList.size(); k++) {
-          EquipmentEntity equipment = equipmentList.get(k);
-          equipment.setUuid(new UUID(equipment.getId1(), equipment.getId2()));
-        }
+       toUUIDEquipment(equipmentList);
         client.setUuid(new UUID(client.getId1(), client.getId2()));
         event.setUuid(new UUID(event.getId1(), event.getId2()));
       }
