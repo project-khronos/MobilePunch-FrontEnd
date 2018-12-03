@@ -30,7 +30,13 @@ private long id2;
 private long id1;
 
 
+  public UUID getUuid() {
+    return uuid;
+  }
 
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
+  }
 
   public long getId2() {
     return id2;

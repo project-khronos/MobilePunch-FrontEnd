@@ -40,6 +40,14 @@ public class EquipmentEntity {
   @ColumnInfo(name = "serial_number")
   private String serialNumber;
 
+  public UUID getUuid() {
+    return uuid;
+  }
+
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
+  }
+
   @Nullable
   public String getSerialNumber() {
     return serialNumber;

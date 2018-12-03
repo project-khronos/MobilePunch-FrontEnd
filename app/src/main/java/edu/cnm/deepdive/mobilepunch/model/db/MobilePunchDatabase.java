@@ -52,7 +52,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
   public static void convertUUIDs(List<ProjectEntity> projects) {
     for (int i = 0; i < projects.size(); i++) {
       ProjectEntity project = projects.get(i);
-
+     // project.setId1(project);
     }
   }
 

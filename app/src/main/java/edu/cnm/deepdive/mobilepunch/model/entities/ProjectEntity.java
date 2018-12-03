@@ -27,6 +27,14 @@ public class ProjectEntity {
   @ColumnInfo(name = "end_date")
   private long endDate;
 
+  public UUID getUuid() {
+    return uuid;
+  }
+
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
+  }
+
   public long getId1() {
     return id1;
   }
