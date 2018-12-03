@@ -38,11 +38,11 @@ public class EquipmentFragment extends Fragment {
       Bundle savedInstanceState) {
 
     View view = inflater.inflate(R.layout.fragment_equipment, container, false);
-    makeField = view.findViewById(R.id.make);
-    modelField = view.findViewById(R.id.model);
-    yearField = view.findViewById(R.id.year);
-    licenseField = view.findViewById(R.id.license);
-    serialNumberField = view.findViewById(R.id.serial_number);
+    makeField = view.findViewById(R.id.equipment_make);
+    modelField = view.findViewById(R.id.equipment_model);
+    yearField = view.findViewById(R.id.equipment_year);
+    licenseField = view.findViewById(R.id.equipment_license);
+    serialNumberField = view.findViewById(R.id.equipment_serial_number);
     dateButton = view.findViewById(R.id.equipment_date);
 
 

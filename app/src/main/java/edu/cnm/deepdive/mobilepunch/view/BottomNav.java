@@ -19,31 +19,27 @@ public class BottomNav extends FragmentSwitcherActivity {
   private TextView textMessage;
 
   private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-      = new BottomNavigationView.OnNavigationItemSelectedListener() {
+      = item -> {
+        switch (item.getItemId()) {
+          case R.id.event:
+            switchFragment(new EventFragment(), false, null);
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-      switch (item.getItemId()) {
-        case R.id.event:
-          switchFragment(new EventFragment(), false, null);
+            return true;
+          case R.id.project:
+            switchFragment(new ProjectFragment(), false, null);
 
-          return true;
-        case R.id.project:
-          switchFragment(new ProjectFragment(), false, null);
+            return true;
+          case R.id.client:
+            switchFragment(new ClientFragment(), false, null);
 
-          return true;
-        case R.id.client:
-          switchFragment(new ClientFragment(), false, null);
+            return true;
+          case R.id.equipment:
+            switchFragment(new EquipmentFragment(), false, null);
 
-          return true;
-        case R.id.equipment:
-          switchFragment(new EquipmentFragment(), false, null);
-
-          return true;
-      }
-      return false;
-    }
-  };
+            return true;
+        }
+        return false;
+      };
   private BottomNavigationView navigation;
 
   @Override

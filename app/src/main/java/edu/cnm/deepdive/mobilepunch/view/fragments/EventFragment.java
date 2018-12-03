@@ -3,38 +3,38 @@ package edu.cnm.deepdive.mobilepunch.view.fragments;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.Toast;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.UUID;
 
 public class EventFragment extends Fragment {
 
   private EventEntity event;
   private EditText expensesField;
-  private EditText locationField;
+  private EditText descriptionField;
   private EditText incomeField;
   private MapView mapview;
   private View view;
+
   private Button eventStartDateButton;
   private Button eventExpectedDateButton;
   private Button eventEndDateButton;
-  private Calendar startDate;
+  private Button saveButton;
+
+  private Date startDate = new Date();
+  private Date expectedDate = new Date();
+  private Date endDate = new Date();
+
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -51,36 +51,58 @@ public class EventFragment extends Fragment {
     initListeners();
     return view;
   }
-private  void initLayout(){
 
-  mapview = view.findViewById(R.id.map);
-  expensesField = view.findViewById(R.id.expenses);
-  locationField = view.findViewById(R.id.location);
-  incomeField = view.findViewById(R.id.income);
-  eventStartDateButton = view.findViewById(R.id.event_start_date);
-  eventExpectedDateButton = view.findViewById(R.id.event_expected_date);
-  eventEndDateButton = view.findViewById(R.id.event_end_date);
-}
-private void initListeners() {
-    eventStartDateButton.setOnClickListener(v -> {
-     getFragmentManager().beginTransaction().add(R.id.container, new DateTimePickerFragment()).commit();
-      Toast.makeText(getContext(), "Clicked", Toast.LENGTH_SHORT).show();
+  private void initLayout() {
+    mapview = view.findViewById(R.id.event_map);
 
-        DateTimePickerFragment picker = new DateTimePickerFragment();
-        picker.setMode(Mode.DATE);
-        picker.setCalendar(startDate);
-        //TODO Add grabber for date
-        picker.show(getFragmentManager(), picker.getClass().getSimpleName());
+    expensesField = view.findViewById(R.id.event_expenses);
+    descriptionField = view.findViewById(R.id.event_description);
+    incomeField = view.findViewById(R.id.event_income);
 
+    eventStartDateButton = view.findViewById(R.id.event_start_date);
+    eventExpectedDateButton = view.findViewById(R.id.event_expected_date);
+    eventEndDateButton = view.findViewById(R.id.event_end_date);
+
+    saveButton = view.findViewById(R.id.event_save);
+  }
+
+  private void initListeners() {
+    DateTimePickerFragment picker = new DateTimePickerFragment();
+    picker.setMode(Mode.DATE);
+//
+//    setButton(eventStartDateButton, picker, startDate);
+//    setButton(eventExpectedDateButton, picker, expectedDate);
+//    setButton(eventEndDateButton, picker, endDate);
+
+    saveButton.setOnClickListener(v -> {
+      Toast.makeText(getContext(), startDate.toString(), Toast.LENGTH_SHORT).show();
     });
 
+    eventStartDateButton.setOnClickListener((v) -> {
+      picker.show(getFragmentManager(), picker.getClass().getSimpleName());
+      picker.setListener(cal -> {
+
+        startDate = cal.getTime();
+        eventStartDateButton.setText(startDate.toString());
+        Toast.makeText(getContext(), startDate.toString(), Toast.LENGTH_SHORT).show();
+      });
+    });
   }
+
+//  private void setButton(Button button, DateTimePickerFragment picker, Date date) {
+//    button.setOnClickListener(v -> {
+//      picker.show(getFragmentManager(), picker.getClass().getSimpleName());
+//      picker.setListener(cal ->{
+////        final Date[] dates = ew
+//      });
+//    });
+//  }
 
   private class InsertEvent extends AsyncTask<EventEntity, Void, Void> {
 
     @Override
-    protected Void doInBackground(EventEntity... eventEntities) {
-      MobilePunchDatabase.getInstance(getContext()).getEventDao().insert(eventEntities[0]);
+    protected Void doInBackground(EventEntity... eventEntity) {
+      MobilePunchDatabase.getInstance(getContext()).getEventDao().insert(eventEntity[0]);
       return null;
     }
   }
