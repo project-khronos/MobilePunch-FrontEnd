@@ -42,6 +42,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     instance = null;
   }
 
+
   public abstract ProjectDao getProjectDao();
 
   public abstract ClientDao getClientDao();
@@ -52,11 +53,8 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
 
 
   public static void fromUUIDProject(List<ProjectEntity> projects) {
-    for (int i = 0; i < projects.size(); i++) {
-      ProjectEntity project = projects.get(i);
-      fromUUIDProject(project);
-    }
-  }
+
+  
 
   public static void fromUUIDProject(ProjectEntity project) {
     project.setId1(project.getUuid().getMostSignificantBits());
@@ -68,9 +66,9 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
   private static void toUUIDProject(List<ProjectEntity> projects) {
     for (int i = 0; i < projects.size(); i++) {
       ProjectEntity project = projects.get(i);
+ Travis-Convertersupdated
       toUUIDProject(project);
-    }
-  }
+
 
   private static void toUUIDProject(ProjectEntity project) {
     project.setUuid(new UUID(project.getId1(), project.getId2()));
@@ -118,12 +116,10 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+
   public static void toUUIDCLient(List<ClientEntity> clients) {
-    for (int i = 0; i < clients.size(); i++) {
-      ClientEntity client = clients.get(i);
-      toUUIDClient(client);
-    }
-  }
+
+
 
   public static void toUUIDClient(ClientEntity client) {
     client.setUuid(new UUID(client.getId1(), client.getId2()));
@@ -131,11 +127,33 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
   }
 
 
+//  public static void fromUUIDEvent (EventEntity event) {
+//    event.setId1(event.getUuid().getMostSignificantBits());
+//    event.setId2(event.getUuid().getLeastSignificantBits());
+//  }
+//
+//  public static void fromUUIDEvent (List<EventEntity> events) {
+//    for (int j = 0; j < events.size(); j++) {
+//      EventEntity event = events.get(j);
+//      fromUUIDEvent(event);
+//    }
+//  }
+//
+//  public static void toUUIDEvent (EventEntity event) {
+//    event.setUuid(new UUID(event.getId1(), event.getId2()));
+//  }
+//
+//  public static void toUUID (List<EventEntity> events) {
+//    for (int j = 0; j < events.size(); j++) {
+//      EventEntity event = events.get(j);
+//      toUUIDEvent(event);
+//    }
+//  }
+
   public static void fromUUIDEquipment(EquipmentEntity equipment) {
     equipment.setId1(equipment.getUuid().getMostSignificantBits());
     equipment.setId2(equipment.getUuid().getLeastSignificantBits());
   }
-
 
   public static void fromUUIDEquipment(List<EquipmentEntity> equipmentList) {
     for (int i = 0; i < equipmentList.size(); i++) {
@@ -154,6 +172,14 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
       toUUIDEquipment(equipment);
     }
   }
+
+  public abstract ProjectDao getProjectDao();
+
+  public abstract ClientDao getClientDao();
+
+  public abstract EquipmentDao getEquipmentDao();
+
+  public abstract EventDao getEventDao();
 
   public static class Converters {
 

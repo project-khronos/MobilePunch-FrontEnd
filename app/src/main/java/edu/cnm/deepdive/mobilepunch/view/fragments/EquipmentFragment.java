@@ -3,8 +3,6 @@ package edu.cnm.deepdive.mobilepunch.view.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +42,6 @@ public class EquipmentFragment extends Fragment {
     licenseField = view.findViewById(R.id.equipment_license);
     serialNumberField = view.findViewById(R.id.equipment_serial_number);
     dateButton = view.findViewById(R.id.equipment_date);
-
 
     return view;
   }

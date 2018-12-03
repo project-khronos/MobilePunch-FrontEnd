@@ -5,7 +5,6 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,8 +16,10 @@ public class ClientEntity {
 
   @Ignore
   @Expose
+  List<ProjectEntity> projects;
+  @Ignore
+  @Expose
   private UUID uuid;
-
   @NonNull
   @ColumnInfo(name = "client_id1")
   private long id1;
@@ -38,10 +39,6 @@ public class ClientEntity {
   @ColumnInfo(name = "mailing_address_id")
   private long mailingAdressId;
   private String notes;
-
-  @Ignore
-  @Expose
-  List<ProjectEntity> projects;
 
   public UUID getUuid() {
     return uuid;

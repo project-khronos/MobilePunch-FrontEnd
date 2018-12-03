@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity
     navigationView.setNavigationItemSelectedListener(this);
 
 
-
   }
 
   @Override
@@ -82,8 +81,8 @@ public class MainActivity extends AppCompatActivity
       signOut();
     }
 
-      return true;
-    }
+    return true;
+  }
 
 
   private void signOut() {
@@ -139,7 +138,7 @@ public class MainActivity extends AppCompatActivity
     Retrofit retrofit = new Builder()
         // TODO change base_url value.
         .baseUrl("https://jsonplaceholder.typicode.com/")
-       .addConverterFactory(GsonConverterFactory.create(gson))
+        .addConverterFactory(GsonConverterFactory.create(gson))
         .build();
     service = retrofit.create(MobilePunchService.class);
   }

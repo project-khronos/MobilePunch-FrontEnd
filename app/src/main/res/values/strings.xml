@@ -24,7 +24,7 @@
   <string name="income">Income</string>
   <string name="location">Location</string>
   <string name="expenses">Expenses</string>
-  <string name="base_url"></string>
+  <string name="base_url">http://10.0.2.2:8080/</string>
   <string name="client_name">Client\'s name</string>
   <string name="license">License</string>
   <string name="serial_number">Serial Number</string>
@@ -39,4 +39,5 @@
   <string name="sign_out">Sign Out</string>
   <string name="skip_login">Skip Login</string>
   <string name="number_of_items">Number of Items:</string>
+  <string name="oauth2_header">Bearer %s</string>
 </resources>
