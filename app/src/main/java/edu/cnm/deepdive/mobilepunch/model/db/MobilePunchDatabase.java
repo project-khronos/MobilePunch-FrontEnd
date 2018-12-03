@@ -17,7 +17,6 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import retrofit2.http.PUT;
 
 @Database(
     entities = {ProjectEntity.class, EventEntity.class, ClientEntity.class, EquipmentEntity.class},
@@ -60,6 +59,30 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
 //    for (int i = 0; i < projects.size(); i++) {
 //      ProjectEntity project = projects.get(i);
 //      fromUUIDProject(project);
+//    }
+//  }
+
+//  public static void fromUUIDEvent (EventEntity event) {
+//    event.setId1(event.getUuid().getMostSignificantBits());
+//    event.setId2(event.getUuid().getLeastSignificantBits());
+//  }
+//
+//  public static void fromUUIDEvent (List<EventEntity> events) {
+//    for (int j = 0; j < events.size(); j++) {
+//      EventEntity event = events.get(j);
+//      fromUUIDEvent(event);
+//    }
+//  }
+//
+//  public static void toUUIDEvent (EventEntity event) {
+//    event.setUuid(new UUID(event.getId1(), event.getId2()));
+//  }
+//
+//  public static void toUUID (List<EventEntity> events) {
+//    for (int j = 0; j < events.size(); j++) {
+//      EventEntity event = events.get(j);
+//      toUUIDEvent(event);
+//    }
 //  }
 
   public static void convertfromProjectEventClientUUIDs(List<ProjectEntity> projects) {
