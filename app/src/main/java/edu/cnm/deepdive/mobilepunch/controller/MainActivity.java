@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity
       FragmentTransaction transaction = manager.beginTransaction();
       transaction.replace(R.id.fragment_container, Retrotest.newInstance(), "");
       transaction.commit();
+    } else if (id == R.id.sign_out) {
+
     }
 
       return true;
