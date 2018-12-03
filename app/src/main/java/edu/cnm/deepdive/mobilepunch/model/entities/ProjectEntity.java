@@ -6,6 +6,7 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 import java.util.UUID;
 
 @Entity(
@@ -14,7 +15,6 @@ import java.util.UUID;
 public class ProjectEntity {
 
   @Ignore
-  @SerializedName("uuid")
   @Expose
   private UUID uuid;
 
@@ -27,12 +27,36 @@ public class ProjectEntity {
   @ColumnInfo(name = "end_date")
   private long endDate;
 
+  @Ignore
+  @Expose
+  private List<EventEntity> events;
+
+  @Ignore
+  @Expose
+  private List<ClientEntity> clients;
+
   public UUID getUuid() {
     return uuid;
   }
 
   public void setUuid(UUID uuid) {
     this.uuid = uuid;
+  }
+
+  public List<EventEntity> getEvents() {
+    return events;
+  }
+
+  public void setEvents(List<EventEntity> events) {
+    this.events = events;
+  }
+
+  public List<ClientEntity> getClients() {
+    return clients;
+  }
+
+  public void setClients(List<ClientEntity> clients) {
+    this.clients = clients;
   }
 
   public long getId1() {
