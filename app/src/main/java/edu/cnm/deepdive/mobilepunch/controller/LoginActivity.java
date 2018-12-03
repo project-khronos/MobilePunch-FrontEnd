@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         switchToMain();
       } catch (ApiException e) {
         Toast.makeText(this, R.string.login_failure, Toast.LENGTH_LONG).show();
+        e.printStackTrace();
         //Do Nothing
       }
     }
