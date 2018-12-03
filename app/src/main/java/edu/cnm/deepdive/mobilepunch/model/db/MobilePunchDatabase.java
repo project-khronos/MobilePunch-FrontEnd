@@ -15,6 +15,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.Date;
+import java.util.List;
 
 @Database(
     entities = {ProjectEntity.class, EventEntity.class, ClientEntity.class, EquipmentEntity.class},
@@ -47,6 +48,13 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
   public abstract EquipmentDao getEquipmentDao();
 
   public abstract EventDao getEventDao();
+
+  public static void convertUUIDs(List<ProjectEntity> projects) {
+    for (int i = 0; i < projects.size(); i++) {
+      ProjectEntity project = projects.get(i);
+
+    }
+  }
 
   public static class Converters {
 

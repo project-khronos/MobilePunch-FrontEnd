@@ -2,13 +2,22 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.support.annotation.NonNull;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import java.util.UUID;
 
 
 @Entity(
     primaryKeys = {"client_id1", "client_id2"}
 )
 public class ClientEntity {
+
+  @Ignore
+  @SerializedName("uuid")
+  @Expose
+  private UUID uuid;
 
   @NonNull
   @ColumnInfo(name = "client_id1")

@@ -2,8 +2,12 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.support.annotation.Nullable;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import java.util.Date;
+import java.util.UUID;
 
 
 @Entity(
@@ -13,6 +17,11 @@ import java.util.Date;
 )
 public class EquipmentEntity {
 
+
+  @Ignore
+  @SerializedName("uuid")
+  @Expose
+  private UUID uuid;
 
   @ColumnInfo(name = "equipment_id1")
   private long id1;
