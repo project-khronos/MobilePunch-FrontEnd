@@ -108,6 +108,21 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+
+  public static void convertToUUIDClient(List<ClientEntity> clients) {
+    for (int i = 0; i < clients.size(); i++) {
+      ClientEntity client = clients.get(i);
+      client.setUuid(new UUID(client.getId1(), client.getId2()));
+      List<ProjectEntity> projects = client.getProjects();
+      for (int j = 0; j < projects.size(); j++) {
+        ProjectEntity project = projects.get(i);
+        project.setUuid(new UUID(project.getId1(), project.getId2()));
+      }
+    }
+  }
+
+
+
   public static class Converters {
 
     @TypeConverter
