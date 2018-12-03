@@ -17,6 +17,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import retrofit2.http.PUT;
 
 @Database(
     entities = {ProjectEntity.class, EventEntity.class, ClientEntity.class, EquipmentEntity.class},
@@ -101,9 +102,9 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
       client.setId2(client.getUuid().getLeastSignificantBits());
       List<ProjectEntity> projects = client.getProjects();
       for (int j = 0; j < projects.size(); j++) {
-      ProjectEntity project = projects.get(j);
-      project.setId1(project.getUuid().getMostSignificantBits());
-      project.setId2(project.getUuid().getLeastSignificantBits());
+        ProjectEntity project = projects.get(j);
+        project.setId1(project.getUuid().getMostSignificantBits());
+        project.setId2(project.getUuid().getLeastSignificantBits());
       }
     }
   }
@@ -122,6 +123,30 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
   }
 
 
+
+  public static void fromUUIDEquipment(EquipmentEntity equipment) {
+    equipment.setId1(equipment.getUuid().getMostSignificantBits());
+    equipment.setId2(equipment.getUuid().getLeastSignificantBits());
+  }
+
+
+  public static void fromUUIDEquipment(List<EquipmentEntity> equipmentList) {
+    for (int i = 0; i < equipmentList.size(); i++) {
+      EquipmentEntity equipment = equipmentList.get(i);
+      fromUUIDEquipment(equipment);
+    }
+  }
+
+  public static void toUUIDEquipment(EquipmentEntity equipment) {
+    equipment.setUuid(new UUID(equipment.getId1(), equipment.getId2()));
+  }
+
+  public static void toUUIDEquipment(List<EquipmentEntity> equipmentList) {
+    for (int i = 0; i < equipmentList.size(); i++) {
+      EquipmentEntity equipment = equipmentList.get(i);
+      toUUIDEquipment(equipment);
+    }
+  }
 
   public static class Converters {
 
