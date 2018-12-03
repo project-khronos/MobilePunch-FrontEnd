@@ -94,25 +94,35 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
-    public static void convertFromUUIDClient (List < ClientEntity > clients) {
+  public static void convertFromUUIDClient(List<ClientEntity> clients) {
+    for (int i = 0; i < clients.size(); i++) {
+      ClientEntity client = clients.get(i);
+      client.setId1(client.getUuid().getMostSignificantBits());
+      client.setId2(client.getUuid().getLeastSignificantBits());
+      List<ProjectEntity> projects = client.getProjects();
+      for (int j = 0; j < projects.size(); j++) {
+      ProjectEntity project = projects.get(j);
+      project.setId1(project.getUuid().getMostSignificantBits());
+      project.setId2(project.getUuid().getLeastSignificantBits());
+      }
+    }
+  }
 
+  public static class Converters {
+
+    @TypeConverter
+    public static Date dateFromLong(Long time) {
+      return (time != null) ? new Date(time) : null;
     }
 
-    public static class Converters {
-
-      @TypeConverter
-      public static Date dateFromLong(Long time) {
-        return (time != null) ? new Date(time) : null;
-      }
-
-      @TypeConverter
-      public static long longFromDate(Date date) {
-        return (date != null) ? date.getTime() : null;
-      }
-
-
+    @TypeConverter
+    public static long longFromDate(Date date) {
+      return (date != null) ? date.getTime() : null;
     }
 
 
   }
+
+
+}
 
