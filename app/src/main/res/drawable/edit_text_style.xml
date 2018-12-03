@@ -6,4 +6,8 @@
     android:width="1dp"
   android:color="@color/rallyDarkGreen"/>
 
+<solid
+  android:color="#1c1c1c">
+
+</solid>
 </shape>

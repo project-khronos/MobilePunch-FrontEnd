@@ -28,7 +28,7 @@ public class ClientFragment extends Fragment {
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     final View view = inflater.inflate(R.layout.fragment_client, container, false);
-    final EditText testee = view.findViewById(R.id.alternate_num);
+    final EditText alt_num= view.findViewById(R.id.client_alternate_num);
     EditText test = view.findViewById(R.id.client_number);
     test.addTextChangedListener(new TextWatcher() {
       @Override
@@ -38,7 +38,7 @@ public class ClientFragment extends Fragment {
 
       @Override
       public void onTextChanged(CharSequence s, int start, int before, int count) {
-        testee.setVisibility(View.VISIBLE);
+        alt_num.setVisibility(View.VISIBLE);
       }
 
       @Override
