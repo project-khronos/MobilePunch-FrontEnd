@@ -11,6 +11,13 @@
   android:orientation="vertical"
   android:visibility="visible"
   tools:context=".view.BottomNav">
+  <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
+    android:id="@+id/project_description"
+    style="?android:listSeparatorTextViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:hint="Description"
+    android:inputType="textMultiLine"/>
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
     android:id="@+id/project_name"
@@ -31,15 +38,6 @@
     android:textColor="@color/rallyBlue"/>
 
   <Button
-    android:id="@+id/project_end_date"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="2dp"
-    android:background="@drawable/edit_text_style"
-    android:text="End date"
-    android:textColor="@color/rallyBlue"/>
-
-  <Button
     android:id="@+id/project_expected_date"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -48,13 +46,15 @@
     android:text="Expected end date"
     android:textColor="@color/rallyBlue"/>
 
-  <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
-    android:id="@+id/project_description"
-    style="?android:listSeparatorTextViewStyle"
+  <Button
+    android:id="@+id/project_end_date"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:hint="Description"
-    android:inputType="textMultiLine"/>
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    android:background="@drawable/edit_text_style"
+    android:text="End date"
+    android:textColor="@color/rallyBlue"/>
+
 
   <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
