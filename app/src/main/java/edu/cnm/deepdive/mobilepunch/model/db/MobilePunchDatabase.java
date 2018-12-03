@@ -54,7 +54,12 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
       ProjectEntity project = projects.get(i);
       project.setId1(project.getUuid().getMostSignificantBits());
       project.setId2(project.getUuid().getLeastSignificantBits());
-      List<EventEntity> events = project.getE
+      List<EventEntity> events = project.getEvents();
+      for (int j = 0; j < events.size(); j++) {
+        EventEntity event = events.get(j);
+        event.setId1(event.getUuid().getMostSignificantBits());
+        event.setId2(event.getUuid().getLeastSignificantBits());
+      }
     }
   }
 
