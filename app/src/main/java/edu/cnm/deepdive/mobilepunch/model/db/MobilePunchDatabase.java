@@ -50,109 +50,85 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
 
   public abstract EventDao getEventDao();
 
-//  public static void fromUUIDProject(ProjectEntity project) {
-//    project.setId1(project.getUuid().getMostSignificantBits());
-//    project.setId2(project.getUuid().getLeastSignificantBits());
-//  }
-//
-//  public static void fromUUIDProject(List<ProjectEntity> projects) {
-//    for (int i = 0; i < projects.size(); i++) {
-//      ProjectEntity project = projects.get(i);
-//      fromUUIDProject(project);
-//    }
-//  }
 
-//  public static void fromUUIDEvent (EventEntity event) {
-//    event.setId1(event.getUuid().getMostSignificantBits());
-//    event.setId2(event.getUuid().getLeastSignificantBits());
-//  }
-//
-//  public static void fromUUIDEvent (List<EventEntity> events) {
-//    for (int j = 0; j < events.size(); j++) {
-//      EventEntity event = events.get(j);
-//      fromUUIDEvent(event);
-//    }
-//  }
-//
-//  public static void toUUIDEvent (EventEntity event) {
-//    event.setUuid(new UUID(event.getId1(), event.getId2()));
-//  }
-//
-//  public static void toUUID (List<EventEntity> events) {
-//    for (int j = 0; j < events.size(); j++) {
-//      EventEntity event = events.get(j);
-//      toUUIDEvent(event);
-//    }
-//  }
-
-  public static void convertfromProjectEventClientUUIDs(List<ProjectEntity> projects) {
+  public static void fromUUIDProject(List<ProjectEntity> projects) {
     for (int i = 0; i < projects.size(); i++) {
       ProjectEntity project = projects.get(i);
-      project.setId1(project.getUuid().getMostSignificantBits());
-      project.setId2(project.getUuid().getLeastSignificantBits());
-      List<EventEntity> events = project.getEvents();
-      List<ClientEntity> clients = project.getClients();
-      for (int j = 0; j < events.size(); j++) {
-        EventEntity event = events.get(j);
-        ClientEntity client = clients.get(j);
-        List<EquipmentEntity> equipmentList = event.getEquipmentList();
-        for (int k = 0; k < equipmentList.size(); k++) {
-          EquipmentEntity equipment = equipmentList.get(k);
-          equipment.setId1(equipment.getUuid().getMostSignificantBits());
-          equipment.setId2(equipment.getUuid().getLeastSignificantBits());
-        }
-        client.setId1(client.getUuid().getMostSignificantBits());
-        client.setId2(client.getUuid().getLeastSignificantBits());
-        event.setId1(event.getUuid().getMostSignificantBits());
-        event.setId2(event.getUuid().getLeastSignificantBits());
-      }
+      fromUUIDProject(project);
     }
   }
 
-  public static void convertToUUIDProject(List<ProjectEntity> projects) {
+  public static void fromUUIDProject(ProjectEntity project) {
+    project.setId1(project.getUuid().getMostSignificantBits());
+    project.setId2(project.getUuid().getLeastSignificantBits());
+    fromUUIDEvent(project.getEvents());
+    fromUUIDClient(project.getClients());
+  }
+
+  private static void toUUIDProject(List<ProjectEntity> projects) {
     for (int i = 0; i < projects.size(); i++) {
       ProjectEntity project = projects.get(i);
-      project.setUuid(new UUID(project.getId1(), project.getId2()));
-      List<EventEntity> events = project.getEvents();
-      List<ClientEntity> clients = project.getClients();
-      for (int j = 0; j < events.size(); j++) {
-        EventEntity event = events.get(i);
-        ClientEntity client = clients.get(i);
-        List<EquipmentEntity> equipmentList = event.getEquipmentList();
-       toUUIDEquipment(equipmentList);
-        client.setUuid(new UUID(client.getId1(), client.getId2()));
-        event.setUuid(new UUID(event.getId1(), event.getId2()));
-      }
+      toUUIDProject(project);
     }
   }
 
-  public static void convertFromUUIDClient(List<ClientEntity> clients) {
+  private static void toUUIDProject(ProjectEntity project) {
+    project.setUuid(new UUID(project.getId1(), project.getId2()));
+    toUUIDCLient(project.getClients());
+    toUUIDEvent(project.getEvents());
+  }
+
+  public static void fromUUIDEvent(List<EventEntity> events) {
+    for (int j = 0; j < events.size(); j++) {
+      EventEntity event = events.get(j);
+      fromUUIDEvent(event);
+    }
+  }
+
+  public static void fromUUIDEvent(EventEntity event) {
+    event.setId1(event.getUuid().getMostSignificantBits());
+    event.setId2(event.getUuid().getLeastSignificantBits());
+    fromUUIDEquipment(event.getEquipmentList());
+  }
+
+
+  public static void toUUIDEvent(EventEntity event) {
+    event.setUuid(new UUID(event.getId1(), event.getId2()));
+    toUUIDEquipment(event.getEquipmentList());
+  }
+
+  public static void toUUIDEvent(List<EventEntity> events) {
+    for (int j = 0; j < events.size(); j++) {
+      EventEntity event = events.get(j);
+      toUUIDEvent(event);
+    }
+  }
+
+
+  public static void fromUUIDClient(ClientEntity client) {
+    client.setId1(client.getUuid().getMostSignificantBits());
+    client.setId2(client.getUuid().getLeastSignificantBits());
+    fromUUIDProject(client.getProjects());
+  }
+
+  public static void fromUUIDClient(List<ClientEntity> clients) {
     for (int i = 0; i < clients.size(); i++) {
       ClientEntity client = clients.get(i);
-      client.setId1(client.getUuid().getMostSignificantBits());
-      client.setId2(client.getUuid().getLeastSignificantBits());
-      List<ProjectEntity> projects = client.getProjects();
-      for (int j = 0; j < projects.size(); j++) {
-        ProjectEntity project = projects.get(j);
-        project.setId1(project.getUuid().getMostSignificantBits());
-        project.setId2(project.getUuid().getLeastSignificantBits());
-      }
+      fromUUIDClient(client);
     }
   }
 
-
-  public static void convertToUUIDClient(List<ClientEntity> clients) {
+  public static void toUUIDCLient(List<ClientEntity> clients) {
     for (int i = 0; i < clients.size(); i++) {
       ClientEntity client = clients.get(i);
-      client.setUuid(new UUID(client.getId1(), client.getId2()));
-      List<ProjectEntity> projects = client.getProjects();
-      for (int j = 0; j < projects.size(); j++) {
-        ProjectEntity project = projects.get(i);
-        project.setUuid(new UUID(project.getId1(), project.getId2()));
-      }
+      toUUIDClient(client);
     }
   }
 
+  public static void toUUIDClient(ClientEntity client) {
+    client.setUuid(new UUID(client.getId1(), client.getId2()));
+    toUUIDProject(client.getProjects());
+  }
 
 
   public static void fromUUIDEquipment(EquipmentEntity equipment) {
