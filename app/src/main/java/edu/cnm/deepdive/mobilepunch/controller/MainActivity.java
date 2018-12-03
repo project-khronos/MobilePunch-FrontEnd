@@ -78,12 +78,21 @@ public class MainActivity extends AppCompatActivity
       FragmentTransaction transaction = manager.beginTransaction();
       transaction.replace(R.id.fragment_container, Retrotest.newInstance(), "");
       transaction.commit();
+    } else if (id == R.id.sign_out) {
+      signOut();
     }
 
       return true;
     }
 
 
+  private void signOut() {
+    FrontendApplication.getInstance().getClient().signOut().addOnCompleteListener(this, (task) -> {
+      Intent intent = new Intent(this, LoginActivity.class);
+      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+      startActivity(intent);
+    });
+  }
 
 
   @SuppressWarnings("StatementWithEmptyBody")

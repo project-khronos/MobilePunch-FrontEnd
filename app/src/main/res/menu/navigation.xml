@@ -25,4 +25,5 @@
     android:title="@string/equipmentList"
     android:titleCondensed="@string/equipmentList"
     android:iconTint="@color/rallyGreen"/>
+
 </menu>
