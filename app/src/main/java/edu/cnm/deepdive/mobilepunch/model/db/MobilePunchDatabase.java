@@ -42,13 +42,72 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     instance = null;
   }
 
-  public abstract ProjectDao getProjectDao();
+  public static void convertfromProjectEventClientUUIDs(List<ProjectEntity> projects) {
+    for (int i = 0; i < projects.size(); i++) {
+      ProjectEntity project = projects.get(i);
+      project.setId1(project.getUuid().getMostSignificantBits());
+      project.setId2(project.getUuid().getLeastSignificantBits());
+      List<EventEntity> events = project.getEvents();
+      List<ClientEntity> clients = project.getClients();
+      for (int j = 0; j < events.size(); j++) {
+        EventEntity event = events.get(j);
+        ClientEntity client = clients.get(j);
+        List<EquipmentEntity> equipmentList = event.getEquipmentList();
+        for (int k = 0; k < equipmentList.size(); k++) {
+          EquipmentEntity equipment = equipmentList.get(k);
+          equipment.setId1(equipment.getUuid().getMostSignificantBits());
+          equipment.setId2(equipment.getUuid().getLeastSignificantBits());
+        }
+        client.setId1(client.getUuid().getMostSignificantBits());
+        client.setId2(client.getUuid().getLeastSignificantBits());
+        event.setId1(event.getUuid().getMostSignificantBits());
+        event.setId2(event.getUuid().getLeastSignificantBits());
+      }
+    }
+  }
 
-  public abstract ClientDao getClientDao();
+  public static void convertToUUIDProject(List<ProjectEntity> projects) {
+    for (int i = 0; i < projects.size(); i++) {
+      ProjectEntity project = projects.get(i);
+      project.setUuid(new UUID(project.getId1(), project.getId2()));
+      List<EventEntity> events = project.getEvents();
+      List<ClientEntity> clients = project.getClients();
+      for (int j = 0; j < events.size(); j++) {
+        EventEntity event = events.get(i);
+        ClientEntity client = clients.get(i);
+        List<EquipmentEntity> equipmentList = event.getEquipmentList();
+        toUUIDEquipment(equipmentList);
+        client.setUuid(new UUID(client.getId1(), client.getId2()));
+        event.setUuid(new UUID(event.getId1(), event.getId2()));
+      }
+    }
+  }
 
-  public abstract EquipmentDao getEquipmentDao();
+  public static void convertFromUUIDClient(List<ClientEntity> clients) {
+    for (int i = 0; i < clients.size(); i++) {
+      ClientEntity client = clients.get(i);
+      client.setId1(client.getUuid().getMostSignificantBits());
+      client.setId2(client.getUuid().getLeastSignificantBits());
+      List<ProjectEntity> projects = client.getProjects();
+      for (int j = 0; j < projects.size(); j++) {
+        ProjectEntity project = projects.get(j);
+        project.setId1(project.getUuid().getMostSignificantBits());
+        project.setId2(project.getUuid().getLeastSignificantBits());
+      }
+    }
+  }
 
-  public abstract EventDao getEventDao();
+  public static void convertToUUIDClient(List<ClientEntity> clients) {
+    for (int i = 0; i < clients.size(); i++) {
+      ClientEntity client = clients.get(i);
+      client.setUuid(new UUID(client.getId1(), client.getId2()));
+      List<ProjectEntity> projects = client.getProjects();
+      for (int j = 0; j < projects.size(); j++) {
+        ProjectEntity project = projects.get(i);
+        project.setUuid(new UUID(project.getId1(), project.getId2()));
+      }
+    }
+  }
 
 //  public static void fromUUIDProject(ProjectEntity project) {
 //    project.setId1(project.getUuid().getMostSignificantBits());
@@ -85,81 +144,10 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
 //    }
 //  }
 
-  public static void convertfromProjectEventClientUUIDs(List<ProjectEntity> projects) {
-    for (int i = 0; i < projects.size(); i++) {
-      ProjectEntity project = projects.get(i);
-      project.setId1(project.getUuid().getMostSignificantBits());
-      project.setId2(project.getUuid().getLeastSignificantBits());
-      List<EventEntity> events = project.getEvents();
-      List<ClientEntity> clients = project.getClients();
-      for (int j = 0; j < events.size(); j++) {
-        EventEntity event = events.get(j);
-        ClientEntity client = clients.get(j);
-        List<EquipmentEntity> equipmentList = event.getEquipmentList();
-        for (int k = 0; k < equipmentList.size(); k++) {
-          EquipmentEntity equipment = equipmentList.get(k);
-          equipment.setId1(equipment.getUuid().getMostSignificantBits());
-          equipment.setId2(equipment.getUuid().getLeastSignificantBits());
-        }
-        client.setId1(client.getUuid().getMostSignificantBits());
-        client.setId2(client.getUuid().getLeastSignificantBits());
-        event.setId1(event.getUuid().getMostSignificantBits());
-        event.setId2(event.getUuid().getLeastSignificantBits());
-      }
-    }
-  }
-
-  public static void convertToUUIDProject(List<ProjectEntity> projects) {
-    for (int i = 0; i < projects.size(); i++) {
-      ProjectEntity project = projects.get(i);
-      project.setUuid(new UUID(project.getId1(), project.getId2()));
-      List<EventEntity> events = project.getEvents();
-      List<ClientEntity> clients = project.getClients();
-      for (int j = 0; j < events.size(); j++) {
-        EventEntity event = events.get(i);
-        ClientEntity client = clients.get(i);
-        List<EquipmentEntity> equipmentList = event.getEquipmentList();
-       toUUIDEquipment(equipmentList);
-        client.setUuid(new UUID(client.getId1(), client.getId2()));
-        event.setUuid(new UUID(event.getId1(), event.getId2()));
-      }
-    }
-  }
-
-  public static void convertFromUUIDClient(List<ClientEntity> clients) {
-    for (int i = 0; i < clients.size(); i++) {
-      ClientEntity client = clients.get(i);
-      client.setId1(client.getUuid().getMostSignificantBits());
-      client.setId2(client.getUuid().getLeastSignificantBits());
-      List<ProjectEntity> projects = client.getProjects();
-      for (int j = 0; j < projects.size(); j++) {
-        ProjectEntity project = projects.get(j);
-        project.setId1(project.getUuid().getMostSignificantBits());
-        project.setId2(project.getUuid().getLeastSignificantBits());
-      }
-    }
-  }
-
-
-  public static void convertToUUIDClient(List<ClientEntity> clients) {
-    for (int i = 0; i < clients.size(); i++) {
-      ClientEntity client = clients.get(i);
-      client.setUuid(new UUID(client.getId1(), client.getId2()));
-      List<ProjectEntity> projects = client.getProjects();
-      for (int j = 0; j < projects.size(); j++) {
-        ProjectEntity project = projects.get(i);
-        project.setUuid(new UUID(project.getId1(), project.getId2()));
-      }
-    }
-  }
-
-
-
   public static void fromUUIDEquipment(EquipmentEntity equipment) {
     equipment.setId1(equipment.getUuid().getMostSignificantBits());
     equipment.setId2(equipment.getUuid().getLeastSignificantBits());
   }
-
 
   public static void fromUUIDEquipment(List<EquipmentEntity> equipmentList) {
     for (int i = 0; i < equipmentList.size(); i++) {
@@ -178,6 +166,14 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
       toUUIDEquipment(equipment);
     }
   }
+
+  public abstract ProjectDao getProjectDao();
+
+  public abstract ClientDao getClientDao();
+
+  public abstract EquipmentDao getEquipmentDao();
+
+  public abstract EventDao getEventDao();
 
   public static class Converters {
 

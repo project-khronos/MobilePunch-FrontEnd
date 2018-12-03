@@ -26,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Retrotest extends Fragment {
 
+  private static final String TAG = "tag";
   MobilePunchService service;
   EditText keyText;
   EditText valueText;
@@ -33,7 +34,6 @@ public class Retrotest extends Fragment {
   TextView getResponse;
   Button postButton;
   Button getButton;
-  private static final String TAG = "tag";
   PostTest post;
   PostTask postTask;
 
