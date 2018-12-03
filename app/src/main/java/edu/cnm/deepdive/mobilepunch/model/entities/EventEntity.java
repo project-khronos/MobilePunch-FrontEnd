@@ -27,7 +27,7 @@ public class EventEntity {
 
   @Ignore
   @Expose
-  List<EquipmentEntity> equipment;
+  List<EquipmentEntity> equipmentList;
 
   public UUID getUuid() {
     return uuid;
@@ -37,13 +37,13 @@ public class EventEntity {
     this.uuid = uuid;
   }
 
-  public List<EquipmentEntity> getEquipment() {
-    return equipment;
+  public List<EquipmentEntity> getEquipmentList() {
+    return equipmentList;
   }
 
-  public void setEquipment(
-      List<EquipmentEntity> equipment) {
-    this.equipment = equipment;
+  public void setEquipmentList(
+      List<EquipmentEntity> equipmentList) {
+    this.equipmentList = equipmentList;
   }
 
   public long getId2() {

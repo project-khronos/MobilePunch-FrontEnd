@@ -60,6 +60,12 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
       for (int j = 0; j < events.size(); j++) {
         EventEntity event = events.get(j);
         ClientEntity client = clients.get(j);
+        List<EquipmentEntity> equipmentList = event.getEquipmentList();
+        for (int k = 0; k < equipmentList.size(); k++) {
+          EquipmentEntity equipment = equipmentList.get(k);
+          equipment.setId1(equipment.getUuid().getMostSignificantBits());
+          equipment.setId2(equipment.getUuid().getLeastSignificantBits());
+        }
         client.setId1(client.getUuid().getMostSignificantBits());
         client.setId2(client.getUuid().getLeastSignificantBits());
         event.setId1(event.getUuid().getMostSignificantBits());
@@ -77,13 +83,18 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
       for (int j = 0; j < events.size(); j++) {
         EventEntity event = events.get(i);
         ClientEntity client = clients.get(i);
+        List<EquipmentEntity> equipmentList = event.getEquipmentList();
+        for (int k = 0; k < equipmentList.size(); k++) {
+          EquipmentEntity equipment = equipmentList.get(k);
+          equipment.setUuid(new UUID(equipment.getId1(), equipment.getId2()));
+        }
         client.setUuid(new UUID(client.getId1(), client.getId2()));
         event.setUuid(new UUID(event.getId1(), event.getId2()));
       }
     }
   }
 
-    public static void convertFormUUIDClient (List < ClientEntity > clients) {
+    public static void convertFromUUIDClient (List < ClientEntity > clients) {
 
     }
 
