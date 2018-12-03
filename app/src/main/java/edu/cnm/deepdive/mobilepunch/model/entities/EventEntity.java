@@ -16,20 +16,25 @@ public class EventEntity {
 
   @Ignore
   @Expose
+  List<EquipmentEntity> equipmentList;
+  @Ignore
+  @Expose
   private UUID uuid;
-
-
   @NonNull
   @ColumnInfo(name = "event_id1")
   private long id2;
-
   @NonNull
   @ColumnInfo(name = "event_id2")
   private long id1;
-
-  @Ignore
-  @Expose
-  List<EquipmentEntity> equipmentList;
+  @ColumnInfo(name = "event_start_date")
+  private Date startDate;
+  @ColumnInfo(name = "event_end_date")
+  private Date endDate;
+  private int expenses;
+  private int income;
+  private String description;
+  private double longitude;
+  private double latidtude;
 
   public UUID getUuid() {
     return uuid;
@@ -48,24 +53,7 @@ public class EventEntity {
     this.equipmentList = equipmentList;
   }
 
-@ColumnInfo(name = "event_start_date")
-private Date startDate;
-
-@ColumnInfo(name = "event_end_date")
-private Date endDate;
-
-private int expenses;
-
-private int income;
-
-private String description;
-
-private double longitude;
-
-private double latidtude;
-
 //  Image -URI
-
 
   public Date getStartDate() {
     return startDate;

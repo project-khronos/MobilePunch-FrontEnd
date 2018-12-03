@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mobilepunch.R;
-import edu.cnm.deepdive.mobilepunch.model.entities.PostTest;
+import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import java.util.List;
 import retrofit2.Response;
@@ -26,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Retrotest extends Fragment {
 
+  private static final String TAG = "tag";
   MobilePunchService service;
   EditText keyText;
   EditText valueText;
@@ -33,8 +34,7 @@ public class Retrotest extends Fragment {
   TextView getResponse;
   Button postButton;
   Button getButton;
-  private static final String TAG = "tag";
-  PostTest post;
+  ProjectEntity post;
   PostTask postTask;
 
   public static Retrotest newInstance() {
@@ -83,7 +83,7 @@ public class Retrotest extends Fragment {
         .create();
     Retrofit retrofit = new Builder()
         // TODO change base_url value.
-        .baseUrl("https://jsonplaceholder.typicode.com/")
+        .baseUrl(getString(R.string.base_url))
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build();
     service = retrofit.create(MobilePunchService.class);
@@ -95,8 +95,8 @@ public class Retrotest extends Fragment {
     @Override
     protected List<PostTask> doInBackground(Void... voids) {
       try {
-        List<PostTest> posts;
-        Response<List<PostTest>> response = service.get().execute();
+        List<ProjectEntity> posts;
+        Response<List<ProjectEntity>> response = service.get().execute();
         if (response.isSuccessful()) {
           posts = response.body();
           post = posts.get(0);
@@ -112,8 +112,13 @@ public class Retrotest extends Fragment {
 
     @Override
     protected void onPostExecute(List<PostTask> postTasks) {
-      getResponse.setText(post.title);
+      if ((post != null)) {
+        getResponse.setText(post.getUuid().toString());
+      } else {
+        getResponse.setText("null");
+      }
     }
+
 
   }
 }

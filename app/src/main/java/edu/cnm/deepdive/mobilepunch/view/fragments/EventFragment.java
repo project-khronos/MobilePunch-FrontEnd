@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -105,6 +104,7 @@ public class EventFragment extends Fragment {
   }
 
   private class DatePickerListener implements OnChangeListener {
+
     private Date date;
 
     public DatePickerListener(Date date) {
@@ -113,7 +113,7 @@ public class EventFragment extends Fragment {
 
     @Override
     public void onChange(Calendar calendar) {
-     date.setTime(calendar.getTimeInMillis());
+      date.setTime(calendar.getTimeInMillis());
     }
   }
 }
