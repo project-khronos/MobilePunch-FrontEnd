@@ -2,39 +2,58 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.support.annotation.NonNull;
+import com.google.gson.annotations.Expose;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 @Entity(
-    primaryKeys = {"event_id1","event_id2"}
+    primaryKeys = {"event_id1", "event_id2"}
 )
 public class EventEntity {
-@NonNull
-@ColumnInfo(name = "event_id1")
-private long id2;
 
-@NonNull
-@ColumnInfo(name = "event_id2")
-private long id1;
+  @Ignore
+  @Expose
+  List<EquipmentEntity> equipmentList;
+  @Ignore
+  @Expose
+  private UUID uuid;
+  @NonNull
+  @ColumnInfo(name = "event_id1")
+  private long id2;
+  @NonNull
+  @ColumnInfo(name = "event_id2")
+  private long id1;
+  @ColumnInfo(name = "event_start_date")
+  private Date startDate;
+  @ColumnInfo(name = "event_end_date")
+  private Date endDate;
+  private int expenses;
+  private int income;
+  private String description;
+  private double longitude;
+  private double latidtude;
 
-@ColumnInfo(name = "event_start_date")
-private Date startDate;
+  public UUID getUuid() {
+    return uuid;
+  }
 
-@ColumnInfo(name = "event_end_date")
-private Date endDate;
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
+  }
 
-private int expenses;
+  public List<EquipmentEntity> getEquipmentList() {
+    return equipmentList;
+  }
 
-private int income;
-
-private String description;
-
-private double longitude;
-
-private double latidtude;
+  public void setEquipmentList(
+      List<EquipmentEntity> equipmentList) {
+    this.equipmentList = equipmentList;
+  }
 
 //  Image -URI
-
 
   public Date getStartDate() {
     return startDate;
@@ -90,6 +109,7 @@ private double latidtude;
 
   public void setLatidtude(double latidtude) {
     this.latidtude = latidtude;
+
   }
 
   public long getId2() {

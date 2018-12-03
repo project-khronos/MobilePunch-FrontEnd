@@ -9,7 +9,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions.Builder;
 import edu.cnm.deepdive.mobilepunch.R;
 
-public class FrontendApplication  extends Application {
+public class FrontendApplication extends Application {
 
   private static FrontendApplication instance = null;
 
