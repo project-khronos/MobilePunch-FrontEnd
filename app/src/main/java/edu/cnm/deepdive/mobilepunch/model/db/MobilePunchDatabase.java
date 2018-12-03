@@ -83,9 +83,9 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
-//    public static void convertFormUUIDClient (List < ClientEntity > clients) {
-//
-//    }
+    public static void convertFormUUIDClient (List < ClientEntity > clients) {
+
+    }
 
     public static class Converters {
 
