@@ -20,10 +20,10 @@
     android:iconTint="@color/rallyGreen"
     />
   <item
-    android:id="@+id/equipment"
+    android:id="@+id/equipmentList"
     android:icon="@drawable/ic_equipment"
-    android:title="@string/equipment"
-    android:titleCondensed="@string/equipment"
+    android:title="@string/equipmentList"
+    android:titleCondensed="@string/equipmentList"
     android:iconTint="@color/rallyGreen"/>
 
 </menu>

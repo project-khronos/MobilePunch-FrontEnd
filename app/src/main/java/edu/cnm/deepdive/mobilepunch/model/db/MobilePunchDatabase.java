@@ -15,6 +15,8 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 @Database(
     entities = {ProjectEntity.class, EventEntity.class, ClientEntity.class, EquipmentEntity.class},
@@ -47,6 +49,135 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
   public abstract EquipmentDao getEquipmentDao();
 
   public abstract EventDao getEventDao();
+
+//  public static void fromUUIDProject(ProjectEntity project) {
+//    project.setId1(project.getUuid().getMostSignificantBits());
+//    project.setId2(project.getUuid().getLeastSignificantBits());
+//  }
+//
+//  public static void fromUUIDProject(List<ProjectEntity> projects) {
+//    for (int i = 0; i < projects.size(); i++) {
+//      ProjectEntity project = projects.get(i);
+//      fromUUIDProject(project);
+//    }
+//  }
+
+//  public static void fromUUIDEvent (EventEntity event) {
+//    event.setId1(event.getUuid().getMostSignificantBits());
+//    event.setId2(event.getUuid().getLeastSignificantBits());
+//  }
+//
+//  public static void fromUUIDEvent (List<EventEntity> events) {
+//    for (int j = 0; j < events.size(); j++) {
+//      EventEntity event = events.get(j);
+//      fromUUIDEvent(event);
+//    }
+//  }
+//
+//  public static void toUUIDEvent (EventEntity event) {
+//    event.setUuid(new UUID(event.getId1(), event.getId2()));
+//  }
+//
+//  public static void toUUID (List<EventEntity> events) {
+//    for (int j = 0; j < events.size(); j++) {
+//      EventEntity event = events.get(j);
+//      toUUIDEvent(event);
+//    }
+//  }
+
+  public static void convertfromProjectEventClientUUIDs(List<ProjectEntity> projects) {
+    for (int i = 0; i < projects.size(); i++) {
+      ProjectEntity project = projects.get(i);
+      project.setId1(project.getUuid().getMostSignificantBits());
+      project.setId2(project.getUuid().getLeastSignificantBits());
+      List<EventEntity> events = project.getEvents();
+      List<ClientEntity> clients = project.getClients();
+      for (int j = 0; j < events.size(); j++) {
+        EventEntity event = events.get(j);
+        ClientEntity client = clients.get(j);
+        List<EquipmentEntity> equipmentList = event.getEquipmentList();
+        for (int k = 0; k < equipmentList.size(); k++) {
+          EquipmentEntity equipment = equipmentList.get(k);
+          equipment.setId1(equipment.getUuid().getMostSignificantBits());
+          equipment.setId2(equipment.getUuid().getLeastSignificantBits());
+        }
+        client.setId1(client.getUuid().getMostSignificantBits());
+        client.setId2(client.getUuid().getLeastSignificantBits());
+        event.setId1(event.getUuid().getMostSignificantBits());
+        event.setId2(event.getUuid().getLeastSignificantBits());
+      }
+    }
+  }
+
+  public static void convertToUUIDProject(List<ProjectEntity> projects) {
+    for (int i = 0; i < projects.size(); i++) {
+      ProjectEntity project = projects.get(i);
+      project.setUuid(new UUID(project.getId1(), project.getId2()));
+      List<EventEntity> events = project.getEvents();
+      List<ClientEntity> clients = project.getClients();
+      for (int j = 0; j < events.size(); j++) {
+        EventEntity event = events.get(i);
+        ClientEntity client = clients.get(i);
+        List<EquipmentEntity> equipmentList = event.getEquipmentList();
+       toUUIDEquipment(equipmentList);
+        client.setUuid(new UUID(client.getId1(), client.getId2()));
+        event.setUuid(new UUID(event.getId1(), event.getId2()));
+      }
+    }
+  }
+
+  public static void convertFromUUIDClient(List<ClientEntity> clients) {
+    for (int i = 0; i < clients.size(); i++) {
+      ClientEntity client = clients.get(i);
+      client.setId1(client.getUuid().getMostSignificantBits());
+      client.setId2(client.getUuid().getLeastSignificantBits());
+      List<ProjectEntity> projects = client.getProjects();
+      for (int j = 0; j < projects.size(); j++) {
+        ProjectEntity project = projects.get(j);
+        project.setId1(project.getUuid().getMostSignificantBits());
+        project.setId2(project.getUuid().getLeastSignificantBits());
+      }
+    }
+  }
+
+
+  public static void convertToUUIDClient(List<ClientEntity> clients) {
+    for (int i = 0; i < clients.size(); i++) {
+      ClientEntity client = clients.get(i);
+      client.setUuid(new UUID(client.getId1(), client.getId2()));
+      List<ProjectEntity> projects = client.getProjects();
+      for (int j = 0; j < projects.size(); j++) {
+        ProjectEntity project = projects.get(i);
+        project.setUuid(new UUID(project.getId1(), project.getId2()));
+      }
+    }
+  }
+
+
+
+  public static void fromUUIDEquipment(EquipmentEntity equipment) {
+    equipment.setId1(equipment.getUuid().getMostSignificantBits());
+    equipment.setId2(equipment.getUuid().getLeastSignificantBits());
+  }
+
+
+  public static void fromUUIDEquipment(List<EquipmentEntity> equipmentList) {
+    for (int i = 0; i < equipmentList.size(); i++) {
+      EquipmentEntity equipment = equipmentList.get(i);
+      fromUUIDEquipment(equipment);
+    }
+  }
+
+  public static void toUUIDEquipment(EquipmentEntity equipment) {
+    equipment.setUuid(new UUID(equipment.getId1(), equipment.getId2()));
+  }
+
+  public static void toUUIDEquipment(List<EquipmentEntity> equipmentList) {
+    for (int i = 0; i < equipmentList.size(); i++) {
+      EquipmentEntity equipment = equipmentList.get(i);
+      toUUIDEquipment(equipment);
+    }
+  }
 
   public static class Converters {
 

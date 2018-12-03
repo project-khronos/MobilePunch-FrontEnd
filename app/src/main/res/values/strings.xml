@@ -11,7 +11,7 @@
   <string name="title_dashboard">Dashboard</string>
   <string name="title_notifications">Notifications</string>
 
-  <string name="equipment">Equipment</string>
+  <string name="equipmentList">Equipment</string>
   <string name="client">Client</string>
   <string name="project">Project</string>
   <string name="event">Event</string>
