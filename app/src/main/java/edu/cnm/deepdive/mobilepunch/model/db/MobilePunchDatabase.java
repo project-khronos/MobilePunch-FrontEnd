@@ -68,39 +68,40 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
-  public static void convertToUUIDProject(ProjectEntity project) {
-    project.setUuid(new UUID(project.getId1(), project.getId2()));
-   List<EventEntity> events = project.getEvents();
-   List<ClientEntity> clients = project.getClients();
-   for (int i = 0; i < events.size(); i++) {
-     EventEntity event = events.get(i);
-     ClientEntity client = clients.get(i);
-     client.setUuid(new UUID(client.getId1(), client.getId2()));
-     event.setUuid(new UUID(event.getId1(), event.getId2()));
-   }
+  public static void convertToUUIDProject(List<ProjectEntity> projects) {
+    for (int i = 0; i < projects.size(); i++) {
+      ProjectEntity project = projects.get(i);
+      project.setUuid(new UUID(project.getId1(), project.getId2()));
+      List<EventEntity> events = project.getEvents();
+      List<ClientEntity> clients = project.getClients();
+      for (int j = 0; j < events.size(); j++) {
+        EventEntity event = events.get(i);
+        ClientEntity client = clients.get(i);
+        client.setUuid(new UUID(client.getId1(), client.getId2()));
+        event.setUuid(new UUID(event.getId1(), event.getId2()));
+      }
+    }
   }
 
+//    public static void convertFormUUIDClient (List < ClientEntity > clients) {
+//
+//    }
+
+    public static class Converters {
+
+      @TypeConverter
+      public static Date dateFromLong(Long time) {
+        return (time != null) ? new Date(time) : null;
+      }
+
+      @TypeConverter
+      public static long longFromDate(Date date) {
+        return (date != null) ? date.getTime() : null;
+      }
 
 
-
-
-
-
-  public static class Converters {
-
-    @TypeConverter
-    public static Date dateFromLong(Long time) {
-      return (time != null) ? new Date(time) : null;
-    }
-
-    @TypeConverter
-    public static long longFromDate(Date date) {
-      return (date != null) ? date.getTime() : null;
     }
 
 
   }
-
-
-}
 
