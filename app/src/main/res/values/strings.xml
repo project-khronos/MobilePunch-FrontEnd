@@ -38,4 +38,8 @@
   <string name="sign_out">Sign Out</string>
   <string name="skip_login">Skip Login</string>
   <string name="number_of_items">Number of Items:</string>
+  <string name="latitude">Latitude</string>
+  <string name="longitude">Longitude</string>
+  <string name="end_date_time">End Date/Time</string>
+  <string name="start_date_time">Start Date/Time</string>
 </resources>
