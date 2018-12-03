@@ -5,90 +5,91 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:layout_marginBottom="@dimen/nav_bottom_height"
+  android:padding="20dp"
   android:background="@color/rallyBackground"
-  android:visibility="visible"
   android:orientation="vertical"
-  tools:context=".view.BottomNav"
-  android:padding="20dp">
+  android:visibility="visible"
+  tools:context=".view.BottomNav">
 
 
-  <android.support.v7.widget.AppCompatEditText
-    android:id="@+id/make"
+  <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
+    android:id="@+id/equipment_make"
     style="?android:listSeparatorTextViewStyle"
-    android:layout_width="100dp"
-    android:layout_height="40sp"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginBottom="2dp"
     android:hint="@string/make"
-    android:inputType="text"
-    android:textColor="@color/rallyGreen"
-    android:textColorHint="@color/rallyBlue"/>
+    android:inputType="text"/>
 
-  <android.support.v7.widget.AppCompatEditText
-    android:id="@+id/model"
+  <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
+    android:id="@+id/equipment_model"
     style="?android:listSeparatorTextViewStyle"
-    android:layout_width="100dp"
-    android:layout_height="40sp"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginBottom="2dp"
     android:hint="@string/model"
-    android:inputType="text"
-    android:textColor="@color/rallyGreen"
-    android:textColorHint="@color/rallyBlue"/>
+    android:inputType="text"/>
 
-  <android.support.v7.widget.AppCompatEditText
-    android:id="@+id/year"
+  <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
+    android:id="@+id/equipment_year"
     style="?android:listSeparatorTextViewStyle"
-    android:layout_width="100dp"
-    android:layout_height="40sp"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginBottom="2dp"
     android:hint="@string/year"
-    android:inputType="number"
-    android:textColor="@color/rallyGreen"
-    android:textColorHint="@color/rallyBlue"/>
+    android:inputType="number"/>
 
-  <android.support.v7.widget.AppCompatEditText
-    android:id="@+id/descOrName"
+
+
+
+  <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
+    android:id="@+id/equipment_license"
     style="?android:listSeparatorTextViewStyle"
-    android:layout_width="100dp"
-    android:layout_height="40sp"
-    android:hint="@string/description_or_name"
-    android:inputType="text"
-    android:textColor="@color/rallyGreen"
-    android:textColorHint="@color/rallyBlue"/>
-
-
-  <android.support.v7.widget.AppCompatEditText
-    android:id="@+id/license"
-    style="?android:listSeparatorTextViewStyle"
-    android:layout_width="100dp"
-    android:layout_height="40sp"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginBottom="2dp"
     android:hint="@string/license"
-    android:inputType="number"
-    android:textColor="@color/rallyGreen"
-    android:textColorHint="@color/rallyBlue"/>
+    android:inputType="number"/>
 
-  <android.support.v7.widget.AppCompatEditText
-    android:id="@+id/serial_number"
+  <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
+    android:id="@+id/equipment_serial_number"
     style="?android:listSeparatorTextViewStyle"
-    android:layout_width="100dp"
-    android:layout_height="40sp"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginBottom="2dp"
     android:hint="@string/serial_number"
-    android:inputType="text"
-    android:textColor="@color/rallyGreen"
-    android:textColorHint="@color/rallyBlue"/>
+    android:inputType="text"/>
 
 
   <Button
     android:id="@+id/equipment_date"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
-
-  <Button
-    android:id="@+id/save"
-    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="100dp"
-    android:background="@color/rallyGreen"
-    android:text="@string/save"
-    android:layout_gravity="bottom"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"/>
+    android:layout_marginBottom="2dp"
+    android:background="@drawable/edit_text_style"
+    android:text="Date acquired/date used"
+    android:textColor="@color/rallyBlue"/>
 
+  <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
+    android:id="@+id/equipment_description"
+    style="?android:listSeparatorTextViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_marginBottom="2dp"
+    android:hint="@string/description_or_name"
+    android:inputType="text"/>
+
+  <android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+      android:id="@+id/equipment_save"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/rallyGreen"
+      android:text="SAVE"
+      app:layout_constraintBottom_toBottomOf="parent"/>
+  </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>
