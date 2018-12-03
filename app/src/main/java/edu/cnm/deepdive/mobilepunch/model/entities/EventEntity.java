@@ -2,11 +2,10 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-
 import android.arch.persistence.room.Ignore;
-
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,6 +46,7 @@ public class EventEntity {
   public void setEquipmentList(
       List<EquipmentEntity> equipmentList) {
     this.equipmentList = equipmentList;
+  }
 
 @ColumnInfo(name = "event_start_date")
 private Date startDate;
