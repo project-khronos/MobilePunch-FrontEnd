@@ -16,6 +16,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Database(
     entities = {ProjectEntity.class, EventEntity.class, ClientEntity.class, EquipmentEntity.class},
@@ -49,19 +50,38 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
 
   public abstract EventDao getEventDao();
 
-  public static void convertUUIDs(List<ProjectEntity> projects) {
+  public static void convertfromProjectEventClientUUIDs(List<ProjectEntity> projects) {
     for (int i = 0; i < projects.size(); i++) {
       ProjectEntity project = projects.get(i);
       project.setId1(project.getUuid().getMostSignificantBits());
       project.setId2(project.getUuid().getLeastSignificantBits());
       List<EventEntity> events = project.getEvents();
+      List<ClientEntity> clients = project.getClients();
       for (int j = 0; j < events.size(); j++) {
         EventEntity event = events.get(j);
+        ClientEntity client = clients.get(j);
+        client.setId1(client.getUuid().getMostSignificantBits());
+        client.setId2(client.getUuid().getLeastSignificantBits());
         event.setId1(event.getUuid().getMostSignificantBits());
         event.setId2(event.getUuid().getLeastSignificantBits());
       }
     }
   }
+
+  public static void convertToUUIDProject(ProjectEntity project) {
+    project.setUuid(new UUID(project.getId1(), project.getId2()));
+   List<EventEntity> events = project.getEvents();
+   for (int i = 0; i < events.size(); i++) {
+     EventEntity event = events.get(i);
+     event.setUuid(new UUID(event.getId1(), event.getId2()));
+   }
+  }
+
+
+
+
+
+
 
   public static class Converters {
 

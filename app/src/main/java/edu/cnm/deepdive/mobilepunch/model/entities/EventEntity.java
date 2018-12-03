@@ -17,7 +17,6 @@ import java.util.UUID;
 public class EventEntity {
 
   @Ignore
-  @SerializedName("uuid")
   @Expose
   private UUID uuid;
 

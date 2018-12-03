@@ -15,7 +15,6 @@ import java.util.UUID;
 public class ClientEntity {
 
   @Ignore
-  @SerializedName("uuid")
   @Expose
   private UUID uuid;
 
