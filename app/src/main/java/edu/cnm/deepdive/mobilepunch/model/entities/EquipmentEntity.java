@@ -3,7 +3,7 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.Date;
@@ -33,12 +33,8 @@ public class EquipmentEntity {
   private Date date;
   @ColumnInfo(name = "desc_or_name")
   private String descOrName;
-  @Nullable
-  @ColumnInfo(name = "license_plate")
-  private String licensePlate;
-  @Nullable
-  @ColumnInfo(name = "serial_number")
-  private String serialNumber;
+  @NonNull
+  private String Identification;
 
   public UUID getUuid() {
     return uuid;
@@ -48,13 +44,13 @@ public class EquipmentEntity {
     this.uuid = uuid;
   }
 
-  @Nullable
-  public String getSerialNumber() {
-    return serialNumber;
+  @NonNull
+  public String getIdentification() {
+    return Identification;
   }
 
-  public void setSerialNumber(@Nullable String serialNumber) {
-    this.serialNumber = serialNumber;
+  public void setIdentification(@NonNull String identification) {
+    Identification = identification;
   }
 
   public String getMake() {
@@ -111,14 +107,6 @@ public class EquipmentEntity {
 
   public void setId2(long id2) {
     this.id2 = id2;
-  }
-
-  public String getLicensePlate() {
-    return licensePlate;
-  }
-
-  public void setLicensePlate(String licensePlate) {
-    this.licensePlate = licensePlate;
   }
 
 

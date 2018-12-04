@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity(
-    primaryKeys = {"event_id1","event_id2"},
+    primaryKeys = {"event_id1", "event_id2"},
     foreignKeys = {@ForeignKey(
         entity = ProjectEntity.class,
-        parentColumns = {"project_id1","project_id2"},
-        childColumns = {"project_id1","project_id2"},
+        parentColumns = {"project_id1", "project_id2"},
+        childColumns = {"project_id1", "project_id2"},
         onDelete = OnConflictStrategy.FAIL
     )}
 )
@@ -28,8 +28,38 @@ public class EventEntity {
   List<EquipmentEntity> equipmentList;
   @Ignore
   @Expose
-
   private UUID uuid;
+  @NonNull
+  @ColumnInfo(name = "event_id1")
+  private long id2;
+
+  @NonNull
+  @ColumnInfo(name = "event_id2")
+  private long id1;
+
+  @ColumnInfo(name = "project_id1")
+  private long projectId1;
+
+  @ColumnInfo(name = "project_id2")
+  private long projectId2;
+
+  @ColumnInfo(name = "event_start_date")
+  private Date startDate;
+
+  @ColumnInfo(name = "event_end_date")
+  private Date endDate;
+
+  private int expenses;
+
+  private int income;
+
+  private String description;
+
+  private double longitude;
+
+  private double latidtude;
+
+//  Image -URI
 
   public List<EquipmentEntity> getEquipmentList() {
     return equipmentList;
@@ -47,38 +77,6 @@ public class EventEntity {
   public void setUuid(UUID uuid) {
     this.uuid = uuid;
   }
-@NonNull
-@ColumnInfo(name = "event_id1")
-private long id2;
-
-@NonNull
-@ColumnInfo(name = "event_id2")
-private long id1;
-
-@ColumnInfo(name = "project_id1")
-private long projectId1;
-
-@ColumnInfo(name = "project_id2")
-private long projectId2;
-
-@ColumnInfo(name = "event_start_date")
-private Date startDate;
-
-@ColumnInfo(name = "event_end_date")
-private Date endDate;
-
-private int expenses;
-
-private int income;
-
-private String description;
-
-private double longitude;
-
-private double latidtude;
-
-//  Image -URI
-
 
   public Date getStartDate() {
     return startDate;
