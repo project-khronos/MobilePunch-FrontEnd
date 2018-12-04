@@ -44,22 +44,15 @@
 
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
-    android:id="@+id/equipment_license"
+    android:id="@+id/equipment_identification"
     style="?android:listSeparatorTextViewStyle"
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:layout_marginBottom="2dp"
-    android:hint="@string/license"
+    android:hint="License/Serial Number"
     android:inputType="number"/>
 
-  <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
-    android:id="@+id/equipment_serial_number"
-    style="?android:listSeparatorTextViewStyle"
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:layout_marginBottom="2dp"
-    android:hint="@string/serial_number"
-    android:inputType="text"/>
+
 
 
   <Button

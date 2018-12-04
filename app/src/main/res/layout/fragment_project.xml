@@ -11,6 +11,7 @@
   android:orientation="vertical"
   android:visibility="visible"
   tools:context=".view.BottomNav">
+
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
     android:id="@+id/project_description"
     style="?android:listSeparatorTextViewStyle"

@@ -29,6 +29,28 @@ public class EventEntity {
   @SerializedName("event_id")
   private UUID uuid;
 
+  @ColumnInfo(name = "equipment_id1")
+  private long equipmentId1;
+
+  @ColumnInfo(name = "equipment_id2")
+  private long equipmentId2;
+
+  public long getEquipmentId1() {
+    return equipmentId1;
+  }
+
+  public void setEquipmentId1(long equipmentId1) {
+    this.equipmentId1 = equipmentId1;
+  }
+
+  public long getEquipmentId2() {
+    return equipmentId2;
+  }
+
+  public void setEquipmentId2(long equipmentId2) {
+    this.equipmentId2 = equipmentId2;
+  }
+
   @NonNull
   @ColumnInfo(name = "event_id1")
   private long id2;
