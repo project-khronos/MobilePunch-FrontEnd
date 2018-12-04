@@ -18,7 +18,6 @@ import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.Retrotest;
-import retrofit2.Retrofit;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
 
-
+    setupService();
   }
 
   @Override
@@ -135,12 +134,12 @@ public class MainActivity extends AppCompatActivity
     Gson gson = new GsonBuilder()
         .excludeFieldsWithoutExposeAnnotation()
         .create();
-    Retrofit retrofit = new Builder()
+    service = new Builder()
         // TODO change base_url value.
-        .baseUrl("https://jsonplaceholder.typicode.com/")
+        .baseUrl(getString(R.string.base_url))
         .addConverterFactory(GsonConverterFactory.create(gson))
-        .build();
-    service = retrofit.create(MobilePunchService.class);
+        .build()
+        .create(MobilePunchService.class);
   }
 
 
