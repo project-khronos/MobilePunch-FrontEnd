@@ -24,12 +24,18 @@ public class EquipmentEntity {
 
   @ColumnInfo(name = "equipment_id1")
   private long id1;
+
   @ColumnInfo(name = "equipment_id2")
   private long id2;
+
   private String name;
+
   private String make;
+
   private String model;
+
   private String mfcyear;
+
   @NonNull
   private String Identification;
 

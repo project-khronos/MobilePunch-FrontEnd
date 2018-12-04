@@ -18,26 +18,36 @@ public class ClientEntity {
   @Ignore
   @Expose
   private UUID uuid;
+
   @NonNull
   @ColumnInfo(name = "client_id1")
   private long id1;
+
+
   @NonNull
   @ColumnInfo(name = "client_id2")
   private long id2;
+
   @NonNull
   private String name;
+
   private String email;
+
   @Ignore
   @Expose
   List<ProjectEntity> projects;
   @NonNull
 
   private String phone;
+
   @ColumnInfo(name = "alt_phone")
   private String altPhone;
+
   private long address;
+
   private String notes;
-  @ColumnInfo(name = "aly_address")
+
+  @ColumnInfo(name = "alt_address")
   private long altAddress;
 
   public UUID getUuid() {

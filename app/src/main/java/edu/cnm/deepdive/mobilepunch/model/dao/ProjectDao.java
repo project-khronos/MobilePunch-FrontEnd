@@ -12,7 +12,7 @@ public interface ProjectDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   long insert(ProjectEntity projectEntity);
 
-  @Query("SELECT * FROM ProjectEntity ORDER BY start_date")
+  @Query("SELECT * FROM ProjectEntity ORDER BY start_time")
   List<ProjectEntity> select();
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
