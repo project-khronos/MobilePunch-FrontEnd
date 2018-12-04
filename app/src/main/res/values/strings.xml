@@ -43,4 +43,10 @@
   <string name="end_date_time">End Date/Time</string>
   <string name="start_date_time">Start Date/Time</string>
   <string name="expected_end_date">expected_end_date</string>
+  <string name="phone_number">Phone Number</string>
+  <string name="alt_phone_number">Alt phone number</string>
+  <string name="email">Email</string>
+  <string name="billing_address">Billing Address</string>
+  <string name="mailing_address">Mailing Address</string>
+  <string name="notes">Notes</string>
 </resources>
