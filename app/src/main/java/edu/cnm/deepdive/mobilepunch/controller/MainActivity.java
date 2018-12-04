@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
   private MobilePunchService service;
+  private List<ProjectEntity> projects;
+  private MobilePunchDatabase dataBase;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,8 @@ public class MainActivity extends AppCompatActivity
     navigationView.setNavigationItemSelectedListener(this);
 
     setupService();
+    dataBase = MobilePunchDatabase.getInstance(this);
+
   }
 
   @Override
@@ -148,8 +153,31 @@ public class MainActivity extends AppCompatActivity
         .create(MobilePunchService.class);
   }
 
+  private class QuerryProjects extends AsyncTask<Void, Void, List<ProjectEntity>> {
 
-  private class QuerryTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
+    @Override
+    protected void onPreExecute() {
+      super.onPreExecute();
+    }
+
+    @Override
+    protected List<ProjectEntity> doInBackground(Void... voids) {
+      return null;
+    }
+
+    @Override
+    protected void onPostExecute(List<ProjectEntity> projectEntities) {
+      super.onPostExecute(projectEntities);
+    }
+
+    @Override
+    protected void onCancelled() {
+      super.onCancelled();
+    }
+
+  }
+
+  private class ProjectsTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
 
     @Override
     protected void onPreExecute() {
@@ -173,6 +201,12 @@ public class MainActivity extends AppCompatActivity
         if (projects == null) {
           cancel(true);
         }
+        try {
+          MobilePunchDatabase.fromUUIDProject(projects);
+          dataBase.getProjectDao().insert(projects);
+        } catch (Exception e) {
+          // FIXME do what
+        }
       }
       return projects;
     }
@@ -187,7 +221,5 @@ public class MainActivity extends AppCompatActivity
     protected void onCancelled() {
       super.onCancelled();
     }
-
-
   }
 }
