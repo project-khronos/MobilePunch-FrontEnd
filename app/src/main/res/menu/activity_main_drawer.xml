@@ -17,9 +17,9 @@
       android:icon="@drawable/ic_client"
       android:title="@string/client"/>
     <item
-      android:id="@+id/equipmentList"
+      android:id="@+id/equipment"
       android:icon="@drawable/ic_equipment"
-      android:title="@string/equipmentList"/>
+      android:title="@string/equipment"/>
   </group>
 
   <!--<item android:title="Communicate">-->
