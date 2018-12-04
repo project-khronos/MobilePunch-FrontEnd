@@ -1,42 +1,53 @@
 package edu.cnm.deepdive.mobilepunch.view.fragments;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.StaticLayout;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.internal.IGoogleMapDelegate;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.OnChangeListener;
+import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
+import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 public class EventFragment extends Fragment {
 
   private EventEntity event;
-  private EditText expensesField;
-  private EditText descriptionField;
-  private EditText incomeField;
+
+  private EditText expensesField,
+      descriptionField,
+      incomeField;
+
+  private Button eventStartDateButton,
+      eventEndDateButton,
+      saveButton;
+
   private MapView mapview;
+
   private View view;
 
-  private Button eventStartDateButton;
-  private Button eventExpectedDateButton;
-  private Button eventEndDateButton;
-  private Button saveButton;
 
-  private Date startDate = new Date();
-  private Date expectedDate = new Date();
-  private Date endDate = new Date();
+
+
+  private Date startDate = new Date(), endDate  = new Date();
 
 
   @Override
@@ -50,9 +61,16 @@ public class EventFragment extends Fragment {
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     view = inflater.inflate(R.layout.fragment_event, container, false);
+    generateIds();
     initLayout();
     initListeners();
+
     return view;
+  }
+
+  private void generateIds(){
+    event.setId1(UUID.randomUUID().getMostSignificantBits());
+    event.setId2(UUID.randomUUID().getLeastSignificantBits());
   }
 
   private void initLayout() {
@@ -63,10 +81,13 @@ public class EventFragment extends Fragment {
     incomeField = view.findViewById(R.id.event_income);
 
     eventStartDateButton = view.findViewById(R.id.event_start_date);
+    eventStartDateButton.setTag("Start date");
     eventEndDateButton = view.findViewById(R.id.event_end_date);
+    eventEndDateButton.setTag("End date");
 
     saveButton = view.findViewById(R.id.event_save);
   }
+
 
   private void initListeners() {
     DateTimePickerFragment picker = new DateTimePickerFragment();
@@ -76,8 +97,21 @@ public class EventFragment extends Fragment {
     setButton(eventEndDateButton, picker, endDate);
 
     saveButton.setOnClickListener(v -> {
-      Toast.makeText(getContext(), startDate.toString(), Toast.LENGTH_SHORT).show();
+      grabFields();
+      new InsertEvent(getContext(), MainFragment.projectEntity).execute(event);
+      getFragmentManager().beginTransaction().replace(R.id.fragment_container, new EventFragment()).commit();
+      Toast.makeText(getContext(),"Event Saved!", Toast.LENGTH_SHORT).show();
     });
+  }
+
+  private void grabFields(){
+    int income;
+    int expenses;
+    income = incomeField.getText().toString().equals("") ? 0 : Integer.valueOf(incomeField.getText().toString());
+    expenses = expensesField.getText().toString().equals("") ? 0 : Integer.valueOf(expensesField.getText().toString());
+    event.setIncome(income);
+    event.setExpenses(expenses);
+    event.setDescription(descriptionField.getText().toString());
   }
 
 
@@ -85,35 +119,68 @@ public class EventFragment extends Fragment {
     button.setOnClickListener(v -> {
       picker.show(getFragmentManager(), picker.getClass().getSimpleName());
       picker.setListener((cal) -> {
-        date.setTime(cal.getTimeInMillis());
-        new SimpleDateFormat("EE").format(cal);
-        button.setText("Start Date: " + cal.get(Calendar.DAY_OF_WEEK));
 
+        if(button.getTag().equals("Start date")){
+          event.setStartDate(cal.getTime());
+        }else{
+          event.setEndDate(cal.getTime());
+        }
+
+        String day = "UNKNOWN";
+        switch (cal.get(Calendar.DAY_OF_WEEK)){
+          case 2:
+            day = "Monday";
+            break;
+          case 3:
+            day = "Tuesday";
+            break;
+          case 4:
+            day = "Wednesday";
+            break;
+          case 5:
+            day = "Thursday";
+            break;
+          case 6:
+            day = "Friday";
+            break;
+          case 7:
+            day = "Saturday";
+            break;
+          case 8:
+            day = "Sunday";
+            break;
+        }
+
+        button.setText(button.getTag().toString() + ": " + day + " " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH)+1) + "/" + cal.get(Calendar.YEAR));
 
       });
     });
   }
 
-  private class InsertEvent extends AsyncTask<EventEntity, Void, Void> {
+  private static class InsertEvent extends AsyncTask<EventEntity, Void, Void> {
+
+    private Context context;
+    private ProjectEntity projectEntity;
+
+    public InsertEvent(Context context, ProjectEntity projectEntity) {
+      this.context = context;
+      this.projectEntity = projectEntity;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+      super.onPostExecute(aVoid);
+      Toast.makeText(context, "Event saved!", Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected Void doInBackground(EventEntity... eventEntity) {
-      MobilePunchDatabase.getInstance(getContext()).getEventDao().insert(eventEntity[0]);
+      eventEntity[0].setProjectId1(1010);
+      eventEntity[0].setProjectId2(1010);
+      MobilePunchDatabase.getInstance(context).getEventDao().insert(eventEntity[0]);
       return null;
     }
+
   }
 
-  private class DatePickerListener implements OnChangeListener {
-
-    private Date date;
-
-    public DatePickerListener(Date date) {
-      this.date = date;
-    }
-
-    @Override
-    public void onChange(Calendar calendar) {
-      date.setTime(calendar.getTimeInMillis());
-    }
-  }
 }

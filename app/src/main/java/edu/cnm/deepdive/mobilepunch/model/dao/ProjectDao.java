@@ -9,10 +9,12 @@ import java.util.List;
 
 @Dao
 public interface ProjectDao {
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  long insert(ProjectEntity projectEntity);
+
+  @Query("SELECT * FROM ProjectEntity ORDER BY start_date")
+  List<ProjectEntity> select();
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   List<Long> insert(List<ProjectEntity> projects);
-
-  @Query("SELECT * From ProjectEntity")
-  List<ProjectEntity> select();
 }

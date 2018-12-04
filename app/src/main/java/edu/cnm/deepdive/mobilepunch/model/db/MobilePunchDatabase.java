@@ -38,6 +38,10 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     return instance;
   }
 
+  public synchronized static void forgetInstance() {
+    instance = null;
+  }
+
   public abstract ProjectDao getProjectDao();
 
   public abstract ClientDao getClientDao();
@@ -46,9 +50,6 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
 
   public abstract EventDao getEventDao();
 
-  public synchronized static void forgetInstance() {
-    instance = null;
-  }
 
   public static void fromUUIDProject(List<ProjectEntity> projects) {
     for (int i = 0; i < projects.size(); i++) {
@@ -150,6 +151,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+
   public static class Converters {
 
     @TypeConverter
@@ -159,9 +161,12 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
 
     @TypeConverter
     public static long longFromDate(Date date) {
-      return (date != null) ? date.getTime() : 0;
+        return (date != null) ? date.getTime() : 0;
     }
+
+
   }
+
+
 }
 
-// updated

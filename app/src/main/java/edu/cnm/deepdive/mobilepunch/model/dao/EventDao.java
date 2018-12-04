@@ -10,5 +10,4 @@ public interface EventDao {
 
   @Insert(onConflict = OnConflictStrategy.FAIL)
   long insert(EventEntity event);
-
 }

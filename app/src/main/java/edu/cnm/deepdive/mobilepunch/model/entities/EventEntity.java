@@ -2,58 +2,54 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.support.annotation.NonNull;
-import com.google.gson.annotations.Expose;
 import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 @Entity(
-    primaryKeys = {"event_id1", "event_id2"}
+    primaryKeys = {"event_id1","event_id2"},
+    foreignKeys = {@ForeignKey(
+        entity = ProjectEntity.class,
+        parentColumns = {"project_id1","project_id2"},
+        childColumns = {"project_id1","project_id2"},
+        onDelete = OnConflictStrategy.FAIL
+    )}
 )
+
 public class EventEntity {
+@NonNull
+@ColumnInfo(name = "event_id1")
+private long id2;
 
-  @Ignore
-  @Expose
-  List<EquipmentEntity> equipmentList;
-  @Ignore
-  @Expose
-  private UUID uuid;
-  @NonNull
-  @ColumnInfo(name = "event_id1")
-  private long id2;
-  @NonNull
-  @ColumnInfo(name = "event_id2")
-  private long id1;
-  @ColumnInfo(name = "event_start_date")
-  private Date startDate;
-  @ColumnInfo(name = "event_end_date")
-  private Date endDate;
-  private int expenses;
-  private int income;
-  private String description;
-  private double longitude;
-  private double latitude;
+@NonNull
+@ColumnInfo(name = "event_id2")
+private long id1;
 
-  public UUID getUuid() {
-    return uuid;
-  }
+@ColumnInfo(name = "project_id1")
+private long projectId1;
 
-  public void setUuid(UUID uuid) {
-    this.uuid = uuid;
-  }
+@ColumnInfo(name = "project_id2")
+private long projectId2;
 
-  public List<EquipmentEntity> getEquipmentList() {
-    return equipmentList;
-  }
+@ColumnInfo(name = "event_start_date")
+private Date startDate;
 
-  public void setEquipmentList(
-      List<EquipmentEntity> equipmentList) {
-    this.equipmentList = equipmentList;
-  }
+@ColumnInfo(name = "event_end_date")
+private Date endDate;
+
+private int expenses;
+
+private int income;
+
+private String description;
+
+private double longitude;
+
+private double latidtude;
 
 //  Image -URI
+
 
   public Date getStartDate() {
     return startDate;
@@ -103,13 +99,12 @@ public class EventEntity {
     this.longitude = longitude;
   }
 
-  public double getLatitude() {
-    return latitude;
+  public double getLatidtude() {
+    return latidtude;
   }
 
-  public void setLatitude(double latitude) {
-    this.latitude = latitude;
-
+  public void setLatidtude(double latidtude) {
+    this.latidtude = latidtude;
   }
 
   public long getId2() {
@@ -126,5 +121,21 @@ public class EventEntity {
 
   public void setId1(long id1) {
     this.id1 = id1;
+  }
+
+  public long getProjectId1() {
+    return projectId1;
+  }
+
+  public void setProjectId1(long projectId1) {
+    this.projectId1 = projectId1;
+  }
+
+  public long getProjectId2() {
+    return projectId2;
+  }
+
+  public void setProjectId2(long projectId2) {
+    this.projectId2 = projectId2;
   }
 }
