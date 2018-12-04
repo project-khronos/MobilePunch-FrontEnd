@@ -5,7 +5,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import edu.cnm.deepdive.mobilepunch.R;
 
-public class BasicEditText extends android.support.v7.widget.AppCompatEditText{
+public class BasicEditText extends android.support.v7.widget.AppCompatEditText {
 
   public BasicEditText(Context context) {
     super(context);

@@ -1,20 +1,17 @@
 package edu.cnm.deepdive.mobilepunch.service;
 
-import edu.cnm.deepdive.mobilepunch.model.entities.PostTest;
+import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
+import retrofit2.http.Header;
 
 
 public interface MobilePunchService {
 
-  @GET("posts")
-  Call<List<PostTest>> get();
-
-  @POST
-  Call<String> post(@Query("posts") String key, @Query("post") String value);
+  @GET("projects")
+  Call<List<ProjectEntity>> get(
+      @Header("Authorization") String authorization);
 
 
 }

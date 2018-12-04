@@ -2,54 +2,36 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.OnConflictStrategy;
 import android.support.annotation.NonNull;
 import java.util.Date;
 
 @Entity(
-    primaryKeys = {"event_id1", "event_id2"},
-
-    foreignKeys = {@ForeignKey(
-        entity = ProjectEntity.class,
-        parentColumns = {"project_id1", "project_id2"},
-        childColumns = {"project_id1", "project_id2"},
-        onDelete = OnConflictStrategy.IGNORE)}
-    )
-
+    primaryKeys = {"event_id1","event_id2"}
+)
 public class EventEntity {
+@NonNull
+@ColumnInfo(name = "event_id1")
+private long id2;
 
-  @NonNull
-  @ColumnInfo(name = "event_id1")
-  private long id2;
+@NonNull
+@ColumnInfo(name = "event_id2")
+private long id1;
 
-  @NonNull
-  @ColumnInfo(name = "event_id2")
-  private long id1;
+@ColumnInfo(name = "event_start_date")
+private Date startDate;
 
-  @ColumnInfo(name = "project_id1")
-  private long projectId1;
+@ColumnInfo(name = "event_end_date")
+private Date endDate;
 
-  @ColumnInfo(name = "project_id2")
-  private long projectId2;
+private int expenses;
 
-  @ColumnInfo(name = "event_start_date")
-  private Date startDate;
+private int income;
 
-  @ColumnInfo(name = "event_end_date")
-  private Date endDate;
+private String description;
 
+private double longitude;
 
-
-  private int expenses;
-
-  private int income;
-
-  private String description;
-
-  private double longitude;
-
-  private double latidtude;
+private double latidtude;
 
 //  Image -URI
 

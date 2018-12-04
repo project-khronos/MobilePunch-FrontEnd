@@ -1,12 +1,9 @@
 package edu.cnm.deepdive.mobilepunch.view;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
-import android.view.MenuItem;
 import android.widget.TextView;
-import com.google.common.collect.Maps;
 import edu.cnm.deepdive.mobilepunch.FragmentSwitcherActivity;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.view.fragments.ClientFragment;
@@ -20,26 +17,26 @@ public class BottomNav extends FragmentSwitcherActivity {
 
   private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
       = item -> {
-        switch (item.getItemId()) {
-          case R.id.event:
-            switchFragment(new EventFragment(), false, null);
+    switch (item.getItemId()) {
+      case R.id.event:
+        switchFragment(new EventFragment(), false, null);
 
-            return true;
-          case R.id.project:
-            switchFragment(new ProjectFragment(), false, null);
+        return true;
+      case R.id.project:
+        switchFragment(new ProjectFragment(), false, null);
 
-            return true;
-          case R.id.client:
-            switchFragment(new ClientFragment(), false, null);
+        return true;
+      case R.id.client:
+        switchFragment(new ClientFragment(), false, null);
 
-            return true;
-          case R.id.equipment:
-            switchFragment(new EquipmentFragment(), false, null);
+        return true;
+      case R.id.equipment:
+        switchFragment(new EquipmentFragment(), false, null);
 
-            return true;
-        }
-        return false;
-      };
+        return true;
+    }
+    return false;
+  };
   private BottomNavigationView navigation;
 
   @Override
