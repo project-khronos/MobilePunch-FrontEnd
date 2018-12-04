@@ -4,26 +4,19 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.StaticLayout;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.internal.IGoogleMapDelegate;
 import edu.cnm.deepdive.mobilepunch.R;
-import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
-import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
-import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.OnChangeListener;
-import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
+import edu.cnm.deepdive.mobilepunch.controller.adapters.DateTimePickerFragment;
+import edu.cnm.deepdive.mobilepunch.controller.adapters.DateTimePickerFragment.Mode;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
@@ -175,8 +168,6 @@ public class EventFragment extends Fragment {
 
     @Override
     protected Void doInBackground(EventEntity... eventEntity) {
-      eventEntity[0].setProjectId1(1010);
-      eventEntity[0].setProjectId2(1010);
       MobilePunchDatabase.getInstance(context).getEventDao().insert(eventEntity[0]);
       return null;
     }

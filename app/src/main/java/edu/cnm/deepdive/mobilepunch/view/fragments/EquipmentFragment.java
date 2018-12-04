@@ -39,8 +39,7 @@ public class EquipmentFragment extends Fragment {
     makeField = view.findViewById(R.id.equipment_make);
     modelField = view.findViewById(R.id.equipment_model);
     yearField = view.findViewById(R.id.equipment_year);
-    licenseField = view.findViewById(R.id.equipment_license);
-    serialNumberField = view.findViewById(R.id.equipment_serial_number);
+    licenseField = view.findViewById(R.id.equipment_identification);
     dateButton = view.findViewById(R.id.equipment_date);
 
     return view;

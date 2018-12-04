@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.mobilepunch.controller;
+package edu.cnm.deepdive.mobilepunch.controller.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import edu.cnm.deepdive.mobilepunch.R;
-import edu.cnm.deepdive.mobilepunch.controller.EventRecyclerViewAdapter.ItemClickListener;
+import edu.cnm.deepdive.mobilepunch.controller.adapters.EventRecyclerViewAdapter.ItemClickListener;
 import java.util.List;
 
 public class ClientRecyclerViewAdapter extends

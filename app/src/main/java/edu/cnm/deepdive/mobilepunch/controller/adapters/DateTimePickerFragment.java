@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.mobilepunch.controller;
+package edu.cnm.deepdive.mobilepunch.controller.adapters;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
