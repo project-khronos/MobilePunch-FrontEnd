@@ -23,8 +23,8 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.Retrotest;
-import java.util.ArrayList;
 import java.util.List;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected List<ProjectEntity> doInBackground(Void... voids) {
-      List<ProjectEntity> projects = new ArrayList<>();
+      List<ProjectEntity> projects;
       MobilePunchDatabase.getInstance(MainActivity.this);
       projects = dataBase.getProjectDao().select();
       return projects;
@@ -209,11 +209,12 @@ public class MainActivity extends AppCompatActivity
         String token = getString(
             R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
         //GoogleSignIn.getLastSignedInAccount(MainActivity.this).getIdToken());
-        Call<List<ProjectEntity>> call = service.get(token);
-        Response<List<ProjectEntity>> response = call.execute();
+        Call<ResponseBody> call = service.get(token);
+        Response<ResponseBody> response = call.execute();
+        Log.d(TAG, "TOKEN: " + token);
         if (response.isSuccessful()) {
-          projects = response.body();
-          Log.d(TAG, "RESPONSE SUCCESS: " + response.message());
+          // projects = response.body();
+          Log.d(TAG, "RESPONSE SUCCESS: " + response.body().string());
 
         } else {
           Log.d(TAG, "RESPONSE NOT SUCCESS: " + response.errorBody().string());

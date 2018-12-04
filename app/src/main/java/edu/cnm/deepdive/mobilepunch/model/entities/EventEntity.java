@@ -34,7 +34,7 @@ public class EventEntity {
   private int income;
   private String description;
   private double longitude;
-  private double latidtude;
+  private double latitude;
 
   public UUID getUuid() {
     return uuid;
@@ -103,12 +103,12 @@ public class EventEntity {
     this.longitude = longitude;
   }
 
-  public double getLatidtude() {
-    return latidtude;
+  public double getLatitude() {
+    return latitude;
   }
 
-  public void setLatidtude(double latidtude) {
-    this.latidtude = latidtude;
+  public void setLatitude(double latitude) {
+    this.latitude = latitude;
 
   }
 
