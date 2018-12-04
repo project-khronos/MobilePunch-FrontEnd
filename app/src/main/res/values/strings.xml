@@ -11,7 +11,7 @@
   <string name="title_dashboard">Dashboard</string>
   <string name="title_notifications">Notifications</string>
 
-  <string name="equipmentList">Equipment</string>
+  <string name="equipment">Equipment</string>
   <string name="client">Client</string>
   <string name="project">Project</string>
   <string name="event">Event</string>
@@ -24,11 +24,10 @@
   <string name="income">Income</string>
   <string name="location">Location</string>
   <string name="expenses">Expenses</string>
-  <string name="base_url">http://10.0.2.2:8080/</string>
+  <string name="base_url"></string>
   <string name="client_name">Client\'s name</string>
   <string name="license">License</string>
   <string name="serial_number">Serial Number</string>
-  <string name="equipment">Equipment</string>
   <string name="save">Save</string>
   <string name="description_or_name">Description</string>
   <string name="address">Address</string>
@@ -39,11 +38,8 @@
   <string name="sign_out">Sign Out</string>
   <string name="skip_login">Skip Login</string>
   <string name="number_of_items">Number of Items:</string>
-
   <string name="latitude">Latitude</string>
   <string name="longitude">Longitude</string>
   <string name="end_date_time">End Date/Time</string>
   <string name="start_date_time">Start Date/Time</string>
-
-
 </resources>
