@@ -51,4 +51,5 @@
   <string name="notes">Notes</string>
   <string name="equipment_name">Name</string>
   <string name="identification">Identification</string>
+  <string name="oauth2_header">Bearer %s</string>
 </resources>
