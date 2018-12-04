@@ -57,7 +57,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
 
     @TypeConverter
     public static long longFromDate(Date date) {
-      return (date != null) ? date.getTime() : null;
+        return (date != null) ? date.getTime() : 0;
     }
 
 

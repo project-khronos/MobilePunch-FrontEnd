@@ -2,36 +2,54 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.support.annotation.NonNull;
 import java.util.Date;
 
 @Entity(
-    primaryKeys = {"event_id1","event_id2"}
-)
+    primaryKeys = {"event_id1", "event_id2"},
+
+    foreignKeys = {@ForeignKey(
+        entity = ProjectEntity.class,
+        parentColumns = {"project_id1", "project_id2"},
+        childColumns = {"project_id1", "project_id2"},
+        onDelete = OnConflictStrategy.IGNORE)}
+    )
+
 public class EventEntity {
-@NonNull
-@ColumnInfo(name = "event_id1")
-private long id2;
 
-@NonNull
-@ColumnInfo(name = "event_id2")
-private long id1;
+  @NonNull
+  @ColumnInfo(name = "event_id1")
+  private long id2;
 
-@ColumnInfo(name = "event_start_date")
-private Date startDate;
+  @NonNull
+  @ColumnInfo(name = "event_id2")
+  private long id1;
 
-@ColumnInfo(name = "event_end_date")
-private Date endDate;
+  @ColumnInfo(name = "project_id1")
+  private long projectId1;
 
-private int expenses;
+  @ColumnInfo(name = "project_id2")
+  private long projectId2;
 
-private int income;
+  @ColumnInfo(name = "event_start_date")
+  private Date startDate;
 
-private String description;
+  @ColumnInfo(name = "event_end_date")
+  private Date endDate;
 
-private double longitude;
 
-private double latidtude;
+
+  private int expenses;
+
+  private int income;
+
+  private String description;
+
+  private double longitude;
+
+  private double latidtude;
 
 //  Image -URI
 
@@ -106,5 +124,21 @@ private double latidtude;
 
   public void setId1(long id1) {
     this.id1 = id1;
+  }
+
+  public long getProjectId1() {
+    return projectId1;
+  }
+
+  public void setProjectId1(long projectId1) {
+    this.projectId1 = projectId1;
+  }
+
+  public long getProjectId2() {
+    return projectId2;
+  }
+
+  public void setProjectId2(long projectId2) {
+    this.projectId2 = projectId2;
   }
 }

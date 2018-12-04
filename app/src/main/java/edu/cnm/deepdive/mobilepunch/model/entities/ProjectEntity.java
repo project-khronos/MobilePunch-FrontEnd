@@ -11,8 +11,10 @@ public class ProjectEntity {
 
   @ColumnInfo(name = "project_id1")
   private long id1;
+
   @ColumnInfo(name = "project_id2")
   private long id2;
+
   @ColumnInfo(name = "start_date")
   private long startDate;
   @ColumnInfo(name = "end_date")
