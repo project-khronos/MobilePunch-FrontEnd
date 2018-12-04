@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.mobilepunch.controller;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -15,9 +16,14 @@ import android.view.MenuItem;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.Retrotest;
+import java.io.IOException;
+import java.util.List;
+import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -143,4 +149,45 @@ public class MainActivity extends AppCompatActivity
   }
 
 
+  private class QuerryTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
+
+    @Override
+    protected void onPreExecute() {
+      super.onPreExecute();
+    }
+
+    @Override
+    protected List<ProjectEntity> doInBackground(Void... voids) {
+      List<ProjectEntity> projects = null;
+      try {
+        String token = getString(
+            R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
+        Call<List<ProjectEntity>> call = service.get(token);
+        Response<List<ProjectEntity>> response = call.execute();
+        if (response.isSuccessful()) {
+          projects = response.body();
+        }
+      } catch (IOException e) {
+
+      } finally {
+        if (projects == null) {
+          cancel(true);
+        }
+      }
+      return projects;
+    }
+
+
+    @Override
+    protected void onPostExecute(List<ProjectEntity> projectEntities) {
+      super.onPostExecute(projectEntities);
+    }
+
+    @Override
+    protected void onCancelled() {
+      super.onCancelled();
+    }
+
+
+  }
 }
