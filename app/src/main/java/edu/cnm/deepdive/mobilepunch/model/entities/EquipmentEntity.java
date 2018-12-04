@@ -66,6 +66,15 @@ public class EquipmentEntity {
   private String model;
 
   private String mfcyear;
+  private String description;
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
   @NonNull
   private String Identification;
