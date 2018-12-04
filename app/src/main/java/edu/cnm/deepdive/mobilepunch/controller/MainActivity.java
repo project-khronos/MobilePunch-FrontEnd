@@ -23,7 +23,6 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.Retrotest;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
@@ -205,19 +204,25 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected List<ProjectEntity> doInBackground(Void... voids) {
       List<ProjectEntity> projects = null;
+
       try {
         String token = getString(
             R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
+        //GoogleSignIn.getLastSignedInAccount(MainActivity.this).getIdToken());
         Call<List<ProjectEntity>> call = service.get(token);
         Response<List<ProjectEntity>> response = call.execute();
         if (response.isSuccessful()) {
           projects = response.body();
+          Log.d(TAG, "RESPONSE SUCCESS: " + response.message());
+
+        } else {
+          Log.d(TAG, "RESPONSE NOT SUCCESS: " + response.errorBody().string());
         }
-      } catch (IOException e) {
-        Log.d(TAG, "call" + e.getLocalizedMessage());
+      } catch (Exception e) {
+        Log.d(TAG, "Caught Exception on Call: " + e.getLocalizedMessage());
       } finally {
         if (projects == null) {
-          // Log.d(TAG, Integer.toString(projects.size()));
+          Log.d(TAG, "On Cancelled called");
           cancel(true);
         }
         try {
@@ -225,7 +230,7 @@ public class MainActivity extends AppCompatActivity
           dataBase.getProjectDao().insert(projects);
         } catch (Exception e) {
           // FIXME do what
-          Log.d(TAG, "insert method " + e.getLocalizedMessage());
+          Log.d(TAG, "insert method failed: " + e.getLocalizedMessage());
         }
       }
       return projects;
@@ -242,7 +247,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCancelled() {
       Toast.makeText(MainActivity.this, "Cancelled", Toast.LENGTH_LONG).show();
-      Log.d(TAG, FrontendApplication.getInstance().getAccount().getIdToken().toString());
     }
   }
 }

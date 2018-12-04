@@ -11,8 +11,7 @@ public interface MobilePunchService {
 
   @GET("projects")
   Call<List<ProjectEntity>> get(
-      @Header("Authorization") String authorization
-  );
+      @Header("Authorization") String authorization);
 
 
 }
