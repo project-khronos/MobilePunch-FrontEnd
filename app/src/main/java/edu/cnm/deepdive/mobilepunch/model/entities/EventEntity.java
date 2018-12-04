@@ -25,9 +25,6 @@ public class EventEntity {
 
   @Ignore
   @Expose
-  List<EquipmentEntity> equipmentList;
-  @Ignore
-  @Expose
   private UUID uuid;
   @NonNull
   @ColumnInfo(name = "event_id1")
@@ -48,6 +45,10 @@ public class EventEntity {
 
   @ColumnInfo(name = "event_end_date")
   private Date endDate;
+
+  @Ignore
+  @Expose
+  private List<EquipmentEntity> equipmentList;
 
   private int expenses;
 

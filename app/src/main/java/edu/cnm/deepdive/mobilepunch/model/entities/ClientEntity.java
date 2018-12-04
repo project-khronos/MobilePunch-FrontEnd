@@ -14,9 +14,7 @@ import java.util.UUID;
 )
 public class ClientEntity {
 
-  @Ignore
-  @Expose
-  List<ProjectEntity> projects;
+
   @Ignore
   @Expose
   private UUID uuid;
@@ -29,16 +27,18 @@ public class ClientEntity {
   @NonNull
   private String name;
   private String email;
+  @Ignore
+  @Expose
+  List<ProjectEntity> projects;
   @NonNull
-  @ColumnInfo(name = "phone_number")
-  private String phoneNumber;
-  @ColumnInfo(name = "alt_phone_number")
-  private String altPhoneNumber;
-  @ColumnInfo(name = "billing_adress_id")
-  private long billingAdressId;
-  @ColumnInfo(name = "mailing_address_id")
-  private long mailingAdressId;
+
+  private String phone;
+  @ColumnInfo(name = "alt_phone")
+  private String altPhone;
+  private long address;
   private String notes;
+  @ColumnInfo(name = "aly_address")
+  private long altAddress;
 
   public UUID getUuid() {
     return uuid;

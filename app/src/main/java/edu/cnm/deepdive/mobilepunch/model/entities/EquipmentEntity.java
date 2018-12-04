@@ -6,7 +6,6 @@ import android.arch.persistence.room.Ignore;
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.util.Date;
 import java.util.UUID;
 
 
@@ -27,12 +26,10 @@ public class EquipmentEntity {
   private long id1;
   @ColumnInfo(name = "equipment_id2")
   private long id2;
+  private String name;
   private String make;
   private String model;
-  private long year;
-  private Date date;
-  @ColumnInfo(name = "desc_or_name")
-  private String descOrName;
+  private String mfcyear;
   @NonNull
   private String Identification;
 
@@ -69,28 +66,20 @@ public class EquipmentEntity {
     this.model = model;
   }
 
-  public long getYear() {
-    return year;
+  public String getName() {
+    return name;
   }
 
-  public void setYear(long year) {
-    this.year = year;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public Date getDate() {
-    return date;
+  public String getMfcyear() {
+    return mfcyear;
   }
 
-  public void setDate(Date date) {
-    this.date = date;
-  }
-
-  public String getDescOrName() {
-    return descOrName;
-  }
-
-  public void setDescOrName(String descOrName) {
-    this.descOrName = descOrName;
+  public void setMfcyear(String mfcyear) {
+    this.mfcyear = mfcyear;
   }
 
   public long getId1() {
