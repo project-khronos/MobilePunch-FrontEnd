@@ -25,7 +25,6 @@ import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
 import edu.cnm.deepdive.mobilepunch.view.fragments.Retrotest;
 import java.util.List;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
@@ -211,12 +210,12 @@ public class MainActivity extends AppCompatActivity
         String token = getString(
             R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
         //GoogleSignIn.getLastSignedInAccount(MainActivity.this).getIdToken());
-        Call<ResponseBody> call = service.get(token);
-        Response<ResponseBody> response = call.execute();
+        Call<List<ProjectEntity>> call = service.get(token);
+        Response<List<ProjectEntity>> response = call.execute();
         Log.d(TAG, "TOKEN: " + token);
         if (response.isSuccessful()) {
-          // projects = response.body();
-          Log.d(TAG, "RESPONSE SUCCESS: " + response.body().string());
+          projects = response.body();
+          Log.d(TAG, "RESPONSE SUCCESS: " + response.body());
 
         } else {
           Log.d(TAG, "RESPONSE NOT SUCCESS: " + response.errorBody().string());
@@ -234,6 +233,7 @@ public class MainActivity extends AppCompatActivity
         } catch (Exception e) {
           // FIXME do what
           Log.d(TAG, "insert method failed: " + e.getLocalizedMessage());
+          e.printStackTrace();
         }
       }
       return projects;
