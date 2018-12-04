@@ -89,36 +89,37 @@ public class ClientEntity {
     this.email = email;
   }
 
-  public String getPhoneNumber() {
-    return phoneNumber;
+  @NonNull
+  public String getPhone() {
+    return phone;
   }
 
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
+  public void setPhone(@NonNull String phone) {
+    this.phone = phone;
   }
 
-  public String getAltPhoneNumber() {
-    return altPhoneNumber;
+  public String getAltPhone() {
+    return altPhone;
   }
 
-  public void setAltPhoneNumber(String altPhoneNumber) {
-    this.altPhoneNumber = altPhoneNumber;
+  public void setAltPhone(String altPhone) {
+    this.altPhone = altPhone;
   }
 
-  public long getBillingAdressId() {
-    return billingAdressId;
+  public long getAddress() {
+    return address;
   }
 
-  public void setBillingAdressId(long billingAdressId) {
-    this.billingAdressId = billingAdressId;
+  public void setAddress(long address) {
+    this.address = address;
   }
 
-  public long getMailingAdressId() {
-    return mailingAdressId;
+  public long getAltAddress() {
+    return altAddress;
   }
 
-  public void setMailingAdressId(long mailingAdressId) {
-    this.mailingAdressId = mailingAdressId;
+  public void setAltAddress(long altAddress) {
+    this.altAddress = altAddress;
   }
 
   public String getNotes() {
