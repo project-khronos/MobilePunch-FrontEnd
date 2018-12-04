@@ -2,12 +2,21 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.support.annotation.NonNull;
 import java.util.Date;
 
 @Entity(
-    primaryKeys = {"event_id1","event_id2"}
+    primaryKeys = {"event_id1","event_id2"},
+    foreignKeys = {@ForeignKey(
+        entity = ProjectEntity.class,
+        parentColumns = {"project_id1","project_id2"},
+        childColumns = {"project_id1","project_id2"},
+        onDelete = OnConflictStrategy.FAIL
+    )}
 )
+
 public class EventEntity {
 @NonNull
 @ColumnInfo(name = "event_id1")
@@ -16,6 +25,12 @@ private long id2;
 @NonNull
 @ColumnInfo(name = "event_id2")
 private long id1;
+
+@ColumnInfo(name = "project_id1")
+private long projectId1;
+
+@ColumnInfo(name = "project_id2")
+private long projectId2;
 
 @ColumnInfo(name = "event_start_date")
 private Date startDate;
