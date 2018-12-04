@@ -10,15 +10,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import java.util.List;
 
 public class EventRecyclerViewAdapter extends RecyclerView.Adapter<EventRecyclerViewAdapter.EventHolder> {
-private List<String> data;
+private List<EventEntity> data;
 private LayoutInflater layoutInflater;
 private ItemClickListener itemClickListener;
 
 
-  public EventRecyclerViewAdapter( Context context, List<String> data) {
+  public EventRecyclerViewAdapter(Context context, List<EventEntity> data) {
     this.layoutInflater = LayoutInflater.from(context);
     this.data = data;
   }
@@ -32,13 +33,13 @@ private ItemClickListener itemClickListener;
 
   @Override
   public void onBindViewHolder(@NonNull EventHolder eventHolder, int position) {
-    eventHolder.startDate.setText(data.get(position));
-    eventHolder.endDate.setText(data.get(position));
-    eventHolder.expenses.setText(data.get(position));
-    eventHolder.income.setText(data.get(position));
-    eventHolder.description.setText(data.get(position));
-    eventHolder.latitude.setText(data.get(position));
-    eventHolder.longitude.setText(data.get(position));
+    eventHolder.startDate.setText(data.get(position).getStartDate().toString());
+    eventHolder.endDate.setText(data.get(position).getEndDate().toString());
+    eventHolder.expenses.setText(data.get(position).getExpenses());
+    eventHolder.income.setText(data.get(position).getIncome());
+    eventHolder.description.setText(data.get(position).getDescription());
+    eventHolder.latitude.setText(String.valueOf(data.get(position).getLatidtude()));
+    eventHolder.longitude.setText(String.valueOf(data.get(position).getLongitude()));
   }
 
 
