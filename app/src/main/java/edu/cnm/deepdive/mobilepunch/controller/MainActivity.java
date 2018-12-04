@@ -17,6 +17,7 @@ import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
+import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
 import edu.cnm.deepdive.mobilepunch.view.fragments.Retrotest;
 import retrofit2.Retrofit;
 import retrofit2.Retrofit.Builder;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
 
+    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainFragment()).commit();
 
   }
 
