@@ -38,6 +38,14 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     return instance;
   }
 
+  public abstract ProjectDao getProjectDao();
+
+  public abstract ClientDao getClientDao();
+
+  public abstract EquipmentDao getEquipmentDao();
+
+  public abstract EventDao getEventDao();
+
   public synchronized static void forgetInstance() {
     instance = null;
   }
@@ -119,20 +127,10 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     toUUIDProject(client.getProjects());
   }
 
-  public abstract ProjectDao getProjectDao();
-
-  public abstract ClientDao getClientDao();
-
-  public abstract EquipmentDao getEquipmentDao();
-
-  public abstract EventDao getEventDao();
-
-
   public static void fromUUIDEquipment(EquipmentEntity equipment) {
     equipment.setId1(equipment.getUuid().getMostSignificantBits());
     equipment.setId2(equipment.getUuid().getLeastSignificantBits());
   }
-
 
   public static void fromUUIDEquipment(List<EquipmentEntity> equipmentList) {
     for (int i = 0; i < equipmentList.size(); i++) {
@@ -163,11 +161,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     public static long longFromDate(Date date) {
       return (date != null) ? date.getTime() : 0;
     }
-
-
   }
-
-
 }
 
 // updated
