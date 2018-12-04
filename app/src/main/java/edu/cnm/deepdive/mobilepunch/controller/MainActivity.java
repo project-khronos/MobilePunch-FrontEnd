@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mobilepunch.R;
@@ -22,6 +23,7 @@ import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.Retrotest;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -162,12 +164,18 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected List<ProjectEntity> doInBackground(Void... voids) {
-      return null;
+      List<ProjectEntity> projects = new ArrayList<>();
+      MobilePunchDatabase.getInstance(MainActivity.this);
+      projects = dataBase.getProjectDao().select();
+      return projects;
     }
 
     @Override
     protected void onPostExecute(List<ProjectEntity> projectEntities) {
-      super.onPostExecute(projectEntities);
+      if (projects != null) {
+        Toast.makeText(MainActivity.this, Integer.toString(projectEntities.size()),
+            Toast.LENGTH_LONG).show();
+      }
     }
 
     @Override
