@@ -7,6 +7,7 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -25,7 +26,9 @@ public class EventEntity {
 
   @Ignore
   @Expose
+  @SerializedName("event_id")
   private UUID uuid;
+
   @NonNull
   @ColumnInfo(name = "event_id1")
   private long id2;

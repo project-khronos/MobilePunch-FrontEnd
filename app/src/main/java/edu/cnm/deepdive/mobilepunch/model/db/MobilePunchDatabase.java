@@ -51,102 +51,134 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
   }
 
   public static void fromUUIDProject(List<ProjectEntity> projects) {
-    for (int i = 0; i < projects.size(); i++) {
-      ProjectEntity project = projects.get(i);
-      fromUUIDProject(project);
+    if (projects != null) {
+      for (int i = 0; i < projects.size(); i++) {
+        ProjectEntity project = projects.get(i);
+        fromUUIDProject(project);
+      }
     }
   }
 
   public static void fromUUIDProject(ProjectEntity project) {
-    project.setId1(project.getUuid().getMostSignificantBits());
-    project.setId2(project.getUuid().getLeastSignificantBits());
-    fromUUIDEvent(project.getEvents());
-    fromUUIDClient(project.getClients());
+    if (project != null) {
+      project.setId1(project.getUuid().getMostSignificantBits());
+      project.setId2(project.getUuid().getLeastSignificantBits());
+      fromUUIDEvent(project.getEvents());
+      fromUUIDClient(project.getClients());
+    }
   }
 
   private static void toUUIDProject(List<ProjectEntity> projects) {
-    for (int i = 0; i < projects.size(); i++) {
-      ProjectEntity project = projects.get(i);
-      toUUIDProject(project);
+    if (projects != null) {
+      for (int i = 0; i < projects.size(); i++) {
+        ProjectEntity project = projects.get(i);
+        toUUIDProject(project);
+      }
     }
   }
 
   private static void toUUIDProject(ProjectEntity project) {
-    project.setUuid(new UUID(project.getId1(), project.getId2()));
-    toUUIDCLient(project.getClients());
-    toUUIDEvent(project.getEvents());
+    if (project != null) {
+      project.setUuid(new UUID(project.getId1(), project.getId2()));
+      toUUIDCLient(project.getClients());
+      toUUIDEvent(project.getEvents());
+    }
   }
 
   public static void fromUUIDEvent(List<EventEntity> events) {
-    for (int j = 0; j < events.size(); j++) {
-      EventEntity event = events.get(j);
-      fromUUIDEvent(event);
+    if (events != null) {
+      for (int j = 0; j < events.size(); j++) {
+        EventEntity event = events.get(j);
+        fromUUIDEvent(event);
+      }
     }
   }
 
   public static void fromUUIDEvent(EventEntity event) {
-    event.setId1(event.getUuid().getMostSignificantBits());
-    event.setId2(event.getUuid().getLeastSignificantBits());
-    fromUUIDEquipment(event.getEquipmentList());
+    if (event != null) {
+      event.setId1(event.getUuid().getMostSignificantBits());
+      event.setId2(event.getUuid().getLeastSignificantBits());
+      fromUUIDEquipment(event.getEquipmentList());
+    }
   }
 
   public static void toUUIDEvent(EventEntity event) {
-    event.setUuid(new UUID(event.getId1(), event.getId2()));
-    toUUIDEquipment(event.getEquipmentList());
+    if (event != null) {
+      event.setUuid(new UUID(event.getId1(), event.getId2()));
+      toUUIDEquipment(event.getEquipmentList());
+    }
   }
 
   public static void toUUIDEvent(List<EventEntity> events) {
-    for (int j = 0; j < events.size(); j++) {
-      EventEntity event = events.get(j);
-      toUUIDEvent(event);
+    if (events != null) {
+      for (int j = 0; j < events.size(); j++) {
+        EventEntity event = events.get(j);
+        toUUIDEvent(event);
+      }
     }
   }
 
   public static void fromUUIDClient(ClientEntity client) {
-    client.setId1(client.getUuid().getMostSignificantBits());
-    client.setId2(client.getUuid().getLeastSignificantBits());
-    fromUUIDProject(client.getProjects());
+    if (client != null) {
+      client.setId1(client.getUuid().getMostSignificantBits());
+      client.setId2(client.getUuid().getLeastSignificantBits());
+      fromUUIDProject(client.getProjects());
+    }
   }
 
   public static void fromUUIDClient(List<ClientEntity> clients) {
-    for (int i = 0; i < clients.size(); i++) {
-      ClientEntity client = clients.get(i);
-      fromUUIDClient(client);
+    if (clients != null) {
+      for (int i = 0; i < clients.size(); i++) {
+        ClientEntity client = clients.get(i);
+        fromUUIDClient(client);
+      }
     }
   }
 
   public static void toUUIDCLient(List<ClientEntity> clients) {
-    for (int i = 0; i < clients.size(); i++) {
-      ClientEntity client = clients.get(i);
-      toUUIDClient(client);
+    if (clients != null) {
+      for (int i = 0; i < clients.size(); i++) {
+        ClientEntity client = clients.get(i);
+        toUUIDClient(client);
+      }
     }
   }
 
   public static void toUUIDClient(ClientEntity client) {
-    client.setUuid(new UUID(client.getId1(), client.getId2()));
-    toUUIDProject(client.getProjects());
+    if (client != null) {
+      client.setUuid(new UUID(client.getId1(), client.getId2()));
+      toUUIDProject(client.getProjects());
+    }
   }
 
   public static void fromUUIDEquipment(EquipmentEntity equipment) {
-    equipment.setId1(equipment.getUuid().getMostSignificantBits());
-    equipment.setId2(equipment.getUuid().getLeastSignificantBits());
+    if (equipment != null) {
+      equipment.setId1(equipment.getUuid().getMostSignificantBits());
+      equipment.setId2(equipment.getUuid().getLeastSignificantBits());
+    }
   }
 
   public static void fromUUIDEquipment(List<EquipmentEntity> equipmentList) {
-    for (int i = 0; i < equipmentList.size(); i++) {
-      EquipmentEntity equipment = equipmentList.get(i);
-      fromUUIDEquipment(equipment);
+    if (equipmentList != null) {
+      for (int i = 0; i < equipmentList.size(); i++) {
+        EquipmentEntity equipment = equipmentList.get(i);
+        fromUUIDEquipment(equipment);
+      }
     }
   }
 
   public static void toUUIDEquipment(EquipmentEntity equipment) {
-    equipment.setUuid(new UUID(equipment.getId1(), equipment.getId2()));
+    if (equipment != null) {
+      equipment.setUuid(new UUID(equipment.getId1(), equipment.getId2()));
+    }
   }
 
   public static void toUUIDEquipment(List<EquipmentEntity> equipmentList) {
-    for (int i = 0; i < equipmentList.size(); i++) {
-      EquipmentEntity equipment = equipmentList.get(i);
-      toUUIDEquipment(equipment);
+    if (equipmentList != null) {
+      for (int i = 0; i < equipmentList.size(); i++) {
+        EquipmentEntity equipment = equipmentList.get(i);
+        toUUIDEquipment(equipment);
+      }
     }
   }
 
