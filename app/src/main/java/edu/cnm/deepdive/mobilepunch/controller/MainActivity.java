@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.mobilepunch.controller;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -10,15 +11,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
+import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.Retrotest;
-import retrofit2.Retrofit;
+import java.util.ArrayList;
+import java.util.List;
+import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -26,6 +34,14 @@ public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
   private MobilePunchService service;
+  private List<ProjectEntity> projects;
+  private MobilePunchDatabase dataBase;
+  private String TAG = "tag";
+
+  public void setProjects(
+      List<ProjectEntity> projects) {
+    this.projects = projects;
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +59,11 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView = findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
 
+
+    setupService();
+    dataBase = MobilePunchDatabase.getInstance(this);
+    ProjectsTask projectsTask = new ProjectsTask();
+    projectsTask.execute();
 
   }
 
@@ -135,13 +156,97 @@ public class MainActivity extends AppCompatActivity
     Gson gson = new GsonBuilder()
         .excludeFieldsWithoutExposeAnnotation()
         .create();
-    Retrofit retrofit = new Builder()
+    service = new Builder()
         // TODO change base_url value.
-        .baseUrl("https://jsonplaceholder.typicode.com/")
+        .baseUrl("http://10.0.2.2:8080/")
         .addConverterFactory(GsonConverterFactory.create(gson))
-        .build();
-    service = retrofit.create(MobilePunchService.class);
+        .build()
+        .create(MobilePunchService.class);
   }
 
+  private class QuerryProjects extends AsyncTask<Void, Void, List<ProjectEntity>> {
 
+    @Override
+    protected void onPreExecute() {
+      super.onPreExecute();
+    }
+
+    @Override
+    protected List<ProjectEntity> doInBackground(Void... voids) {
+      List<ProjectEntity> projects = new ArrayList<>();
+      MobilePunchDatabase.getInstance(MainActivity.this);
+      projects = dataBase.getProjectDao().select();
+      return projects;
+    }
+
+    @Override
+    protected void onPostExecute(List<ProjectEntity> projectEntities) {
+      if (projects != null) {
+        Toast.makeText(MainActivity.this, Integer.toString(projectEntities.size()),
+            Toast.LENGTH_LONG).show();
+      }
+    }
+
+    @Override
+    protected void onCancelled() {
+      super.onCancelled();
+    }
+
+  }
+
+  private class ProjectsTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
+
+    @Override
+    protected void onPreExecute() {
+      super.onPreExecute();
+    }
+
+    @Override
+    protected List<ProjectEntity> doInBackground(Void... voids) {
+      List<ProjectEntity> projects = null;
+
+      try {
+        String token = getString(
+            R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
+        //GoogleSignIn.getLastSignedInAccount(MainActivity.this).getIdToken());
+        Call<List<ProjectEntity>> call = service.get(token);
+        Response<List<ProjectEntity>> response = call.execute();
+        if (response.isSuccessful()) {
+          projects = response.body();
+          Log.d(TAG, "RESPONSE SUCCESS: " + response.message());
+
+        } else {
+          Log.d(TAG, "RESPONSE NOT SUCCESS: " + response.errorBody().string());
+        }
+      } catch (Exception e) {
+        Log.d(TAG, "Caught Exception on Call: " + e.getLocalizedMessage());
+      } finally {
+        if (projects == null) {
+          Log.d(TAG, "On Cancelled called");
+          cancel(true);
+        }
+        try {
+          MobilePunchDatabase.fromUUIDProject(projects);
+          dataBase.getProjectDao().insert(projects);
+        } catch (Exception e) {
+          // FIXME do what
+          Log.d(TAG, "insert method failed: " + e.getLocalizedMessage());
+        }
+      }
+      return projects;
+    }
+
+
+    @Override
+    protected void onPostExecute(List<ProjectEntity> projectEntities) {
+      setProjects(projectEntities);
+      QuerryProjects querryProjects = new QuerryProjects();
+      querryProjects.execute();
+    }
+
+    @Override
+    protected void onCancelled() {
+      Toast.makeText(MainActivity.this, "Cancelled", Toast.LENGTH_LONG).show();
+    }
+  }
 }

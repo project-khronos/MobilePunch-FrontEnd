@@ -1,11 +1,9 @@
 package edu.cnm.deepdive.mobilepunch.view.fragments;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,8 +16,6 @@ import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
-import java.util.List;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -35,7 +31,7 @@ public class Retrotest extends Fragment {
   Button postButton;
   Button getButton;
   ProjectEntity post;
-  PostTask postTask;
+///  PostTask postTask;
 
   public static Retrotest newInstance() {
     Retrotest retroTest = new Retrotest();
@@ -59,7 +55,7 @@ public class Retrotest extends Fragment {
 
         String key = keyText.getText().toString();
         String value = valueText.getText().toString();
-        service.get();
+        //      service.get();
       }
     });
 
@@ -67,7 +63,7 @@ public class Retrotest extends Fragment {
     getButton.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
-        new PostTask().execute();
+        //     new PostTask().execute();
         // postTask.execute();
 
       }
@@ -90,36 +86,36 @@ public class Retrotest extends Fragment {
 
   }
 
-  public class PostTask extends AsyncTask<Void, Void, List<PostTask>> {
-
-    @Override
-    protected List<PostTask> doInBackground(Void... voids) {
-      try {
-        List<ProjectEntity> posts;
-        Response<List<ProjectEntity>> response = service.get().execute();
-        if (response.isSuccessful()) {
-          posts = response.body();
-          post = posts.get(0);
-        } else {
-          post = null;
-        }
-
-      } catch (Exception e) {
-        Log.d(TAG, "exception caught on 'GET", e);
-      }
-      return null;
-    }
-
-    @Override
-    protected void onPostExecute(List<PostTask> postTasks) {
-      if ((post != null)) {
-        getResponse.setText(post.getUuid().toString());
-      } else {
-        getResponse.setText("null");
-      }
-    }
-
-
-  }
+//  public class PostTask extends AsyncTask<Void, Void, List<PostTask>> {
+//
+//    @Override
+//    protected List<PostTask> doInBackground(Void... voids) {
+//      try {
+//        List<ProjectEntity> posts;
+//        Response<List<ProjectEntity>> response = service.get().execute();
+//        if (response.isSuccessful()) {
+//          posts = response.body();
+//          post = posts.get(0);
+//        } else {
+//          post = null;
+//        }
+//
+//      } catch (Exception e) {
+//        Log.d(TAG, "exception caught on 'GET", e);
+//      }
+//      return null;
+//    }
+//
+//    @Override
+//    protected void onPostExecute(List<PostTask> postTasks) {
+//      if ((post != null)) {
+//        getResponse.setText(post.getUuid().toString());
+//      } else {
+//        getResponse.setText("null");
+//      }
+//    }
+//
+//
+//  }
 }
 
