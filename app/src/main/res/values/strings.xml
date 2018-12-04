@@ -49,4 +49,6 @@
   <string name="billing_address">Billing Address</string>
   <string name="mailing_address">Mailing Address</string>
   <string name="notes">Notes</string>
+  <string name="equipment_name">Name</string>
+  <string name="identification">Identification</string>
 </resources>
