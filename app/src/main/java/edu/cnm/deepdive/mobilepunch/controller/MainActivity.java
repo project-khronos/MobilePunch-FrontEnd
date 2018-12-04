@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -36,6 +37,12 @@ public class MainActivity extends AppCompatActivity
   private MobilePunchService service;
   private List<ProjectEntity> projects;
   private MobilePunchDatabase dataBase;
+  private String TAG = "tag";
+
+  public void setProjects(
+      List<ProjectEntity> projects) {
+    this.projects = projects;
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +60,11 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
 
+
     setupService();
     dataBase = MobilePunchDatabase.getInstance(this);
+    ProjectsTask projectsTask = new ProjectsTask();
+    projectsTask.execute();
 
   }
 
@@ -149,7 +159,7 @@ public class MainActivity extends AppCompatActivity
         .create();
     service = new Builder()
         // TODO change base_url value.
-        .baseUrl(getString(R.string.base_url))
+        .baseUrl("http://10.0.2.2:8080/")
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
         .create(MobilePunchService.class);
@@ -204,9 +214,10 @@ public class MainActivity extends AppCompatActivity
           projects = response.body();
         }
       } catch (IOException e) {
-
+        Log.d(TAG, "call" + e.getLocalizedMessage());
       } finally {
         if (projects == null) {
+          // Log.d(TAG, Integer.toString(projects.size()));
           cancel(true);
         }
         try {
@@ -214,6 +225,7 @@ public class MainActivity extends AppCompatActivity
           dataBase.getProjectDao().insert(projects);
         } catch (Exception e) {
           // FIXME do what
+          Log.d(TAG, "insert method " + e.getLocalizedMessage());
         }
       }
       return projects;
@@ -222,12 +234,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onPostExecute(List<ProjectEntity> projectEntities) {
-      super.onPostExecute(projectEntities);
+      setProjects(projectEntities);
+      QuerryProjects querryProjects = new QuerryProjects();
+      querryProjects.execute();
     }
 
     @Override
     protected void onCancelled() {
-      super.onCancelled();
+      Toast.makeText(MainActivity.this, "Cancelled", Toast.LENGTH_LONG).show();
+      Log.d(TAG, FrontendApplication.getInstance().getAccount().getIdToken().toString());
     }
   }
 }
