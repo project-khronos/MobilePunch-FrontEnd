@@ -3,9 +3,13 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.support.annotation.NonNull;
+import com.google.gson.annotations.Expose;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 @Entity(
     primaryKeys = {"event_id1","event_id2"},
@@ -18,6 +22,31 @@ import java.util.Date;
 )
 
 public class EventEntity {
+
+  @Ignore
+  @Expose
+  List<EquipmentEntity> equipmentList;
+  @Ignore
+  @Expose
+
+  private UUID uuid;
+
+  public List<EquipmentEntity> getEquipmentList() {
+    return equipmentList;
+  }
+
+  public void setEquipmentList(
+      List<EquipmentEntity> equipmentList) {
+    this.equipmentList = equipmentList;
+  }
+
+  public UUID getUuid() {
+    return uuid;
+  }
+
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
+  }
 @NonNull
 @ColumnInfo(name = "event_id1")
 private long id2;
