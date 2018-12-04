@@ -16,7 +16,7 @@ public class ProjectEntity {
 
   @Ignore
   @Expose
-  @SerializedName("project_id")
+  @SerializedName("uuid")
   private UUID uuid;
 
   private String name;
