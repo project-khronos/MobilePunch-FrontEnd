@@ -10,8 +10,14 @@ import java.util.List;
 @Dao
 public interface EventDao {
 
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  long insert(EventEntity event);
+
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  List<Long> insert(List<EventEntity> events);
+
   @Query("SELECT * FROM EventEntity WHERE project_id1 = :project_id1 AND project_id2= :project_id2 ")
   List<EventEntity> select(long project_id1, long project_id2);
-  @Insert(onConflict = OnConflictStrategy.FAIL)
-  long insert(EventEntity event);
+
+
 }

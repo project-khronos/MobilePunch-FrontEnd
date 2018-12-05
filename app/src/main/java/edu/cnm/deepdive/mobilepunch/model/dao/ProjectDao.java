@@ -10,15 +10,16 @@ import java.util.List;
 @Dao
 public interface ProjectDao {
 
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  long insert(ProjectEntity projectEntity);
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   List<Long> insert(List<ProjectEntity> projects);
 
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  long insert(ProjectEntity projectEntity);
-
   @Query("SELECT * FROM ProjectEntity ORDER BY start_time")
   List<ProjectEntity> selectAll();
 
+  @Query("SELECT * FROM ProjectEntity WHERE :id1 = project_id1 AND :id2 = project_id2")
+  ProjectEntity select(long id1, long id2);
 
 }
