@@ -18,6 +18,9 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import java.util.UUID;
 
 
+/**
+ * The type Equipment fragment.
+ */
 public class EquipmentFragment extends Fragment {
 
   private EquipmentEntity equipment;
@@ -85,6 +88,12 @@ public class EquipmentFragment extends Fragment {
     private EventEntity eventEntity;
 
 
+    /**
+     * Instantiates a new Insert equipment.
+     *
+     * @param context the context
+     * @param eventEntity the event entity
+     */
     public InsertEquipment(Context context, EventEntity eventEntity) {
       this.context = context;
       this.eventEntity = eventEntity;

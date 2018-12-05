@@ -13,6 +13,9 @@ import edu.cnm.deepdive.mobilepunch.controller.adapters.EventRecyclerViewAdapter
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import java.util.List;
 
+/**
+ * The type Client recycler view adapter.
+ */
 public class ClientRecyclerViewAdapter extends
     RecyclerView.Adapter<ClientRecyclerViewAdapter.ClientHolder> {
 
@@ -20,6 +23,12 @@ public class ClientRecyclerViewAdapter extends
   private LayoutInflater layoutInflater;
   private ItemClickListener itemClickListener;
 
+  /**
+   * Instantiates a new Client recycler view adapter.
+   *
+   * @param context the context
+   * @param data the data
+   */
   public ClientRecyclerViewAdapter(Context context, List<ClientEntity> data) {
     this.layoutInflater = LayoutInflater.from(context);
     this.data = data;
@@ -50,6 +59,9 @@ public class ClientRecyclerViewAdapter extends
     return data.size();
   }
 
+  /**
+   * The type Client holder.
+   */
   public class ClientHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private TextView name;
@@ -61,6 +73,11 @@ public class ClientRecyclerViewAdapter extends
     private TextView notes;
 
 
+    /**
+     * Instantiates a new Client holder.
+     *
+     * @param itemView the item view
+     */
     public ClientHolder(@NonNull View itemView) {
       super(itemView);
       name = itemView.findViewById(R.id.li_client_name);

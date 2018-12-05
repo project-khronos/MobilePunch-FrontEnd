@@ -17,12 +17,21 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Event recycler view adapter.
+ */
 public class EventRecyclerViewAdapter extends RecyclerView.Adapter<EventRecyclerViewAdapter.EventHolder> {
 private List<EventEntity> data;
 private LayoutInflater layoutInflater;
 private ItemClickListener itemClickListener;
 private Context context;
 
+  /**
+   * Instantiates a new Event recycler view adapter.
+   *
+   * @param context the context
+   * @param data the data
+   */
   public EventRecyclerViewAdapter(Context context, List<EventEntity> data) {
     this.layoutInflater = LayoutInflater.from(context);
     this.data = data;
@@ -65,6 +74,9 @@ private Context context;
     return data.size();
   }
 
+  /**
+   * The type Event holder.
+   */
   public class EventHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private TextView startDate;
     private TextView endDate;
@@ -74,6 +86,11 @@ private Context context;
     private TextView latitude;
     private TextView longitude;
 
+    /**
+     * Instantiates a new Event holder.
+     *
+     * @param itemView the item view
+     */
     public EventHolder(@NonNull View itemView) {
       super(itemView);
       startDate = itemView.findViewById(R.id.li_event_start_date);
@@ -92,10 +109,27 @@ private Context context;
       if(itemClickListener != null) itemClickListener.onItemClick(view, getAdapterPosition());
     }
   }
+
+  /**
+   * Sets item click listener.
+   *
+   * @param itemClickListener the item click listener
+   */
   void setItemClickListener(ItemClickListener itemClickListener) {
     this.itemClickListener = itemClickListener;
   }
+
+  /**
+   * The interface Item click listener.
+   */
   public interface ItemClickListener {
+
+    /**
+     * On item click.
+     *
+     * @param view the view
+     * @param position the position
+     */
     void onItemClick(View view, int position);
   }
 }

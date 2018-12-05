@@ -21,6 +21,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * The type Event fragment.
+ */
 public class EventFragment extends Fragment {
 
   private EventEntity event;
@@ -158,6 +161,12 @@ public class EventFragment extends Fragment {
     private Context context;
     private ProjectEntity projectEntity;
 
+    /**
+     * Instantiates a new Insert event.
+     *
+     * @param context the context
+     * @param projectEntity the project entity
+     */
     public InsertEvent(Context context, ProjectEntity projectEntity) {
       this.context = context;
       this.projectEntity = projectEntity;

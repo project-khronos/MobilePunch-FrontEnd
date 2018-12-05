@@ -11,6 +11,9 @@ import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import java.util.List;
 
+/**
+ * The type Equipment recycler view adapter.
+ */
 public class EquipmentRecyclerViewAdapter extends
     RecyclerView.Adapter<EquipmentRecyclerViewAdapter.EquipmentHolder> {
 
@@ -18,6 +21,12 @@ public class EquipmentRecyclerViewAdapter extends
   private LayoutInflater layoutinflater;
   private ItemClickListener itemClickListener;
 
+  /**
+   * Instantiates a new Equipment recycler view adapter.
+   *
+   * @param context the context
+   * @param data the data
+   */
   public EquipmentRecyclerViewAdapter(Context context, List<EquipmentEntity> data) {
     this.layoutinflater = LayoutInflater.from(context);
     this.data = data;
@@ -46,6 +55,9 @@ public class EquipmentRecyclerViewAdapter extends
     return data.size();
   }
 
+  /**
+   * The type Equipment holder.
+   */
   public class EquipmentHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private TextView name;
@@ -55,6 +67,11 @@ public class EquipmentRecyclerViewAdapter extends
     private TextView year;
     private TextView description;
 
+    /**
+     * Instantiates a new Equipment holder.
+     *
+     * @param itemView the item view
+     */
     public EquipmentHolder(@NonNull View itemView) {
       super(itemView);
       name = itemView.findViewById(R.id.li_equipment_name);
@@ -73,12 +90,27 @@ public class EquipmentRecyclerViewAdapter extends
   }
 
 
+  /**
+   * Sets item click listener.
+   *
+   * @param itemClickListener the item click listener
+   */
   void setItemClickListener(ItemClickListener itemClickListener) {
     this.itemClickListener = itemClickListener;
 
   }
 
+  /**
+   * The interface Item click listener.
+   */
   public interface ItemClickListener {
+
+    /**
+     * On item click.
+     *
+     * @param view the view
+     * @param position the position
+     */
     void onItemClick(View view, int position);
 
   }

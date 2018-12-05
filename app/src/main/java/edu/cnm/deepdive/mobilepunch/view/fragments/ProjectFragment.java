@@ -16,8 +16,18 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.UUID;
 
 
+/**
+ * The type Project fragment.
+ */
 public class ProjectFragment extends Fragment {
-ProjectEntity project;
+
+  /**
+   * The Project.
+   */
+  ProjectEntity project;
+  /**
+   * The Save button.
+   */
   Button saveButton;
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {

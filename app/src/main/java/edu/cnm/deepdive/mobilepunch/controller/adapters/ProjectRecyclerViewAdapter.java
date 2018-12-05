@@ -12,6 +12,9 @@ import edu.cnm.deepdive.mobilepunch.controller.adapters.EventRecyclerViewAdapter
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.List;
 
+/**
+ * The type Project recycler view adapter.
+ */
 public class ProjectRecyclerViewAdapter extends
     RecyclerView.Adapter<ProjectRecyclerViewAdapter.ProjectHolder> {
 
@@ -20,6 +23,12 @@ public class ProjectRecyclerViewAdapter extends
   private ItemClickListener itemClickListener;
   private Context context;
 
+  /**
+   * Instantiates a new Project recycler view adapter.
+   *
+   * @param context the context
+   * @param data the data
+   */
   public ProjectRecyclerViewAdapter(Context context, List<ProjectEntity> data) {
     this.layoutInflater = LayoutInflater.from(context);
     this.data = data;
@@ -46,6 +55,9 @@ public class ProjectRecyclerViewAdapter extends
   }
 
 
+  /**
+   * The type Project holder.
+   */
   public class ProjectHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private TextView name;
@@ -55,6 +67,11 @@ public class ProjectRecyclerViewAdapter extends
     private TextView description;
 
 
+    /**
+     * Instantiates a new Project holder.
+     *
+     * @param itemView the item view
+     */
     public ProjectHolder(@NonNull View itemView) {
       super(itemView);
       name = itemView.findViewById(R.id.li_project_name);

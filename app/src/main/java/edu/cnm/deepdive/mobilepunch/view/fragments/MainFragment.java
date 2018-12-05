@@ -18,6 +18,9 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.List;
 
+/**
+ * The type Main fragment.
+ */
 public class MainFragment extends Fragment {
 
 private TextView tEvent,
@@ -34,6 +37,9 @@ private RecyclerFragment recyclerFragment = new RecyclerFragment();
 
 private Bundle bundle = new Bundle();
 
+  /**
+   * Instantiates a new Main fragment.
+   */
   public MainFragment() {
     // Required empty public constructor
   }
