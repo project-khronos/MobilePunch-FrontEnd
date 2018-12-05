@@ -24,7 +24,7 @@ public class EquipmentFragment extends Fragment {
 
   private EditText makeField, modelField, yearField, identificationField;
 
-  private Button dateButton, saveButton;
+  private Button  saveButton;
 
   private View view;
 
@@ -56,7 +56,6 @@ public class EquipmentFragment extends Fragment {
     modelField = view.findViewById(R.id.equipment_model);
     yearField = view.findViewById(R.id.equipment_year);
     identificationField = view.findViewById(R.id.equipment_identification);
-    dateButton = view.findViewById(R.id.equipment_date);
     saveButton = view.findViewById(R.id.equipment_save);
 
   }
