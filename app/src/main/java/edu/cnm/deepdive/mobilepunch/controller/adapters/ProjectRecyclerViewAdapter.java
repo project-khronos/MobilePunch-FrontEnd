@@ -43,7 +43,7 @@ public class ProjectRecyclerViewAdapter extends
 
   @Override
   public int getItemCount() {
-    return 0;
+    return data.size();
   }
 
 

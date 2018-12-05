@@ -45,7 +45,7 @@ private Context context;
       eventHolder.expenses.setText(String.valueOf(data.get(position).getExpenses()));
       eventHolder.income.setText(String.valueOf(data.get(position).getIncome()));
       eventHolder.description.setText(data.get(position).getDescription());
-      eventHolder.latitude.setText(String.valueOf(data.get(position).getLatidtude()));
+      eventHolder.latitude.setText(String.valueOf(data.get(position).getLatitude()));
       eventHolder.longitude.setText(String.valueOf(data.get(position).getLongitude()));
 
 
