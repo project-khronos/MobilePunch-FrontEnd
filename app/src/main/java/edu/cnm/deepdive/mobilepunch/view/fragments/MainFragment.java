@@ -3,8 +3,6 @@ package edu.cnm.deepdive.mobilepunch.view.fragments;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import edu.cnm.deepdive.mobilepunch.FragmentSwitcherActivity;
 import edu.cnm.deepdive.mobilepunch.R;
-import edu.cnm.deepdive.mobilepunch.controller.adapters.ClientRecyclerViewAdapter.ClientHolder;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
@@ -21,17 +18,21 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class MainFragment extends Fragment {
 
-private TextView eventT, projectT, clientT, equipmentT;
-private CardView event, project, client, equipment;
+private TextView tEvent,
+    tProject,
+    tClient,
+    tEquipment;
+
+private CardView event,
+    project,
+    client,
+    equipment;
+
 private RecyclerFragment recyclerFragment = new RecyclerFragment();
+
 private Bundle bundle = new Bundle();
-
-
 
   public MainFragment() {
     // Required empty public constructor
@@ -63,17 +64,18 @@ private Bundle bundle = new Bundle();
     setListener(client,recyclerFragment);
     setListener(equipment,recyclerFragment);
   }
+
   private void initViews(View view){
-    eventT = view.findViewById(R.id.event_num_items);
+    tEvent = view.findViewById(R.id.event_num_items);
     event = view.findViewById(R.id.event_card);
     event.setTag("event");
-    projectT = view.findViewById(R.id.project_num_items);
+    tProject = view.findViewById(R.id.project_num_items);
     project = view.findViewById(R.id.project_card);
     project.setTag("project");
-    clientT = view.findViewById(R.id.client_num_items);
+    tClient = view.findViewById(R.id.client_num_items);
     client = view.findViewById(R.id.client_card);
     client.setTag("client");
-    equipmentT = view.findViewById(R.id.equipment_num_items);
+    tEquipment = view.findViewById(R.id.equipment_num_items);
     equipment = view.findViewById(R.id.equipment_card);
     equipment.setTag("equipment");
   }
@@ -90,14 +92,11 @@ private Bundle bundle = new Bundle();
     });
   }
 
-
-
-
   private class NumItemsEvent extends AsyncTask<Void,Void, List<EventEntity>>{
 
     @Override
     protected void onPostExecute(List<EventEntity> eventEntities) {
-      eventT.setText("Number of events: " + eventEntities.size());
+      tEvent.setText("Number of events: " + eventEntities.size());
     }
 
     @Override
@@ -110,7 +109,7 @@ private Bundle bundle = new Bundle();
 
     @Override
     protected void onPostExecute(List<ProjectEntity> projectEntities) {
-      projectT.setText("Number of projects: " + projectEntities.size());
+      tProject.setText("Number of projects: " + projectEntities.size());
     }
 
     @Override
@@ -123,7 +122,7 @@ private Bundle bundle = new Bundle();
 
     @Override
     protected void onPostExecute(List<ClientEntity> eventEntities) {
-      clientT.setText("Number of clients: " + eventEntities.size());
+      tClient.setText("Number of clients: " + eventEntities.size());
     }
 
     @Override
@@ -136,7 +135,7 @@ private Bundle bundle = new Bundle();
 
     @Override
     protected void onPostExecute(List<EquipmentEntity> equipmentEntities) {
-      equipmentT.setText("Number of equipment: " + equipmentEntities.size());
+      tEquipment.setText("Number of equipment: " + equipmentEntities.size());
     }
 
     @Override
