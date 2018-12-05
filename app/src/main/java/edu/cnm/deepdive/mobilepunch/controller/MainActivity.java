@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity
     protected List<ProjectEntity> doInBackground(Void... voids) {
       List<ProjectEntity> projects;
       MobilePunchDatabase.getInstance(MainActivity.this);
-      projects = dataBase.getProjectDao().select();
+      projects = dataBase.getProjectDao().selectAll();
       return projects;
     }
 
