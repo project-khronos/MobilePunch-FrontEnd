@@ -12,6 +12,9 @@ import android.widget.EditText;
 import edu.cnm.deepdive.mobilepunch.R;
 
 
+/**
+ * The type Client fragment.
+ */
 public class ClientFragment extends Fragment {
 
   @Override

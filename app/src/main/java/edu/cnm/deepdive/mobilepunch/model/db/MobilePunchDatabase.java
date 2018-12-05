@@ -19,6 +19,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * The type Mobile punch database.
+ */
 @Database(
     entities = {ProjectEntity.class, EventEntity.class, ClientEntity.class, EquipmentEntity.class},
     version = 1,
@@ -30,6 +33,12 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
   private static final String DB_NAME = "mobile_punch_db";
   private static MobilePunchDatabase instance = null;
 
+  /**
+   * Gets instance.
+   *
+   * @param context the context
+   * @return the instance
+   */
   public synchronized static MobilePunchDatabase getInstance(Context context) {
     if (instance == null) {
       instance = Room
@@ -39,18 +48,46 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     return instance;
   }
 
+  /**
+   * Gets project dao.
+   *
+   * @return the project dao
+   */
   public abstract ProjectDao getProjectDao();
 
+  /**
+   * Gets client dao.
+   *
+   * @return the client dao
+   */
   public abstract ClientDao getClientDao();
 
+  /**
+   * Gets equipment dao.
+   *
+   * @return the equipment dao
+   */
   public abstract EquipmentDao getEquipmentDao();
 
+  /**
+   * Gets event dao.
+   *
+   * @return the event dao
+   */
   public abstract EventDao getEventDao();
 
+  /**
+   * Forget instance.
+   */
   public synchronized static void forgetInstance() {
     instance = null;
   }
 
+  /**
+   * From uuid project.
+   *
+   * @param projects the projects
+   */
   public static void fromUUIDProject(List<ProjectEntity> projects) {
     if (projects != null) {
       for (int i = 0; i < projects.size(); i++) {
@@ -60,6 +97,11 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+  /**
+   * From uuid project.
+   *
+   * @param project the project
+   */
   public static void fromUUIDProject(ProjectEntity project) {
     if (project != null) {
       project.setId1(project.getUuid().getMostSignificantBits());
@@ -86,6 +128,11 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+  /**
+   * From uuid event.
+   *
+   * @param events the events
+   */
   public static void fromUUIDEvent(List<EventEntity> events) {
     if (events != null) {
       for (int j = 0; j < events.size(); j++) {
@@ -95,6 +142,11 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+  /**
+   * From uuid event.
+   *
+   * @param event the event
+   */
   public static void fromUUIDEvent(EventEntity event) {
     if (event != null) {
       event.setId1(event.getUuid().getMostSignificantBits());
@@ -103,6 +155,11 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+  /**
+   * To uuid event.
+   *
+   * @param event the event
+   */
   public static void toUUIDEvent(EventEntity event) {
     if (event != null) {
       event.setUuid(new UUID(event.getId1(), event.getId2()));
@@ -110,6 +167,11 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+  /**
+   * To uuid event.
+   *
+   * @param events the events
+   */
   public static void toUUIDEvent(List<EventEntity> events) {
     if (events != null) {
       for (int j = 0; j < events.size(); j++) {
@@ -119,6 +181,11 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+  /**
+   * From uuid client.
+   *
+   * @param client the client
+   */
   public static void fromUUIDClient(ClientEntity client) {
     if (client != null) {
       client.setId1(client.getUuid().getMostSignificantBits());
@@ -127,6 +194,11 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+  /**
+   * From uuid client.
+   *
+   * @param clients the clients
+   */
   public static void fromUUIDClient(List<ClientEntity> clients) {
     if (clients != null) {
       for (int i = 0; i < clients.size(); i++) {
@@ -136,6 +208,11 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+  /**
+   * To uuidc lient.
+   *
+   * @param clients the clients
+   */
   public static void toUUIDCLient(List<ClientEntity> clients) {
     if (clients != null) {
       for (int i = 0; i < clients.size(); i++) {
@@ -145,6 +222,11 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+  /**
+   * To uuid client.
+   *
+   * @param client the client
+   */
   public static void toUUIDClient(ClientEntity client) {
     if (client != null) {
       client.setUuid(new UUID(client.getId1(), client.getId2()));
@@ -152,6 +234,11 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+  /**
+   * From uuid equipment.
+   *
+   * @param equipment the equipment
+   */
   public static void fromUUIDEquipment(EquipmentEntity equipment) {
     if (equipment != null) {
       equipment.setId1(equipment.getUuid().getMostSignificantBits());
@@ -159,6 +246,11 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+  /**
+   * From uuid equipment.
+   *
+   * @param equipmentList the equipment list
+   */
   public static void fromUUIDEquipment(List<EquipmentEntity> equipmentList) {
     if (equipmentList != null) {
       for (int i = 0; i < equipmentList.size(); i++) {
@@ -168,12 +260,22 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+  /**
+   * To uuid equipment.
+   *
+   * @param equipment the equipment
+   */
   public static void toUUIDEquipment(EquipmentEntity equipment) {
     if (equipment != null) {
       equipment.setUuid(new UUID(equipment.getId1(), equipment.getId2()));
     }
   }
 
+  /**
+   * To uuid equipment.
+   *
+   * @param equipmentList the equipment list
+   */
   public static void toUUIDEquipment(List<EquipmentEntity> equipmentList) {
     if (equipmentList != null) {
       for (int i = 0; i < equipmentList.size(); i++) {
@@ -183,6 +285,12 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     }
   }
 
+  /**
+   * Gets events from project.
+   *
+   * @param project the project
+   * @return the events from project
+   */
   public static List<EventEntity> getEventsFromProject(ProjectEntity project) {
     List<EventEntity> events = null;
     if (project != null) {
@@ -196,6 +304,12 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     return events;
   }
 
+  /**
+   * Gets events from project.
+   *
+   * @param projects the projects
+   * @return the events from project
+   */
   public static List<EventEntity> getEventsFromProject(List<ProjectEntity> projects) {
     List<EventEntity> events = new ArrayList<>();
     if (projects != null) {
@@ -206,13 +320,28 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     return events;
   }
 
+  /**
+   * The type Converters.
+   */
   public static class Converters {
 
+    /**
+     * Date from long date.
+     *
+     * @param time the time
+     * @return the date
+     */
     @TypeConverter
     public static Date dateFromLong(Long time) {
       return (time != null) ? new Date(time) : null;
     }
 
+    /**
+     * Long from date long.
+     *
+     * @param date the date
+     * @return the long
+     */
     @TypeConverter
     public static long longFromDate(Date date) {
       return (date != null) ? date.getTime() : 0;

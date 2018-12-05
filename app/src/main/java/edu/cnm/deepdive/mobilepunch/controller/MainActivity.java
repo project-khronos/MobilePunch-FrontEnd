@@ -33,6 +33,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * The type Main activity.
+ */
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -41,6 +44,11 @@ public class MainActivity extends AppCompatActivity
   private MobilePunchDatabase dataBase;
   private String TAG = "tag";
 
+  /**
+   * Sets projects.
+   *
+   * @param projects the projects
+   */
   public void setProjects(
       List<ProjectEntity> projects) {
     this.projects = projects;

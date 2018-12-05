@@ -20,19 +20,51 @@ import retrofit2.Retrofit;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * The type Retrotest.
+ */
 public class Retrotest extends Fragment {
 
   private static final String TAG = "tag";
+  /**
+   * The Service.
+   */
   MobilePunchService service;
+  /**
+   * The Key text.
+   */
   EditText keyText;
+  /**
+   * The Value text.
+   */
   EditText valueText;
+  /**
+   * The Getkey.
+   */
   EditText getkey;
+  /**
+   * The Get response.
+   */
   TextView getResponse;
+  /**
+   * The Post button.
+   */
   Button postButton;
+  /**
+   * The Get button.
+   */
   Button getButton;
+  /**
+   * The Post.
+   */
   ProjectEntity post;
 ///  PostTask postTask;
 
+  /**
+   * New instance retrotest.
+   *
+   * @return the retrotest
+   */
   public static Retrotest newInstance() {
     Retrotest retroTest = new Retrotest();
     return retroTest;

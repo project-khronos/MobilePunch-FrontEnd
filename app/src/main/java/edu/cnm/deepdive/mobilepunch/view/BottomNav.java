@@ -11,6 +11,9 @@ import edu.cnm.deepdive.mobilepunch.view.fragments.EquipmentFragment;
 import edu.cnm.deepdive.mobilepunch.view.fragments.EventFragment;
 import edu.cnm.deepdive.mobilepunch.view.fragments.ProjectFragment;
 
+/**
+ * The type Bottom nav.
+ */
 public class BottomNav extends FragmentSwitcherActivity {
 
   private TextView textMessage;
@@ -54,6 +57,9 @@ public class BottomNav extends FragmentSwitcherActivity {
     fromMain();
   }
 
+  /**
+   * From main.
+   */
   public void fromMain() {
     Bundle b = getIntent().getExtras();
     int value = -1; // or other values

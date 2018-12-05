@@ -26,6 +26,9 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.List;
 import org.apache.commons.cli.CommandLine;
 
+/**
+ * The type Recycler fragment.
+ */
 public class RecyclerFragment extends Fragment {
 
   private RecyclerView recyclerView;

@@ -13,6 +13,9 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import edu.cnm.deepdive.mobilepunch.R;
 
+/**
+ * The type Login activity.
+ */
 public class LoginActivity extends AppCompatActivity {
 
 
@@ -66,6 +69,11 @@ public class LoginActivity extends AppCompatActivity {
     startActivity(intent);
   }
 
+  /**
+   * Skip login.
+   *
+   * @param view the view
+   */
   public void skipLogin(View view) {
     switchToMain();
   }
