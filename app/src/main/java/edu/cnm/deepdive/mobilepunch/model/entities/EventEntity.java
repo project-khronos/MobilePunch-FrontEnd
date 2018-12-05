@@ -5,9 +5,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.OnConflictStrategy;
-import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -26,38 +24,37 @@ public class EventEntity {
 
   @Ignore
   @Expose
-  @SerializedName("event_id")
+  // @SerializedName("uuid")
   private UUID uuid;
 
-  @ColumnInfo(name = "equipment_id1")
-  private long equipmentId1;
-
-  @ColumnInfo(name = "equipment_id2")
-  private long equipmentId2;
-
-  public long getEquipmentId1() {
-    return equipmentId1;
-  }
-
-  public void setEquipmentId1(long equipmentId1) {
-    this.equipmentId1 = equipmentId1;
-  }
-
-  public long getEquipmentId2() {
-    return equipmentId2;
-  }
-
-  public void setEquipmentId2(long equipmentId2) {
-    this.equipmentId2 = equipmentId2;
-  }
-
-  @NonNull
   @ColumnInfo(name = "event_id1")
   private long id2;
 
-  @NonNull
   @ColumnInfo(name = "event_id2")
   private long id1;
+
+  @Expose
+  @ColumnInfo(name = "event_start_date")
+  private Date startDate;
+
+  @Expose
+  @ColumnInfo(name = "event_end_date")
+  private Date endDate;
+
+  @Expose
+  private int expenses;
+
+  @Expose
+  private int income;
+
+  @Expose
+  private String description;
+
+  @Expose
+  private double longitude;
+
+  @Expose
+  private double latidtude;
 
   @ColumnInfo(name = "project_id1")
   private long projectId1;
@@ -65,36 +62,18 @@ public class EventEntity {
   @ColumnInfo(name = "project_id2")
   private long projectId2;
 
-  @ColumnInfo(name = "event_start_date")
-  private Date startDate;
 
-  @ColumnInfo(name = "event_end_date")
-  private Date endDate;
+  @ColumnInfo(name = "equipment_id1")
+  private long equipmentId1;
+
+  @ColumnInfo(name = "equipment_id2")
+  private long equipmentId2;
 
   @Ignore
   @Expose
   private List<EquipmentEntity> equipmentList;
-
-  private int expenses;
-
-  private int income;
-
-  private String description;
-
-  private double longitude;
-
-  private double latidtude;
-
 //  Image -URI
 
-  public List<EquipmentEntity> getEquipmentList() {
-    return equipmentList;
-  }
-
-  public void setEquipmentList(
-      List<EquipmentEntity> equipmentList) {
-    this.equipmentList = equipmentList;
-  }
 
   public UUID getUuid() {
     return uuid;
@@ -102,6 +81,22 @@ public class EventEntity {
 
   public void setUuid(UUID uuid) {
     this.uuid = uuid;
+  }
+
+  public long getId2() {
+    return id2;
+  }
+
+  public void setId2(long id2) {
+    this.id2 = id2;
+  }
+
+  public long getId1() {
+    return id1;
+  }
+
+  public void setId1(long id1) {
+    this.id1 = id1;
   }
 
   public Date getStartDate() {
@@ -160,22 +155,6 @@ public class EventEntity {
     this.latidtude = latidtude;
   }
 
-  public long getId2() {
-    return id2;
-  }
-
-  public void setId2(long id2) {
-    this.id2 = id2;
-  }
-
-  public long getId1() {
-    return id1;
-  }
-
-  public void setId1(long id1) {
-    this.id1 = id1;
-  }
-
   public long getProjectId1() {
     return projectId1;
   }
@@ -190,5 +169,30 @@ public class EventEntity {
 
   public void setProjectId2(long projectId2) {
     this.projectId2 = projectId2;
+  }
+
+  public long getEquipmentId1() {
+    return equipmentId1;
+  }
+
+  public void setEquipmentId1(long equipmentId1) {
+    this.equipmentId1 = equipmentId1;
+  }
+
+  public long getEquipmentId2() {
+    return equipmentId2;
+  }
+
+  public void setEquipmentId2(long equipmentId2) {
+    this.equipmentId2 = equipmentId2;
+  }
+
+  public List<EquipmentEntity> getEquipmentList() {
+    return equipmentList;
+  }
+
+  public void setEquipmentList(
+      List<EquipmentEntity> equipmentList) {
+    this.equipmentList = equipmentList;
   }
 }

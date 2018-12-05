@@ -2,84 +2,63 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.OnConflictStrategy;
-import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import io.reactivex.annotations.NonNull;
 import java.util.List;
 import java.util.UUID;
 
 
 @Entity(
-    primaryKeys = {"client_id1", "client_id2"},
-    foreignKeys = {@ForeignKey(
-        entity = ProjectEntity.class,
-        parentColumns = {"project_id1","project_id2"},
-        childColumns = {"project_id1","project_id2"},
-        onDelete = OnConflictStrategy.FAIL
-    )}
+    primaryKeys = {"client_id1", "client_id2"}
+//    foreignKeys = {@ForeignKey(
+//        entity = ProjectEntity.class,
+//        parentColumns = {"project_id1","project_id2"},
+//        childColumns = {"project_id1","project_id2"},
+//        onDelete = OnConflictStrategy.FAIL
+//    )}
 )
 public class ClientEntity {
 
-  public long getProjectId1() {
-    return projectId1;
-  }
-
-  public void setProjectId1(long projectId1) {
-    this.projectId1 = projectId1;
-  }
-
-  public long getProjectId2() {
-    return projectId2;
-  }
-
-  public void setProjectId2(long projectId2) {
-    this.projectId2 = projectId2;
-  }
-
-  @ColumnInfo(name = "project_id1")
-  private long projectId1;
-
-  @ColumnInfo(name = "project_id2")
-  private long projectId2;
 
   @Ignore
   @Expose
-  @SerializedName("client_id")
+  @SerializedName("uuid")
   private UUID uuid;
 
-  @NonNull
   @ColumnInfo(name = "client_id1")
   private long id1;
 
-
-  @NonNull
   @ColumnInfo(name = "client_id2")
   private long id2;
-
-  @NonNull
-  private String name;
-
-  private String email;
 
   @Ignore
   @Expose
   List<ProjectEntity> projects;
   @NonNull
-
-  private String phone;
+  @Expose
+  private String name;
+  @Expose
+  private String email;
 
   @ColumnInfo(name = "alt_phone")
   private String altPhone;
-
-  private long address;
-
-  private String notes;
-
+  @NonNull
+  @Expose
+  private String phone;
+  @Expose
+  private String address;
+  @Expose
   @ColumnInfo(name = "alt_address")
-  private long altAddress;
+  private String altAddress;
+  @Expose
+  private String notes;
+  @ColumnInfo(name = "project_id1")
+  private long projectId1;
+
+  @ColumnInfo(name = "project_id2")
+  private long projectId2;
 
   public UUID getUuid() {
     return uuid;
@@ -95,15 +74,6 @@ public class ClientEntity {
 
   public void setId1(long id1) {
     this.id1 = id1;
-  }
-
-  public List<ProjectEntity> getProjects() {
-    return projects;
-  }
-
-  public void setProjects(
-      List<ProjectEntity> projects) {
-    this.projects = projects;
   }
 
   public long getId2() {
@@ -130,12 +100,11 @@ public class ClientEntity {
     this.email = email;
   }
 
-  @NonNull
   public String getPhone() {
     return phone;
   }
 
-  public void setPhone(@NonNull String phone) {
+  public void setPhone(String phone) {
     this.phone = phone;
   }
 
@@ -147,19 +116,19 @@ public class ClientEntity {
     this.altPhone = altPhone;
   }
 
-  public long getAddress() {
+  public String getAddress() {
     return address;
   }
 
-  public void setAddress(long address) {
+  public void setAddress(String address) {
     this.address = address;
   }
 
-  public long getAltAddress() {
+  public String getAltAddress() {
     return altAddress;
   }
 
-  public void setAltAddress(long altAddress) {
+  public void setAltAddress(String altAddress) {
     this.altAddress = altAddress;
   }
 
@@ -169,5 +138,30 @@ public class ClientEntity {
 
   public void setNotes(String notes) {
     this.notes = notes;
+  }
+
+  public List<ProjectEntity> getProjects() {
+    return projects;
+  }
+
+  public void setProjects(
+      List<ProjectEntity> projects) {
+    this.projects = projects;
+  }
+
+  public long getProjectId1() {
+    return projectId1;
+  }
+
+  public void setProjectId1(long projectId1) {
+    this.projectId1 = projectId1;
+  }
+
+  public long getProjectId2() {
+    return projectId2;
+  }
+
+  public void setProjectId2(long projectId2) {
+    this.projectId2 = projectId2;
   }
 }

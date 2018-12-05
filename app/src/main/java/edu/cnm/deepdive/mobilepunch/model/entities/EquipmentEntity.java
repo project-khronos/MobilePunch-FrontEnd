@@ -49,7 +49,7 @@ public class EquipmentEntity {
 
 
   @Ignore
-  @SerializedName("equipment_id")
+  @SerializedName("uuid")
   @Expose
   private UUID uuid;
 
