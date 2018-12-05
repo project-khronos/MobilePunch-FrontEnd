@@ -22,4 +22,6 @@ public interface EquipmentDao {
   @Query("SELECT * FROM EquipmentEntity WHERE :id1 = equipment_id1 AND :id2 = equipment_id2 ")
   EquipmentEntity select(long id1, long id2);
 
+  @Query("SELECT * FROM EquipmentEntity")
+  List<EquipmentEntity> select();
 }

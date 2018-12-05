@@ -19,6 +19,7 @@ public class BottomNav extends FragmentSwitcherActivity {
       = item -> {
     switch (item.getItemId()) {
       case R.id.event:
+
         switchFragment(new EventFragment(), false, null);
 
         return true;
@@ -43,6 +44,7 @@ public class BottomNav extends FragmentSwitcherActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_bottom_nav);
+    FragmentSwitcherActivity.setManager(getSupportFragmentManager());
     ActionBar actionBar = getSupportActionBar();
     actionBar.hide();
     textMessage = findViewById(R.id.message);

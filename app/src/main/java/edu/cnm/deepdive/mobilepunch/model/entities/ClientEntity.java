@@ -6,6 +6,7 @@ import android.arch.persistence.room.Ignore;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import io.reactivex.annotations.NonNull;
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,7 +20,7 @@ import java.util.UUID;
 //        onDelete = OnConflictStrategy.FAIL
 //    )}
 )
-public class ClientEntity {
+public class ClientEntity implements Serializable {
 
 
   @Ignore

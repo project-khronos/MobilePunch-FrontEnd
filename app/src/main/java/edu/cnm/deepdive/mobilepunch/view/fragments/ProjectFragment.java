@@ -9,45 +9,43 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
-import java.util.Date;
+import java.util.UUID;
 
 
 public class ProjectFragment extends Fragment {
-  private ProjectEntity project;
-
-  private EditText descriptionField, nameField;
-
-
-  private Button startDateButton, endDateButton,
-      expectedEndDateButton, saveButton;
-
-  private View view;
-
-  private Date startDate = new Date(), endDate = new Date();
-
+ProjectEntity project;
+  Button saveButton;
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    project = new ProjectEntity();
+
   }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_project, container, false);
-    new InsertProject().execute();
+    generateIds();
+
+
     return view;
   }
+  private void generateIds(){
+    project.setId1(UUID.randomUUID().getMostSignificantBits());
+    project.setId2(UUID.randomUUID().getLeastSignificantBits());
+  }
+
 private class InsertProject extends AsyncTask<ProjectEntity,Void,Void>{
 
   @Override
   protected Void doInBackground(ProjectEntity... projectEntities) {
     ProjectEntity projectEntity = new ProjectEntity();
-    projectEntity.setId1(1010);
-    projectEntity.setId2(1010);
+
     MobilePunchDatabase.getInstance(getContext()).getProjectDao().insert(projectEntity);
     return null;
   }

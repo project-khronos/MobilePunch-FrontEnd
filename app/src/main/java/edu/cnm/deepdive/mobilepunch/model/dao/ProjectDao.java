@@ -16,6 +16,9 @@ public interface ProjectDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   List<Long> insert(List<ProjectEntity> projects);
 
+  @Query("SELECT * FROM PROJECTENTITY")
+  List<ProjectEntity> select();
+
   @Query("SELECT * FROM ProjectEntity ORDER BY start_time")
   List<ProjectEntity> selectAll();
 

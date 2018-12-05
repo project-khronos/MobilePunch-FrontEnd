@@ -2,29 +2,28 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.OnConflictStrategy;
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Entity(
-    primaryKeys = {"event_id1", "event_id2"},
-    foreignKeys = {@ForeignKey(
-        entity = ProjectEntity.class,
-        parentColumns = {"project_id1", "project_id2"},
-        childColumns = {"project_id1", "project_id2"},
-        onDelete = OnConflictStrategy.FAIL
-    )}
+    primaryKeys = {"event_id1", "event_id2"}
+//    foreignKeys = {@ForeignKey(
+//        entity = ProjectEntity.class,
+//        parentColumns = {"project_id1", "project_id2"},
+//        childColumns = {"project_id1", "project_id2"},
+//        onDelete = OnConflictStrategy.FAIL
+//    )}
 )
 
 public class EventEntity {
 
   @Ignore
   @Expose
-  // @SerializedName("uuid")
+  @SerializedName("event_id")
   private UUID uuid;
 
   @ColumnInfo(name = "event_id1")
@@ -41,11 +40,12 @@ public class EventEntity {
   @ColumnInfo(name = "event_end_date")
   private Date endDate;
 
+  //TODO switch to BigDec and add converter save as a string
   @Expose
-  private int expenses;
+  private Double expenses;
 
   @Expose
-  private int income;
+  private Double income;
 
   @Expose
   private String description;
@@ -115,19 +115,19 @@ public class EventEntity {
     this.endDate = endDate;
   }
 
-  public int getExpenses() {
+  public Double getExpenses() {
     return expenses;
   }
 
-  public void setExpenses(int expenses) {
+  public void setExpenses(Double expenses) {
     this.expenses = expenses;
   }
 
-  public int getIncome() {
+  public Double getIncome() {
     return income;
   }
 
-  public void setIncome(int income) {
+  public void setIncome(Double income) {
     this.income = income;
   }
 
