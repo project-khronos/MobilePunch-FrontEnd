@@ -254,6 +254,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onPostExecute(List<ProjectEntity> projectEntities) {
+      //FIXME Move this so its called no matter the status of APITask
       setProjects(projectEntities);
       QuerryProjects querryProjects = new QuerryProjects();
       querryProjects.execute();
