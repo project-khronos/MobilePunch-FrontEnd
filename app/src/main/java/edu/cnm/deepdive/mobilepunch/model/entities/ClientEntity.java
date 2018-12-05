@@ -47,7 +47,7 @@ public class ClientEntity {
 
   @Ignore
   @Expose
-  @SerializedName("client_id")
+  @SerializedName("uuid")
   private UUID uuid;
 
   @NonNull

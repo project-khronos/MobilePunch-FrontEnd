@@ -7,7 +7,6 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -26,7 +25,7 @@ public class EventEntity {
 
   @Ignore
   @Expose
-  @SerializedName("event_id")
+  // @SerializedName("uuid")
   private UUID uuid;
 
   @ColumnInfo(name = "equipment_id1")
@@ -34,22 +33,6 @@ public class EventEntity {
 
   @ColumnInfo(name = "equipment_id2")
   private long equipmentId2;
-
-  public long getEquipmentId1() {
-    return equipmentId1;
-  }
-
-  public void setEquipmentId1(long equipmentId1) {
-    this.equipmentId1 = equipmentId1;
-  }
-
-  public long getEquipmentId2() {
-    return equipmentId2;
-  }
-
-  public void setEquipmentId2(long equipmentId2) {
-    this.equipmentId2 = equipmentId2;
-  }
 
   @NonNull
   @ColumnInfo(name = "event_id1")
@@ -190,5 +173,21 @@ public class EventEntity {
 
   public void setProjectId2(long projectId2) {
     this.projectId2 = projectId2;
+  }
+
+  public long getEquipmentId1() {
+    return equipmentId1;
+  }
+
+  public void setEquipmentId1(long equipmentId1) {
+    this.equipmentId1 = equipmentId1;
+  }
+
+  public long getEquipmentId2() {
+    return equipmentId2;
+  }
+
+  public void setEquipmentId2(long equipmentId2) {
+    this.equipmentId2 = equipmentId2;
   }
 }

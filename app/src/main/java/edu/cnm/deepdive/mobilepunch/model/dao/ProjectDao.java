@@ -9,6 +9,7 @@ import java.util.List;
 
 @Dao
 public interface ProjectDao {
+
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   long insert(ProjectEntity projectEntity);
 

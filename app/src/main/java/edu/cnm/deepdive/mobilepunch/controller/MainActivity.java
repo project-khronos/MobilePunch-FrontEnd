@@ -25,7 +25,7 @@ import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
 import edu.cnm.deepdive.mobilepunch.view.fragments.Retrotest;
 import java.util.List;
-import java.util.UUID;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
@@ -213,16 +213,16 @@ public class MainActivity extends AppCompatActivity
         //GoogleSignIn.getLastSignedInAccount(MainActivity.this).getIdToken());
         Call<List<ProjectEntity>> call = service.get(token);
         Response<List<ProjectEntity>> response = call.execute();
-        //Log.d(TAG, "RESPONSE: " + response.body().string() );
-        Log.d(TAG, "TOKEN: " + token);
+        Call<ResponseBody> responseBody = service.getJson(token);
+        Response<ResponseBody> responseJson = responseBody.execute();
+
+        // Log.d(TAG, "TOKEN: " + token);
         if (response.isSuccessful()) {
           projects = response.body();
-          ProjectEntity projectEntity = projects.get(0);
-          UUID id = projectEntity.getUuid();
-          Log.d(TAG, "project 0 UUID: " + id.toString());
-
+          Log.d(TAG, "RESPONSE: " + responseJson.raw());
         } else {
           Log.d(TAG, "RESPONSE NOT SUCCESS: " + response.raw());
+          Log.d(TAG, "RESPONSE NOT SUCCESS: " + responseJson.raw());
         }
       } catch (Exception e) {
         Log.d(TAG, "Caught Exception on Call: " + e.getLocalizedMessage());
