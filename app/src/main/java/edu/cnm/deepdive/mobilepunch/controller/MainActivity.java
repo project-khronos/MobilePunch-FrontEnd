@@ -20,6 +20,7 @@ import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
+import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
@@ -221,6 +222,7 @@ public class MainActivity extends AppCompatActivity
         Call<ResponseBody> responseBody = service.getProjectsJson(token);
         Response<ResponseBody> responseJson = responseBody.execute();
 
+        Log.d(TAG, "RAW JSON: " + responseJson.body().string());
         // Log.d(TAG, "TOKEN: " + token);
         if (responseProjects.isSuccessful()) {
           projects = responseProjects.body();
@@ -228,7 +230,7 @@ public class MainActivity extends AppCompatActivity
           Log.d(TAG, "RESPONSE: " + responseJson.raw().toString());
         } else {
           Log.d(TAG, "RESPONSE NOT SUCCESS: " + responseProjects.raw());
-          Log.d(TAG, "RESPONSE NOT SUCCESS: " + responseJson.raw());
+
         }
       } catch (Exception e) {
         Log.d(TAG, "Caught Exception on Call: " + e.getLocalizedMessage());
@@ -239,7 +241,9 @@ public class MainActivity extends AppCompatActivity
         }
         try {
           MobilePunchDatabase.fromUUIDProject(projects);
+          List<EventEntity> events = MobilePunchDatabase.getEventsFromProject(projects);
           dataBase.getProjectDao().insert(projects);
+          dataBase.getEventDao().insert(events);
           MobilePunchDatabase.fromUUIDClient(clients);
           dataBase.getClientDao().insert(clients);
         } catch (Exception e) {
