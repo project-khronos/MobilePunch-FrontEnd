@@ -27,7 +27,6 @@ public interface MobilePunchService {
   Call<ResponseBody> getProjectsJson(
       @Header("Authorization") String authorization);
 
-
   @GET("clients")
   Call<List<ClientEntity>> getClients(
       @Header("Authorization") String authorization);
