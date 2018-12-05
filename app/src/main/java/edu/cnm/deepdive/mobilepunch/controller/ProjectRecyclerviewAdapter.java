@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 public class ProjectRecyclerviewAdapter extends RecyclerView.Adapter {
 
+
   @NonNull
   @Override
   public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
