@@ -24,30 +24,6 @@ import java.util.UUID;
 )
 public class EquipmentEntity {
 
-  @ColumnInfo(name = "event_id2")
-  private long eventId2;
-
-  @ColumnInfo(name = "event_id1")
-  private long eventId1;
-
-  public long getEventId2() {
-    return eventId2;
-  }
-
-  public void setEventId2(long eventId2) {
-    this.eventId2 = eventId2;
-  }
-
-  public long getEventId1() {
-    return eventId1;
-  }
-
-  public void setEventId1(long eventId1) {
-    this.eventId1 = eventId1;
-  }
-
-
-
   @Ignore
   @SerializedName("equipment_id")
   @Expose
@@ -66,18 +42,17 @@ public class EquipmentEntity {
   private String model;
 
   private String mfcyear;
-  private String description;
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
 
   @NonNull
   private String Identification;
+
+  private String description;
+
+  @ColumnInfo(name = "event_id2")
+  private long eventId2;
+
+  @ColumnInfo(name = "event_id1")
+  private long eventId1;
 
   public UUID getUuid() {
     return uuid;
@@ -85,48 +60,6 @@ public class EquipmentEntity {
 
   public void setUuid(UUID uuid) {
     this.uuid = uuid;
-  }
-
-
-  @NonNull
-  public String getIdentification() {
-    return Identification;
-  }
-
-  public void setIdentification(@NonNull String identification) {
-    Identification = identification;
-  }
-
-  public String getMake() {
-    return make;
-  }
-
-  public void setMake(String make) {
-    this.make = make;
-  }
-
-  public String getModel() {
-    return model;
-  }
-
-  public void setModel(String model) {
-    this.model = model;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getMfcyear() {
-    return mfcyear;
-  }
-
-  public void setMfcyear(String mfcyear) {
-    this.mfcyear = mfcyear;
   }
 
   public long getId1() {
@@ -145,7 +78,70 @@ public class EquipmentEntity {
     this.id2 = id2;
   }
 
+  public String getName() {
+    return name;
+  }
 
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getMake() {
+    return make;
+  }
+
+  public void setMake(String make) {
+    this.make = make;
+  }
+
+  public String getModel() {
+    return model;
+  }
+
+  public void setModel(String model) {
+    this.model = model;
+  }
+
+  public String getMfcyear() {
+    return mfcyear;
+  }
+
+  public void setMfcyear(String mfcyear) {
+    this.mfcyear = mfcyear;
+  }
+
+  @NonNull
+  public String getIdentification() {
+    return Identification;
+  }
+
+  public void setIdentification(@NonNull String identification) {
+    Identification = identification;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public long getEventId2() {
+    return eventId2;
+  }
+
+  public void setEventId2(long eventId2) {
+    this.eventId2 = eventId2;
+  }
+
+  public long getEventId1() {
+    return eventId1;
+  }
+
+  public void setEventId1(long eventId1) {
+    this.eventId1 = eventId1;
+  }
 }
 
 
