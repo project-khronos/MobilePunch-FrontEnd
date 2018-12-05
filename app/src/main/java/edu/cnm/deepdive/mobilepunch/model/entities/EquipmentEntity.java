@@ -2,9 +2,7 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.OnConflictStrategy;
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -14,13 +12,13 @@ import java.util.UUID;
 @Entity(
     primaryKeys = {
         "equipment_id1", "equipment_id2"
-    },
-    foreignKeys = {@ForeignKey(
-    entity = EventEntity.class,
-    parentColumns = {"event_id1","event_id2"},
-    childColumns = {"event_id1","event_id2"},
-    onDelete = OnConflictStrategy.FAIL
-)}
+    }
+//    foreignKeys = {@ForeignKey(
+//    entity = EventEntity.class,
+//    parentColumns = {"event_id1","event_id2"},
+//    childColumns = {"event_id1","event_id2"},
+//    onDelete = OnConflictStrategy.FAIL
+//)}
 )
 public class EquipmentEntity {
 

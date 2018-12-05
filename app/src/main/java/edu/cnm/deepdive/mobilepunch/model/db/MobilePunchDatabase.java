@@ -14,6 +14,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -180,6 +181,29 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
         toUUIDEquipment(equipment);
       }
     }
+  }
+
+  public static List<EventEntity> getEventsFromProject(ProjectEntity project) {
+    List<EventEntity> events = null;
+    if (project != null) {
+      events = project.getEvents();
+      MobilePunchDatabase.fromUUIDEvent(events);
+      for (EventEntity event : events) {
+        event.setProjectId1(project.getId1());
+        event.setProjectId2(project.getId2());
+      }
+    }
+    return events;
+  }
+
+  public static List<EventEntity> getEventsFromProject(List<ProjectEntity> projects) {
+    List<EventEntity> events = new ArrayList<>();
+    if (projects != null) {
+      for (ProjectEntity project : projects) {
+        events.addAll(getEventsFromProject(project));
+      }
+    }
+    return events;
   }
 
   public static class Converters {

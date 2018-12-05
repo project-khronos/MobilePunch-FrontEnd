@@ -99,10 +99,12 @@ public class EventFragment extends Fragment {
   }
 
   private void grabFields(){
-    int income;
-    int expenses;
-    income = incomeField.getText().toString().equals("") ? 0 : Integer.valueOf(incomeField.getText().toString());
-    expenses = expensesField.getText().toString().equals("") ? 0 : Integer.valueOf(expensesField.getText().toString());
+    double income;
+    double expenses;
+    income = incomeField.getText().toString().equals("") ? 0
+        : Double.valueOf(incomeField.getText().toString());
+    expenses = expensesField.getText().toString().equals("") ? 0
+        : Double.valueOf(expensesField.getText().toString());
     event.setIncome(income);
     event.setExpenses(expenses);
     event.setDescription(descriptionField.getText().toString());
