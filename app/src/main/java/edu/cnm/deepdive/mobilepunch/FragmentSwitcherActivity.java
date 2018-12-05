@@ -5,11 +5,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-public abstract class FragmentSwitcherActivity extends AppCompatActivity {
+public class FragmentSwitcherActivity extends AppCompatActivity {
+  private static FragmentManager manager;
 
-  protected void switchFragment(Fragment fragment, boolean useStack, String variant) {
+  public static FragmentManager getManager() {
+    return manager;
+  }
 
-    FragmentManager manager = getSupportFragmentManager();
+  public static void setManager(FragmentManager manager) {
+    FragmentSwitcherActivity.manager = manager;
+  }
+
+  public static void switchFragment(Fragment fragment, boolean useStack, String variant) {
     String tag = fragment.getClass().getSimpleName() + ((variant != null) ? variant : "");
     if (manager.findFragmentByTag(tag) != null) {
       manager.popBackStackImmediate(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);

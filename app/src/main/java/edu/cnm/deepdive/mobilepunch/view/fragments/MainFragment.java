@@ -10,18 +10,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import edu.cnm.deepdive.mobilepunch.FragmentSwitcherActivity;
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.controller.adapters.ClientRecyclerViewAdapter.ClientHolder;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
+import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
+import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
+import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MainFragment extends Fragment {
 
+private TextView eventT, projectT, clientT, equipmentT;
 private CardView event, project, client, equipment;
 private RecyclerFragment recyclerFragment = new RecyclerFragment();
 private Bundle bundle = new Bundle();
+
 
 
   public MainFragment() {
@@ -34,20 +43,39 @@ private Bundle bundle = new Bundle();
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_main, container, false);
-    event = view.findViewById(R.id.event_card);
-    event.setTag("event");
-    project = view.findViewById(R.id.project_card);
-    project.setTag("project");
-    client = view.findViewById(R.id.client_card);
-    client.setTag("client");
-    equipment = view.findViewById(R.id.equipment_card);
-    equipment.setTag("equipment");
+    initViews(view);
+    setListeners();
+    getNumItems();
+    return view;
+
+  }
+
+  private void getNumItems(){
+    new NumItemsEvent().execute();
+    new NumItemsProject().execute();
+    new NumItemsClient().execute();
+    new NumItemsEquipment().execute();
+  }
+
+  private void setListeners(){
     setListener(event,recyclerFragment);
     setListener(project,recyclerFragment);
     setListener(client,recyclerFragment);
     setListener(equipment,recyclerFragment);
-    return view;
-
+  }
+  private void initViews(View view){
+    eventT = view.findViewById(R.id.event_num_items);
+    event = view.findViewById(R.id.event_card);
+    event.setTag("event");
+    projectT = view.findViewById(R.id.project_num_items);
+    project = view.findViewById(R.id.project_card);
+    project.setTag("project");
+    clientT = view.findViewById(R.id.client_num_items);
+    client = view.findViewById(R.id.client_card);
+    client.setTag("client");
+    equipmentT = view.findViewById(R.id.equipment_num_items);
+    equipment = view.findViewById(R.id.equipment_card);
+    equipment.setTag("equipment");
   }
 
   private void setListener(CardView cardView, Fragment fragment){
@@ -56,33 +84,64 @@ private Bundle bundle = new Bundle();
       public void onClick(View view) {
         bundle.putString("fragment", cardView.getTag().toString());
         recyclerFragment.setArguments(bundle);
-        switchFragment(fragment,true,"");
+        FragmentSwitcherActivity.setManager(getFragmentManager());
+        FragmentSwitcherActivity.switchFragment(fragment,true,null);
       }
     });
   }
 
-  public void switchFragment(Fragment fragment, boolean useStack, String variant) {
 
-    FragmentManager manager = getFragmentManager();
-    String tag = fragment.getClass().getSimpleName() + ((variant != null) ? variant : "");
-    if (manager.findFragmentByTag(tag) != null) {
-      manager.popBackStackImmediate(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-    }
-    FragmentTransaction transaction = manager.beginTransaction();
-    transaction.replace(R.id.fragment_container, fragment, tag);
-    if (useStack) {
-      transaction.addToBackStack(tag);
-    }
-    transaction.commit();
-  }
 
-  //TODO REMOVE FROM CODE{
-private class InsertProject extends AsyncTask<ProjectEntity, Void, Void>{
+
+  private class NumItemsEvent extends AsyncTask<Void,Void, List<EventEntity>>{
 
     @Override
-    protected Void doInBackground(ProjectEntity... projectEntity) {
-      MobilePunchDatabase.getInstance(getContext()).getProjectDao().insert(projectEntity[0]);
-      return null;
+    protected void onPostExecute(List<EventEntity> eventEntities) {
+      eventT.setText("Number of events: " + eventEntities.size());
+    }
+
+    @Override
+    protected List<EventEntity> doInBackground(Void... voids) {
+      return MobilePunchDatabase.getInstance(getContext()).getEventDao().select();
+    }
+  }
+
+  private class NumItemsProject extends AsyncTask<Void,Void, List<ProjectEntity>>{
+
+    @Override
+    protected void onPostExecute(List<ProjectEntity> projectEntities) {
+      projectT.setText("Number of projects: " + projectEntities.size());
+    }
+
+    @Override
+    protected List<ProjectEntity> doInBackground(Void... voids) {
+      return MobilePunchDatabase.getInstance(getContext()).getProjectDao().select();
+    }
+  }
+
+  private class NumItemsClient extends AsyncTask<Void,Void, List<ClientEntity>>{
+
+    @Override
+    protected void onPostExecute(List<ClientEntity> eventEntities) {
+      clientT.setText("Number of clients: " + eventEntities.size());
+    }
+
+    @Override
+    protected List<ClientEntity> doInBackground(Void... voids) {
+      return MobilePunchDatabase.getInstance(getContext()).getClientDao().select();
+    }
+  }
+
+  private class NumItemsEquipment extends AsyncTask<Void,Void, List<EquipmentEntity>>{
+
+    @Override
+    protected void onPostExecute(List<EquipmentEntity> equipmentEntities) {
+      equipmentT.setText("Number of equipment: " + equipmentEntities.size());
+    }
+
+    @Override
+    protected List<EquipmentEntity> doInBackground(Void... voids) {
+      return MobilePunchDatabase.getInstance(getContext()).getEquipmentDao().select();
     }
   }
 }

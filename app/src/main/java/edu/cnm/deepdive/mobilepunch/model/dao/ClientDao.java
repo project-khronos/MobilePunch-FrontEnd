@@ -8,13 +8,16 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import java.util.List;
 
 @Dao
-public interface ClientDao {
+public interface ClientDao{
 
   @Insert
   long insert(ClientEntity client);
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   List<Long> insert(List<ClientEntity> clients);
+
+  @Query("SELECT * FROM ClientEntity")
+  List<ClientEntity> select();
 
   @Query("SELECT * FROM ClientEntity ORDER BY name")
   List<ClientEntity> selectAll();
