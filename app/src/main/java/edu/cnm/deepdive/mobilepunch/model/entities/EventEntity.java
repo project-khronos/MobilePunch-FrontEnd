@@ -54,7 +54,7 @@ public class EventEntity {
   private double longitude;
 
   @Expose
-  private double latidtude;
+  private double latitude;
 
   @ColumnInfo(name = "project_id1")
   private long projectId1;
@@ -147,12 +147,12 @@ public class EventEntity {
     this.longitude = longitude;
   }
 
-  public double getLatidtude() {
-    return latidtude;
+  public double getLatitude() {
+    return latitude;
   }
 
-  public void setLatidtude(double latidtude) {
-    this.latidtude = latidtude;
+  public void setLatitude(double latitude) {
+    this.latitude = latitude;
   }
 
   public long getProjectId1() {

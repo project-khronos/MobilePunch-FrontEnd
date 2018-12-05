@@ -19,5 +19,7 @@ public interface EventDao {
   @Query("SELECT * FROM EventEntity WHERE project_id1 = :project_id1 AND project_id2= :project_id2 ")
   List<EventEntity> select(long project_id1, long project_id2);
 
+  @Query("SELECT * FROM EventEntity")
+  List<EventEntity> select();
 
 }

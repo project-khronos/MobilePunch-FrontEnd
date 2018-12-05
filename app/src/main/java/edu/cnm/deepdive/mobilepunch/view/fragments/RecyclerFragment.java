@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.adapters.EventRecyclerViewAdapter;
-import edu.cnm.deepdive.mobilepunch.controller.adapters.ProjectRecyclerViewAdapter;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import java.util.List;
@@ -57,7 +56,7 @@ public class RecyclerFragment extends Fragment {
 
     @Override
     protected List<EventEntity> doInBackground(Void... voids) {
-      return MobilePunchDatabase.getInstance(getContext()).getEventDao().query();
+      return MobilePunchDatabase.getInstance(getContext()).getEventDao().select();
     }
   }
 }
