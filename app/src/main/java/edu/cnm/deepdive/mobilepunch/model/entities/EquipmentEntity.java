@@ -19,6 +19,7 @@ import java.util.UUID;
 //    childColumns = {"event_id1","event_id2"},
 //    onDelete = OnConflictStrategy.FAIL
 //)}
+
 )
 public class EquipmentEntity {
 
