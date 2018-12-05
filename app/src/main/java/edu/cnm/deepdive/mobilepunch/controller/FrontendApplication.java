@@ -28,11 +28,10 @@ public class FrontendApplication extends Application {
   public static void refreshToken() {
     OptionalPendingResult<GoogleSignInResult> pendingResult =
         Auth.GoogleSignInApi.silentSignIn(instance.refreshClient);
-    if (pendingResult.isDone()) {
-      if (pendingResult.get().isSuccess()) {
-        instance.account = pendingResult.get().getSignInAccount();
-      }
-    }
+    pendingResult.await();
+    GoogleSignInResult result = pendingResult.await();
+      
+    instance.account = result.getSignInAccount();
   }
 
   public GoogleSignInClient getClient() {
@@ -71,7 +70,6 @@ public class FrontendApplication extends Application {
   }
 
   public static class RefreshTokenTask implements Runnable {
-
     @Override
     public void run() {
       refreshToken();
