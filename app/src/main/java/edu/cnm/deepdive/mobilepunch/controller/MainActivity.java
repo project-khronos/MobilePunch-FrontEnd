@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
+import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
@@ -64,8 +65,8 @@ public class MainActivity extends AppCompatActivity
 
     setupService();
     dataBase = MobilePunchDatabase.getInstance(this);
-    ProjectsTask projectsTask = new ProjectsTask();
-    projectsTask.execute();
+    ApiTask apiTask = new ApiTask();
+    apiTask.execute();
 
   }
 
@@ -196,7 +197,7 @@ public class MainActivity extends AppCompatActivity
 
   }
 
-  private class ProjectsTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
+  private class ApiTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
 
     @Override
     protected void onPreExecute() {
@@ -206,22 +207,27 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected List<ProjectEntity> doInBackground(Void... voids) {
       List<ProjectEntity> projects = null;
+      List<ClientEntity> clients = null;
 
       try {
         String token = getString(
             R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
         //GoogleSignIn.getLastSignedInAccount(MainActivity.this).getIdToken());
-        Call<List<ProjectEntity>> call = service.get(token);
-        Response<List<ProjectEntity>> response = call.execute();
-        Call<ResponseBody> responseBody = service.getJson(token);
+        Call<List<ProjectEntity>> callProjects = service.getProjects(token);
+        Response<List<ProjectEntity>> responseProjects = callProjects.execute();
+        Call<List<ClientEntity>> callClients = service.getClients(token);
+        Response<List<ClientEntity>> responseClients = callClients.execute();
+
+        Call<ResponseBody> responseBody = service.getProjectsJson(token);
         Response<ResponseBody> responseJson = responseBody.execute();
 
         // Log.d(TAG, "TOKEN: " + token);
-        if (response.isSuccessful()) {
-          projects = response.body();
-          Log.d(TAG, "RESPONSE: " + responseJson.raw());
+        if (responseProjects.isSuccessful()) {
+          projects = responseProjects.body();
+          clients = responseClients.body();
+          Log.d(TAG, "RESPONSE: " + responseJson.raw().toString());
         } else {
-          Log.d(TAG, "RESPONSE NOT SUCCESS: " + response.raw());
+          Log.d(TAG, "RESPONSE NOT SUCCESS: " + responseProjects.raw());
           Log.d(TAG, "RESPONSE NOT SUCCESS: " + responseJson.raw());
         }
       } catch (Exception e) {
@@ -234,6 +240,8 @@ public class MainActivity extends AppCompatActivity
         try {
           MobilePunchDatabase.fromUUIDProject(projects);
           dataBase.getProjectDao().insert(projects);
+          MobilePunchDatabase.fromUUIDClient(clients);
+          dataBase.getClientDao().insert(clients);
         } catch (Exception e) {
           // FIXME do what
           Log.d(TAG, "insert method failed: " + e.getLocalizedMessage());

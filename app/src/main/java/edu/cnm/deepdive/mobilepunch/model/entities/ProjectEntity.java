@@ -19,23 +19,28 @@ public class ProjectEntity {
   @SerializedName("uuid")
   private UUID uuid;
 
-  private String name;
-
   @ColumnInfo(name = "project_id1")
   private long id1;
 
   @ColumnInfo(name = "project_id2")
   private long id2;
 
+  @Expose
+  private String name;
+
+  @Expose
   @ColumnInfo(name = "start_time")
-  private long startTime;
+  private Date startTime;
 
+  @Expose
   @ColumnInfo(name = "end_time")
-  private long endTime;
+  private Date endTime;
 
+  @Expose
   @ColumnInfo(name = "expected_end_time")
   private Date expectedEndTime;
 
+  @Expose
   private String description;
 
   @Ignore
@@ -52,22 +57,6 @@ public class ProjectEntity {
 
   public void setUuid(UUID uuid) {
     this.uuid = uuid;
-  }
-
-  public List<EventEntity> getEvents() {
-    return events;
-  }
-
-  public void setEvents(List<EventEntity> events) {
-    this.events = events;
-  }
-
-  public List<ClientEntity> getClients() {
-    return clients;
-  }
-
-  public void setClients(List<ClientEntity> clients) {
-    this.clients = clients;
   }
 
   public long getId1() {
@@ -94,19 +83,19 @@ public class ProjectEntity {
     this.name = name;
   }
 
-  public long getStartTime() {
+  public Date getStartTime() {
     return startTime;
   }
 
-  public void setStartTime(long startTime) {
+  public void setStartTime(Date startTime) {
     this.startTime = startTime;
   }
 
-  public long getEndTime() {
+  public Date getEndTime() {
     return endTime;
   }
 
-  public void setEndTime(long endTime) {
+  public void setEndTime(Date endTime) {
     this.endTime = endTime;
   }
 
@@ -124,5 +113,21 @@ public class ProjectEntity {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public List<EventEntity> getEvents() {
+    return events;
+  }
+
+  public void setEvents(List<EventEntity> events) {
+    this.events = events;
+  }
+
+  public List<ClientEntity> getClients() {
+    return clients;
+  }
+
+  public void setClients(List<ClientEntity> clients) {
+    this.clients = clients;
   }
 }

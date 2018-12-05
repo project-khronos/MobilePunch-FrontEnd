@@ -55,7 +55,7 @@ public class Retrotest extends Fragment {
 
         String key = keyText.getText().toString();
         String value = valueText.getText().toString();
-        //      service.get();
+        //      service.getProjects();
       }
     });
 
@@ -92,10 +92,10 @@ public class Retrotest extends Fragment {
 //    protected List<PostTask> doInBackground(Void... voids) {
 //      try {
 //        List<ProjectEntity> posts;
-//        Response<List<ProjectEntity>> response = service.get().execute();
+//        Response<List<ProjectEntity>> response = service.getProjects().execute();
 //        if (response.isSuccessful()) {
 //          posts = response.body();
-//          post = posts.get(0);
+//          post = posts.getProjects(0);
 //        } else {
 //          post = null;
 //        }
