@@ -209,11 +209,11 @@ public class MainActivity extends AppCompatActivity
     protected List<ProjectEntity> doInBackground(Void... voids) {
       List<ProjectEntity> projects = null;
       List<ClientEntity> clients = null;
+      FrontendApplication.refreshToken();
 
       try {
         String token = getString(
             R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
-        //GoogleSignIn.getLastSignedInAccount(MainActivity.this).getIdToken());
         Call<List<ProjectEntity>> callProjects = service.getProjects(token);
         Response<List<ProjectEntity>> responseProjects = callProjects.execute();
         Call<List<ClientEntity>> callClients = service.getClients(token);
@@ -260,8 +260,8 @@ public class MainActivity extends AppCompatActivity
     protected void onPostExecute(List<ProjectEntity> projectEntities) {
       //FIXME Move this so its called no matter the status of APITask
       setProjects(projectEntities);
-      QueryProjects querryProjects = new QueryProjects();
-      querryProjects.execute();
+      QueryProjects queryProjects = new QueryProjects();
+      queryProjects.execute();
     }
 
     @Override
