@@ -53,17 +53,6 @@
     android:inputType="number"/>
 
 
-
-
-  <Button
-    android:id="@+id/equipment_date"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="2dp"
-    android:background="@drawable/edit_text_style"
-    android:text="Date acquired/date used"
-    android:textColor="@color/rallyBlue"/>
-
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
     android:id="@+id/equipment_description"
     style="?android:listSeparatorTextViewStyle"
@@ -71,11 +60,15 @@
     android:layout_height="150dp"
     android:layout_marginBottom="2dp"
     android:hint="@string/description_or_name"
-    android:inputType="text"/>
+    android:inputType="text"
+    app:layout_constraintTop_toTopOf="@+id/equipment_save"/>
+
 
   <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
     <Button
       android:id="@+id/equipment_save"
       android:layout_width="match_parent"
