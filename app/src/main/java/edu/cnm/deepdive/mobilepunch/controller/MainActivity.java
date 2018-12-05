@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity
         .create(MobilePunchService.class);
   }
 
-  private class QuerryProjects extends AsyncTask<Void, Void, List<ProjectEntity>> {
+  private class QueryProjects extends AsyncTask<Void, Void, List<ProjectEntity>> {
 
     @Override
     protected void onPreExecute() {
@@ -256,7 +256,7 @@ public class MainActivity extends AppCompatActivity
     protected void onPostExecute(List<ProjectEntity> projectEntities) {
       //FIXME Move this so its called no matter the status of APITask
       setProjects(projectEntities);
-      QuerryProjects querryProjects = new QuerryProjects();
+      QueryProjects querryProjects = new QueryProjects();
       querryProjects.execute();
     }
 

@@ -1,61 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  tools:context=".view.fragments.MainFragment"
   android:padding="20dp"
+  android:background="@color/rallyBackground"
   android:orientation="vertical"
+  tools:context=".view.fragments.MainFragment"
   >
 
   <android.support.v7.widget.CardView
     android:id="@+id/event_card"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    app:layout_constraintTop_toTopOf="parent"
     android:translationZ="8dp"
+    app:cardBackgroundColor="@color/rallyBackground"
     app:cardCornerRadius="10dp"
     app:cardElevation="8dp"
-    android:background="@color/rallyBackground">
+    app:layout_constraintTop_toTopOf="parent">
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@drawable/edit_text_style"
+      />
       <TextView
+        android:paddingTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|top"
-
         android:text="@string/event"
+        android:textColor="@color/rallyBlue"
         android:textSize="20sp"/>
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/number_of_items"/>
+        android:text="@string/number_of_items"
+        android:textColor="@color/rallyBlue"/>
   </android.support.v7.widget.CardView>
 
   <android.support.v7.widget.CardView
     android:id="@+id/project_card"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    app:layout_constraintTop_toBottomOf="@id/event_card"
-    app:layout_constraintBottom_toTopOf="@id/client_card"
-    app:cardElevation="8dp"
     android:translationZ="8dp"
+    app:cardBackgroundColor="@color/rallyBackground"
     app:cardCornerRadius="10dp"
-    android:background="@color/rallyBackground">
+    app:cardElevation="8dp"
+    app:layout_constraintBottom_toTopOf="@id/client_card"
+    app:layout_constraintTop_toBottomOf="@id/event_card">
 
-
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@drawable/edit_text_style"
+      />
     <TextView
+      android:paddingTop="8dp"
+
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/project"
       android:layout_gravity="center|top"
+      android:text="@string/project"
+      android:textColor="@color/rallyBlue"
       android:textSize="20sp"/>
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
-      android:text="@string/number_of_items"/>
+      android:text="@string/number_of_items"
+      android:textColor="@color/rallyBlue"/>
 
 
 
@@ -64,25 +80,32 @@
     android:id="@+id/client_card"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    app:layout_constraintTop_toBottomOf="@id/project_card"
-    app:layout_constraintBottom_toTopOf="@id/equipment_card"
-    app:cardElevation="20dp"
+    app:cardBackgroundColor="@color/rallyBackground"
     app:cardCornerRadius="10dp"
-    android:background="@color/rallyBackground">
-
+    app:cardElevation="20dp"
+    app:layout_constraintBottom_toTopOf="@id/equipment_card"
+    app:layout_constraintTop_toBottomOf="@id/project_card">
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@drawable/edit_text_style"
+      />
 
 
     <TextView
+      android:paddingTop="8dp"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/client"
       android:layout_gravity="center|top"
+      android:text="@string/client"
+      android:textColor="@color/rallyBlue"
       android:textSize="20sp"/>
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_gravity="center"
       android:text="@string/number_of_items"
-      android:layout_gravity="center"/>
+      android:textColor="@color/rallyBlue"/>
 
 
   </android.support.v7.widget.CardView>
@@ -91,25 +114,34 @@
     android:id="@+id/equipment_card"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    app:cardElevation="8dp"
     android:translationZ="8dp"
+    app:cardBackgroundColor="@color/rallyBackground"
     app:cardCornerRadius="10dp"
-    app:layout_constraintTop_toBottomOf="@id/client_card"
+    app:cardElevation="8dp"
     app:layout_constraintBottom_toBottomOf="parent"
-    android:background="@color/rallyBackground">
+    app:layout_constraintTop_toBottomOf="@id/client_card"
+
+    > <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/edit_text_style"
+    />
 
 
     <TextView
+      android:paddingTop="8dp"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/equipment"
       android:layout_gravity="center|top"
+      android:text="@string/equipment"
+      android:textColor="@color/rallyBlue"
       android:textSize="20sp"/>
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_gravity="center"
       android:text="@string/number_of_items"
-      android:layout_gravity="center"/>
+      android:textColor="@color/rallyBlue"/>
 
 
 

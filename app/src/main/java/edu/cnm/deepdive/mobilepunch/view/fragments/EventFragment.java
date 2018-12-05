@@ -12,8 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.google.android.gms.maps.MapView;
 import edu.cnm.deepdive.mobilepunch.R;
-import edu.cnm.deepdive.mobilepunch.controller.adapters.DateTimePickerFragment;
-import edu.cnm.deepdive.mobilepunch.controller.adapters.DateTimePickerFragment.Mode;
+import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
+import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
@@ -91,9 +91,10 @@ public class EventFragment extends Fragment {
 
     saveButton.setOnClickListener(v -> {
       grabFields();
-      new InsertEvent(getContext(), MainFragment.projectEntity).execute(event);
+      event.setProjectId1(1010);
+      event.setProjectId2(1010);
+      new InsertEvent(getContext(),null).execute(event);
       getFragmentManager().beginTransaction().replace(R.id.fragment_container, new EventFragment()).commit();
-      Toast.makeText(getContext(),"Event Saved!", Toast.LENGTH_SHORT).show();
     });
   }
 

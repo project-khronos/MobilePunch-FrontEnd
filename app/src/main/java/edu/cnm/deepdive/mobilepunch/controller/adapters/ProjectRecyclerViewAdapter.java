@@ -1,11 +1,11 @@
-package edu.cnm.deepdive.mobilepunch.controller;
+package edu.cnm.deepdive.mobilepunch.controller.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.ViewGroup;
 
-public class ProjectRecyclerviewAdapter extends RecyclerView.Adapter {
+public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter {
 
   @NonNull
   @Override

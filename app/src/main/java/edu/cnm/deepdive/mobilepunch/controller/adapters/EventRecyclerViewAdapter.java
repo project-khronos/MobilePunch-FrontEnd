@@ -9,40 +9,56 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import android.widget.Toast;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class EventRecyclerViewAdapter extends RecyclerView.Adapter<EventRecyclerViewAdapter.EventHolder> {
 private List<EventEntity> data;
 private LayoutInflater layoutInflater;
 private ItemClickListener itemClickListener;
-
+private Context context;
 
   public EventRecyclerViewAdapter(Context context, List<EventEntity> data) {
     this.layoutInflater = LayoutInflater.from(context);
     this.data = data;
+    this.context = context;
   }
 
 
   @NonNull
   @Override
-  public EventHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
-    return null;
+  public EventHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    View view = layoutInflater.inflate(R.layout.event_list_item, viewGroup, false);
+    return new EventHolder(view);
   }
 
   @Override
   public void onBindViewHolder(@NonNull EventHolder eventHolder, int position) {
-    eventHolder.startDate.setText(data.get(position).getStartDate().toString());
-    eventHolder.endDate.setText(data.get(position).getEndDate().toString());
-    eventHolder.expenses.setText(data.get(position).getExpenses());
-    eventHolder.income.setText(data.get(position).getIncome());
-    eventHolder.description.setText(data.get(position).getDescription());
-    eventHolder.latitude.setText(String.valueOf(data.get(position).getLatidtude()));
-    eventHolder.longitude.setText(String.valueOf(data.get(position).getLongitude()));
+
+      eventHolder.startDate.setText("Start date: " + setTimeFormat(data.get(position).getStartDate()));
+      eventHolder.endDate.setText("End date: " + setTimeFormat(data.get(position).getEndDate()));
+      eventHolder.expenses.setText(String.valueOf(data.get(position).getExpenses()));
+      eventHolder.income.setText(String.valueOf(data.get(position).getIncome()));
+      eventHolder.description.setText(data.get(position).getDescription());
+      eventHolder.latitude.setText(String.valueOf(data.get(position).getLatitude()));
+      eventHolder.longitude.setText(String.valueOf(data.get(position).getLongitude()));
+
+
   }
 
-
+  private String setTimeFormat(Date date) {
+    if (date == null) {
+      return "DATE NOT SET";
+    } else {
+      SimpleDateFormat sdf = new SimpleDateFormat("MMMM-dd-yyyy");
+      return sdf.format(date);
+    }
+  }
 
   @Override
   public int getItemCount() {

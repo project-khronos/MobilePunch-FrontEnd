@@ -5,6 +5,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.OnConflictStrategy;
+import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.UUID;
@@ -23,8 +24,32 @@ import java.util.UUID;
 )
 public class EquipmentEntity {
 
+  @ColumnInfo(name = "event_id2")
+  private long eventId2;
+
+  @ColumnInfo(name = "event_id1")
+  private long eventId1;
+
+  public long getEventId2() {
+    return eventId2;
+  }
+
+  public void setEventId2(long eventId2) {
+    this.eventId2 = eventId2;
+  }
+
+  public long getEventId1() {
+    return eventId1;
+  }
+
+  public void setEventId1(long eventId1) {
+    this.eventId1 = eventId1;
+  }
+
+
+
   @Ignore
-  @SerializedName("uuid")
+  @SerializedName("equipment_id")
   @Expose
   private UUID uuid;
 
@@ -34,29 +59,25 @@ public class EquipmentEntity {
   @ColumnInfo(name = "equipment_id2")
   private long id2;
 
-  @Expose
   private String name;
 
-  @Expose
-  private String Identification;
-
-  @Expose
   private String make;
 
-  @Expose
   private String model;
 
-  @Expose
   private String mfcyear;
-
-  @Expose
   private String description;
 
-  @ColumnInfo(name = "event_id2")
-  private long eventId2;
+  public String getDescription() {
+    return description;
+  }
 
-  @ColumnInfo(name = "event_id1")
-  private long eventId1;
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  @NonNull
+  private String Identification;
 
   public UUID getUuid() {
     return uuid;
@@ -66,35 +87,13 @@ public class EquipmentEntity {
     this.uuid = uuid;
   }
 
-  public long getId1() {
-    return id1;
-  }
 
-  public void setId1(long id1) {
-    this.id1 = id1;
-  }
-
-  public long getId2() {
-    return id2;
-  }
-
-  public void setId2(long id2) {
-    this.id2 = id2;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
+  @NonNull
   public String getIdentification() {
     return Identification;
   }
 
-  public void setIdentification(String identification) {
+  public void setIdentification(@NonNull String identification) {
     Identification = identification;
   }
 
@@ -114,6 +113,14 @@ public class EquipmentEntity {
     this.model = model;
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
   public String getMfcyear() {
     return mfcyear;
   }
@@ -122,29 +129,23 @@ public class EquipmentEntity {
     this.mfcyear = mfcyear;
   }
 
-  public String getDescription() {
-    return description;
+  public long getId1() {
+    return id1;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
+  public void setId1(long id1) {
+    this.id1 = id1;
   }
 
-  public long getEventId2() {
-    return eventId2;
+  public long getId2() {
+    return id2;
   }
 
-  public void setEventId2(long eventId2) {
-    this.eventId2 = eventId2;
+  public void setId2(long id2) {
+    this.id2 = id2;
   }
 
-  public long getEventId1() {
-    return eventId1;
-  }
 
-  public void setEventId1(long eventId1) {
-    this.eventId1 = eventId1;
-  }
 }
 
 
