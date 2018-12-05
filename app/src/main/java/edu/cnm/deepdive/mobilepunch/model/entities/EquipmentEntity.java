@@ -14,8 +14,8 @@ import java.util.UUID;
 @Entity(
     primaryKeys = {
         "equipment_id1", "equipment_id2"
-    },
-    foreignKeys = {@ForeignKey(
+     },
+     foreignKeys = {@ForeignKey(
     entity = EventEntity.class,
     parentColumns = {"event_id1","event_id2"},
     childColumns = {"event_id1","event_id2"},
