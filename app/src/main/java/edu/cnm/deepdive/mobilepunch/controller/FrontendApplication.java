@@ -28,7 +28,12 @@ public class FrontendApplication extends Application {
   public static void refreshToken() {
     OptionalPendingResult<GoogleSignInResult> pendingResult =
         Auth.GoogleSignInApi.silentSignIn(instance.refreshClient);
-    GoogleSignInResult result = pendingResult.await();
+    GoogleSignInResult result = null;
+    if (pendingResult.isDone()) {
+      result = pendingResult.get();
+    } else {
+      result = pendingResult.await();
+    }
     instance.account = result.getSignInAccount();
   }
 
