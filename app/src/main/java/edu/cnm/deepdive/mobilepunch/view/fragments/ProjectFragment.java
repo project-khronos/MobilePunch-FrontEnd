@@ -16,11 +16,15 @@ import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
 import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
+
 import edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText;
 import java.lang.ref.WeakReference;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
+
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
+
 
 
 /**
@@ -60,8 +64,7 @@ public class ProjectFragment extends Fragment {
   }
 
   private void generateIds() {
-    project.setId1(UUID.randomUUID().getMostSignificantBits());
-    project.setId2(UUID.randomUUID().getLeastSignificantBits());
+    UuidSetter.setNewRandomUuid(project);
   }
 
   private void initLayout() {

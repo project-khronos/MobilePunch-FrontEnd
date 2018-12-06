@@ -15,7 +15,7 @@ import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
-import java.util.UUID;
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 
 
 /**
@@ -50,8 +50,7 @@ public class EquipmentFragment extends Fragment {
   }
 
   private void generateIds() {
-    equipment.setId1(UUID.randomUUID().getMostSignificantBits());
-    equipment.setId2(UUID.randomUUID().getLeastSignificantBits());
+    UuidSetter.setNewRandomUuid(equipment);
   }
 
   private void initLayout() {

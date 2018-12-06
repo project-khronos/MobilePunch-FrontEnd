@@ -21,6 +21,16 @@
     android:layout_marginBottom="2dp"
     android:hint="Project Name"/>
 
+  <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
+    android:id="@+id/project_description"
+    style="?android:listSeparatorTextViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:hint="Description"
+    android:cursorVisible="true"
+    android:textAlignment="inherit"
+    android:textCursorDrawable="@null"
+    android:inputType="textMultiLine"/>
 
   <Button
     android:id="@+id/project_start_date"

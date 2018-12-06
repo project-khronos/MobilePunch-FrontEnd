@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.model.dao.abstraction.ProjectHelper;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity
     ApiTask apiTask = new ApiTask();
     apiTask.execute();
     instance = this;
-
+    new ProjectHelper.ProjectGetterTask().execute();
   }
 
 
@@ -204,6 +205,10 @@ public class MainActivity extends AppCompatActivity
 
   }
 
+  public List<ProjectEntity> getProjects() {
+    return projects;
+  }
+
   private class ApiTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
 
     @Override
@@ -270,7 +275,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onPostExecute(List<ProjectEntity> projectEntities) {
       //FIXME Move this so its called no matter the status of APITask
-      setProjects(projectEntities);
+      getProjects().addAll(projectEntities);
       QueryTask queryTask = new QueryTask();
       queryTask.execute();
       Toast.makeText(MainActivity.this, "Database Updated",
@@ -284,6 +289,4 @@ public class MainActivity extends AppCompatActivity
       Log.d(TAG, "Service cancelled");
     }
   }
-
-
 }
