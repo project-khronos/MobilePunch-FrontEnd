@@ -58,5 +58,5 @@ public class EventEquipment {
   public void setEquipmentId2(long equipmentId2) {
     this.equipmentId2 = equipmentId2;
   }
-  
+
 }
