@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -26,7 +24,6 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
-import edu.cnm.deepdive.mobilepunch.view.fragments.Retrotest;
 import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
@@ -96,10 +93,7 @@ public class MainActivity extends AppCompatActivity
 
     //noinspection SimplifiableIfStatement
     if (id == R.id.action_settings) {
-      FragmentManager manager = getSupportFragmentManager();
-      FragmentTransaction transaction = manager.beginTransaction();
-      transaction.replace(R.id.fragment_container, Retrotest.newInstance(), "");
-      transaction.commit();
+
     } else if (id == R.id.sign_out) {
       signOut();
     }
