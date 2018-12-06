@@ -30,18 +30,18 @@ public class EquipmentEntity implements UuidHaver {
 
   @ColumnInfo(name = "equipment_id2")
   private long id2;
-
+  @Expose
   private String name;
-
+  @Expose
   private String make;
-
+  @Expose
   private String model;
-
+  @Expose
   private String mfcyear;
-
+  @Expose
   @NonNull
   private String identification;
-
+  @Expose
   private String description;
 
   /**
