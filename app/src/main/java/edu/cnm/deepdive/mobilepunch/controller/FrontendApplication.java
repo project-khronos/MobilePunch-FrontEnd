@@ -49,13 +49,14 @@ public class FrontendApplication extends Application {
       } else {
         result = pendingResult.await();
       }
+      FrontendApplication.getInstance().refreshClient.disconnect();
       if (result == null) {
         MainActivity.getInstance().runOnUiThread(() -> MainActivity.signOut());
         return;
       }
       instance.account = result.getSignInAccount();
     }
-    FrontendApplication.getInstance().refreshClient.disconnect();
+
 
   }
 
