@@ -17,6 +17,7 @@ import com.google.android.gms.maps.MapView;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
+import edu.cnm.deepdive.mobilepunch.controller.FrontendApplication;
 import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
@@ -93,7 +94,7 @@ public class EventFragment extends Fragment {
         android.R.layout.simple_spinner_item, android.R.id.text1);
     spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     projectSpinner.setAdapter(spinnerAdapter);
-    localList = new ArrayList<>(MainActivity.getInstance().getProjects());
+    localList = new ArrayList<>(FrontendApplication.getMasterProjectSet());
     List<String> getProjectNames = new ArrayList<>();
     for (ProjectEntity project : localList) {
       getProjectNames.add(project.getName());

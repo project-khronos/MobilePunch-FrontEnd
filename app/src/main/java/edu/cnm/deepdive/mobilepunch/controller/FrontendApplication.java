@@ -13,6 +13,10 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
+import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
+import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
+import java.util.Set;
 
 /**
  * The type Frontend application.
@@ -24,6 +28,36 @@ public class FrontendApplication extends Application {
   private GoogleSignInClient client;
   private GoogleApiClient refreshClient;
   private GoogleSignInAccount account;
+  private static Set<ProjectEntity> masterProjectSet;
+  private static Set<ClientEntity> masterClientSet;
+  private static Set<EquipmentEntity> masterEquipmentSet;
+
+  public static Set<ProjectEntity> getMasterProjectSet() {
+    return masterProjectSet;
+  }
+
+  public static void setMasterProjectSet(
+      Set<ProjectEntity> masterProjectSet) {
+    FrontendApplication.masterProjectSet = masterProjectSet;
+  }
+
+  public static Set<ClientEntity> getMasterClientSet() {
+    return masterClientSet;
+  }
+
+  public static void setMasterClientSet(
+      Set<ClientEntity> masterClientSet) {
+    FrontendApplication.masterClientSet = masterClientSet;
+  }
+
+  public static Set<EquipmentEntity> getMasterEquipmentSet() {
+    return masterEquipmentSet;
+  }
+
+  public static void setMasterEquipmentSet(
+      Set<EquipmentEntity> masterEquipmentSet) {
+    FrontendApplication.masterEquipmentSet = masterEquipmentSet;
+  }
 
   /**
    * Gets instance.

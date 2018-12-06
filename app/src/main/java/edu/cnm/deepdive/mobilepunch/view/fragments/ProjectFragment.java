@@ -13,6 +13,7 @@ import android.widget.Toast;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
+import edu.cnm.deepdive.mobilepunch.controller.FrontendApplication;
 import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
@@ -91,7 +92,7 @@ public class ProjectFragment extends Fragment {
         v -> {
           grabFields();
           if (!projectName.getText().toString().equals("")) {
-            MainActivity.getInstance().getProjects().add(project);
+            FrontendApplication.getMasterProjectSet().add(project);
             new InsertProject(MainActivity.getInstance()).execute(project);
             Toast.makeText(getContext(), "Project saved", Toast.LENGTH_SHORT).show();
             getFragmentManager().beginTransaction()

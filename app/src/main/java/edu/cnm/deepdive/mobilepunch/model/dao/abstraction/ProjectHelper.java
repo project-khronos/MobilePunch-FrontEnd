@@ -2,6 +2,7 @@ package edu.cnm.deepdive.mobilepunch.model.dao.abstraction;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import edu.cnm.deepdive.mobilepunch.controller.FrontendApplication;
 import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
@@ -50,7 +51,10 @@ public class ProjectHelper {
     @Override
     protected Set<ProjectEntity> doInBackground(Void... voids) {
       Set<ProjectEntity> projects = getProjects(MainActivity.getInstance());
-      MainActivity.getInstance().setProjects(projects);
+      if (FrontendApplication.getMasterProjectSet() == null) {
+        FrontendApplication.setMasterProjectSet(new HashSet<>());
+      }
+      FrontendApplication.getMasterProjectSet().addAll(projects);
       return projects;
     }
   }

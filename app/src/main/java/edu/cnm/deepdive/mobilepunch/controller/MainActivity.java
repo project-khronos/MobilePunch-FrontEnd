@@ -27,7 +27,6 @@ import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -40,7 +39,6 @@ public class MainActivity extends AppCompatActivity
 
   private static MainActivity instance = null;
   private MobilePunchService service;
-  private Set<ProjectEntity> projects;
   private MobilePunchDatabase dataBase;
   private String TAG = "tag";
 
@@ -58,9 +56,6 @@ public class MainActivity extends AppCompatActivity
         });
   }
 
-  public Set<ProjectEntity> getProjects() {
-    return projects;
-  }
 
   @Override
   public void onBackPressed() {
@@ -202,16 +197,6 @@ public class MainActivity extends AppCompatActivity
 
   }
 
-  /**
-   * Sets projects.
-   *
-   * @param projects the projects
-   */
-  public void setProjects(
-      Set<ProjectEntity> projects) {
-    this.projects = projects;
-  }
-
   private class ApiTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
 
     @Override
@@ -228,9 +213,10 @@ public class MainActivity extends AppCompatActivity
       Log.d(TAG, "Executing API TASK");
       FrontendApplication.refreshToken();
       Log.d(TAG, "Token Refreshed");
-      MainActivity.this.projects = new HashSet<>(ProjectHelper.getProjects(MainActivity.this));
-      if (MainActivity.this.projects == null) {
-        MainActivity.this.projects = new HashSet<>();
+      FrontendApplication
+          .setMasterProjectSet(new HashSet<>(ProjectHelper.getProjects(MainActivity.this)));
+      if (FrontendApplication.getMasterProjectSet() == null) {
+        FrontendApplication.setMasterProjectSet(new HashSet<>());
       }
       try {
         String token = getString(
@@ -282,7 +268,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onPostExecute(List<ProjectEntity> projectEntities) {
       //FIXME Move this so its called no matter the status of APITask
-      getProjects().addAll(projectEntities);
+      FrontendApplication.getMasterProjectSet().addAll(projectEntities);
       QueryTask queryTask = new QueryTask();
       queryTask.execute();
       Toast.makeText(MainActivity.this, "Database Updated",
