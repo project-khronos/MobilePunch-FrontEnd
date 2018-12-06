@@ -1,7 +1,6 @@
 package edu.cnm.deepdive.mobilepunch.view.fragments;
 
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,10 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
-import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
+import java.lang.ref.WeakReference;
 
 
 /**
@@ -63,53 +63,47 @@ public class EquipmentFragment extends Fragment {
   }
 
   private void initListeners() {
-    saveButton.setOnClickListener(v -> {
-      grabFields();
-      new InsertEquipment(getContext(), new EventEntity()).execute(equipment);
-      getFragmentManager().beginTransaction()
-          .replace(R.id.fragment_container, new EquipmentFragment())
-          .commit();
-    });
+    saveButton.setOnClickListener(
+        v -> {
+          grabFields();
+          if (!makeField.getText().toString().equals("")) {
+            new InsertEquipment(MainActivity.getInstance()).execute(equipment);
+            Toast.makeText(getContext(), "Equipment saved", Toast.LENGTH_SHORT).show();
+            getFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new EquipmentFragment()).commit();
+          } else {
+            Toast.makeText(getContext(), "Please enter text into Make Field", Toast.LENGTH_SHORT)
+                .show();
+          }
+        });
   }
 
-  private void grabFields() {
-    equipment.setMake(makeField.getText().toString());
-    equipment.setModel(modelField.getText().toString());
-    equipment.setMfcyear(yearField.getText().toString());
-    equipment.setIdentification(identificationField.getText().toString());
+    private void grabFields () {
+      equipment.setMake(makeField.getText().toString());
+      equipment.setModel(modelField.getText().toString());
+      equipment.setMfcyear(yearField.getText().toString());
+      equipment.setIdentification(identificationField.getText().toString());
+
+    }
+
+    private static class InsertEquipment extends AsyncTask<EquipmentEntity, Void, Void> {
+
+      private WeakReference<MainActivity> mainActivity;
+
+      public InsertEquipment(MainActivity mainActivity) {
+        this.mainActivity = new WeakReference<>(mainActivity);
+      }
+
+      @Override
+      protected Void doInBackground(EquipmentEntity... equipmentEntities) {
+
+        MobilePunchDatabase.getInstance(mainActivity.get()).getEquipmentDao()
+            .insert(equipmentEntities[0]);
+        return null;
+      }
+    }
 
   }
-
-
-  private static class InsertEquipment extends AsyncTask<EquipmentEntity, Void, Void> {
-
-    private Context context;
-    private EventEntity eventEntity;
-
-
-    /**
-     * Instantiates a new Insert equipment.
-     *
-     * @param context the context
-     * @param eventEntity the event entity
-     */
-    public InsertEquipment(Context context, EventEntity eventEntity) {
-      this.context = context;
-      this.eventEntity = eventEntity;
-    }
-
-    @Override
-    protected void onPostExecute(Void aVoid) {
-      Toast.makeText(context, "Equipment saved!", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected Void doInBackground(EquipmentEntity... equipmentEntity) {
-      MobilePunchDatabase.getInstance(context).getEquipmentDao().insert(equipmentEntity[0]);
-      return null;
-    }
-  }
-}
 
 
 
