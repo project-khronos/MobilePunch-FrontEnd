@@ -50,6 +50,14 @@ public class MainActivity extends AppCompatActivity
     return instance;
   }
 
+  static void signOut() {
+    FrontendApplication.getInstance().getClient().signOut()
+        .addOnCompleteListener(MainActivity.getInstance(), (task) -> {
+          Intent intent = new Intent(MainActivity.getInstance(), LoginActivity.class);
+          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+          MainActivity.getInstance().startActivity(intent);
+        });
+  }
 
   /**
    * Sets projects.
@@ -59,15 +67,6 @@ public class MainActivity extends AppCompatActivity
   public void setProjects(
       List<ProjectEntity> projects) {
     this.projects = projects;
-  }
-
-  static void signOut() {
-    FrontendApplication.getInstance().getClient().signOut()
-        .addOnCompleteListener(MainActivity.getInstance(), (task) -> {
-          Intent intent = new Intent(MainActivity.getInstance(), LoginActivity.class);
-          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-          MainActivity.getInstance().startActivity(intent);
-        });
   }
 
   @Override
