@@ -28,7 +28,7 @@
     android:layout_height="40dp"
     android:layout_marginBottom="2dp"
     android:background="@drawable/edit_text_style"
-    android:hint="Client's number"
+    android:hint="@string/clients_number"
     android:inputType="phone"/>
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
@@ -39,7 +39,7 @@
     android:layout_marginBottom="2dp"
     android:visibility="gone"
     android:background="@drawable/edit_text_style"
-    android:hint="Alternate number"
+    android:hint="@string/alternate_number"
     android:inputType="phone"/>
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
@@ -54,14 +54,35 @@
     android:inputType="text"/>
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
+    android:id="@+id/client_alt_address"
+    style="?android:listSeparatorTextViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginBottom="2dp"
+
+    android:background="@drawable/edit_text_style"
+    android:hint="@string/alternate_address"
+    android:inputType="text"/>
+
+  <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
     android:id="@+id/client_email"
     style="?android:listSeparatorTextViewStyle"
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:layout_marginBottom="2dp"
     android:background="@drawable/edit_text_style"
-    android:hint="Client's email"
+    android:hint="@string/clients_email"
     android:inputType="text"/>
+  <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
+    android:id="@+id/client_note"
+    style="?android:listSeparatorTextViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginBottom="2dp"
+    android:background="@drawable/edit_text_style"
+    android:hint="@string/client_notes"
+    android:inputType="text"/>
+
 
 
   <android.support.constraint.ConstraintLayout
@@ -72,7 +93,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@color/rallyGreen"
-      android:text="SAVE"
+      android:text="@string/client_save"
       app:layout_constraintBottom_toBottomOf="parent"/>
   </android.support.constraint.ConstraintLayout>
 </LinearLayout>

@@ -18,7 +18,7 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:hint="Description"
-    android:inputType="textMultiLine"/>
+    android:inputType="text"/>
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
     android:id="@+id/project_name"
@@ -26,7 +26,8 @@
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:layout_marginBottom="2dp"
-    android:hint="Project Name"/>
+    android:hint="Project Name"
+    android:inputType="text"/>
 
 
   <Button
