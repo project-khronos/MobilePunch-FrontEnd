@@ -6,6 +6,7 @@ import android.arch.persistence.room.Ignore;
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
 import java.util.UUID;
 
 
@@ -16,19 +17,12 @@ import java.util.UUID;
     primaryKeys = {
         "equipment_id1", "equipment_id2"
     }
-//    foreignKeys = {@ForeignKey(
-//    entity = EventEntity.class,
-//    parentColumns = {"event_id1","event_id2"},
-//    childColumns = {"event_id1","event_id2"},
-//    onDelete = OnConflictStrategy.FAIL
-//)}
-
 )
-public class EquipmentEntity {
+public class EquipmentEntity implements UuidHaver {
 
   @Ignore
-  @SerializedName("equipment_id")
   @Expose
+  @SerializedName("uuid")
   private UUID uuid;
 
   @ColumnInfo(name = "equipment_id1")
@@ -36,25 +30,19 @@ public class EquipmentEntity {
 
   @ColumnInfo(name = "equipment_id2")
   private long id2;
-
+  @Expose
   private String name;
-
+  @Expose
   private String make;
-
+  @Expose
   private String model;
-
+  @Expose
   private String mfcyear;
-
+  @Expose
   @NonNull
-  private String Identification;
-
+  private String identification;
+  @Expose
   private String description;
-
-  @ColumnInfo(name = "event_id2")
-  private long eventId2;
-
-  @ColumnInfo(name = "event_id1")
-  private long eventId1;
 
   /**
    * Gets uuid.
@@ -189,7 +177,7 @@ public class EquipmentEntity {
    */
   @NonNull
   public String getIdentification() {
-    return Identification;
+    return identification;
   }
 
   /**
@@ -198,7 +186,7 @@ public class EquipmentEntity {
    * @param identification the identification
    */
   public void setIdentification(@NonNull String identification) {
-    Identification = identification;
+    this.identification = identification;
   }
 
   /**
@@ -217,42 +205,6 @@ public class EquipmentEntity {
    */
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  /**
-   * Gets event id 2.
-   *
-   * @return the event id 2
-   */
-  public long getEventId2() {
-    return eventId2;
-  }
-
-  /**
-   * Sets event id 2.
-   *
-   * @param eventId2 the event id 2
-   */
-  public void setEventId2(long eventId2) {
-    this.eventId2 = eventId2;
-  }
-
-  /**
-   * Gets event id 1.
-   *
-   * @return the event id 1
-   */
-  public long getEventId1() {
-    return eventId1;
-  }
-
-  /**
-   * Sets event id 1.
-   *
-   * @param eventId1 the event id 1
-   */
-  public void setEventId1(long eventId1) {
-    this.eventId1 = eventId1;
   }
 }
 

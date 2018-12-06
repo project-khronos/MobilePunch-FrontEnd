@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,15 +18,14 @@ import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
+import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
-import edu.cnm.deepdive.mobilepunch.view.fragments.Retrotest;
 import java.util.List;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -39,10 +36,25 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
+  private static MainActivity instance = null;
   private MobilePunchService service;
   private List<ProjectEntity> projects;
   private MobilePunchDatabase dataBase;
   private String TAG = "tag";
+
+
+  public static MainActivity getInstance() {
+    return instance;
+  }
+
+  static void signOut() {
+    FrontendApplication.getInstance().getClient().signOut()
+        .addOnCompleteListener(MainActivity.getInstance(), (task) -> {
+          Intent intent = new Intent(MainActivity.getInstance(), LoginActivity.class);
+          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+          MainActivity.getInstance().startActivity(intent);
+        });
+  }
 
   /**
    * Sets projects.
@@ -52,32 +64,6 @@ public class MainActivity extends AppCompatActivity
   public void setProjects(
       List<ProjectEntity> projects) {
     this.projects = projects;
-  }
-
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    Toolbar toolbar = findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
-
-    DrawerLayout drawer = findViewById(R.id.drawer_layout);
-    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-    drawer.addDrawerListener(toggle);
-    toggle.syncState();
-
-    NavigationView navigationView = findViewById(R.id.nav_view);
-    navigationView.setNavigationItemSelectedListener(this);
-
-    getSupportFragmentManager().beginTransaction()
-        .replace(R.id.fragment_container, new MainFragment()).commit();
-
-    setupService();
-    dataBase = MobilePunchDatabase.getInstance(this);
-    ApiTask apiTask = new ApiTask();
-    apiTask.execute();
-
   }
 
   @Override
@@ -107,10 +93,7 @@ public class MainActivity extends AppCompatActivity
 
     //noinspection SimplifiableIfStatement
     if (id == R.id.action_settings) {
-      FragmentManager manager = getSupportFragmentManager();
-      FragmentTransaction transaction = manager.beginTransaction();
-      transaction.replace(R.id.fragment_container, Retrotest.newInstance(), "");
-      transaction.commit();
+
     } else if (id == R.id.sign_out) {
       signOut();
     }
@@ -118,13 +101,31 @@ public class MainActivity extends AppCompatActivity
     return true;
   }
 
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    Toolbar toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
 
-  private void signOut() {
-    FrontendApplication.getInstance().getClient().signOut().addOnCompleteListener(this, (task) -> {
-      Intent intent = new Intent(this, LoginActivity.class);
-      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-      startActivity(intent);
-    });
+    DrawerLayout drawer = findViewById(R.id.drawer_layout);
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    drawer.addDrawerListener(toggle);
+    toggle.syncState();
+
+    NavigationView navigationView = findViewById(R.id.nav_view);
+    navigationView.setNavigationItemSelectedListener(this);
+
+    getSupportFragmentManager().beginTransaction()
+        .replace(R.id.fragment_container, new MainFragment()).commit();
+
+    setupService();
+    dataBase = MobilePunchDatabase.getInstance(this);
+    ApiTask apiTask = new ApiTask();
+    apiTask.execute();
+    instance = this;
+
   }
 
 
@@ -177,7 +178,7 @@ public class MainActivity extends AppCompatActivity
         .create(MobilePunchService.class);
   }
 
-  private class QueryProjects extends AsyncTask<Void, Void, List<ProjectEntity>> {
+  private class QueryTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
 
     @Override
     protected void onPreExecute() {
@@ -194,10 +195,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onPostExecute(List<ProjectEntity> projectEntities) {
-      if (projects != null) {
-        Toast.makeText(MainActivity.this, Integer.toString(projectEntities.size()),
-            Toast.LENGTH_LONG).show();
-      }
+
     }
 
     @Override
@@ -218,34 +216,37 @@ public class MainActivity extends AppCompatActivity
     protected List<ProjectEntity> doInBackground(Void... voids) {
       List<ProjectEntity> projects = null;
       List<ClientEntity> clients = null;
+      List<EquipmentEntity> equipment = null;
+      Log.d(TAG, "Executing API TASK");
+      FrontendApplication.refreshToken();
+      Log.d(TAG, "Token Refreshed");
 
       try {
         String token = getString(
             R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
-        //GoogleSignIn.getLastSignedInAccount(MainActivity.this).getIdToken());
-        Call<List<ProjectEntity>> callProjects = service.getProjects(token);
-        Response<List<ProjectEntity>> responseProjects = callProjects.execute();
-        Call<List<ClientEntity>> callClients = service.getClients(token);
-        Response<List<ClientEntity>> responseClients = callClients.execute();
+        Response<List<ProjectEntity>> projectsResponse = service.getProjects(token).execute();
+        Response<List<ClientEntity>> clientsResponse = service.getClients(token).execute();
+        Response<List<EquipmentEntity>> equipmentResponse = service.getEquipment(token).execute();
 
-        Call<ResponseBody> responseBody = service.getProjectsJson(token);
-        Response<ResponseBody> responseJson = responseBody.execute();
+        Response<ResponseBody> eqJson = service.getEquipmentJson(token).execute();
 
-        Log.d(TAG, "RAW JSON: " + responseJson.body().string());
-        // Log.d(TAG, "TOKEN: " + token);
-        if (responseProjects.isSuccessful()) {
-          projects = responseProjects.body();
-          clients = responseClients.body();
-          Log.d(TAG, "RESPONSE: " + responseJson.raw().toString());
+        //Use this to see raw response, needs a jasoncall.
+        Log.d(TAG, "RAW JSON: " + eqJson.body().string());
+        if (projectsResponse.isSuccessful()
+            && clientsResponse.isSuccessful()
+            && equipmentResponse.isSuccessful()) {
+          projects = projectsResponse.body();
+          clients = clientsResponse.body();
+          equipment = equipmentResponse.body();
+
         } else {
-          Log.d(TAG, "RESPONSE NOT SUCCESS: " + responseProjects.raw());
-
+          Log.d(TAG, "Service Execution Failed: ");
         }
       } catch (Exception e) {
-        Log.d(TAG, "Caught Exception on Call: " + e.getLocalizedMessage());
+        Log.d(TAG, "Exception in service execution: " + e.getLocalizedMessage());
       } finally {
-        if (projects == null) {
-          Log.d(TAG, "On Cancelled called");
+        if (projects == null || clients == null || equipment == null) {
+          Log.d(TAG, "Service execution cancelled");
           cancel(true);
         }
         try {
@@ -255,6 +256,8 @@ public class MainActivity extends AppCompatActivity
           dataBase.getEventDao().insert(events);
           MobilePunchDatabase.fromUUIDClient(clients);
           dataBase.getClientDao().insert(clients);
+          MobilePunchDatabase.fromUUIDEquipment(equipment);
+          dataBase.getEquipmentDao().insert(equipment);
         } catch (Exception e) {
           // FIXME do what
           Log.d(TAG, "insert method failed: " + e.getLocalizedMessage());
@@ -269,13 +272,17 @@ public class MainActivity extends AppCompatActivity
     protected void onPostExecute(List<ProjectEntity> projectEntities) {
       //FIXME Move this so its called no matter the status of APITask
       setProjects(projectEntities);
-      QueryProjects querryProjects = new QueryProjects();
-      querryProjects.execute();
+      QueryTask queryTask = new QueryTask();
+      queryTask.execute();
+      Toast.makeText(MainActivity.this, "Database Updated",
+          Toast.LENGTH_LONG).show();
     }
 
     @Override
     protected void onCancelled() {
-      Toast.makeText(MainActivity.this, "Cancelled", Toast.LENGTH_LONG).show();
+      Toast.makeText(MainActivity.this,
+          "Unable to connect to server... Check network connection", Toast.LENGTH_LONG).show();
+      Log.d(TAG, "Service cancelled");
     }
   }
 

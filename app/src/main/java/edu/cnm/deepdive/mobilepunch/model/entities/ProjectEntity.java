@@ -4,7 +4,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -15,11 +15,10 @@ import java.util.UUID;
 @Entity(
     primaryKeys = {"project_id1", "project_id2"}
 )
-public class ProjectEntity {
+public class ProjectEntity implements UuidHaver {
 
   @Ignore
   @Expose
-  @SerializedName("uuid")
   private UUID uuid;
 
   @ColumnInfo(name = "project_id1")

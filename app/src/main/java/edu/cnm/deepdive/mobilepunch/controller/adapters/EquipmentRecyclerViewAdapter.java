@@ -56,6 +56,32 @@ public class EquipmentRecyclerViewAdapter extends
   }
 
   /**
+   * Sets item click listener.
+   *
+   * @param itemClickListener the item click listener
+   */
+  void setItemClickListener(ItemClickListener itemClickListener) {
+    this.itemClickListener = itemClickListener;
+
+  }
+
+
+  /**
+   * The interface Item click listener.
+   */
+  public interface ItemClickListener {
+
+    /**
+     * On item click.
+     *
+     * @param view the view
+     * @param position the position
+     */
+    void onItemClick(View view, int position);
+
+  }
+
+  /**
    * The type Equipment holder.
    */
   public class EquipmentHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -86,32 +112,6 @@ public class EquipmentRecyclerViewAdapter extends
     public void onClick(View view) {
 
     }
-
-  }
-
-
-  /**
-   * Sets item click listener.
-   *
-   * @param itemClickListener the item click listener
-   */
-  void setItemClickListener(ItemClickListener itemClickListener) {
-    this.itemClickListener = itemClickListener;
-
-  }
-
-  /**
-   * The interface Item click listener.
-   */
-  public interface ItemClickListener {
-
-    /**
-     * On item click.
-     *
-     * @param view the view
-     * @param position the position
-     */
-    void onItemClick(View view, int position);
 
   }
 }

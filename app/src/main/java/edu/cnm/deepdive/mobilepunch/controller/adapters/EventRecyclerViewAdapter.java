@@ -41,7 +41,7 @@ public class EventRecyclerViewAdapter extends
   @NonNull
   @Override
   public EventHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-    View view = layoutInflater.inflate(R.layout.event_list_item, viewGroup, false);
+    View view = layoutInflater.inflate(R.layout.equipment_list_item, viewGroup, false);
     return new EventHolder(view);
   }
 
@@ -72,6 +72,29 @@ public class EventRecyclerViewAdapter extends
   @Override
   public int getItemCount() {
     return data.size();
+  }
+
+  /**
+   * Sets item click listener.
+   *
+   * @param itemClickListener the item click listener
+   */
+  void setItemClickListener(ItemClickListener itemClickListener) {
+    this.itemClickListener = itemClickListener;
+  }
+
+  /**
+   * The interface Item click listener.
+   */
+  public interface ItemClickListener {
+
+    /**
+     * On item click.
+     *
+     * @param view the view
+     * @param position the position
+     */
+    void onItemClick(View view, int position);
   }
 
   /**
@@ -111,28 +134,5 @@ public class EventRecyclerViewAdapter extends
         itemClickListener.onItemClick(view, getAdapterPosition());
       }
     }
-  }
-
-  /**
-   * Sets item click listener.
-   *
-   * @param itemClickListener the item click listener
-   */
-  void setItemClickListener(ItemClickListener itemClickListener) {
-    this.itemClickListener = itemClickListener;
-  }
-
-  /**
-   * The interface Item click listener.
-   */
-  public interface ItemClickListener {
-
-    /**
-     * On item click.
-     *
-     * @param view the view
-     * @param position the position
-     */
-    void onItemClick(View view, int position);
   }
 }

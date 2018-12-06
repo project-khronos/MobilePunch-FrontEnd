@@ -9,6 +9,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions.Builder;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import edu.cnm.deepdive.mobilepunch.R;
@@ -37,15 +38,31 @@ public class FrontendApplication extends Application {
    * Refresh token.
    */
   public static void refreshToken() {
-    OptionalPendingResult<GoogleSignInResult> pendingResult =
-        Auth.GoogleSignInApi.silentSignIn(instance.refreshClient);
-    GoogleSignInResult result = null;
-    if (pendingResult.isDone()) {
-      result = pendingResult.get();
-    } else {
-      result = pendingResult.await();
+    ConnectionResult connectionResult = FrontendApplication.getInstance().refreshClient
+        .blockingConnect();
+    if (connectionResult.isSuccess()) {
+      OptionalPendingResult<GoogleSignInResult> pendingResult =
+          Auth.GoogleSignInApi.silentSignIn(instance.refreshClient);
+      GoogleSignInResult result = null;
+      if (pendingResult.isDone()) {
+        result = pendingResult.get();
+      } else {
+        result = pendingResult.await();
+      }
+      FrontendApplication.getInstance().refreshClient.disconnect();
+      if (result == null) {
+        MainActivity.getInstance().runOnUiThread(() -> MainActivity.signOut());
+        return;
+      }
+      instance.account = result.getSignInAccount();
     }
-    instance.account = result.getSignInAccount();
+  }
+
+  /**
+   * Refresh in background.
+   */
+  public static void refreshInBackground() {
+    new Thread(new RefreshTokenTask()).start();
   }
 
   /**
@@ -82,13 +99,6 @@ public class FrontendApplication extends Application {
    */
   public void setAccount(GoogleSignInAccount account) {
     this.account = account;
-  }
-
-  /**
-   * Refresh in background.
-   */
-  public static void refreshInBackground() {
-    new Thread(new RefreshTokenTask()).start();
   }
 
   @Override
