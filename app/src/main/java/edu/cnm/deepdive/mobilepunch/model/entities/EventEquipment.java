@@ -2,9 +2,8 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.PrimaryKey;
 
-@Entity(foreignKeys = {
+@Entity(primaryKeys = {"eventId1", "eventId2"}, foreignKeys = {
     @ForeignKey(entity = EventEntity.class, parentColumns = {"event_id1",
         "event_id2"}, childColumns = {"eventId1", "eventId2"}),
     @ForeignKey(entity = EquipmentEntity.class, parentColumns = {"equipment_id1",
@@ -13,8 +12,6 @@ import android.arch.persistence.room.PrimaryKey;
 )
 public class EventEquipment {
 
-  @PrimaryKey
-  private long id;
   private long eventId1;
   private long eventId2;
   private long equipmentId1;
@@ -61,13 +58,5 @@ public class EventEquipment {
   public void setEquipmentId2(long equipmentId2) {
     this.equipmentId2 = equipmentId2;
   }
-
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
-  }
+  
 }

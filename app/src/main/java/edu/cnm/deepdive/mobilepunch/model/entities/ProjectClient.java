@@ -2,9 +2,8 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.PrimaryKey;
 
-@Entity(foreignKeys = {
+@Entity(primaryKeys = {"projectId1", "projectId2"}, foreignKeys = {
     @ForeignKey(entity = ProjectEntity.class, parentColumns = {"project_id1",
         "project_id2"}, childColumns = {"projectId1", "projectId2"}),
     @ForeignKey(entity = ClientEntity.class, parentColumns = {"client_id1",
@@ -13,8 +12,6 @@ import android.arch.persistence.room.PrimaryKey;
 )
 public class ProjectClient {
 
-  @PrimaryKey
-  private long id;
   private long projectId1;
   private long projectId2;
   private long clientId1;
@@ -30,13 +27,7 @@ public class ProjectClient {
     clientId2 = client.getId2();
   }
 
-  public long getId() {
-    return id;
-  }
 
-  public void setId(long id) {
-    this.id = id;
-  }
 
   public long getProjectId1() {
     return projectId1;
