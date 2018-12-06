@@ -11,11 +11,13 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EventEquipment;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectClient;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ProjectHelper {
 
-  public static List<ProjectEntity> getProjects(Context context) {
+  public static Set<ProjectEntity> getProjects(Context context) {
     List<ProjectEntity> projects = MobilePunchDatabase.getInstance(context).getProjectDao()
         .select();
     for (ProjectEntity project : projects) {
@@ -40,14 +42,14 @@ public class ProjectHelper {
       }
       project.setClients(clients);
     }
-    return projects;
+    return new HashSet<>(projects);
   }
 
-  public static class ProjectGetterTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
+  public static class ProjectGetterTask extends AsyncTask<Void, Void, Set<ProjectEntity>> {
 
     @Override
-    protected List<ProjectEntity> doInBackground(Void... voids) {
-      List<ProjectEntity> projects = getProjects(MainActivity.getInstance());
+    protected Set<ProjectEntity> doInBackground(Void... voids) {
+      Set<ProjectEntity> projects = getProjects(MainActivity.getInstance());
       MainActivity.getInstance().setProjects(projects);
       return projects;
     }

@@ -25,8 +25,9 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity
 
   private static MainActivity instance = null;
   private MobilePunchService service;
-  private List<ProjectEntity> projects;
+  private Set<ProjectEntity> projects;
   private MobilePunchDatabase dataBase;
   private String TAG = "tag";
 
@@ -57,14 +58,8 @@ public class MainActivity extends AppCompatActivity
         });
   }
 
-  /**
-   * Sets projects.
-   *
-   * @param projects the projects
-   */
-  public void setProjects(
-      List<ProjectEntity> projects) {
-    this.projects = projects;
+  public Set<ProjectEntity> getProjects() {
+    return projects;
   }
 
   @Override
@@ -207,8 +202,14 @@ public class MainActivity extends AppCompatActivity
 
   }
 
-  public List<ProjectEntity> getProjects() {
-    return projects;
+  /**
+   * Sets projects.
+   *
+   * @param projects the projects
+   */
+  public void setProjects(
+      Set<ProjectEntity> projects) {
+    this.projects = projects;
   }
 
   private class ApiTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
@@ -227,9 +228,9 @@ public class MainActivity extends AppCompatActivity
       Log.d(TAG, "Executing API TASK");
       FrontendApplication.refreshToken();
       Log.d(TAG, "Token Refreshed");
-      MainActivity.this.projects = ProjectHelper.getProjects(MainActivity.this);
+      MainActivity.this.projects = new HashSet<>(ProjectHelper.getProjects(MainActivity.this));
       if (MainActivity.this.projects == null) {
-        MainActivity.this.projects = new ArrayList<>();
+        MainActivity.this.projects = new HashSet<>();
       }
       try {
         String token = getString(
@@ -239,7 +240,7 @@ public class MainActivity extends AppCompatActivity
         Response<List<EquipmentEntity>> equipmentResponse = service.getEquipment(token).execute();
 
         // Response<ResponseBody> eqJson = service.getEquipmentJson(token).execute();
-        //Use this to see raw response, needs a jasoncall.
+        //Use this to see raw response, needs a jsoncall.
         // Log.d(TAG, "RAW JSON: " + eqJson.body().string());
         if (projectsResponse.isSuccessful()
             && clientsResponse.isSuccessful()
