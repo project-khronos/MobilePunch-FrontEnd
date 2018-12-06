@@ -16,6 +16,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
   </Spinner>
+  <Spinner
+    android:id="@+id/equipment_spinner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"></Spinner>
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
     android:id="@+id/event_expenses"
     style="?android:listSeparatorTextViewStyle"

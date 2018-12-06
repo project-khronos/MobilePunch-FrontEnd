@@ -46,6 +46,7 @@ public class EventFragment extends Fragment {
 
   private MapView mapview;
   private Spinner projectSpinner;
+  private Spinner equipmentSpinner;
 
   private View view;
 
