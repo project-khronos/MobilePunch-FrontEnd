@@ -37,7 +37,7 @@ public class ClientRecyclerViewAdapter extends
   @NonNull
   @Override
   public ClientHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
-    View view = layoutInflater.inflate(R.layout.event_list_item, viewGroup, false);
+    View view = layoutInflater.inflate(R.layout.client_list_item, viewGroup, false);
     return new ClientHolder(view);
   }
 
