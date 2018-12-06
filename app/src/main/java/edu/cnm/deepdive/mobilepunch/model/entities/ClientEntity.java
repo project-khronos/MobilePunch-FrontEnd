@@ -5,164 +5,252 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
 import io.reactivex.annotations.NonNull;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
 
+/**
+ * The type Client entity.
+ */
 @Entity(
-    primaryKeys = {"client_id1", "client_id2"}
-//    foreignKeys = {@ForeignKey(
-//        entity = ProjectEntity.class,
-//        parentColumns = {"project_id1","project_id2"},
-//        childColumns = {"project_id1","project_id2"},
-//        onDelete = OnConflictStrategy.FAIL
-//    )}
+        primaryKeys = {"client_id1", "client_id2"}
 )
-public class ClientEntity implements Serializable {
+public class ClientEntity implements Serializable, UuidHaver {
 
 
-  @Ignore
-  @Expose
-  @SerializedName("uuid")
-  private UUID uuid;
+    /**
+     * The Projects.
+     */
+    @Ignore
+    @Expose
+    List<ProjectEntity> projects;
+    @Ignore
+    @Expose
+    @SerializedName("uuid")
+    private UUID uuid;
+    @ColumnInfo(name = "client_id1")
+    private long id1;
+    @ColumnInfo(name = "client_id2")
+    private long id2;
+    @NonNull
+    @Expose
+    private String name;
+    @Expose
+    private String email;
 
-  @ColumnInfo(name = "client_id1")
-  private long id1;
+    @ColumnInfo(name = "alt_phone")
+    private String altPhone;
+    @NonNull
+    @Expose
+    private String phone;
+    @Expose
+    private String address;
+    @Expose
+    @ColumnInfo(name = "alt_address")
+    private String altAddress;
+    @Expose
+    private String notes;
 
-  @ColumnInfo(name = "client_id2")
-  private long id2;
+    /**
+     * Gets uuid.
+     *
+     * @return the uuid
+     */
+    public UUID getUuid() {
+        return uuid;
+    }
 
-  @Ignore
-  @Expose
-  List<ProjectEntity> projects;
-  @NonNull
-  @Expose
-  private String name;
-  @Expose
-  private String email;
+    /**
+     * Sets uuid.
+     *
+     * @param uuid the uuid
+     */
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
 
-  @ColumnInfo(name = "alt_phone")
-  private String altPhone;
-  @NonNull
-  @Expose
-  private String phone;
-  @Expose
-  private String address;
-  @Expose
-  @ColumnInfo(name = "alt_address")
-  private String altAddress;
-  @Expose
-  private String notes;
-  @ColumnInfo(name = "project_id1")
-  private long projectId1;
+    /**
+     * Gets id 1.
+     *
+     * @return the id 1
+     */
+    public long getId1() {
+        return id1;
+    }
 
-  @ColumnInfo(name = "project_id2")
-  private long projectId2;
+    /**
+     * Sets id 1.
+     *
+     * @param id1 the id 1
+     */
+    public void setId1(long id1) {
+        this.id1 = id1;
+    }
 
-  public UUID getUuid() {
-    return uuid;
-  }
+    /**
+     * Gets id 2.
+     *
+     * @return the id 2
+     */
+    public long getId2() {
+        return id2;
+    }
 
-  public void setUuid(UUID uuid) {
-    this.uuid = uuid;
-  }
+    /**
+     * Sets id 2.
+     *
+     * @param id2 the id 2
+     */
+    public void setId2(long id2) {
+        this.id2 = id2;
+    }
 
-  public long getId1() {
-    return id1;
-  }
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
-  public void setId1(long id1) {
-    this.id1 = id1;
-  }
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public long getId2() {
-    return id2;
-  }
+    /**
+     * Gets email.
+     *
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
 
-  public void setId2(long id2) {
-    this.id2 = id2;
-  }
+    /**
+     * Sets email.
+     *
+     * @param email the email
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-  public String getName() {
-    return name;
-  }
+    /**
+     * Gets phone.
+     *
+     * @return the phone
+     */
+    public String getPhone() {
+        return phone;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    /**
+     * Sets phone.
+     *
+     * @param phone the phone
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-  public String getEmail() {
-    return email;
-  }
+    /**
+     * Gets alt phone.
+     *
+     * @return the alt phone
+     */
+    public String getAltPhone() {
+        return altPhone;
+    }
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    /**
+     * Sets alt phone.
+     *
+     * @param altPhone the alt phone
+     */
+    public void setAltPhone(String altPhone) {
+        this.altPhone = altPhone;
+    }
 
-  public String getPhone() {
-    return phone;
-  }
+    /**
+     * Gets address.
+     *
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
 
-  public void setPhone(String phone) {
-    this.phone = phone;
-  }
+    /**
+     * Sets address.
+     *
+     * @param address the address
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-  public String getAltPhone() {
-    return altPhone;
-  }
+    /**
+     * Gets alt address.
+     *
+     * @return the alt address
+     */
+    public String getAltAddress() {
+        return altAddress;
+    }
 
-  public void setAltPhone(String altPhone) {
-    this.altPhone = altPhone;
-  }
+    /**
+     * Sets alt address.
+     *
+     * @param altAddress the alt address
+     */
+    public void setAltAddress(String altAddress) {
+        this.altAddress = altAddress;
+    }
 
-  public String getAddress() {
-    return address;
-  }
+    /**
+     * Gets notes.
+     *
+     * @return the notes
+     */
+    public String getNotes() {
+        return notes;
+    }
 
-  public void setAddress(String address) {
-    this.address = address;
-  }
+    /**
+     * Sets notes.
+     *
+     * @param notes the notes
+     */
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
-  public String getAltAddress() {
-    return altAddress;
-  }
+    /**
+     * Gets projects.
+     *
+     * @return the projects
+     */
+    public List<ProjectEntity> getProjects() {
+        return projects;
+    }
 
-  public void setAltAddress(String altAddress) {
-    this.altAddress = altAddress;
-  }
+    /**
+     * Sets projects.
+     *
+     * @param projects the projects
+     */
+    public void setProjects(
+            List<ProjectEntity> projects) {
+        this.projects = projects;
+    }
 
-  public String getNotes() {
-    return notes;
-  }
-
-  public void setNotes(String notes) {
-    this.notes = notes;
-  }
-
-  public List<ProjectEntity> getProjects() {
-    return projects;
-  }
-
-  public void setProjects(
-      List<ProjectEntity> projects) {
-    this.projects = projects;
-  }
-
-  public long getProjectId1() {
-    return projectId1;
-  }
-
-  public void setProjectId1(long projectId1) {
-    this.projectId1 = projectId1;
-  }
-
-  public long getProjectId2() {
-    return projectId2;
-  }
-
-  public void setProjectId2(long projectId2) {
-    this.projectId2 = projectId2;
-  }
 }

@@ -14,6 +14,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import edu.cnm.deepdive.mobilepunch.R;
 
+/**
+ * The type Frontend application.
+ */
 public class FrontendApplication extends Application {
 
   private static FrontendApplication instance = null;
@@ -22,10 +25,18 @@ public class FrontendApplication extends Application {
   private GoogleApiClient refreshClient;
   private GoogleSignInAccount account;
 
-  public static FrontendApplication getInstance() {
-    return instance;
-  }
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
+    public static FrontendApplication getInstance() {
+        return instance;
+    }
 
+  /**
+   * Refresh token.
+   */
   public static void refreshToken() {
     ConnectionResult connectionResult = FrontendApplication.getInstance().refreshClient
         .blockingConnect();
@@ -44,47 +55,73 @@ public class FrontendApplication extends Application {
 
   }
 
-  public GoogleSignInClient getClient() {
-    return client;
-  }
-
-  public void setClient(GoogleSignInClient client) {
-    this.client = client;
-  }
-
-  public GoogleSignInAccount getAccount() {
-    return account;
-  }
-
-  public void setAccount(GoogleSignInAccount account) {
-    this.account = account;
-  }
-
-  public static void refreshInBackground() {
-    new Thread(new RefreshTokenTask()).start();
-  }
-
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    instance = this;
-    GoogleSignInOptions options = new Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-        .requestEmail()
-        .requestId()
-        .requestIdToken(getString(R.string.client_id))
-        .build();
-    client = GoogleSignIn.getClient(this, options);
-    refreshClient = new GoogleApiClient.Builder(this).addApi(Auth.GOOGLE_SIGN_IN_API, options)
-        .build();
-    Stetho.initializeWithDefaults(this);
-  }
-
-  public static class RefreshTokenTask implements Runnable {
-    @Override
-    public void run() {
-      refreshToken();
+    /**
+     * Refresh in background.
+     */
+    public static void refreshInBackground() {
+        new Thread(new RefreshTokenTask()).start();
     }
-  }
+
+    /**
+     * Gets client.
+     *
+     * @return the client
+     */
+    public GoogleSignInClient getClient() {
+        return client;
+    }
+
+    /**
+     * Sets client.
+     *
+     * @param client the client
+     */
+    public void setClient(GoogleSignInClient client) {
+        this.client = client;
+    }
+
+    /**
+     * Gets account.
+     *
+     * @return the account
+     */
+    public GoogleSignInAccount getAccount() {
+        return account;
+    }
+
+    /**
+     * Sets account.
+     *
+     * @param account the account
+     */
+    public void setAccount(GoogleSignInAccount account) {
+        this.account = account;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance = this;
+        GoogleSignInOptions options = new Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestId()
+                .requestIdToken(getString(R.string.client_id))
+                .build();
+        client = GoogleSignIn.getClient(this, options);
+        refreshClient = new GoogleApiClient.Builder(this).addApi(Auth.GOOGLE_SIGN_IN_API, options)
+                .build();
+        Stetho.initializeWithDefaults(this);
+    }
+
+    /**
+     * The type Refresh token task.
+     */
+    public static class RefreshTokenTask implements Runnable {
+        @Override
+        public void run() {
+            refreshToken();
+        }
+    }
 
 
 }

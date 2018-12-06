@@ -10,45 +10,58 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.UUID;
+
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
-import java.util.UUID;
 
 
+/**
+ * The type Project fragment.
+ */
 public class ProjectFragment extends Fragment {
-ProjectEntity project;
-  Button saveButton;
-  @Override
-  public void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    project = new ProjectEntity();
 
-  }
+    /**
+     * The Project.
+     */
+    ProjectEntity project;
+    /**
+     * The Save button.
+     */
+    Button saveButton;
 
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_project, container, false);
-    generateIds();
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        project = new ProjectEntity();
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_project, container, false);
+        generateIds();
 
 
-    return view;
-  }
-  private void generateIds(){
-    project.setId1(UUID.randomUUID().getMostSignificantBits());
-    project.setId2(UUID.randomUUID().getLeastSignificantBits());
-  }
+        return view;
+    }
 
-private class InsertProject extends AsyncTask<ProjectEntity,Void,Void>{
+    private void generateIds() {
+        project.setId1(UUID.randomUUID().getMostSignificantBits());
+        project.setId2(UUID.randomUUID().getLeastSignificantBits());
+    }
 
-  @Override
-  protected Void doInBackground(ProjectEntity... projectEntities) {
-    ProjectEntity projectEntity = new ProjectEntity();
+    private class InsertProject extends AsyncTask<ProjectEntity, Void, Void> {
 
-    MobilePunchDatabase.getInstance(getContext()).getProjectDao().insert(projectEntity);
-    return null;
-  }
-}
+        @Override
+        protected Void doInBackground(ProjectEntity... projectEntities) {
+            ProjectEntity projectEntity = new ProjectEntity();
+
+            MobilePunchDatabase.getInstance(getContext()).getProjectDao().insert(projectEntity);
+            return null;
+        }
+    }
 
 }
