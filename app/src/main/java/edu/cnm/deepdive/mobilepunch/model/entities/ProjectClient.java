@@ -2,13 +2,14 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 
 @Entity(primaryKeys = {"projectId1", "projectId2"}, foreignKeys = {
     @ForeignKey(entity = ProjectEntity.class, parentColumns = {"project_id1",
         "project_id2"}, childColumns = {"projectId1", "projectId2"}),
     @ForeignKey(entity = ClientEntity.class, parentColumns = {"client_id1",
         "client_id2"}, childColumns = {"clientId1", "clientId2"})
-}
+}, indices = @Index(value = {"projectId1", "projectId2", "clientId1", "clientId2"}, unique = true)
 )
 public class ProjectClient {
 
