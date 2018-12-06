@@ -265,9 +265,11 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     if (project != null) {
       events = project.getEvents();
       MobilePunchDatabase.fromUUIDEvent(events);
-      for (EventEntity event : events) {
-        event.setProjectId1(project.getId1());
-        event.setProjectId2(project.getId2());
+      if (events != null) {
+        for (EventEntity event : events) {
+          event.setProjectId1(project.getId1());
+          event.setProjectId2(project.getId2());
+        }
       }
     }
     return events;
