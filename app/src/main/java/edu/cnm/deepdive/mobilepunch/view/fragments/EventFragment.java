@@ -17,9 +17,9 @@ import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * The type Event fragment.
@@ -63,8 +63,7 @@ public class EventFragment extends Fragment {
   }
 
   private void generateIds() {
-    event.setId1(UUID.randomUUID().getMostSignificantBits());
-    event.setId2(UUID.randomUUID().getLeastSignificantBits());
+    UuidSetter.setNewRandomUuid(event);
   }
 
   private void initLayout() {

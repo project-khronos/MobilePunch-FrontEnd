@@ -12,7 +12,7 @@ import android.widget.Button;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
-import java.util.UUID;
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 
 
 /**
@@ -46,8 +46,7 @@ public class ProjectFragment extends Fragment {
   }
 
   private void generateIds() {
-    project.setId1(UUID.randomUUID().getMostSignificantBits());
-    project.setId2(UUID.randomUUID().getLeastSignificantBits());
+    UuidSetter.setNewRandomUuid(project);
   }
 
   private class InsertProject extends AsyncTask<ProjectEntity, Void, Void> {

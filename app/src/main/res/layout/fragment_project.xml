@@ -18,6 +18,9 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:hint="Description"
+    android:cursorVisible="true"
+    android:textAlignment="inherit"
+    android:textCursorDrawable="@null"
     android:inputType="textMultiLine"/>
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
