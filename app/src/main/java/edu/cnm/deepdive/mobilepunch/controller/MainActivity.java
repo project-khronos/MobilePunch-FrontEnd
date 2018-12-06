@@ -25,6 +25,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
@@ -125,7 +126,8 @@ public class MainActivity extends AppCompatActivity
     ApiTask apiTask = new ApiTask();
     apiTask.execute();
     instance = this;
-    new ProjectHelper.ProjectGetterTask().execute();
+    //new ProjectHelper.ProjectGetterTask().execute();
+
   }
 
 
@@ -224,7 +226,10 @@ public class MainActivity extends AppCompatActivity
       Log.d(TAG, "Executing API TASK");
       FrontendApplication.refreshToken();
       Log.d(TAG, "Token Refreshed");
-
+      MainActivity.this.projects = ProjectHelper.getProjects(MainActivity.this);
+      if (MainActivity.this.projects == null) {
+        MainActivity.this.projects = new ArrayList<>();
+      }
       try {
         String token = getString(
             R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
