@@ -17,5 +17,11 @@ public class UuidSetter {
     }
   }
 
+  public static void setNewRandomUuid(UuidHaver haver) {
+    UUID uuid = UUID.randomUUID();
+    haver.setUuid(uuid);
+    setIdsFromUuid(haver);
+  }
+
 
 }

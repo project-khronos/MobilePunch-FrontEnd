@@ -9,6 +9,8 @@ import android.content.Context;
 import edu.cnm.deepdive.mobilepunch.model.dao.ClientDao;
 import edu.cnm.deepdive.mobilepunch.model.dao.EquipmentDao;
 import edu.cnm.deepdive.mobilepunch.model.dao.EventDao;
+import edu.cnm.deepdive.mobilepunch.model.dao.EventEquipmentDao;
+import edu.cnm.deepdive.mobilepunch.model.dao.ProjectClientDao;
 import edu.cnm.deepdive.mobilepunch.model.dao.ProjectDao;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
@@ -263,9 +265,11 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     if (project != null) {
       events = project.getEvents();
       MobilePunchDatabase.fromUUIDEvent(events);
-      for (EventEntity event : events) {
-        event.setProjectId1(project.getId1());
-        event.setProjectId2(project.getId2());
+      if (events != null) {
+        for (EventEntity event : events) {
+          event.setProjectId1(project.getId1());
+          event.setProjectId2(project.getId2());
+        }
       }
     }
     return events;
@@ -314,6 +318,12 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
    * @return the event dao
    */
   public abstract EventDao getEventDao();
+
+
+  public abstract EventEquipmentDao getEventEquipmentDao();
+
+  public abstract ProjectClientDao getProjectClientDao();
+
 
   /**
    * The type Converters.

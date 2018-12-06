@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.model.dao.abstraction.ProjectHelper;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
@@ -25,7 +26,6 @@ import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
 import java.util.List;
-import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity
     ApiTask apiTask = new ApiTask();
     apiTask.execute();
     instance = this;
-
+    new ProjectHelper.ProjectGetterTask().execute();
   }
 
 
@@ -205,6 +205,10 @@ public class MainActivity extends AppCompatActivity
 
   }
 
+  public List<ProjectEntity> getProjects() {
+    return projects;
+  }
+
   private class ApiTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
 
     @Override
@@ -228,10 +232,9 @@ public class MainActivity extends AppCompatActivity
         Response<List<ClientEntity>> clientsResponse = service.getClients(token).execute();
         Response<List<EquipmentEntity>> equipmentResponse = service.getEquipment(token).execute();
 
-        Response<ResponseBody> eqJson = service.getEquipmentJson(token).execute();
-
+        // Response<ResponseBody> eqJson = service.getEquipmentJson(token).execute();
         //Use this to see raw response, needs a jasoncall.
-        Log.d(TAG, "RAW JSON: " + eqJson.body().string());
+        // Log.d(TAG, "RAW JSON: " + eqJson.body().string());
         if (projectsResponse.isSuccessful()
             && clientsResponse.isSuccessful()
             && equipmentResponse.isSuccessful()) {
@@ -253,6 +256,7 @@ public class MainActivity extends AppCompatActivity
           MobilePunchDatabase.fromUUIDProject(projects);
           List<EventEntity> events = MobilePunchDatabase.getEventsFromProject(projects);
           dataBase.getProjectDao().insert(projects);
+
           dataBase.getEventDao().insert(events);
           MobilePunchDatabase.fromUUIDClient(clients);
           dataBase.getClientDao().insert(clients);
@@ -271,7 +275,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onPostExecute(List<ProjectEntity> projectEntities) {
       //FIXME Move this so its called no matter the status of APITask
-      setProjects(projectEntities);
+      getProjects().addAll(projectEntities);
       QueryTask queryTask = new QueryTask();
       queryTask.execute();
       Toast.makeText(MainActivity.this, "Database Updated",
@@ -285,6 +289,4 @@ public class MainActivity extends AppCompatActivity
       Log.d(TAG, "Service cancelled");
     }
   }
-
-
 }
