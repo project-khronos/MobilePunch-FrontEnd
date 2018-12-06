@@ -24,6 +24,7 @@ public class EventRecyclerViewAdapter extends
   private LayoutInflater layoutInflater;
   private ItemClickListener itemClickListener;
   private Context context;
+  private String TAG = "tag";
 
   /**
    * Instantiates a new Event recycler view adapter.
@@ -48,14 +49,15 @@ public class EventRecyclerViewAdapter extends
   @Override
   public void onBindViewHolder(@NonNull EventHolder eventHolder, int position) {
 
-    eventHolder.startDate
-        .setText("Start date: " + setTimeFormat(data.get(position).getStartDate()));
-    eventHolder.endDate.setText("End date: " + setTimeFormat(data.get(position).getEndDate()));
-    eventHolder.expenses.setText(String.valueOf(data.get(position).getExpenses()));
-    eventHolder.income.setText(String.valueOf(data.get(position).getIncome()));
-    eventHolder.description.setText(data.get(position).getDescription());
-    eventHolder.latitude.setText(String.valueOf(data.get(position).getLatitude()));
-    eventHolder.longitude.setText(String.valueOf(data.get(position).getLongitude()));
+    eventHolder.startDate.setText(data.get(position).getStartDate().toString());
+    eventHolder.endDate.setText(data.get(position).getEndDate().toString());
+
+    //  Log.d(TAG,data.get(position).getStartDate().toString());
+    eventHolder.expenses.setText(data.get(position).getExpenses().toString());
+    eventHolder.income.setText(data.get(position).getIncome().toString());
+    eventHolder.description.setText(data.get(position).getDescription().toString());
+    //eventHolder.latitude.setText(data.get(position).getLatitude());
+    // eventHolder.longitude.setText(String.valueOf(data.get(position).getLongitude()));
 
 
   }
