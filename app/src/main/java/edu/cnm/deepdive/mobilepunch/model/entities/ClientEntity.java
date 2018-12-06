@@ -40,7 +40,7 @@ public class ClientEntity implements Serializable, UuidHaver {
     private String name;
     @Expose
     private String email;
-
+    @Expose
     @ColumnInfo(name = "alt_phone")
     private String altPhone;
     @NonNull
