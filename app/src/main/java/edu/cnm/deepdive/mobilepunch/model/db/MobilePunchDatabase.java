@@ -10,7 +10,6 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import edu.cnm.deepdive.mobilepunch.model.dao.ClientDao;
 import edu.cnm.deepdive.mobilepunch.model.dao.EquipmentDao;
@@ -22,6 +21,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEquipment;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectClient;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 
 /**
  * The type Mobile punch database.
@@ -108,8 +108,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
    */
   public static void fromUUIDProject(ProjectEntity project) {
     if (project != null) {
-      project.setId1(project.getUuid().getMostSignificantBits());
-      project.setId2(project.getUuid().getLeastSignificantBits());
+      UuidSetter.setIdsFromUuid(project);
       fromUUIDEvent(project.getEvents());
       fromUUIDClient(project.getClients());
     }
@@ -126,7 +125,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
 
   private static void toUUIDProject(ProjectEntity project) {
     if (project != null) {
-      project.setUuid(new UUID(project.getId1(), project.getId2()));
+      UuidSetter.setUuidFromIds(project);
       toUUIDCLient(project.getClients());
       toUUIDEvent(project.getEvents());
     }
@@ -153,8 +152,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
    */
   public static void fromUUIDEvent(EventEntity event) {
     if (event != null) {
-      event.setId1(event.getUuid().getMostSignificantBits());
-      event.setId2(event.getUuid().getLeastSignificantBits());
+      UuidSetter.setIdsFromUuid(event);
       fromUUIDEquipment(event.getEquipmentList());
     }
   }
@@ -166,7 +164,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
    */
   public static void toUUIDEvent(EventEntity event) {
     if (event != null) {
-      event.setUuid(new UUID(event.getId1(), event.getId2()));
+      UuidSetter.setUuidFromIds(event);
       toUUIDEquipment(event.getEquipmentList());
     }
   }
@@ -192,8 +190,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
    */
   public static void fromUUIDClient(ClientEntity client) {
     if (client != null) {
-      client.setId1(client.getUuid().getMostSignificantBits());
-      client.setId2(client.getUuid().getLeastSignificantBits());
+      UuidSetter.setIdsFromUuid(client);
       fromUUIDProject(client.getProjects());
     }
   }
@@ -233,7 +230,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
    */
   public static void toUUIDClient(ClientEntity client) {
     if (client != null) {
-      client.setUuid(new UUID(client.getId1(), client.getId2()));
+      UuidSetter.setUuidFromIds(client);
       toUUIDProject(client.getProjects());
     }
   }
@@ -245,8 +242,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
    */
   public static void fromUUIDEquipment(EquipmentEntity equipment) {
     if (equipment != null) {
-      equipment.setId1(equipment.getUuid().getMostSignificantBits());
-      equipment.setId2(equipment.getUuid().getLeastSignificantBits());
+      UuidSetter.setIdsFromUuid(equipment);
     }
   }
 
@@ -271,7 +267,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
    */
   public static void toUUIDEquipment(EquipmentEntity equipment) {
     if (equipment != null) {
-      equipment.setUuid(new UUID(equipment.getId1(), equipment.getId2()));
+      UuidSetter.setUuidFromIds(equipment);
     }
   }
 

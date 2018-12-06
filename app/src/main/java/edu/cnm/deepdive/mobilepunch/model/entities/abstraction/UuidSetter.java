@@ -5,8 +5,8 @@ import java.util.UUID;
 public class UuidSetter {
 
     public static void setIdsFromUuid(UuidHaver haver) {
-        haver.setId1(haver.getUuid().getLeastSignificantBits());
-        haver.setId2(haver.getUuid().getMostSignificantBits());
+        haver.setId1(haver.getUuid().getMostSignificantBits());
+        haver.setId2(haver.getUuid().getLeastSignificantBits());
     }
 
     public static void setUuidFromIds(UuidHaver haver) {
