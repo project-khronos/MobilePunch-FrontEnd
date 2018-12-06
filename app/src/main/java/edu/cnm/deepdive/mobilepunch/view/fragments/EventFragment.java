@@ -20,13 +20,11 @@ import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
 import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
+import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 import edu.cnm.deepdive.mobilepunch.view.fragments.helpers.DayOfWeekHelper;
-
 import java.lang.ref.WeakReference;
-
 import java.util.ArrayList;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -53,7 +51,6 @@ public class EventFragment extends Fragment {
   private View view;
 
   private ProjectEntity pickedProject;
-
 
   private Date startDate = new Date(), endDate = new Date();
 
@@ -128,7 +125,7 @@ public class EventFragment extends Fragment {
       grabFields();
 
       if (!descriptionField.getText().toString().equals("")) {
-        new InsertEvent(getContext(), pickedProject).execute(event);
+        new InsertEvent((MainActivity) getActivity(), pickedProject).execute(event);
         Toast.makeText(getContext(), "Event saved", Toast.LENGTH_SHORT).show();
         getFragmentManager().beginTransaction()
             .replace(R.id.fragment_container, new ProjectFragment()).commit();
@@ -180,8 +177,10 @@ public class EventFragment extends Fragment {
   private static class InsertEvent extends AsyncTask<EventEntity, Void, Void> {
 
     private WeakReference<MainActivity> mainActivity;
+    private ProjectEntity projectEntity;
 
-    public InsertEvent(MainActivity mainActivity) {
+    public InsertEvent(MainActivity mainActivity, ProjectEntity projectEntity) {
+      this.projectEntity = projectEntity;
       this.mainActivity = new WeakReference<>(mainActivity);
     }
 
@@ -193,7 +192,7 @@ public class EventFragment extends Fragment {
         projectEntity.setEvents(new ArrayList<>());
       }
       projectEntity.getEvents().add(eventEntity[0]);
-      MobilePunchDatabase.getInstance(context).getEventDao().insert(eventEntity[0]);
+      MobilePunchDatabase.getInstance(mainActivity.get()).getEventDao().insert(eventEntity[0]);
       return null;
     }
   }
