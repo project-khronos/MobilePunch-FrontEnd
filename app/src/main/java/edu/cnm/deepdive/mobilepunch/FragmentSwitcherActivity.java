@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
  * The type Fragment switcher activity.
  */
 public class FragmentSwitcherActivity extends AppCompatActivity {
+
   private static FragmentManager manager;
 
   /**

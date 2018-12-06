@@ -41,9 +41,7 @@ public class EventFragment extends Fragment {
   private View view;
 
 
-
-
-  private Date startDate = new Date(), endDate  = new Date();
+  private Date startDate = new Date(), endDate = new Date();
 
 
   @Override
@@ -64,7 +62,7 @@ public class EventFragment extends Fragment {
     return view;
   }
 
-  private void generateIds(){
+  private void generateIds() {
     event.setId1(UUID.randomUUID().getMostSignificantBits());
     event.setId2(UUID.randomUUID().getLeastSignificantBits());
   }
@@ -96,12 +94,13 @@ public class EventFragment extends Fragment {
       grabFields();
       event.setProjectId1(1010);
       event.setProjectId2(1010);
-      new InsertEvent(getContext(),null).execute(event);
-      getFragmentManager().beginTransaction().replace(R.id.fragment_container, new EventFragment()).commit();
+      new InsertEvent(getContext(), null).execute(event);
+      getFragmentManager().beginTransaction().replace(R.id.fragment_container, new EventFragment())
+          .commit();
     });
   }
 
-  private void grabFields(){
+  private void grabFields() {
     double income;
     double expenses;
     income = incomeField.getText().toString().equals("") ? 0
@@ -119,14 +118,14 @@ public class EventFragment extends Fragment {
       picker.show(getFragmentManager(), picker.getClass().getSimpleName());
       picker.setListener((cal) -> {
 
-        if(button.getTag().equals("Start date")){
+        if (button.getTag().equals("Start date")) {
           event.setStartDate(cal.getTime());
-        }else{
+        } else {
           event.setEndDate(cal.getTime());
         }
 
         String day = "UNKNOWN";
-        switch (cal.get(Calendar.DAY_OF_WEEK)){
+        switch (cal.get(Calendar.DAY_OF_WEEK)) {
           case 2:
             day = "Monday";
             break;
@@ -150,7 +149,9 @@ public class EventFragment extends Fragment {
             break;
         }
 
-        button.setText(button.getTag().toString() + ": " + day + " " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH)+1) + "/" + cal.get(Calendar.YEAR));
+        button.setText(
+            button.getTag().toString() + ": " + day + " " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (
+                cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR));
 
       });
     });

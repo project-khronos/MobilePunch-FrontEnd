@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
@@ -29,6 +28,7 @@ public class ProjectFragment extends Fragment {
    * The Save button.
    */
   Button saveButton;
+
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -42,23 +42,23 @@ public class ProjectFragment extends Fragment {
     View view = inflater.inflate(R.layout.fragment_project, container, false);
     generateIds();
 
-
     return view;
   }
-  private void generateIds(){
+
+  private void generateIds() {
     project.setId1(UUID.randomUUID().getMostSignificantBits());
     project.setId2(UUID.randomUUID().getLeastSignificantBits());
   }
 
-private class InsertProject extends AsyncTask<ProjectEntity,Void,Void>{
+  private class InsertProject extends AsyncTask<ProjectEntity, Void, Void> {
 
-  @Override
-  protected Void doInBackground(ProjectEntity... projectEntities) {
-    ProjectEntity projectEntity = new ProjectEntity();
+    @Override
+    protected Void doInBackground(ProjectEntity... projectEntities) {
+      ProjectEntity projectEntity = new ProjectEntity();
 
-    MobilePunchDatabase.getInstance(getContext()).getProjectDao().insert(projectEntity);
-    return null;
+      MobilePunchDatabase.getInstance(getContext()).getProjectDao().insert(projectEntity);
+      return null;
+    }
   }
-}
 
 }

@@ -8,23 +8,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import android.widget.Toast;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 /**
  * The type Event recycler view adapter.
  */
-public class EventRecyclerViewAdapter extends RecyclerView.Adapter<EventRecyclerViewAdapter.EventHolder> {
-private List<EventEntity> data;
-private LayoutInflater layoutInflater;
-private ItemClickListener itemClickListener;
-private Context context;
+public class EventRecyclerViewAdapter extends
+    RecyclerView.Adapter<EventRecyclerViewAdapter.EventHolder> {
+
+  private List<EventEntity> data;
+  private LayoutInflater layoutInflater;
+  private ItemClickListener itemClickListener;
+  private Context context;
 
   /**
    * Instantiates a new Event recycler view adapter.
@@ -49,13 +48,14 @@ private Context context;
   @Override
   public void onBindViewHolder(@NonNull EventHolder eventHolder, int position) {
 
-      eventHolder.startDate.setText("Start date: " + setTimeFormat(data.get(position).getStartDate()));
-      eventHolder.endDate.setText("End date: " + setTimeFormat(data.get(position).getEndDate()));
-      eventHolder.expenses.setText(String.valueOf(data.get(position).getExpenses()));
-      eventHolder.income.setText(String.valueOf(data.get(position).getIncome()));
-      eventHolder.description.setText(data.get(position).getDescription());
-      eventHolder.latitude.setText(String.valueOf(data.get(position).getLatitude()));
-      eventHolder.longitude.setText(String.valueOf(data.get(position).getLongitude()));
+    eventHolder.startDate
+        .setText("Start date: " + setTimeFormat(data.get(position).getStartDate()));
+    eventHolder.endDate.setText("End date: " + setTimeFormat(data.get(position).getEndDate()));
+    eventHolder.expenses.setText(String.valueOf(data.get(position).getExpenses()));
+    eventHolder.income.setText(String.valueOf(data.get(position).getIncome()));
+    eventHolder.description.setText(data.get(position).getDescription());
+    eventHolder.latitude.setText(String.valueOf(data.get(position).getLatitude()));
+    eventHolder.longitude.setText(String.valueOf(data.get(position).getLongitude()));
 
 
   }
@@ -78,6 +78,7 @@ private Context context;
    * The type Event holder.
    */
   public class EventHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
     private TextView startDate;
     private TextView endDate;
     private TextView expenses;
@@ -106,7 +107,9 @@ private Context context;
 
     @Override
     public void onClick(View view) {
-      if(itemClickListener != null) itemClickListener.onItemClick(view, getAdapterPosition());
+      if (itemClickListener != null) {
+        itemClickListener.onItemClick(view, getAdapterPosition());
+      }
     }
   }
 

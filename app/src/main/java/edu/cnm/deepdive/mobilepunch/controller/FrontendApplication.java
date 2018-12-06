@@ -110,6 +110,7 @@ public class FrontendApplication extends Application {
    * The type Refresh token task.
    */
   public static class RefreshTokenTask implements Runnable {
+
     @Override
     public void run() {
       refreshToken();

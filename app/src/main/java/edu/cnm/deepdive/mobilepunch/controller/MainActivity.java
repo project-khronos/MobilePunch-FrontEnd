@@ -70,7 +70,8 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView = findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(this);
 
-    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainFragment()).commit();
+    getSupportFragmentManager().beginTransaction()
+        .replace(R.id.fragment_container, new MainFragment()).commit();
 
     setupService();
     dataBase = MobilePunchDatabase.getInstance(this);

@@ -23,19 +23,19 @@ import java.util.List;
  */
 public class MainFragment extends Fragment {
 
-private TextView tEvent,
-    tProject,
-    tClient,
-    tEquipment;
+  private TextView tEvent,
+      tProject,
+      tClient,
+      tEquipment;
 
-private CardView event,
-    project,
-    client,
-    equipment;
+  private CardView event,
+      project,
+      client,
+      equipment;
 
-private RecyclerFragment recyclerFragment = new RecyclerFragment();
+  private RecyclerFragment recyclerFragment = new RecyclerFragment();
 
-private Bundle bundle = new Bundle();
+  private Bundle bundle = new Bundle();
 
   /**
    * Instantiates a new Main fragment.
@@ -57,21 +57,21 @@ private Bundle bundle = new Bundle();
 
   }
 
-  private void getNumItems(){
+  private void getNumItems() {
     new NumItemsEvent().execute();
     new NumItemsProject().execute();
     new NumItemsClient().execute();
     new NumItemsEquipment().execute();
   }
 
-  private void setListeners(){
-    setListener(event,recyclerFragment);
-    setListener(project,recyclerFragment);
-    setListener(client,recyclerFragment);
-    setListener(equipment,recyclerFragment);
+  private void setListeners() {
+    setListener(event, recyclerFragment);
+    setListener(project, recyclerFragment);
+    setListener(client, recyclerFragment);
+    setListener(equipment, recyclerFragment);
   }
 
-  private void initViews(View view){
+  private void initViews(View view) {
     tEvent = view.findViewById(R.id.event_num_items);
     event = view.findViewById(R.id.event_card);
     event.setTag("event");
@@ -86,19 +86,19 @@ private Bundle bundle = new Bundle();
     equipment.setTag("equipment");
   }
 
-  private void setListener(CardView cardView, Fragment fragment){
+  private void setListener(CardView cardView, Fragment fragment) {
     cardView.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View view) {
         bundle.putString("fragment", cardView.getTag().toString());
         recyclerFragment.setArguments(bundle);
         FragmentSwitcherActivity.setManager(getFragmentManager());
-        FragmentSwitcherActivity.switchFragment(fragment,true,null);
+        FragmentSwitcherActivity.switchFragment(fragment, true, null);
       }
     });
   }
 
-  private class NumItemsEvent extends AsyncTask<Void,Void, List<EventEntity>>{
+  private class NumItemsEvent extends AsyncTask<Void, Void, List<EventEntity>> {
 
     @Override
     protected void onPostExecute(List<EventEntity> eventEntities) {
@@ -111,7 +111,7 @@ private Bundle bundle = new Bundle();
     }
   }
 
-  private class NumItemsProject extends AsyncTask<Void,Void, List<ProjectEntity>>{
+  private class NumItemsProject extends AsyncTask<Void, Void, List<ProjectEntity>> {
 
     @Override
     protected void onPostExecute(List<ProjectEntity> projectEntities) {
@@ -124,7 +124,7 @@ private Bundle bundle = new Bundle();
     }
   }
 
-  private class NumItemsClient extends AsyncTask<Void,Void, List<ClientEntity>>{
+  private class NumItemsClient extends AsyncTask<Void, Void, List<ClientEntity>> {
 
     @Override
     protected void onPostExecute(List<ClientEntity> eventEntities) {
@@ -137,7 +137,7 @@ private Bundle bundle = new Bundle();
     }
   }
 
-  private class NumItemsEquipment extends AsyncTask<Void,Void, List<EquipmentEntity>>{
+  private class NumItemsEquipment extends AsyncTask<Void, Void, List<EquipmentEntity>> {
 
     @Override
     protected void onPostExecute(List<EquipmentEntity> equipmentEntities) {

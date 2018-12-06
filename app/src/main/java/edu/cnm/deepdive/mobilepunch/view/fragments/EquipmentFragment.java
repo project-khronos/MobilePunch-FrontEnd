@@ -27,7 +27,7 @@ public class EquipmentFragment extends Fragment {
 
   private EditText makeField, modelField, yearField, identificationField;
 
-  private Button  saveButton;
+  private Button saveButton;
 
   private View view;
 

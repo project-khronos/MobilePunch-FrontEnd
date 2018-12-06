@@ -21,55 +21,55 @@
 
 
   <LinearLayout
-  android:layout_height="match_parent"
-  android:layout_width="match_parent"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:orientation="vertical"
-  android:layout_margin="20dp">
-  <TextView
-    android:id="@+id/li_event_start_date"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/start_date_time"
-    android:textColor="@color/rallyBlue"/>
-  <TextView
-    android:id="@+id/li_event_end_date"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/end_date_time"
-    android:textColor="@color/rallyBlue"/>
-  <TextView
-    android:id="@+id/li_event_expenses"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/expenses"
-    android:textColor="@color/rallyBlue"/>
-  <TextView
-    android:id="@+id/li_event_income"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/income"
-    android:textColor="@color/rallyBlue"/>
-  <TextView
-    android:id="@+id/li_event_description"
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/description"
-    android:textColor="@color/rallyBlue"/>
-  <TextView
-    android:id="@+id/li_event_latitude"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/latitude"
-    android:textColor="@color/rallyBlue"/>
-  <TextView
-    android:id="@+id/li_event_longitude"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/longitude"
-    android:textColor="@color/rallyBlue"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="20dp">
+    <TextView
+      android:id="@+id/li_event_start_date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/start_date_time"
+      android:textColor="@color/rallyBlue"/>
+    <TextView
+      android:id="@+id/li_event_end_date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/end_date_time"
+      android:textColor="@color/rallyBlue"/>
+    <TextView
+      android:id="@+id/li_event_expenses"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/expenses"
+      android:textColor="@color/rallyBlue"/>
+    <TextView
+      android:id="@+id/li_event_income"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/income"
+      android:textColor="@color/rallyBlue"/>
+    <TextView
+      android:id="@+id/li_event_description"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/description"
+      android:textColor="@color/rallyBlue"/>
+    <TextView
+      android:id="@+id/li_event_latitude"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/latitude"
+      android:textColor="@color/rallyBlue"/>
+    <TextView
+      android:id="@+id/li_event_longitude"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/longitude"
+      android:textColor="@color/rallyBlue"/>
 
 
-</LinearLayout>
+  </LinearLayout>
 
 </android.support.v7.widget.CardView>

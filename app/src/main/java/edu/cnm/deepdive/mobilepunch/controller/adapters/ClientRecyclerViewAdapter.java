@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import edu.cnm.deepdive.mobilepunch.R;
-import edu.cnm.deepdive.mobilepunch.controller.adapters.EventRecyclerViewAdapter.EventHolder;
 import edu.cnm.deepdive.mobilepunch.controller.adapters.EventRecyclerViewAdapter.ItemClickListener;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import java.util.List;
@@ -38,7 +37,7 @@ public class ClientRecyclerViewAdapter extends
   @NonNull
   @Override
   public ClientHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
-    View view = layoutInflater.inflate(R.layout.event_list_item, viewGroup, false);
+    View view = layoutInflater.inflate(R.layout.client_list_item, viewGroup, false);
     return new ClientHolder(view);
   }
 

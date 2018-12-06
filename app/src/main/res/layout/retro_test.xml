@@ -9,7 +9,7 @@
     android:id="@+id/key_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:hint="Enter key to store value" />
+    android:hint="Enter key to store value"/>
 
   <EditText
     android:id="@+id/value_text"
@@ -26,7 +26,7 @@
     android:layout_height="wrap_content"
     android:layout_below="@id/value_text"
     android:layout_marginTop="8dp"
-    android:text="Post" />
+    android:text="Post"/>
 
   <TextView
     android:id="@+id/repsonse"
@@ -51,7 +51,7 @@
     android:layout_height="wrap_content"
     android:layout_below="@id/get_key"
     android:layout_marginTop="8dp"
-    android:text="get" />
+    android:text="get"/>
 
 
 </RelativeLayout>

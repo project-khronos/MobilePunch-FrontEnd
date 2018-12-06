@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Toast;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.adapters.ClientRecyclerViewAdapter;
@@ -24,7 +23,6 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.List;
-import org.apache.commons.cli.CommandLine;
 
 /**
  * The type Recycler fragment.
@@ -63,8 +61,8 @@ public class RecyclerFragment extends Fragment {
     return view;
   }
 
-  private void checkFrag(){
-    switch (bundle.getString("fragment")){
+  private void checkFrag() {
+    switch (bundle.getString("fragment")) {
       case "event":
         new QueryEvents().execute();
         break;
@@ -80,14 +78,14 @@ public class RecyclerFragment extends Fragment {
     }
   }
 
-  private class QueryEvents extends AsyncTask<Void, Void, List<EventEntity>>{
+  private class QueryEvents extends AsyncTask<Void, Void, List<EventEntity>> {
 
     @Override
     protected void onPostExecute(List<EventEntity> entities) {
       super.onPostExecute(entities);
       events = entities;
       adapter = new EventRecyclerViewAdapter(getContext(), events);
-      if(adapter.getItemCount()==0){
+      if (adapter.getItemCount() == 0) {
         Toast.makeText(getContext(), "No items found.", Toast.LENGTH_SHORT).show();
       }
       recyclerView.setAdapter(adapter);
@@ -99,14 +97,14 @@ public class RecyclerFragment extends Fragment {
     }
   }
 
-  private class QueryProjects extends AsyncTask<Void, Void, List<ProjectEntity>>{
+  private class QueryProjects extends AsyncTask<Void, Void, List<ProjectEntity>> {
 
     @Override
     protected void onPostExecute(List<ProjectEntity> entities) {
       super.onPostExecute(entities);
       projects = entities;
       adapter = new ProjectRecyclerViewAdapter(getContext(), projects);
-      if(adapter.getItemCount()==0){
+      if (adapter.getItemCount() == 0) {
         Toast.makeText(getContext(), "No items found.", Toast.LENGTH_SHORT).show();
       }
       recyclerView.setAdapter(adapter);
@@ -118,14 +116,14 @@ public class RecyclerFragment extends Fragment {
     }
   }
 
-  private class QueryClients extends AsyncTask<Void, Void, List<ClientEntity>>{
+  private class QueryClients extends AsyncTask<Void, Void, List<ClientEntity>> {
 
     @Override
     protected void onPostExecute(List<ClientEntity> entities) {
       super.onPostExecute(entities);
       clients = entities;
       adapter = new ClientRecyclerViewAdapter(getContext(), clients);
-      if(adapter.getItemCount()==0){
+      if (adapter.getItemCount() == 0) {
         Toast.makeText(getContext(), "No items found.", Toast.LENGTH_SHORT).show();
       }
       recyclerView.setAdapter(adapter);
@@ -137,14 +135,14 @@ public class RecyclerFragment extends Fragment {
     }
   }
 
-  private class QueryEquipment extends AsyncTask<Void, Void, List<EquipmentEntity>>{
+  private class QueryEquipment extends AsyncTask<Void, Void, List<EquipmentEntity>> {
 
     @Override
     protected void onPostExecute(List<EquipmentEntity> entities) {
       super.onPostExecute(entities);
       equipment = entities;
       adapter = new EquipmentRecyclerViewAdapter(getContext(), equipment);
-      if(adapter.getItemCount()==0){
+      if (adapter.getItemCount() == 0) {
         Toast.makeText(getContext(), "No items found.", Toast.LENGTH_SHORT).show();
       }
       recyclerView.setAdapter(adapter);

@@ -11,7 +11,7 @@ import java.util.List;
  * The interface Client dao.
  */
 @Dao
-public interface ClientDao{
+public interface ClientDao {
 
   /**
    * Insert long.
