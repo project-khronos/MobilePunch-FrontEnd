@@ -15,23 +15,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.util.List;
-
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
+import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
 import edu.cnm.deepdive.mobilepunch.view.fragments.Retrotest;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
+import java.util.List;
 import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -179,7 +175,7 @@ public class MainActivity extends AppCompatActivity
                 .create(MobilePunchService.class);
     }
 
-    private class QueryProjects extends AsyncTask<Void, Void, List<ProjectEntity>> {
+  private class QueryTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
 
         @Override
         protected void onPreExecute() {
@@ -196,10 +192,7 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         protected void onPostExecute(List<ProjectEntity> projectEntities) {
-            if (projects != null) {
-                Toast.makeText(MainActivity.this, Integer.toString(projectEntities.size()),
-                        Toast.LENGTH_LONG).show();
-            }
+
         }
 
         @Override
@@ -220,34 +213,34 @@ public class MainActivity extends AppCompatActivity
         protected List<ProjectEntity> doInBackground(Void... voids) {
             List<ProjectEntity> projects = null;
             List<ClientEntity> clients = null;
+          List<EquipmentEntity> equipment = null;
             FrontendApplication.refreshToken();
 
             try {
                 String token = getString(
                         R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
-                Call<List<ProjectEntity>> callProjects = service.getProjects(token);
-                Response<List<ProjectEntity>> responseProjects = callProjects.execute();
-                Call<List<ClientEntity>> callClients = service.getClients(token);
-                Response<List<ClientEntity>> responseClients = callClients.execute();
+              Response<List<ProjectEntity>> projectsResponse = service.getProjects(token).execute();
+              Response<List<ClientEntity>> clientsResponse = service.getClients(token).execute();
+              Response<List<EquipmentEntity>> equipmentResponse = service.getEquipment(token)
+                  .execute();
+              Log.d(TAG, projectsResponse.body().toString());
+              //Use this to see raw response, needs a jasoncall.
+              //Log.d(TAG, "RAW JSON: " + responseJson.body().string());
+              if (projectsResponse.isSuccessful()
+                  && clientsResponse.isSuccessful()
+                  && equipmentResponse.isSuccessful()) {
+                projects = projectsResponse.body();
+                clients = clientsResponse.body();
+                equipment = equipmentResponse.body();
 
-                Call<ResponseBody> responseBody = service.getProjectsJson(token);
-                Response<ResponseBody> responseJson = responseBody.execute();
-
-                Log.d(TAG, "RAW JSON: " + responseJson.body().string());
-                // Log.d(TAG, "TOKEN: " + token);
-                if (responseProjects.isSuccessful()) {
-                    projects = responseProjects.body();
-                    clients = responseClients.body();
-                    Log.d(TAG, "RESPONSE: " + responseJson.raw().toString());
                 } else {
-                    Log.d(TAG, "RESPONSE NOT SUCCESS: " + responseProjects.raw());
-
+                Log.d(TAG, "Service Execution Failed: ");
                 }
             } catch (Exception e) {
-                Log.d(TAG, "Caught Exception on Call: " + e.getLocalizedMessage());
+              Log.d(TAG, "Exception in service execution: " + e.getLocalizedMessage());
             } finally {
-                if (projects == null) {
-                    Log.d(TAG, "On Cancelled called");
+              if (projects == null || clients == null || equipment == null) {
+                Log.d(TAG, "Service execution cancelled");
                     cancel(true);
                 }
                 try {
@@ -257,6 +250,8 @@ public class MainActivity extends AppCompatActivity
                     dataBase.getEventDao().insert(events);
                     MobilePunchDatabase.fromUUIDClient(clients);
                     dataBase.getClientDao().insert(clients);
+                  MobilePunchDatabase.fromUUIDEquipment(equipment);
+                  dataBase.getEquipmentDao().insert(equipment);
                 } catch (Exception e) {
                     // FIXME do what
                     Log.d(TAG, "insert method failed: " + e.getLocalizedMessage());
@@ -271,13 +266,17 @@ public class MainActivity extends AppCompatActivity
         protected void onPostExecute(List<ProjectEntity> projectEntities) {
             //FIXME Move this so its called no matter the status of APITask
             setProjects(projectEntities);
-            QueryProjects queryProjects = new QueryProjects();
-            queryProjects.execute();
+          QueryTask queryTask = new QueryTask();
+          queryTask.execute();
+          Toast.makeText(MainActivity.this, "Database Updated",
+              Toast.LENGTH_LONG).show();
         }
 
         @Override
         protected void onCancelled() {
-            Toast.makeText(MainActivity.this, "Cancelled", Toast.LENGTH_LONG).show();
+          Toast.makeText(MainActivity.this,
+              "Unable to connect to server... Check network connection", Toast.LENGTH_LONG).show();
+          Log.d(TAG, "Service cancelled");
         }
     }
 
