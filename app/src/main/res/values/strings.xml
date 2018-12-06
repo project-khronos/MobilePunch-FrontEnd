@@ -52,4 +52,10 @@
   <string name="equipment_name">Name</string>
   <string name="identification">Identification</string>
   <string name="oauth2_header">Bearer %s</string>
+  <string name="alternate_address">Alternate Address</string>
+  <string name="alternate_number">Alternate number</string>
+  <string name="clients_number">Client\'s number</string>
+  <string name="clients_email">Client\'s email</string>
+  <string name="client_save">SAVE</string>
+  <string name="client_notes">Notes</string>
 </resources>
