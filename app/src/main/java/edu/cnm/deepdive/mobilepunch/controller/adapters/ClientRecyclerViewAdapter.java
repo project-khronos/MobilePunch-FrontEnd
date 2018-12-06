@@ -47,8 +47,8 @@ public class ClientRecyclerViewAdapter extends
     clientHolder.phone.setText(data.get(position).getPhone());
     clientHolder.altPhone.setText(data.get(position).getAltPhone());
     clientHolder.email.setText(data.get(position).getEmail());
-    clientHolder.billingAddress.setText(String.valueOf(data.get(position).getAddress()));
-    clientHolder.mailingAddress.setText(String.valueOf(data.get(position).getAltAddress()));
+    clientHolder.billingAddress.setText(data.get(position).getAddress());
+    clientHolder.mailingAddress.setText(data.get(position).getAltAddress());
     clientHolder.notes.setText(data.get(position).getNotes());
 
   }

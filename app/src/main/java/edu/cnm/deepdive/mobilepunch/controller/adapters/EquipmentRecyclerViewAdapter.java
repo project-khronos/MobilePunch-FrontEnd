@@ -105,7 +105,7 @@ public class EquipmentRecyclerViewAdapter extends
       make = itemView.findViewById(R.id.li_equipment_make);
       model = itemView.findViewById(R.id.li_equipment_model);
       year = itemView.findViewById(R.id.li_equipment_year);
-      description = itemView.findViewById(R.id.li_event_description);
+      description = itemView.findViewById(R.id.li_equipment_description);
     }
 
     @Override

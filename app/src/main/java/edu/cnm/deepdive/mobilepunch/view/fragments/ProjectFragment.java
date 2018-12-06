@@ -125,19 +125,19 @@ public class ProjectFragment extends Fragment {
 
   private static class InsertProject extends AsyncTask<ProjectEntity, Void, Void> {
 
-    private WeakReference<MainActivity> mainActivity;
+  private WeakReference<MainActivity> mainActivity;
 
-    public InsertProject(MainActivity mainActivity) {
-      this.mainActivity = new WeakReference<>(mainActivity);
-    }
-
-    @Override
-    protected Void doInBackground(ProjectEntity... projectEntities) {
-
-      MobilePunchDatabase.getInstance(mainActivity.get()).getProjectDao()
-          .insert(projectEntities[0]);
-      return null;
-    }
+  public InsertProject(MainActivity mainActivity) {
+    this.mainActivity = new WeakReference<>(mainActivity);
   }
+
+  @Override
+  protected Void doInBackground(ProjectEntity... projectEntities) {
+
+    MobilePunchDatabase.getInstance(mainActivity.get()).getProjectDao()
+        .insert(projectEntities[0]);
+    return null;
+  }
+}
 
 }
