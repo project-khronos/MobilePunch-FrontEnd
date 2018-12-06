@@ -7,7 +7,13 @@
   android:translationZ="8dp"
   app:cardCornerRadius="10dp"
   app:cardElevation="8dp"
+  app:cardBackgroundColor="@color/rallyBackground"
+  android:background="@drawable/edit_text_style"
   xmlns:android="http://schemas.android.com/apk/res/android">
+<ImageView
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/edit_text_style"/>
 
   <LinearLayout
     android:layout_height="match_parent"
