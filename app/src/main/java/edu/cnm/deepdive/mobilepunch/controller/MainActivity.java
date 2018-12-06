@@ -28,6 +28,7 @@ import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
 import edu.cnm.deepdive.mobilepunch.view.fragments.Retrotest;
 import java.util.List;
+import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -36,249 +37,253 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * The type Main activity.
  */
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+    implements NavigationView.OnNavigationItemSelectedListener {
 
-    private MobilePunchService service;
-    private List<ProjectEntity> projects;
-    private MobilePunchDatabase dataBase;
-    private String TAG = "tag";
+  private MobilePunchService service;
+  private List<ProjectEntity> projects;
+  private MobilePunchDatabase dataBase;
+  private String TAG = "tag";
 
-    /**
-     * Sets projects.
-     *
-     * @param projects the projects
-     */
-    public void setProjects(
-            List<ProjectEntity> projects) {
-        this.projects = projects;
+  /**
+   * Sets projects.
+   *
+   * @param projects the projects
+   */
+  public void setProjects(
+      List<ProjectEntity> projects) {
+    this.projects = projects;
+  }
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    Toolbar toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+
+    DrawerLayout drawer = findViewById(R.id.drawer_layout);
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    drawer.addDrawerListener(toggle);
+    toggle.syncState();
+
+    NavigationView navigationView = findViewById(R.id.nav_view);
+    navigationView.setNavigationItemSelectedListener(this);
+
+    getSupportFragmentManager().beginTransaction()
+        .replace(R.id.fragment_container, new MainFragment()).commit();
+
+    setupService();
+    dataBase = MobilePunchDatabase.getInstance(this);
+    ApiTask apiTask = new ApiTask();
+    apiTask.execute();
+
+  }
+
+  @Override
+  public void onBackPressed() {
+    DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
+    if (drawer.isDrawerOpen(GravityCompat.START)) {
+      drawer.closeDrawer(GravityCompat.START);
+    } else {
+      super.onBackPressed();
+    }
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    // Inflate the menu; this adds items to the action bar if it is present.
+    getMenuInflater().inflate(R.menu.main, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    // Handle action bar item clicks here. The action bar will
+    // automatically handle clicks on the Home/Up button, so long
+    // as you specify a parent activity in AndroidManifest.xml.
+    int id = item.getItemId();
+
+    //noinspection SimplifiableIfStatement
+    if (id == R.id.action_settings) {
+      FragmentManager manager = getSupportFragmentManager();
+      FragmentTransaction transaction = manager.beginTransaction();
+      transaction.replace(R.id.fragment_container, Retrotest.newInstance(), "");
+      transaction.commit();
+    } else if (id == R.id.sign_out) {
+      signOut();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    return true;
+  }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+  private void signOut() {
+    FrontendApplication.getInstance().getClient().signOut().addOnCompleteListener(this, (task) -> {
+      Intent intent = new Intent(this, LoginActivity.class);
+      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+      startActivity(intent);
+    });
+  }
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainFragment()).commit();
 
-        setupService();
-        dataBase = MobilePunchDatabase.getInstance(this);
-        ApiTask apiTask = new ApiTask();
-        apiTask.execute();
+  @SuppressWarnings("StatementWithEmptyBody")
+  @Override
+  public boolean onNavigationItemSelected(MenuItem item) {
+    // Handle navigation view item clicks here.
+    int id = item.getItemId();
 
+    if (id == R.id.event) {
+      Intent intent = new Intent(MainActivity.this, BottomNav.class);
+      Bundle send = new Bundle();
+      send.putInt("key", 1);
+      intent.putExtras(send);
+      startActivity(intent);
+    } else if (id == R.id.project) {
+      Intent intent = new Intent(MainActivity.this, BottomNav.class);
+      Bundle send = new Bundle();
+      send.putInt("key", 2);
+      intent.putExtras(send);
+      startActivity(intent);
+    } else if (id == R.id.client) {
+      Intent intent = new Intent(MainActivity.this, BottomNav.class);
+      Bundle send = new Bundle();
+      send.putInt("key", 3);
+      intent.putExtras(send);
+      startActivity(intent);
+    } else if (id == R.id.equipment) {
+      Intent intent = new Intent(MainActivity.this, BottomNav.class);
+      Bundle send = new Bundle();
+      send.putInt("key", 4);
+      intent.putExtras(send);
+      startActivity(intent);
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+    DrawerLayout drawer = findViewById(R.id.drawer_layout);
+    drawer.closeDrawer(GravityCompat.START);
+    return true;
+  }
 
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            FragmentManager manager = getSupportFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.fragment_container, Retrotest.newInstance(), "");
-            transaction.commit();
-        } else if (id == R.id.sign_out) {
-            signOut();
-        }
-
-        return true;
-    }
-
-
-    private void signOut() {
-        FrontendApplication.getInstance().getClient().signOut().addOnCompleteListener(this, (task) -> {
-            Intent intent = new Intent(this, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        });
-    }
-
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.event) {
-            Intent intent = new Intent(MainActivity.this, BottomNav.class);
-            Bundle send = new Bundle();
-            send.putInt("key", 1);
-            intent.putExtras(send);
-            startActivity(intent);
-        } else if (id == R.id.project) {
-            Intent intent = new Intent(MainActivity.this, BottomNav.class);
-            Bundle send = new Bundle();
-            send.putInt("key", 2);
-            intent.putExtras(send);
-            startActivity(intent);
-        } else if (id == R.id.client) {
-            Intent intent = new Intent(MainActivity.this, BottomNav.class);
-            Bundle send = new Bundle();
-            send.putInt("key", 3);
-            intent.putExtras(send);
-            startActivity(intent);
-        } else if (id == R.id.equipment) {
-            Intent intent = new Intent(MainActivity.this, BottomNav.class);
-            Bundle send = new Bundle();
-            send.putInt("key", 4);
-            intent.putExtras(send);
-            startActivity(intent);
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    private void setupService() {
-        Gson gson = new GsonBuilder()
-                .excludeFieldsWithoutExposeAnnotation()
-                .create();
-        service = new Builder()
-                // TODO change base_url value.
-                .baseUrl("http://10.0.2.2:8080/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build()
-                .create(MobilePunchService.class);
-    }
+  private void setupService() {
+    Gson gson = new GsonBuilder()
+        .excludeFieldsWithoutExposeAnnotation()
+        .create();
+    service = new Builder()
+        // TODO change base_url value.
+        .baseUrl("http://10.0.2.2:8080/")
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .build()
+        .create(MobilePunchService.class);
+  }
 
   private class QueryTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
+    @Override
+    protected void onPreExecute() {
+      super.onPreExecute();
+    }
 
-        @Override
-        protected List<ProjectEntity> doInBackground(Void... voids) {
-            List<ProjectEntity> projects;
-            MobilePunchDatabase.getInstance(MainActivity.this);
-            projects = dataBase.getProjectDao().selectAll();
-            return projects;
-        }
+    @Override
+    protected List<ProjectEntity> doInBackground(Void... voids) {
+      List<ProjectEntity> projects;
+      MobilePunchDatabase.getInstance(MainActivity.this);
+      projects = dataBase.getProjectDao().selectAll();
+      return projects;
+    }
 
-        @Override
-        protected void onPostExecute(List<ProjectEntity> projectEntities) {
-
-        }
-
-        @Override
-        protected void onCancelled() {
-            super.onCancelled();
-        }
+    @Override
+    protected void onPostExecute(List<ProjectEntity> projectEntities) {
 
     }
 
-    private class ApiTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected List<ProjectEntity> doInBackground(Void... voids) {
-            List<ProjectEntity> projects = null;
-            List<ClientEntity> clients = null;
-          List<EquipmentEntity> equipment = null;
-            FrontendApplication.refreshToken();
-
-            try {
-                String token = getString(
-                        R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
-              Response<List<ProjectEntity>> projectsResponse = service.getProjects(token).execute();
-              Response<List<ClientEntity>> clientsResponse = service.getClients(token).execute();
-              Response<List<EquipmentEntity>> equipmentResponse = service.getEquipment(token)
-                  .execute();
-              Log.d(TAG, projectsResponse.body().toString());
-              //Use this to see raw response, needs a jasoncall.
-              //Log.d(TAG, "RAW JSON: " + responseJson.body().string());
-              if (projectsResponse.isSuccessful()
-                  && clientsResponse.isSuccessful()
-                  && equipmentResponse.isSuccessful()) {
-                projects = projectsResponse.body();
-                clients = clientsResponse.body();
-                equipment = equipmentResponse.body();
-
-                } else {
-                Log.d(TAG, "Service Execution Failed: ");
-                }
-            } catch (Exception e) {
-              Log.d(TAG, "Exception in service execution: " + e.getLocalizedMessage());
-            } finally {
-              if (projects == null || clients == null || equipment == null) {
-                Log.d(TAG, "Service execution cancelled");
-                    cancel(true);
-                }
-                try {
-                    MobilePunchDatabase.fromUUIDProject(projects);
-                    List<EventEntity> events = MobilePunchDatabase.getEventsFromProject(projects);
-                    dataBase.getProjectDao().insert(projects);
-                    dataBase.getEventDao().insert(events);
-                    MobilePunchDatabase.fromUUIDClient(clients);
-                    dataBase.getClientDao().insert(clients);
-                  MobilePunchDatabase.fromUUIDEquipment(equipment);
-                  dataBase.getEquipmentDao().insert(equipment);
-                } catch (Exception e) {
-                    // FIXME do what
-                    Log.d(TAG, "insert method failed: " + e.getLocalizedMessage());
-                    e.printStackTrace();
-                }
-            }
-            return projects;
-        }
-
-
-        @Override
-        protected void onPostExecute(List<ProjectEntity> projectEntities) {
-            //FIXME Move this so its called no matter the status of APITask
-            setProjects(projectEntities);
-          QueryTask queryTask = new QueryTask();
-          queryTask.execute();
-          Toast.makeText(MainActivity.this, "Database Updated",
-              Toast.LENGTH_LONG).show();
-        }
-
-        @Override
-        protected void onCancelled() {
-          Toast.makeText(MainActivity.this,
-              "Unable to connect to server... Check network connection", Toast.LENGTH_LONG).show();
-          Log.d(TAG, "Service cancelled");
-        }
+    @Override
+    protected void onCancelled() {
+      super.onCancelled();
     }
+
+  }
+
+  private class ApiTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
+
+    @Override
+    protected void onPreExecute() {
+      super.onPreExecute();
+    }
+
+    @Override
+    protected List<ProjectEntity> doInBackground(Void... voids) {
+      List<ProjectEntity> projects = null;
+      List<ClientEntity> clients = null;
+      List<EquipmentEntity> equipment = null;
+      Log.d(TAG, "Executing API TASK");
+      FrontendApplication.refreshToken();
+      Log.d(TAG, "Token Refreshed");
+
+      try {
+        String token = getString(
+            R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
+        Response<List<ProjectEntity>> projectsResponse = service.getProjects(token).execute();
+        Response<List<ClientEntity>> clientsResponse = service.getClients(token).execute();
+        Response<List<EquipmentEntity>> equipmentResponse = service.getEquipment(token).execute();
+
+        Response<ResponseBody> eqJson = service.getEquipmentJson(token).execute();
+
+        //Use this to see raw response, needs a jasoncall.
+        Log.d(TAG, "RAW JSON: " + eqJson.body().string());
+        if (projectsResponse.isSuccessful()
+            && clientsResponse.isSuccessful()
+            && equipmentResponse.isSuccessful()) {
+          projects = projectsResponse.body();
+          clients = clientsResponse.body();
+          equipment = equipmentResponse.body();
+
+        } else {
+          Log.d(TAG, "Service Execution Failed: ");
+        }
+      } catch (Exception e) {
+        Log.d(TAG, "Exception in service execution: " + e.getLocalizedMessage());
+      } finally {
+        if (projects == null || clients == null || equipment == null) {
+          Log.d(TAG, "Service execution cancelled");
+          cancel(true);
+        }
+        try {
+          MobilePunchDatabase.fromUUIDProject(projects);
+          List<EventEntity> events = MobilePunchDatabase.getEventsFromProject(projects);
+          dataBase.getProjectDao().insert(projects);
+          dataBase.getEventDao().insert(events);
+          MobilePunchDatabase.fromUUIDClient(clients);
+          dataBase.getClientDao().insert(clients);
+          MobilePunchDatabase.fromUUIDEquipment(equipment);
+          dataBase.getEquipmentDao().insert(equipment);
+        } catch (Exception e) {
+          // FIXME do what
+          Log.d(TAG, "insert method failed: " + e.getLocalizedMessage());
+          e.printStackTrace();
+        }
+      }
+      return projects;
+    }
+
+
+    @Override
+    protected void onPostExecute(List<ProjectEntity> projectEntities) {
+      //FIXME Move this so its called no matter the status of APITask
+      setProjects(projectEntities);
+      QueryTask queryTask = new QueryTask();
+      queryTask.execute();
+      Toast.makeText(MainActivity.this, "Database Updated",
+          Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onCancelled() {
+      Toast.makeText(MainActivity.this,
+          "Unable to connect to server... Check network connection", Toast.LENGTH_LONG).show();
+      Log.d(TAG, "Service cancelled");
+    }
+  }
 
 
 }
