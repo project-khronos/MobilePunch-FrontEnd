@@ -9,6 +9,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
 import io.reactivex.annotations.NonNull;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 
@@ -253,4 +254,37 @@ public class ClientEntity implements Serializable, UuidHaver {
     this.projects = projects;
   }
 
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    ClientEntity that = (ClientEntity) o;
+    return Objects.equals(uuid, that.uuid);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(uuid);
+  }
+
+  @Override
+  public String toString() {
+    return "ClientEntity{" +
+        "projects=" + projects +
+        ", uuid=" + uuid +
+        ", name='" + name + '\'' +
+        ", email='" + email + '\'' +
+        ", altPhone='" + altPhone + '\'' +
+        ", phone='" + phone + '\'' +
+        ", address='" + address + '\'' +
+        ", altAddress='" + altAddress + '\'' +
+        ", notes='" + notes + '\'' +
+        '}';
+  }
 }

@@ -305,4 +305,30 @@ public class EventEntity implements UuidHaver {
       List<EquipmentEntity> equipmentList) {
     this.equipmentList = equipmentList;
   }
+
+
+  @Override
+  public int hashCode() {
+    return this.uuid.hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    return this.uuid.equals(((EventEntity) obj).uuid);
+  }
+
+  @Override
+  public String toString() {
+    return "EventEntity{" +
+        "uuid=" + uuid +
+        ", startDate=" + startDate +
+        ", endDate=" + endDate +
+        ", expenses=" + expenses +
+        ", income=" + income +
+        ", description='" + description + '\'' +
+        ", longitude=" + longitude +
+        ", latitude=" + latitude +
+        ", equipmentList=" + equipmentList +
+        '}';
+  }
 }

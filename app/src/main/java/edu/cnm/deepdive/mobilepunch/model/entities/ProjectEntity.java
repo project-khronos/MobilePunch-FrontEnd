@@ -232,4 +232,29 @@ public class ProjectEntity implements UuidHaver {
   public void setClients(List<ClientEntity> clients) {
     this.clients = clients;
   }
+
+
+  @Override
+  public boolean equals(Object obj) {
+    return this.uuid.equals(((ProjectEntity) obj).uuid);
+  }
+
+  @Override
+  public int hashCode() {
+    return this.uuid.hashCode();
+  }
+
+  @Override
+  public String toString() {
+    return "ProjectEntity{" +
+        "uuid=" + uuid +
+        ", name='" + name + '\'' +
+        ", startTime=" + startTime +
+        ", endTime=" + endTime +
+        ", expectedEndTime=" + expectedEndTime +
+        ", description='" + description + '\'' +
+        ", events=" + events +
+        ", clients=" + clients +
+        '}';
+  }
 }
