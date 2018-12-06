@@ -84,12 +84,15 @@ public class MainFragment extends Fragment {
     tEvent = view.findViewById(R.id.event_num_items);
     event = view.findViewById(R.id.event_card);
     event.setTag("event");
+
     tProject = view.findViewById(R.id.project_num_items);
     project = view.findViewById(R.id.project_card);
     project.setTag("project");
+
     tClient = view.findViewById(R.id.client_num_items);
     client = view.findViewById(R.id.client_card);
     client.setTag("client");
+
     tEquipment = view.findViewById(R.id.equipment_num_items);
     equipment = view.findViewById(R.id.equipment_card);
     equipment.setTag("equipment");

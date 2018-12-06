@@ -33,16 +33,18 @@ public class ProjectFragment extends Fragment {
   private String TAG = "tag";
 
   private ProjectEntity project;
-  private Button saveButton;
-  private Button startDateButton;
-  private Button endDateButton;
-  private Button expectedEndDate;
-  private View view;
-  private BasicEditText projectName;
-  private BasicEditText description;
 
-  private Date startDate = new Date();
-  private Date endDate = new Date();
+  private Button saveButton,
+      startDateButton,
+      endDateButton,
+      expectedEndDate;
+
+  private View view;
+  private BasicEditText projectName,
+      description;
+
+  private Date startDate = new Date(),
+      endDate = new Date();
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,8 +69,10 @@ public class ProjectFragment extends Fragment {
 
   private void initLayout() {
     saveButton = view.findViewById(R.id.project_save);
+
     projectName = view.findViewById(R.id.project_name);
     description = view.findViewById(R.id.project_description);
+
     startDateButton = view.findViewById(R.id.project_start_date);
     startDateButton.setTag("Start date");
     endDateButton = view.findViewById(R.id.project_end_date);
