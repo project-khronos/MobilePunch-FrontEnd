@@ -3,15 +3,11 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
-
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
-import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
 
 /**
  * The type Project entity.
@@ -23,7 +19,6 @@ public class ProjectEntity implements UuidHaver {
 
     @Ignore
     @Expose
-    @SerializedName("uuid")
     private UUID uuid;
 
     @ColumnInfo(name = "project_id1")
