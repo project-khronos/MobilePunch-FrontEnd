@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.model.dao.abstraction.ProjectHelper;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity
     ApiTask apiTask = new ApiTask();
     apiTask.execute();
     instance = this;
-
+    new ProjectHelper.ProjectGetterTask().execute();
   }
 
 

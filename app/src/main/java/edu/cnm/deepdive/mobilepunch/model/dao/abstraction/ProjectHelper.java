@@ -1,6 +1,8 @@
 package edu.cnm.deepdive.mobilepunch.model.dao.abstraction;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
@@ -37,6 +39,16 @@ public class ProjectHelper {
       project.setClients(clients);
     }
     return projects;
+  }
+
+  public static class ProjectGetterTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
+
+    @Override
+    protected List<ProjectEntity> doInBackground(Void... voids) {
+      List<ProjectEntity> projects = getProjects(MainActivity.getInstance());
+      MainActivity.getInstance().setProjects(projects);
+      return projects;
+    }
   }
 
 
