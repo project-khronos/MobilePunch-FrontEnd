@@ -1,6 +1,5 @@
 package edu.cnm.deepdive.mobilepunch.view.fragments;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,11 +13,12 @@ import com.google.android.gms.maps.MapView;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
+import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
-import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 import edu.cnm.deepdive.mobilepunch.view.fragments.helpers.DayOfWeekHelper;
+import java.lang.ref.WeakReference;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -92,11 +92,14 @@ public class EventFragment extends Fragment {
 
     saveButton.setOnClickListener(v -> {
       grabFields();
-      event.setProjectId1(1010);
-      event.setProjectId2(1010);
-      new InsertEvent(getContext(), null).execute(event);
-      getFragmentManager().beginTransaction().replace(R.id.fragment_container, new EventFragment())
-          .commit();
+      if (!descriptionField.getText().toString().equals("")) {
+        new InsertEvent(MainActivity.getInstance()).execute(event);
+        Toast.makeText(getContext(), "Event saved", Toast.LENGTH_SHORT).show();
+        getFragmentManager().beginTransaction()
+            .replace(R.id.fragment_container, new ProjectFragment()).commit();
+      } else {
+        Toast.makeText(getContext(), "Please enter a Description", Toast.LENGTH_SHORT).show();
+      }
     });
   }
 
@@ -136,32 +139,24 @@ public class EventFragment extends Fragment {
 
   private static class InsertEvent extends AsyncTask<EventEntity, Void, Void> {
 
-    private Context context;
-    private ProjectEntity projectEntity;
+    private WeakReference<MainActivity> mainActivity;
 
-    /**
-     * Instantiates a new Insert event.
-     *
-     * @param context the context
-     * @param projectEntity the project entity
-     */
-    public InsertEvent(Context context, ProjectEntity projectEntity) {
-      this.context = context;
-      this.projectEntity = projectEntity;
+    public InsertEvent(MainActivity mainActivity) {
+      this.mainActivity = new WeakReference<>(mainActivity);
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-      super.onPostExecute(aVoid);
-      Toast.makeText(context, "Event saved!", Toast.LENGTH_SHORT).show();
-    }
+    protected Void doInBackground(EventEntity... eventEntities) {
 
-    @Override
-    protected Void doInBackground(EventEntity... eventEntity) {
-      MobilePunchDatabase.getInstance(context).getEventDao().insert(eventEntity[0]);
+      MobilePunchDatabase.getInstance(mainActivity.get()).getEventDao()
+          .insert(eventEntities[0]);
       return null;
     }
-
   }
 
 }
+
+
+
+
+
