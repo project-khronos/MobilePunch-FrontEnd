@@ -35,7 +35,8 @@ public class EquipmentRecyclerViewAdapter extends
   @NonNull
   @Override
   public EquipmentHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
-    return null;
+    View view = layoutinflater.inflate(R.layout.equipment_list_item, viewGroup, false);
+    return new EquipmentHolder(view);
   }
 
   @Override

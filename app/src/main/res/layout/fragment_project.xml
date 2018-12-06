@@ -27,7 +27,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="2dp"
     android:background="@drawable/edit_text_style"
-    android:text="Start date"
+    android:text="Start time"
     android:textColor="@color/rallyBlue"/>
 
   <Button
@@ -36,7 +36,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="2dp"
     android:background="@drawable/edit_text_style"
-    android:text="@string/expected_end_date"
+    android:text="Expected end time"
     android:textColor="@color/rallyBlue"/>
 
   <Button
@@ -45,7 +45,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="2dp"
     android:background="@drawable/edit_text_style"
-    android:text="End date"
+    android:text="End time"
     android:textColor="@color/rallyBlue"/>
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText

@@ -87,6 +87,7 @@ public class ProjectFragment extends Fragment {
         v -> {
           grabFields();
           if (!projectName.getText().toString().equals("")) {
+            MainActivity.getInstance().getProjects().add(project);
             new InsertProject(MainActivity.getInstance()).execute(project);
             Toast.makeText(getContext(), "Project saved", Toast.LENGTH_SHORT).show();
             getFragmentManager().beginTransaction()

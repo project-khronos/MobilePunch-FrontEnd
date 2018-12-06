@@ -223,6 +223,7 @@ public class MainActivity extends AppCompatActivity
       List<ProjectEntity> projects = null;
       List<ClientEntity> clients = null;
       List<EquipmentEntity> equipment = null;
+
       Log.d(TAG, "Executing API TASK");
       FrontendApplication.refreshToken();
       Log.d(TAG, "Token Refreshed");
