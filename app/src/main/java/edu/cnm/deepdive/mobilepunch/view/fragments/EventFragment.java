@@ -155,12 +155,11 @@ public class EventFragment extends Fragment {
           event.setEndDate(cal.getTime());
         }
 
-        String day = DayOfWeekHelper
-            .getDayOfWeekFromCalendarDayOfWeek(cal.get(Calendar.DAY_OF_WEEK));
-        button.setText(
-            button.getTag().toString() + ": " + day + " " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (
-                cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR));
+        String dateFormat = button.getTag().toString() + ": " + DayOfWeekHelper.getDayOfWeekFromCalendarDayOfWeek(cal.get(Calendar.DAY_OF_WEEK))
+            + " " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (
+            cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR);
 
+        button.setText(dateFormat);
       });
     });
   }
