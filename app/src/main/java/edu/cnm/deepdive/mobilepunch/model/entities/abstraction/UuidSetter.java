@@ -5,12 +5,16 @@ import java.util.UUID;
 public class UuidSetter {
 
     public static void setIdsFromUuid(UuidHaver haver) {
-        haver.setId1(haver.getUuid().getMostSignificantBits());
-        haver.setId2(haver.getUuid().getLeastSignificantBits());
+        if (haver != null) {
+            haver.setId1(haver.getUuid().getMostSignificantBits());
+            haver.setId2(haver.getUuid().getLeastSignificantBits());
+        }
     }
 
     public static void setUuidFromIds(UuidHaver haver) {
-        haver.setUuid(new UUID(haver.getId1(), haver.getId2()));
+        if (haver != null) {
+            haver.setUuid(new UUID(haver.getId1(), haver.getId2()));
+        }
     }
 
 

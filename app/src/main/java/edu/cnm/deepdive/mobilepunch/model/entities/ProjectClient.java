@@ -15,18 +15,9 @@ public class ProjectClient {
     private long projectId1;
     private long projectId2;
     private long clientId1;
-
-    public ProjectClient() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
     private long clientId2;
 
-    public void setId(long id) {
-        this.id = id;
+    public ProjectClient() {
     }
 
     public ProjectClient(ProjectEntity project, ClientEntity client) {
@@ -34,6 +25,14 @@ public class ProjectClient {
         projectId2 = project.getId2();
         clientId1 = client.getId1();
         clientId2 = client.getId2();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getProjectId1() {

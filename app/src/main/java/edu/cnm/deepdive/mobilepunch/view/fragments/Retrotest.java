@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
@@ -25,98 +27,98 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class Retrotest extends Fragment {
 
-  private static final String TAG = "tag";
-  /**
-   * The Service.
-   */
-  MobilePunchService service;
-  /**
-   * The Key text.
-   */
-  EditText keyText;
-  /**
-   * The Value text.
-   */
-  EditText valueText;
-  /**
-   * The Getkey.
-   */
-  EditText getkey;
-  /**
-   * The Get response.
-   */
-  TextView getResponse;
-  /**
-   * The Post button.
-   */
-  Button postButton;
-  /**
-   * The Get button.
-   */
-  Button getButton;
-  /**
-   * The Post.
-   */
-  ProjectEntity post;
+    private static final String TAG = "tag";
+    /**
+     * The Service.
+     */
+    MobilePunchService service;
+    /**
+     * The Key text.
+     */
+    EditText keyText;
+    /**
+     * The Value text.
+     */
+    EditText valueText;
+    /**
+     * The Getkey.
+     */
+    EditText getkey;
+    /**
+     * The Get response.
+     */
+    TextView getResponse;
+    /**
+     * The Post button.
+     */
+    Button postButton;
+    /**
+     * The Get button.
+     */
+    Button getButton;
+    /**
+     * The Post.
+     */
+    ProjectEntity post;
 ///  PostTask postTask;
 
-  /**
-   * New instance retrotest.
-   *
-   * @return the retrotest
-   */
-  public static Retrotest newInstance() {
-    Retrotest retroTest = new Retrotest();
-    return retroTest;
-  }
+    /**
+     * New instance retrotest.
+     *
+     * @return the retrotest
+     */
+    public static Retrotest newInstance() {
+        Retrotest retroTest = new Retrotest();
+        return retroTest;
+    }
 
-  @Nullable
-  @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-      @Nullable Bundle savedInstanceState) {
-    final View view = inflater.inflate(R.layout.retro_test, container, false);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.retro_test, container, false);
 
-    keyText = view.findViewById(R.id.key_text);
-    valueText = view.findViewById(R.id.value_text);
-    getkey = view.findViewById(R.id.get_key);
-    getResponse = view.findViewById(R.id.repsonse);
-    final Button postButton = view.findViewById(R.id.post_button);
-    postButton.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
+        keyText = view.findViewById(R.id.key_text);
+        valueText = view.findViewById(R.id.value_text);
+        getkey = view.findViewById(R.id.get_key);
+        getResponse = view.findViewById(R.id.repsonse);
+        final Button postButton = view.findViewById(R.id.post_button);
+        postButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        String key = keyText.getText().toString();
-        String value = valueText.getText().toString();
-        //      service.getProjects();
-      }
-    });
+                String key = keyText.getText().toString();
+                String value = valueText.getText().toString();
+                //      service.getProjects();
+            }
+        });
 
-    Button getButton = view.findViewById(R.id.get_button);
-    getButton.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        //     new PostTask().execute();
-        // postTask.execute();
+        Button getButton = view.findViewById(R.id.get_button);
+        getButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //     new PostTask().execute();
+                // postTask.execute();
 
-      }
-    });
-    return view;
-  }
+            }
+        });
+        return view;
+    }
 
-  @Override
-  public void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    Gson gson = new GsonBuilder()
-        //    .excludeFieldsWithoutExposeAnnotation()
-        .create();
-    Retrofit retrofit = new Builder()
-        // TODO change base_url value.
-        .baseUrl(getString(R.string.base_url))
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .build();
-    service = retrofit.create(MobilePunchService.class);
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Gson gson = new GsonBuilder()
+                //    .excludeFieldsWithoutExposeAnnotation()
+                .create();
+        Retrofit retrofit = new Builder()
+                // TODO change base_url value.
+                .baseUrl(getString(R.string.base_url))
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        service = retrofit.create(MobilePunchService.class);
 
-  }
+    }
 
 //  public class PostTask extends AsyncTask<Void, Void, List<PostTask>> {
 //
