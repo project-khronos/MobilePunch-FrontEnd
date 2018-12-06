@@ -190,6 +190,10 @@ public class EventFragment extends Fragment {
     protected Void doInBackground(EventEntity... eventEntity) {
       eventEntity[0].setProjectId1(projectEntity.getId1());
       eventEntity[0].setProjectId2(projectEntity.getId2());
+      if (projectEntity.getEvents() == null) {
+        projectEntity.setEvents(new ArrayList<>());
+      }
+      projectEntity.getEvents().add(eventEntity[0]);
       MobilePunchDatabase.getInstance(context).getEventDao().insert(eventEntity[0]);
       return null;
     }
