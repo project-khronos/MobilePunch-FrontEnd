@@ -87,6 +87,7 @@ public class ProjectFragment extends Fragment {
         v -> {
           grabFields();
           if (!projectName.getText().toString().equals("")) {
+            MainActivity.getInstance().getProjects().add(project);
             new InsertProject(MainActivity.getInstance()).execute(project);
             Toast.makeText(getContext(), "Project saved", Toast.LENGTH_SHORT).show();
             getFragmentManager().beginTransaction()
@@ -125,19 +126,19 @@ public class ProjectFragment extends Fragment {
 
   private static class InsertProject extends AsyncTask<ProjectEntity, Void, Void> {
 
-    private WeakReference<MainActivity> mainActivity;
+  private WeakReference<MainActivity> mainActivity;
 
-    public InsertProject(MainActivity mainActivity) {
-      this.mainActivity = new WeakReference<>(mainActivity);
-    }
-
-    @Override
-    protected Void doInBackground(ProjectEntity... projectEntities) {
-
-      MobilePunchDatabase.getInstance(mainActivity.get()).getProjectDao()
-          .insert(projectEntities[0]);
-      return null;
-    }
+  public InsertProject(MainActivity mainActivity) {
+    this.mainActivity = new WeakReference<>(mainActivity);
   }
+
+  @Override
+  protected Void doInBackground(ProjectEntity... projectEntities) {
+
+    MobilePunchDatabase.getInstance(mainActivity.get()).getProjectDao()
+        .insert(projectEntities[0]);
+    return null;
+  }
+}
 
 }

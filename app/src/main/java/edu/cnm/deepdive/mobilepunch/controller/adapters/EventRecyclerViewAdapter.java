@@ -125,7 +125,6 @@ public class EventRecyclerViewAdapter extends
       latitude = itemView.findViewById(R.id.li_event_latitude);
       longitude = itemView.findViewById(R.id.li_event_longitude);
       itemView.setOnClickListener(this);
-
     }
 
     @Override

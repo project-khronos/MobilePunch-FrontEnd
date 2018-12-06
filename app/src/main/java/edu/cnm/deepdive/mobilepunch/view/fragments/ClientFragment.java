@@ -1,7 +1,6 @@
 package edu.cnm.deepdive.mobilepunch.view.fragments;
 
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,9 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
-import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
+import java.lang.ref.WeakReference;
 import java.util.UUID;
 
 
@@ -69,10 +69,14 @@ public class ClientFragment extends Fragment {
   private void initListeners() {
     saveButton.setOnClickListener(v -> {
       grabFields();
-      new InsertClient(getContext(), new EventEntity()).execute(client);
-      getFragmentManager().beginTransaction()
-          .replace(R.id.fragment_container, new ClientFragment())
-          .commit();
+      if (!nameField.getText().toString().equals("")) {
+        new InsertClient(MainActivity.getInstance()).execute(client);
+        Toast.makeText(getContext(), "Client saved", Toast.LENGTH_SHORT).show();
+        getFragmentManager().beginTransaction()
+            .replace(R.id.fragment_container, new ClientFragment()).commit();
+      } else {
+        Toast.makeText(getContext(), "Please enter a client Name", Toast.LENGTH_SHORT).show();
+      }
     });
   }
 
@@ -89,30 +93,19 @@ public class ClientFragment extends Fragment {
 
   private static class InsertClient extends AsyncTask<ClientEntity, Void, Void> {
 
-    private Context context;
-    private ClientEntity clientEntity;
+    private WeakReference<MainActivity> mainActivity;
 
-    /**
-     * Instantiates a new Insert client.
-     *
-     * @param context the context
-     * @param eventEntity the event entity
-     */
-    public InsertClient(Context context, EventEntity eventEntity) {
-      this.context = context;
-      this.clientEntity = clientEntity;
-    }
-
-    @Override
-    protected void onPostExecute(Void aVoid) {
-      Toast.makeText(context, "Client saved!", Toast.LENGTH_SHORT).show();
+    public InsertClient(MainActivity mainActivity) {
+      this.mainActivity = new WeakReference<>(mainActivity);
     }
 
 
     @Override
     protected Void doInBackground(ClientEntity... clientEntities) {
-      MobilePunchDatabase.getInstance(context).getClientDao().insert(clientEntities[0]);
+      MobilePunchDatabase.getInstance(mainActivity.get()).getClientDao()
+          .insert(clientEntities[0]);
       return null;
     }
   }
+
 }

@@ -10,6 +10,12 @@
   android:orientation="vertical"
   tools:context=".view.fragments.EventFragment">
 
+
+  <Spinner
+    android:id="@+id/project_spinner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+  </Spinner>
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
     android:id="@+id/event_expenses"
     style="?android:listSeparatorTextViewStyle"
