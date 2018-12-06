@@ -20,13 +20,6 @@ import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
         primaryKeys = {
                 "equipment_id1", "equipment_id2"
         }
-//    foreignKeys = {@ForeignKey(
-//    entity = EventEntity.class,
-//    parentColumns = {"event_id1","event_id2"},
-//    childColumns = {"event_id1","event_id2"},
-//    onDelete = OnConflictStrategy.FAIL
-//)}
-
 )
 public class EquipmentEntity implements UuidHaver {
 
@@ -53,12 +46,6 @@ public class EquipmentEntity implements UuidHaver {
     private String Identification;
 
     private String description;
-
-    @ColumnInfo(name = "event_id2")
-    private long eventId2;
-
-    @ColumnInfo(name = "event_id1")
-    private long eventId1;
 
     /**
      * Gets uuid.
@@ -221,42 +208,6 @@ public class EquipmentEntity implements UuidHaver {
      */
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    /**
-     * Gets event id 2.
-     *
-     * @return the event id 2
-     */
-    public long getEventId2() {
-        return eventId2;
-    }
-
-    /**
-     * Sets event id 2.
-     *
-     * @param eventId2 the event id 2
-     */
-    public void setEventId2(long eventId2) {
-        this.eventId2 = eventId2;
-    }
-
-    /**
-     * Gets event id 1.
-     *
-     * @return the event id 1
-     */
-    public long getEventId1() {
-        return eventId1;
-    }
-
-    /**
-     * Sets event id 1.
-     *
-     * @param eventId1 the event id 1
-     */
-    public void setEventId1(long eventId1) {
-        this.eventId1 = eventId1;
     }
 }
 

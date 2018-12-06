@@ -2,6 +2,7 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 
 import com.google.gson.annotations.Expose;
@@ -17,13 +18,10 @@ import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
  * The type Event entity.
  */
 @Entity(
-        primaryKeys = {"event_id1", "event_id2"}
-//    foreignKeys = {@ForeignKey(
-//        entity = ProjectEntity.class,
-//        parentColumns = {"project_id1", "project_id2"},
-//        childColumns = {"project_id1", "project_id2"},
-//        onDelete = OnConflictStrategy.FAIL
-//    )}
+        primaryKeys = {"event_id1", "event_id2"},
+        foreignKeys = {@ForeignKey(entity = ProjectEntity.class,
+                parentColumns = {"project_id1", "project_id2"},
+                childColumns = {"project_id1", "project_id2"})}
 )
 
 public class EventEntity implements UuidHaver {
@@ -68,13 +66,6 @@ public class EventEntity implements UuidHaver {
 
     @ColumnInfo(name = "project_id2")
     private long projectId2;
-
-
-    @ColumnInfo(name = "equipment_id1")
-    private long equipmentId1;
-
-    @ColumnInfo(name = "equipment_id2")
-    private long equipmentId2;
 
     @Ignore
     @Expose
@@ -298,41 +289,6 @@ public class EventEntity implements UuidHaver {
         this.projectId2 = projectId2;
     }
 
-    /**
-     * Gets equipment id 1.
-     *
-     * @return the equipment id 1
-     */
-    public long getEquipmentId1() {
-        return equipmentId1;
-    }
-
-    /**
-     * Sets equipment id 1.
-     *
-     * @param equipmentId1 the equipment id 1
-     */
-    public void setEquipmentId1(long equipmentId1) {
-        this.equipmentId1 = equipmentId1;
-    }
-
-    /**
-     * Gets equipment id 2.
-     *
-     * @return the equipment id 2
-     */
-    public long getEquipmentId2() {
-        return equipmentId2;
-    }
-
-    /**
-     * Sets equipment id 2.
-     *
-     * @param equipmentId2 the equipment id 2
-     */
-    public void setEquipmentId2(long equipmentId2) {
-        this.equipmentId2 = equipmentId2;
-    }
 
     /**
      * Gets equipment list.
