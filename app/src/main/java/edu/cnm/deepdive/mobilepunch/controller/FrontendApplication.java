@@ -9,6 +9,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions.Builder;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import edu.cnm.deepdive.mobilepunch.R;
@@ -26,15 +27,21 @@ public class FrontendApplication extends Application {
   }
 
   public static void refreshToken() {
-    OptionalPendingResult<GoogleSignInResult> pendingResult =
-        Auth.GoogleSignInApi.silentSignIn(instance.refreshClient);
-    GoogleSignInResult result = null;
-    if (pendingResult.isDone()) {
-      result = pendingResult.get();
-    } else {
-      result = pendingResult.await();
+    ConnectionResult connectionResult = FrontendApplication.getInstance().refreshClient
+        .blockingConnect();
+    if (connectionResult.isSuccess()) {
+      OptionalPendingResult<GoogleSignInResult> pendingResult =
+          Auth.GoogleSignInApi.silentSignIn(instance.refreshClient);
+      GoogleSignInResult result = null;
+      if (pendingResult.isDone()) {
+        result = pendingResult.get();
+      } else {
+        result = pendingResult.await();
+      }
+      instance.account = result.getSignInAccount();
     }
-    instance.account = result.getSignInAccount();
+    FrontendApplication.getInstance().refreshClient.disconnect();
+
   }
 
   public GoogleSignInClient getClient() {
