@@ -6,6 +6,12 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverter;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
 import edu.cnm.deepdive.mobilepunch.model.dao.ClientDao;
 import edu.cnm.deepdive.mobilepunch.model.dao.EquipmentDao;
 import edu.cnm.deepdive.mobilepunch.model.dao.EventDao;
@@ -13,17 +19,15 @@ import edu.cnm.deepdive.mobilepunch.model.dao.ProjectDao;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
+import edu.cnm.deepdive.mobilepunch.model.entities.EventEquipment;
+import edu.cnm.deepdive.mobilepunch.model.entities.ProjectClient;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * The type Mobile punch database.
  */
 @Database(
-    entities = {ProjectEntity.class, EventEntity.class, ClientEntity.class, EquipmentEntity.class},
+        entities = {ProjectEntity.class, EventEntity.class, ClientEntity.class, EquipmentEntity.class, EventEquipment.class, ProjectClient.class},
     version = 1,
     exportSchema = true
 )

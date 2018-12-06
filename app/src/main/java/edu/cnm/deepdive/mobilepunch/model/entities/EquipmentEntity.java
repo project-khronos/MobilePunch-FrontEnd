@@ -4,9 +4,13 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import java.util.UUID;
+
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
 
 
 /**
@@ -24,7 +28,7 @@ import java.util.UUID;
 //)}
 
 )
-public class EquipmentEntity {
+public class EquipmentEntity implements UuidHaver {
 
   @Ignore
   @SerializedName("equipment_id")

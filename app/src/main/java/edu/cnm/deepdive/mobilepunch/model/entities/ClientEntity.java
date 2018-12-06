@@ -3,12 +3,16 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import io.reactivex.annotations.NonNull;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
+
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
+import io.reactivex.annotations.NonNull;
 
 
 /**
@@ -23,7 +27,7 @@ import java.util.UUID;
 //        onDelete = OnConflictStrategy.FAIL
 //    )}
 )
-public class ClientEntity implements Serializable {
+public class ClientEntity implements Serializable, UuidHaver {
 
 
   @Ignore
