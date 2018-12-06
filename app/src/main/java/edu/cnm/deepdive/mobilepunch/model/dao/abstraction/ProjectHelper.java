@@ -20,15 +20,17 @@ public class ProjectHelper {
         .select();
     for (ProjectEntity project : projects) {
       project.setEvents(MobilePunchDatabase.getEventsFromProject(project));
-      for (EventEntity event : project.getEvents()) {
-        List<EventEquipment> eventEquipments = MobilePunchDatabase.getInstance(context)
-            .getEventEquipmentDao().select(event.getId1(), event.getId2());
-        List<EquipmentEntity> equipment = new ArrayList<>();
-        for (EventEquipment eventEquipment : eventEquipments) {
-          equipment.add(MobilePunchDatabase.getInstance(context).getEquipmentDao()
-              .select(eventEquipment.getEquipmentId1(), eventEquipment.getEquipmentId2()));
+      if (project.getEvents() != null) {
+        for (EventEntity event : project.getEvents()) {
+          List<EventEquipment> eventEquipments = MobilePunchDatabase.getInstance(context)
+              .getEventEquipmentDao().select(event.getId1(), event.getId2());
+          List<EquipmentEntity> equipment = new ArrayList<>();
+          for (EventEquipment eventEquipment : eventEquipments) {
+            equipment.add(MobilePunchDatabase.getInstance(context).getEquipmentDao()
+                .select(eventEquipment.getEquipmentId1(), eventEquipment.getEquipmentId2()));
+          }
+          event.setEquipmentList(equipment);
         }
-        event.setEquipmentList(equipment);
       }
       List<ClientEntity> clients = new ArrayList<>();
       for (ProjectClient projectClient : MobilePunchDatabase.getInstance(context)
