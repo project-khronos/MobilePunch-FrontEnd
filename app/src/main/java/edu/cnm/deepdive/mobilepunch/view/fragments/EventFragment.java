@@ -125,7 +125,7 @@ public class EventFragment extends Fragment {
       grabFields();
 
       if (!descriptionField.getText().toString().equals("")) {
-        new InsertEvent((MainActivity) getActivity(), pickedProject).execute(event);
+        new InsertEvent(MainActivity.getInstance(), pickedProject).execute(event);
         Toast.makeText(getContext(), "Event saved", Toast.LENGTH_SHORT).show();
         getFragmentManager().beginTransaction()
             .replace(R.id.fragment_container, new ProjectFragment()).commit();
