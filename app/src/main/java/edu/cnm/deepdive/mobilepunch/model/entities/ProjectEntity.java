@@ -7,6 +7,7 @@ import com.google.gson.annotations.Expose;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -235,13 +236,21 @@ public class ProjectEntity implements UuidHaver {
 
 
   @Override
-  public boolean equals(Object obj) {
-    return this.uuid.equals(((ProjectEntity) obj).uuid);
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    ProjectEntity that = (ProjectEntity) o;
+    return Objects.equals(uuid, that.uuid);
   }
 
   @Override
   public int hashCode() {
-    return this.uuid.hashCode();
+
+    return Objects.hash(uuid);
   }
 
   @Override

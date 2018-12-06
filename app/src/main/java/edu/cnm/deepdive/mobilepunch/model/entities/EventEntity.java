@@ -9,6 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -308,13 +309,21 @@ public class EventEntity implements UuidHaver {
 
 
   @Override
-  public int hashCode() {
-    return this.uuid.hashCode();
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    EventEntity that = (EventEntity) o;
+    return Objects.equals(uuid, that.uuid);
   }
 
   @Override
-  public boolean equals(Object obj) {
-    return this.uuid.equals(((EventEntity) obj).uuid);
+  public int hashCode() {
+
+    return Objects.hash(uuid);
   }
 
   @Override
