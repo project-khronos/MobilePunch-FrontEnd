@@ -92,9 +92,7 @@ public class EventFragment extends Fragment {
 
     saveButton.setOnClickListener(v -> {
       grabFields();
-      event.setProjectId1(1010);
-      event.setProjectId2(1010);
-      new InsertEvent(getContext(), null).execute(event);
+      new InsertEvent(getContext(), new ProjectEntity()).execute(event);
       getFragmentManager().beginTransaction().replace(R.id.fragment_container, new EventFragment())
           .commit();
     });
