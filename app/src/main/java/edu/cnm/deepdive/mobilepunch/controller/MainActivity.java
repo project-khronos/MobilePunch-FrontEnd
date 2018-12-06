@@ -206,6 +206,10 @@ public class MainActivity extends AppCompatActivity
 
   }
 
+  public List<ProjectEntity> getProjects() {
+    return projects;
+  }
+
   private class ApiTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
 
     @Override
@@ -272,7 +276,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onPostExecute(List<ProjectEntity> projectEntities) {
       //FIXME Move this so its called no matter the status of APITask
-      setProjects(projectEntities);
+      getProjects().addAll(projectEntities);
       QueryTask queryTask = new QueryTask();
       queryTask.execute();
       Toast.makeText(MainActivity.this, "Database Updated",
@@ -286,6 +290,4 @@ public class MainActivity extends AppCompatActivity
       Log.d(TAG, "Service cancelled");
     }
   }
-
-
 }
