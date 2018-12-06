@@ -41,8 +41,6 @@
     android:inputType="number"/>
 
 
-
-
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
     android:id="@+id/equipment_identification"
     style="?android:listSeparatorTextViewStyle"

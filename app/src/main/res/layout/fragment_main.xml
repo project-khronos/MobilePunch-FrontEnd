@@ -25,21 +25,21 @@
       android:layout_height="match_parent"
       android:background="@drawable/edit_text_style"
       />
-      <TextView
-        android:paddingTop="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
-        android:text="@string/event"
-        android:textColor="@color/rallyBlue"
-        android:textSize="20sp"/>
-      <TextView
-        android:id="@+id/event_num_items"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/number_of_items"
-        android:textColor="@color/rallyBlue"/>
+    <TextView
+      android:paddingTop="8dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center|top"
+      android:text="@string/event"
+      android:textColor="@color/rallyBlue"
+      android:textSize="20sp"/>
+    <TextView
+      android:id="@+id/event_num_items"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="@string/number_of_items"
+      android:textColor="@color/rallyBlue"/>
   </android.support.v7.widget.CardView>
 
   <android.support.v7.widget.CardView
@@ -75,7 +75,6 @@
       android:layout_gravity="center"
       android:text="@string/number_of_items"
       android:textColor="@color/rallyBlue"/>
-
 
 
   </android.support.v7.widget.CardView>
@@ -126,11 +125,12 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintTop_toBottomOf="@id/client_card"
 
-    > <ImageView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/edit_text_style"
-    />
+    >
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@drawable/edit_text_style"
+      />
 
 
     <TextView
@@ -151,14 +151,7 @@
       android:textColor="@color/rallyBlue"/>
 
 
-
-
-
   </android.support.v7.widget.CardView>
-
-
-
-
 
 
 </android.support.constraint.ConstraintLayout>

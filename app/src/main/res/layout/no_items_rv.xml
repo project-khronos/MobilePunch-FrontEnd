@@ -5,11 +5,11 @@
   android:layout_height="match_parent"
   android:background="@color/rallyBackground"
   android:gravity="center">
-<TextView
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:textSize="40dp"
-  android:text="Uh oh! Looks like you don't have any items here."
-  android:gravity="center"
-  android:textColor="#404040"/>
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textSize="40dp"
+    android:text="Uh oh! Looks like you don't have any items here."
+    android:gravity="center"
+    android:textColor="#404040"/>
 </android.support.constraint.ConstraintLayout>
