@@ -25,7 +25,6 @@ import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
 import java.util.List;
-import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -228,10 +227,9 @@ public class MainActivity extends AppCompatActivity
         Response<List<ClientEntity>> clientsResponse = service.getClients(token).execute();
         Response<List<EquipmentEntity>> equipmentResponse = service.getEquipment(token).execute();
 
-        Response<ResponseBody> eqJson = service.getEquipmentJson(token).execute();
-
+        // Response<ResponseBody> eqJson = service.getEquipmentJson(token).execute();
         //Use this to see raw response, needs a jasoncall.
-        Log.d(TAG, "RAW JSON: " + eqJson.body().string());
+        // Log.d(TAG, "RAW JSON: " + eqJson.body().string());
         if (projectsResponse.isSuccessful()
             && clientsResponse.isSuccessful()
             && equipmentResponse.isSuccessful()) {
@@ -253,6 +251,7 @@ public class MainActivity extends AppCompatActivity
           MobilePunchDatabase.fromUUIDProject(projects);
           List<EventEntity> events = MobilePunchDatabase.getEventsFromProject(projects);
           dataBase.getProjectDao().insert(projects);
+
           dataBase.getEventDao().insert(events);
           MobilePunchDatabase.fromUUIDClient(clients);
           dataBase.getClientDao().insert(clients);

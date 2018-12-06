@@ -9,9 +9,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
+import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
+import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
+import edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText;
+import java.lang.ref.WeakReference;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -20,14 +28,19 @@ import java.util.UUID;
  */
 public class ProjectFragment extends Fragment {
 
-  /**
-   * The Project.
-   */
-  ProjectEntity project;
-  /**
-   * The Save button.
-   */
-  Button saveButton;
+  private String TAG = "tag";
+
+  private ProjectEntity project;
+  private Button saveButton;
+  private Button startDateButton;
+  private Button endDateButton;
+  private Button expectedEndDate;
+  private View view;
+  private BasicEditText projectName;
+  private BasicEditText description;
+
+  private Date startDate = new Date();
+  private Date endDate = new Date();
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,9 +52,10 @@ public class ProjectFragment extends Fragment {
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_project, container, false);
+    view = inflater.inflate(R.layout.fragment_project, container, false);
     generateIds();
-
+    initLayout();
+    initListeners();
     return view;
   }
 
@@ -50,13 +64,101 @@ public class ProjectFragment extends Fragment {
     project.setId2(UUID.randomUUID().getLeastSignificantBits());
   }
 
-  private class InsertProject extends AsyncTask<ProjectEntity, Void, Void> {
+  private void initLayout() {
+    saveButton = view.findViewById(R.id.project_save);
+    projectName = view.findViewById(R.id.project_name);
+    description = view.findViewById(R.id.project_description);
+    startDateButton = view.findViewById(R.id.project_start_date);
+    startDateButton.setTag("Start date");
+    endDateButton = view.findViewById(R.id.project_end_date);
+    endDateButton.setTag("End date");
+    expectedEndDate = view.findViewById(R.id.project_expected_date);
+  }
+
+  private void initListeners() {
+    DateTimePickerFragment picker = new DateTimePickerFragment();
+    picker.setMode(Mode.DATE);
+
+    setButton(startDateButton, picker, startDate);
+    setButton(endDateButton, picker, endDate);
+
+    saveButton.setOnClickListener(
+        v -> {
+          grabFields();
+          if (!projectName.getText().toString().equals("")) {
+            new InsertProject(MainActivity.getInstance()).execute(project);
+            Toast.makeText(getContext(), "Project saved", Toast.LENGTH_SHORT).show();
+            getFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new ProjectFragment()).commit();
+          } else {
+            Toast.makeText(getContext(), "Please enter a project Name", Toast.LENGTH_SHORT).show();
+          }
+        });
+  }
+
+  private void grabFields() {
+    project.setName(projectName.getText().toString());
+    project.setDescription(description.getText().toString());
+
+  }
+
+  private void setButton(Button button, DateTimePickerFragment picker, Date date) {
+    button.setOnClickListener(v -> {
+      picker.show(getFragmentManager(), picker.getClass().getSimpleName());
+      picker.setListener((cal) -> {
+
+        if (button.getTag().equals("Start date")) {
+          project.setStartTime(cal.getTime());
+        } else {
+          project.setEndTime(cal.getTime());
+        }
+
+        String day = "UNKNOWN";
+        switch (cal.get(Calendar.DAY_OF_WEEK)) {
+          case 2:
+            day = "Monday";
+            break;
+          case 3:
+            day = "Tuesday";
+            break;
+          case 4:
+            day = "Wednesday";
+            break;
+          case 5:
+            day = "Thursday";
+            break;
+          case 6:
+            day = "Friday";
+            break;
+          case 7:
+            day = "Saturday";
+            break;
+          case 8:
+            day = "Sunday";
+            break;
+        }
+
+        button.setText(
+            button.getTag().toString() + ": " + day + " " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (
+                cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR));
+
+      });
+    });
+  }
+
+  private static class InsertProject extends AsyncTask<ProjectEntity, Void, Void> {
+
+    private WeakReference<MainActivity> mainActivity;
+
+    public InsertProject(MainActivity mainActivity) {
+      this.mainActivity = new WeakReference<>(mainActivity);
+    }
 
     @Override
     protected Void doInBackground(ProjectEntity... projectEntities) {
-      ProjectEntity projectEntity = new ProjectEntity();
 
-      MobilePunchDatabase.getInstance(getContext()).getProjectDao().insert(projectEntity);
+      MobilePunchDatabase.getInstance(mainActivity.get()).getProjectDao()
+          .insert(projectEntities[0]);
       return null;
     }
   }

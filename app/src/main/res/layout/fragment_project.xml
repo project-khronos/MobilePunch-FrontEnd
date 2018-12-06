@@ -12,13 +12,6 @@
   android:visibility="visible"
   tools:context=".view.BottomNav">
 
-  <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
-    android:id="@+id/project_description"
-    style="?android:listSeparatorTextViewStyle"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:hint="Description"
-    android:inputType="textMultiLine"/>
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
     android:id="@+id/project_name"
@@ -56,6 +49,13 @@
     android:text="End date"
     android:textColor="@color/rallyBlue"/>
 
+  <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
+    android:id="@+id/project_description"
+    style="?android:listSeparatorTextViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:hint="Description"
+    android:inputType="textMultiLine"/>
 
   <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
