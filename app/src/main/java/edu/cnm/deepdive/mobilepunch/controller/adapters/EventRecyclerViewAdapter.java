@@ -41,7 +41,7 @@ public class EventRecyclerViewAdapter extends
   @NonNull
   @Override
   public EventHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-    View view = layoutInflater.inflate(R.layout.event_list_item, viewGroup, false);
+    View view = layoutInflater.inflate(R.layout.equipment_list_item, viewGroup, false);
     return new EventHolder(view);
   }
 
