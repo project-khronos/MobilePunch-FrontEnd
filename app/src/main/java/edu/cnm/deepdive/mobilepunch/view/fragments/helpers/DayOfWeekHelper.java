@@ -1,33 +1,14 @@
 package edu.cnm.deepdive.mobilepunch.view.fragments.helpers;
 
+import android.util.Log;
+import android.widget.Toast;
+
 public class DayOfWeekHelper {
 
+
   public static String getDayOfWeekFromCalendarDayOfWeek(int dayOfWeek) {
-    String day = "UNKNOWN";
-    switch (dayOfWeek) {
-      case 2:
-        day = "Monday";
-        break;
-      case 3:
-        day = "Tuesday";
-        break;
-      case 4:
-        day = "Wednesday";
-        break;
-      case 5:
-        day = "Thursday";
-        break;
-      case 6:
-        day = "Friday";
-        break;
-      case 7:
-        day = "Saturday";
-        break;
-      case 8:
-        day = "Sunday";
-        break;
-    }
-    return day;
+    String[] days = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+    return days[dayOfWeek-1];
   }
 
 
