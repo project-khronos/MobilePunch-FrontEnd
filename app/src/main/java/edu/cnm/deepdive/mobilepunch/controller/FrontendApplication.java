@@ -49,6 +49,10 @@ public class FrontendApplication extends Application {
       } else {
         result = pendingResult.await();
       }
+      if (result == null) {
+        MainActivity.getInstance().runOnUiThread(() -> MainActivity.signOut());
+        return;
+      }
       instance.account = result.getSignInAccount();
     }
     FrontendApplication.getInstance().refreshClient.disconnect();

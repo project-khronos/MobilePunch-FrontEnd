@@ -39,10 +39,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
+  private static MainActivity instance = null;
   private MobilePunchService service;
   private List<ProjectEntity> projects;
   private MobilePunchDatabase dataBase;
   private String TAG = "tag";
+
+
+  public static MainActivity getInstance() {
+    return instance;
+  }
+
 
   /**
    * Sets projects.
@@ -54,30 +61,13 @@ public class MainActivity extends AppCompatActivity
     this.projects = projects;
   }
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    Toolbar toolbar = findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
-
-    DrawerLayout drawer = findViewById(R.id.drawer_layout);
-    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-    drawer.addDrawerListener(toggle);
-    toggle.syncState();
-
-    NavigationView navigationView = findViewById(R.id.nav_view);
-    navigationView.setNavigationItemSelectedListener(this);
-
-    getSupportFragmentManager().beginTransaction()
-        .replace(R.id.fragment_container, new MainFragment()).commit();
-
-    setupService();
-    dataBase = MobilePunchDatabase.getInstance(this);
-    ApiTask apiTask = new ApiTask();
-    apiTask.execute();
-
+  static void signOut() {
+    FrontendApplication.getInstance().getClient().signOut()
+        .addOnCompleteListener(MainActivity.getInstance(), (task) -> {
+          Intent intent = new Intent(MainActivity.getInstance(), LoginActivity.class);
+          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+          MainActivity.getInstance().startActivity(intent);
+        });
   }
 
   @Override
@@ -118,13 +108,31 @@ public class MainActivity extends AppCompatActivity
     return true;
   }
 
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    Toolbar toolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
 
-  private void signOut() {
-    FrontendApplication.getInstance().getClient().signOut().addOnCompleteListener(this, (task) -> {
-      Intent intent = new Intent(this, LoginActivity.class);
-      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-      startActivity(intent);
-    });
+    DrawerLayout drawer = findViewById(R.id.drawer_layout);
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    drawer.addDrawerListener(toggle);
+    toggle.syncState();
+
+    NavigationView navigationView = findViewById(R.id.nav_view);
+    navigationView.setNavigationItemSelectedListener(this);
+
+    getSupportFragmentManager().beginTransaction()
+        .replace(R.id.fragment_container, new MainFragment()).commit();
+
+    setupService();
+    dataBase = MobilePunchDatabase.getInstance(this);
+    ApiTask apiTask = new ApiTask();
+    apiTask.execute();
+    instance = this;
+
   }
 
 
