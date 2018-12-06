@@ -16,14 +16,12 @@ import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
 import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
-
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 import edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText;
+import edu.cnm.deepdive.mobilepunch.view.fragments.helpers.DayOfWeekHelper;
 import java.lang.ref.WeakReference;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.UUID;
-
-import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 
 
 
@@ -115,32 +113,8 @@ public class ProjectFragment extends Fragment {
         } else {
           project.setEndTime(cal.getTime());
         }
-
-        String day = "UNKNOWN";
-        switch (cal.get(Calendar.DAY_OF_WEEK)) {
-          case 2:
-            day = "Monday";
-            break;
-          case 3:
-            day = "Tuesday";
-            break;
-          case 4:
-            day = "Wednesday";
-            break;
-          case 5:
-            day = "Thursday";
-            break;
-          case 6:
-            day = "Friday";
-            break;
-          case 7:
-            day = "Saturday";
-            break;
-          case 8:
-            day = "Sunday";
-            break;
-        }
-
+        String day = DayOfWeekHelper
+            .getDayOfWeekFromCalendarDayOfWeek(cal.get(Calendar.DAY_OF_WEEK));
         button.setText(
             button.getTag().toString() + ": " + day + " " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (
                 cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR));
