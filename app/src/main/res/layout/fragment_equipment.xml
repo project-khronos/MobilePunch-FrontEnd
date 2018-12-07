@@ -65,8 +65,9 @@
     android:layout_height="150dp"
     android:layout_marginBottom="2dp"
     android:hint="@string/description_or_name"
+    android:gravity="start"
     android:inputType="text"
-    app:layout_constraintTop_toTopOf="@+id/equipment_save"/>
+    />
 
 
   <android.support.constraint.ConstraintLayout
