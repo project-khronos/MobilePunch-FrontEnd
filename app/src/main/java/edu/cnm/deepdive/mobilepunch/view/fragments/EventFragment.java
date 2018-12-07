@@ -182,6 +182,12 @@ public class EventFragment extends Fragment {
     private WeakReference<MainActivity> mainActivity;
     private ProjectEntity projectEntity;
 
+    /**
+     * Instantiates a new Insert event.
+     *
+     * @param mainActivity the main activity
+     * @param projectEntity the project entity
+     */
     public InsertEvent(MainActivity mainActivity, ProjectEntity projectEntity) {
       this.projectEntity = projectEntity;
       this.mainActivity = new WeakReference<>(mainActivity);

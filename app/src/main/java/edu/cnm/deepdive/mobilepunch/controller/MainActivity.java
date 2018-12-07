@@ -43,10 +43,18 @@ public class MainActivity extends AppCompatActivity
   private String TAG = "tag";
 
 
+  /**
+   * Gets instance.
+   *
+   * @return the instance
+   */
   public static MainActivity getInstance() {
     return instance;
   }
 
+  /**
+   * Sign out.
+   */
   static void signOut() {
     FrontendApplication.getInstance().getClient().signOut()
         .addOnCompleteListener(MainActivity.getInstance(), (task) -> {
@@ -196,6 +204,7 @@ public class MainActivity extends AppCompatActivity
     }
 
   }
+
 
   private class ApiTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
 

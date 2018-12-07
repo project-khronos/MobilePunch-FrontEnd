@@ -17,9 +17,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The type Project helper.
+ */
 public class ProjectHelper {
 
+  /**
+   * Gets projects.
+   *
+   * @param context the context
+   * @return the projects
+   */
+
   public static Set<ProjectEntity> getProjects(Context context) {
+
     List<ProjectEntity> projects = MobilePunchDatabase.getInstance(context).getProjectDao()
         .select();
     for (ProjectEntity project : projects) {
@@ -53,7 +64,12 @@ public class ProjectHelper {
     return new HashSet<>(projects);
   }
 
+  /**
+   * The type Project getter task.
+   */
+
   public static class ProjectGetterTask extends AsyncTask<Void, Void, Set<ProjectEntity>> {
+
 
     @Override
     protected Set<ProjectEntity> doInBackground(Void... voids) {
