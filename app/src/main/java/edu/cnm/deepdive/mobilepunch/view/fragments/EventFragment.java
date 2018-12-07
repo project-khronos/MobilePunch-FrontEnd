@@ -1,9 +1,15 @@
 package edu.cnm.deepdive.mobilepunch.view.fragments;
 
+import android.Manifest;
+import android.Manifest.permission;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +20,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
@@ -36,7 +50,7 @@ import java.util.List;
 /**
  * The type Event fragment.
  */
-public class EventFragment extends Fragment implements OnMapReadyCallback {
+public class EventFragment extends Fragment {
 
   private EventEntity event;
 
@@ -47,19 +61,25 @@ public class EventFragment extends Fragment implements OnMapReadyCallback {
   private Button eventStartDateButton,
       eventEndDateButton,
       saveButton;
+  private ProjectEntity pickedProject;
+  private Date startDate = new Date(), endDate = new Date();
 
-  private MapView mapView;
+  private String TAG = "tag";
   private Spinner projectSpinner;
   private Spinner equipmentSpinner;
 
   private View view;
 
-  private ProjectEntity pickedProject;
-
+  private MapView mapView;
   private Bundle bundle;
+  private FusedLocationProviderClient fusedLocationProviderClient;
+  private LocationRequest locationRequest;
+  private LocationCallback locationCallback;
 
-  private Date startDate = new Date(), endDate = new Date();
 
+  private int locationRequestCode = 1000;
+  private double currentLatitude;
+  private double currentLongitude;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +87,81 @@ public class EventFragment extends Fragment implements OnMapReadyCallback {
     event = new EventEntity();
     this.bundle = savedInstanceState;
 
+    fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
+    if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+        != PackageManager.PERMISSION_GRANTED
+        && ActivityCompat
+        .checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+        != PackageManager.PERMISSION_GRANTED) {
+      ActivityCompat.requestPermissions(getActivity(),
+          new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+              Manifest.permission.ACCESS_COARSE_LOCATION},
+          locationRequestCode);
+    } else {
+      // already permission granted
+      getLocation();
+    }
   }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+      @NonNull int[] grantResults) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    switch (requestCode) {
+      case 1000: {
+        // If request is cancelled, the result arrays are empty.
+        if (grantResults.length > 0
+            && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        } else {
+          Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_SHORT).show();
+        }
+        break;
+      }
+    }
+  }
+
+  private void getLocation() {
+
+    locationRequest = LocationRequest.create();
+    locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+    locationRequest.setInterval(20 * 1000);
+
+    locationCallback = new LocationCallback() {
+      @Override
+      public void onLocationResult(LocationResult locationResult) {
+        if (locationResult == null) {
+          return;
+        }
+        for (Location location : locationResult.getLocations()) {
+          if (location != null) {
+            currentLongitude = locationResult.getLastLocation().getLongitude();
+            currentLatitude = locationResult.getLastLocation().getLatitude();
+          }
+        }
+        Log.d(TAG, "Longitude" + Double.toString(currentLongitude));
+        Log.d(TAG, "Latitide" + Double.toString(currentLatitude));
+
+      }
+    };
+
+    if (ActivityCompat.checkSelfPermission(getActivity(), permission.ACCESS_FINE_LOCATION)
+        != PackageManager.PERMISSION_GRANTED
+        && ActivityCompat.checkSelfPermission(getActivity(), permission.ACCESS_COARSE_LOCATION)
+        != PackageManager.PERMISSION_GRANTED) {
+      // TODO: Consider calling
+      //    ActivityCompat#requestPermissions
+      // here to request the missing permissions, and then overriding
+      //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+      //                                          int[] grantResults)
+      // to handle the case where the user grants the permission. See the documentation
+      // for ActivityCompat#requestPermissions for more details.
+      return;
+    }
+    fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null);
+
+  }
+
 
   @Override
   public void onStart() {
@@ -112,10 +206,6 @@ public class EventFragment extends Fragment implements OnMapReadyCallback {
     mapView.onDestroy();
   }
 
-  @Override
-  public void onMapReady(GoogleMap googleMap) {
-
-  }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -124,12 +214,23 @@ public class EventFragment extends Fragment implements OnMapReadyCallback {
     view = inflater.inflate(R.layout.fragment_event, container, false);
 
     mapView = view.findViewById(R.id.event_map);
-    mapView.getMapAsync(this);
-
+    //String title = "You are here";
     MapsInitializer.initialize(MainActivity.getInstance());
     mapView.onCreate(bundle);
 
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(GoogleMap googleMap) {
+        if (googleMap != null) {
+          LatLng currentLocation = new LatLng(currentLatitude, currentLongitude);
+          googleMap.addMarker(new MarkerOptions()
+              .position(currentLocation));
+          googleMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+        }
 
+
+      }
+    });
 
     generateIds();
     initLayout();
@@ -137,6 +238,7 @@ public class EventFragment extends Fragment implements OnMapReadyCallback {
 
     return view;
   }
+
 
   private void generateIds() {
     UuidSetter.setNewRandomUuid(event);
@@ -197,8 +299,6 @@ public class EventFragment extends Fragment implements OnMapReadyCallback {
         Toast.makeText(getContext(), "Please enter a Description", Toast.LENGTH_SHORT).show();
       }
 
-
-      
       getFragmentManager().beginTransaction().replace(R.id.fragment_container, new EventFragment())
           .commit();
 
@@ -229,7 +329,8 @@ public class EventFragment extends Fragment implements OnMapReadyCallback {
           event.setEndDate(cal.getTime());
         }
 
-        String dateFormat = button.getTag().toString() + ": " + DayOfWeekHelper.getDayOfWeekFromCalendarDayOfWeek(cal.get(Calendar.DAY_OF_WEEK))
+        String dateFormat = button.getTag().toString() + ": " + DayOfWeekHelper
+            .getDayOfWeekFromCalendarDayOfWeek(cal.get(Calendar.DAY_OF_WEEK))
             + " " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (
             cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR);
 
