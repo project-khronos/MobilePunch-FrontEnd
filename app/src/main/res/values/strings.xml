@@ -58,4 +58,7 @@
   <string name="clients_email">Client\'s email</string>
   <string name="client_save">SAVE</string>
   <string name="client_notes">Notes</string>
+  <string name="name">Name</string>
+  <string name="license_serial_number">License/Serial Number</string>
+  <string name="equipment_save">SAVE</string>
 </resources>

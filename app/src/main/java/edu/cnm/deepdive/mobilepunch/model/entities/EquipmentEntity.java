@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
+import java.util.Objects;
 import java.util.UUID;
 
 
@@ -205,6 +206,37 @@ public class EquipmentEntity implements UuidHaver {
    */
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    EquipmentEntity that = (EquipmentEntity) o;
+    return Objects.equals(uuid, that.uuid);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(uuid);
+  }
+
+  @Override
+  public String toString() {
+    return "EquipmentEntity{" +
+        "uuid=" + uuid +
+        ", name='" + name + '\'' +
+        ", make='" + make + '\'' +
+        ", model='" + model + '\'' +
+        ", mfcyear='" + mfcyear + '\'' +
+        ", identification='" + identification + '\'' +
+        ", description='" + description + '\'' +
+        '}';
   }
 }
 

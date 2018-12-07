@@ -25,7 +25,7 @@ public class EquipmentFragment extends Fragment {
 
   private EquipmentEntity equipment;
 
-  private EditText makeField, modelField, yearField, identificationField;
+  private EditText nameField, makeField, modelField, yearField, identificationField;
 
   private Button saveButton;
 
@@ -54,6 +54,7 @@ public class EquipmentFragment extends Fragment {
   }
 
   private void initLayout() {
+    nameField = view.findViewById(R.id.equipment_name);
     makeField = view.findViewById(R.id.equipment_make);
     modelField = view.findViewById(R.id.equipment_model);
     yearField = view.findViewById(R.id.equipment_year);
@@ -66,44 +67,50 @@ public class EquipmentFragment extends Fragment {
     saveButton.setOnClickListener(
         v -> {
           grabFields();
-          if (!makeField.getText().toString().equals("")) {
+          if (!nameField.getText().toString().equals("")) {
             new InsertEquipment(MainActivity.getInstance()).execute(equipment);
             Toast.makeText(getContext(), "Equipment saved", Toast.LENGTH_SHORT).show();
             getFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new EquipmentFragment()).commit();
           } else {
-            Toast.makeText(getContext(), "Please enter text into Make Field", Toast.LENGTH_SHORT)
+            Toast.makeText(getContext(), "Please enter equipment name", Toast.LENGTH_SHORT)
                 .show();
           }
         });
   }
 
-    private void grabFields () {
-      equipment.setMake(makeField.getText().toString());
-      equipment.setModel(modelField.getText().toString());
-      equipment.setMfcyear(yearField.getText().toString());
-      equipment.setIdentification(identificationField.getText().toString());
-
-    }
-
-    private static class InsertEquipment extends AsyncTask<EquipmentEntity, Void, Void> {
-
-      private WeakReference<MainActivity> mainActivity;
-
-      public InsertEquipment(MainActivity mainActivity) {
-        this.mainActivity = new WeakReference<>(mainActivity);
-      }
-
-      @Override
-      protected Void doInBackground(EquipmentEntity... equipmentEntities) {
-
-        MobilePunchDatabase.getInstance(mainActivity.get()).getEquipmentDao()
-            .insert(equipmentEntities[0]);
-        return null;
-      }
-    }
+  private void grabFields() {
+    equipment.setName(nameField.getText().toString());
+    equipment.setMake(makeField.getText().toString());
+    equipment.setModel(modelField.getText().toString());
+    equipment.setMfcyear(yearField.getText().toString());
+    equipment.setIdentification(identificationField.getText().toString());
 
   }
+
+  private static class InsertEquipment extends AsyncTask<EquipmentEntity, Void, Void> {
+
+    private WeakReference<MainActivity> mainActivity;
+
+    /**
+     * Instantiates a new Insert equipment.
+     *
+     * @param mainActivity the main activity
+     */
+    public InsertEquipment(MainActivity mainActivity) {
+      this.mainActivity = new WeakReference<>(mainActivity);
+    }
+
+    @Override
+    protected Void doInBackground(EquipmentEntity... equipmentEntities) {
+
+      MobilePunchDatabase.getInstance(mainActivity.get()).getEquipmentDao()
+          .insert(equipmentEntities[0]);
+      return null;
+    }
+  }
+
+}
 
 
 

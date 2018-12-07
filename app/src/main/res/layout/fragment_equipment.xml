@@ -18,7 +18,7 @@
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:layout_marginBottom="2dp"
-    android:hint="Name"
+    android:hint="@string/name"
     android:inputType="text"/>
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
     android:id="@+id/equipment_make"
@@ -54,7 +54,7 @@
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:layout_marginBottom="2dp"
-    android:hint="License/Serial Number"
+    android:hint="@string/license_serial_number"
     android:inputType="number"/>
 
 
@@ -79,7 +79,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@color/rallyGreen"
-      android:text="SAVE"
+      android:text="@string/equipment_save"
       app:layout_constraintBottom_toBottomOf="parent"/>
   </android.support.constraint.ConstraintLayout>
 

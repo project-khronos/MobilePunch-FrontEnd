@@ -95,6 +95,11 @@ public class ClientFragment extends Fragment {
 
     private WeakReference<MainActivity> mainActivity;
 
+    /**
+     * Instantiates a new Insert client.
+     *
+     * @param mainActivity the main activity
+     */
     public InsertClient(MainActivity mainActivity) {
       this.mainActivity = new WeakReference<>(mainActivity);
     }

@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,6 +23,8 @@ import java.util.List;
  * The type Main fragment.
  */
 public class MainFragment extends Fragment {
+
+  private static final String TAG = "MainFragment";
 
   private TextView tEvent,
       tProject,
@@ -50,11 +53,17 @@ public class MainFragment extends Fragment {
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View view = inflater.inflate(R.layout.fragment_main, container, false);
-    initViews(view);
+    initLayout(view);
     setListeners();
-    getNumItems();
     return view;
 
+  }
+
+  @Override
+  public void onStart() {
+    super.onStart();
+    getNumItems();
+    Log.d(TAG, "On start called");
   }
 
   private void getNumItems() {
@@ -71,16 +80,19 @@ public class MainFragment extends Fragment {
     setListener(equipment, recyclerFragment);
   }
 
-  private void initViews(View view) {
+  private void initLayout(View view) {
     tEvent = view.findViewById(R.id.event_num_items);
     event = view.findViewById(R.id.event_card);
     event.setTag("event");
+
     tProject = view.findViewById(R.id.project_num_items);
     project = view.findViewById(R.id.project_card);
     project.setTag("project");
+
     tClient = view.findViewById(R.id.client_num_items);
     client = view.findViewById(R.id.client_card);
     client.setTag("client");
+
     tEquipment = view.findViewById(R.id.equipment_num_items);
     equipment = view.findViewById(R.id.equipment_card);
     equipment.setTag("equipment");
