@@ -2,6 +2,7 @@ package edu.cnm.deepdive.mobilepunch.view.fragments;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
@@ -32,7 +36,7 @@ import java.util.List;
 /**
  * The type Event fragment.
  */
-public class EventFragment extends Fragment {
+public class EventFragment extends Fragment implements OnMapReadyCallback {
 
   private EventEntity event;
 
@@ -44,13 +48,15 @@ public class EventFragment extends Fragment {
       eventEndDateButton,
       saveButton;
 
-  private MapView mapview;
+  private MapView mapView;
   private Spinner projectSpinner;
   private Spinner equipmentSpinner;
 
   private View view;
 
   private ProjectEntity pickedProject;
+
+  private Bundle bundle;
 
   private Date startDate = new Date(), endDate = new Date();
 
@@ -59,6 +65,56 @@ public class EventFragment extends Fragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     event = new EventEntity();
+    this.bundle = savedInstanceState;
+
+  }
+
+  @Override
+  public void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    mapView.onResume();
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    mapView.onPause();
+  }
+
+
+  @Override
+  public void onSaveInstanceState(@NonNull Bundle outState) {
+    super.onSaveInstanceState(outState);
+    mapView.onSaveInstanceState(outState);
+  }
+
+  @Override
+  public void onLowMemory() {
+    super.onLowMemory();
+    mapView.onLowMemory();
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+    mapView.onStop();
+  }
+
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    mapView.onDestroy();
+  }
+
+  @Override
+  public void onMapReady(GoogleMap googleMap) {
+
   }
 
   @Override
@@ -66,6 +122,15 @@ public class EventFragment extends Fragment {
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     view = inflater.inflate(R.layout.fragment_event, container, false);
+
+    mapView = view.findViewById(R.id.event_map);
+    mapView.getMapAsync(this);
+
+    MapsInitializer.initialize(MainActivity.getInstance());
+    mapView.onCreate(bundle);
+
+
+
     generateIds();
     initLayout();
     initListeners();
@@ -78,7 +143,6 @@ public class EventFragment extends Fragment {
   }
 
   private void initLayout() {
-    mapview = view.findViewById(R.id.event_map);
 
     expensesField = view.findViewById(R.id.event_expenses);
     descriptionField = view.findViewById(R.id.event_description);
@@ -173,6 +237,7 @@ public class EventFragment extends Fragment {
       });
     });
   }
+
 
   private static class InsertEvent extends AsyncTask<EventEntity, Void, Void> {
 
