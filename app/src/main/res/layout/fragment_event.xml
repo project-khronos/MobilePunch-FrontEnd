@@ -14,7 +14,6 @@
   <Spinner
     android:id="@+id/project_spinner"
     android:layout_width="match_parent"
-
     android:layout_height="40dp"
     android:background="#1c1c1c"/>
 
