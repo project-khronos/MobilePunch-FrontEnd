@@ -55,7 +55,7 @@
     android:layout_height="200dp"
     android:hint="Description"
     android:gravity="start"
-    android:inputType="textMultiLine"/>
+    android:inputType="textLongMessage"/>
 
   <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
