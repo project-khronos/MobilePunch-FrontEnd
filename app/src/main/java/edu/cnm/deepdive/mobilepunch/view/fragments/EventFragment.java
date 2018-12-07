@@ -104,6 +104,7 @@ public class EventFragment extends Fragment {
     }
   }
 
+  //qvqwv
   @Override
   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
       @NonNull int[] grantResults) {
