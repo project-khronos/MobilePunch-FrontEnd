@@ -78,6 +78,7 @@ public class ProjectFragment extends Fragment {
     endDateButton = view.findViewById(R.id.project_end_date);
     endDateButton.setTag("End date");
     expectedEndDate = view.findViewById(R.id.project_expected_date);
+    expectedEndDate.setTag("Expected end date");
   }
 
   private void initListeners() {
@@ -86,6 +87,7 @@ public class ProjectFragment extends Fragment {
 
     setButton(startDateButton, picker, startDate);
     setButton(endDateButton, picker, endDate);
+    setButton(expectedEndDate,picker,null);
 
     saveButton.setOnClickListener(
         v -> {
@@ -115,39 +117,42 @@ public class ProjectFragment extends Fragment {
 
         if (button.getTag().equals("Start date")) {
           project.setStartTime(cal.getTime());
-        } else {
+        } else if (button.getTag().equals("End date")) {
           project.setEndTime(cal.getTime());
+        } else {
+          project.setExpectedEndTime(cal.getTime());
         }
-        String day = DayOfWeekHelper
-            .getDayOfWeekFromCalendarDayOfWeek(cal.get(Calendar.DAY_OF_WEEK));
-        button.setText(
-            button.getTag().toString() + ": " + day + " " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (
-                cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR));
+          String day = DayOfWeekHelper
+              .getDayOfWeekFromCalendarDayOfWeek(cal.get(Calendar.DAY_OF_WEEK));
+          button.setText(
+              button.getTag().toString() + ": " + day + " " + cal.get(Calendar.DAY_OF_MONTH) + "/"
+                  + (
+                  cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR));
+
 
       });
     });
   }
+    private static class InsertProject extends AsyncTask<ProjectEntity, Void, Void> {
 
-  private static class InsertProject extends AsyncTask<ProjectEntity, Void, Void> {
+      private WeakReference<MainActivity> mainActivity;
 
-    private WeakReference<MainActivity> mainActivity;
+      /**
+       * Instantiates a new Insert project.
+       *
+       * @param mainActivity the main activity
+       */
+      public InsertProject(MainActivity mainActivity) {
+        this.mainActivity = new WeakReference<>(mainActivity);
+      }
 
-    /**
-     * Instantiates a new Insert project.
-     *
-     * @param mainActivity the main activity
-     */
-    public InsertProject(MainActivity mainActivity) {
-      this.mainActivity = new WeakReference<>(mainActivity);
+      @Override
+      protected Void doInBackground(ProjectEntity... projectEntities) {
+
+        MobilePunchDatabase.getInstance(mainActivity.get()).getProjectDao()
+            .insert(projectEntities[0]);
+        return null;
+      }
     }
 
-    @Override
-    protected Void doInBackground(ProjectEntity... projectEntities) {
-
-      MobilePunchDatabase.getInstance(mainActivity.get()).getProjectDao()
-          .insert(projectEntities[0]);
-      return null;
-    }
   }
-
-}
