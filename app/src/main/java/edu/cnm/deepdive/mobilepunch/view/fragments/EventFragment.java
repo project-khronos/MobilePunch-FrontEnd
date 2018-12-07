@@ -332,7 +332,6 @@ public class EventFragment extends Fragment {
           event.setEndDate(cal.getTime());
         }
 
-
         String dateFormat = button.getTag().toString() + ": " +
             DayOfWeekHelper.getDayOfWeekFromCalendarDayOfWeek(cal.get(Calendar.DAY_OF_WEEK))
             + " " + cal.get(Calendar.DAY_OF_MONTH) + "/" + (
