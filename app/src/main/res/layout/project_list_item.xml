@@ -24,7 +24,9 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/project_name"
+
       android:paddingBottom="4dp"
+      android:textSize="24sp"
       android:textColor="@color/rallyBlue"/>
     <TextView
       android:id="@+id/li_project_start_date"

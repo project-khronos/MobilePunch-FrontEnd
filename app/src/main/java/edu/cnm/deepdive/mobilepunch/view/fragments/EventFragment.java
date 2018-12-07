@@ -79,8 +79,8 @@ public class EventFragment extends Fragment {
 
 
   private int locationRequestCode = 1000;
-  private double currentLatitude;
-  private double currentLongitude;
+  private double currentLatitude = 35.0844;
+  private double currentLongitude = -106.6504;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -226,7 +226,8 @@ public class EventFragment extends Fragment {
           LatLng currentLocation = new LatLng(currentLatitude, currentLongitude);
           googleMap.addMarker(new MarkerOptions()
               .position(currentLocation));
-          googleMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+          googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 5));
+
         }
 
 
