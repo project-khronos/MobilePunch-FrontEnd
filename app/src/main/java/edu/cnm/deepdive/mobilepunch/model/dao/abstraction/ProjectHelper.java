@@ -13,8 +13,17 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Project helper.
+ */
 public class ProjectHelper {
 
+  /**
+   * Gets projects.
+   *
+   * @param context the context
+   * @return the projects
+   */
   public static List<ProjectEntity> getProjects(Context context) {
     List<ProjectEntity> projects = MobilePunchDatabase.getInstance(context).getProjectDao()
         .select();
@@ -43,6 +52,9 @@ public class ProjectHelper {
     return projects;
   }
 
+  /**
+   * The type Project getter task.
+   */
   public static class ProjectGetterTask extends AsyncTask<Void, Void, List<ProjectEntity>> {
 
     @Override

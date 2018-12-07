@@ -92,6 +92,11 @@ public class EquipmentFragment extends Fragment {
 
       private WeakReference<MainActivity> mainActivity;
 
+      /**
+       * Instantiates a new Insert equipment.
+       *
+       * @param mainActivity the main activity
+       */
       public InsertEquipment(MainActivity mainActivity) {
         this.mainActivity = new WeakReference<>(mainActivity);
       }

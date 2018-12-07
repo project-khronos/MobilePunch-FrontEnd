@@ -24,7 +24,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-
 /**
  * The type Project fragment.
  */
@@ -128,7 +127,12 @@ public class ProjectFragment extends Fragment {
 
   private WeakReference<MainActivity> mainActivity;
 
-  public InsertProject(MainActivity mainActivity) {
+    /**
+     * Instantiates a new Insert project.
+     *
+     * @param mainActivity the main activity
+     */
+    public InsertProject(MainActivity mainActivity) {
     this.mainActivity = new WeakReference<>(mainActivity);
   }
 

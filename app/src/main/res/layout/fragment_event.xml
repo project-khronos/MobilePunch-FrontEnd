@@ -14,12 +14,16 @@
   <Spinner
     android:id="@+id/project_spinner"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-  </Spinner>
+    android:layout_height="40dp"
+    android:background="#1c1c1c"/>
+
+
   <Spinner
     android:id="@+id/equipment_spinner"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"></Spinner>
+    android:layout_height="wrap_content"
+    android:background="@color/rallyBackground"/>
+
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
     android:id="@+id/event_expenses"
     style="?android:listSeparatorTextViewStyle"
@@ -78,7 +82,7 @@
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:id="@+id/event_map"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"/>
+      android:layout_height="250dp"/>
 
     <Button
       android:id="@+id/event_save"

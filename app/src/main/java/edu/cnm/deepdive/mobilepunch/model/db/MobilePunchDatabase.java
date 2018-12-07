@@ -320,8 +320,18 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
   public abstract EventDao getEventDao();
 
 
+  /**
+   * Gets event equipment dao.
+   *
+   * @return the event equipment dao
+   */
   public abstract EventEquipmentDao getEventEquipmentDao();
 
+  /**
+   * Gets project client dao.
+   *
+   * @return the project client dao
+   */
   public abstract ProjectClientDao getProjectClientDao();
 
 
