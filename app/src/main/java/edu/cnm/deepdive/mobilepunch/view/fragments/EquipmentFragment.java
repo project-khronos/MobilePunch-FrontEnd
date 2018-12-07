@@ -79,38 +79,38 @@ public class EquipmentFragment extends Fragment {
         });
   }
 
-    private void grabFields () {
-      equipment.setName(nameField.getText().toString());
-      equipment.setMake(makeField.getText().toString());
-      equipment.setModel(modelField.getText().toString());
-      equipment.setMfcyear(yearField.getText().toString());
-      equipment.setIdentification(identificationField.getText().toString());
-
-    }
-
-    private static class InsertEquipment extends AsyncTask<EquipmentEntity, Void, Void> {
-
-      private WeakReference<MainActivity> mainActivity;
-
-      /**
-       * Instantiates a new Insert equipment.
-       *
-       * @param mainActivity the main activity
-       */
-      public InsertEquipment(MainActivity mainActivity) {
-        this.mainActivity = new WeakReference<>(mainActivity);
-      }
-
-      @Override
-      protected Void doInBackground(EquipmentEntity... equipmentEntities) {
-
-        MobilePunchDatabase.getInstance(mainActivity.get()).getEquipmentDao()
-            .insert(equipmentEntities[0]);
-        return null;
-      }
-    }
+  private void grabFields() {
+    equipment.setName(nameField.getText().toString());
+    equipment.setMake(makeField.getText().toString());
+    equipment.setModel(modelField.getText().toString());
+    equipment.setMfcyear(yearField.getText().toString());
+    equipment.setIdentification(identificationField.getText().toString());
 
   }
+
+  private static class InsertEquipment extends AsyncTask<EquipmentEntity, Void, Void> {
+
+    private WeakReference<MainActivity> mainActivity;
+
+    /**
+     * Instantiates a new Insert equipment.
+     *
+     * @param mainActivity the main activity
+     */
+    public InsertEquipment(MainActivity mainActivity) {
+      this.mainActivity = new WeakReference<>(mainActivity);
+    }
+
+    @Override
+    protected Void doInBackground(EquipmentEntity... equipmentEntities) {
+
+      MobilePunchDatabase.getInstance(mainActivity.get()).getEquipmentDao()
+          .insert(equipmentEntities[0]);
+      return null;
+    }
+  }
+
+}
 
 
 
