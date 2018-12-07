@@ -17,6 +17,7 @@ import com.google.android.gms.maps.MapView;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
+import edu.cnm.deepdive.mobilepunch.controller.FrontendApplication;
 import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
@@ -47,7 +48,7 @@ public class EventFragment extends Fragment {
   private MapView mapview;
   private Spinner projectSpinner;
   private Spinner equipmentSpinner;
-
+  private List<ProjectEntity> localList;
   private View view;
 
   private ProjectEntity pickedProject;
@@ -93,16 +94,18 @@ public class EventFragment extends Fragment {
         android.R.layout.simple_spinner_item, android.R.id.text1);
     spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     projectSpinner.setAdapter(spinnerAdapter);
+    localList = new ArrayList<>(FrontendApplication.getMasterProjectSet());
     List<String> getProjectNames = new ArrayList<>();
-    for (ProjectEntity project : MainActivity.getInstance().getProjects()) {
+    for (ProjectEntity project : localList) {
       getProjectNames.add(project.getName());
     }
     spinnerAdapter.addAll(getProjectNames);
     spinnerAdapter.notifyDataSetChanged();
+
     projectSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
       @Override
       public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        EventFragment.this.pickedProject = MainActivity.getInstance().getProjects().get(position);
+        EventFragment.this.pickedProject = localList.get(position);
       }
 
       @Override

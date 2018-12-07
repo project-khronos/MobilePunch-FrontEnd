@@ -36,8 +36,6 @@ public class RecyclerFragment extends Fragment {
   private List<ClientEntity> clients;
   private List<EquipmentEntity> equipment;
 
-  private ViewGroup viewGroup;
-
   private Adapter adapter;
 
   private Bundle bundle;
@@ -55,9 +53,7 @@ public class RecyclerFragment extends Fragment {
     View view = inflater.inflate(R.layout.fragment_recycler, container, false);
     recyclerView = view.findViewById(R.id.recycler);
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    viewGroup = container;
     checkFrag();
-
     return view;
   }
 

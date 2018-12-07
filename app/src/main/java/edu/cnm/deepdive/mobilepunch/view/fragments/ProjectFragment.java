@@ -13,6 +13,7 @@ import android.widget.Toast;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
+import edu.cnm.deepdive.mobilepunch.controller.FrontendApplication;
 import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
@@ -32,16 +33,18 @@ public class ProjectFragment extends Fragment {
   private String TAG = "tag";
 
   private ProjectEntity project;
-  private Button saveButton;
-  private Button startDateButton;
-  private Button endDateButton;
-  private Button expectedEndDate;
-  private View view;
-  private BasicEditText projectName;
-  private BasicEditText description;
 
-  private Date startDate = new Date();
-  private Date endDate = new Date();
+  private Button saveButton,
+      startDateButton,
+      endDateButton,
+      expectedEndDate;
+
+  private View view;
+  private BasicEditText projectName,
+      description;
+
+  private Date startDate = new Date(),
+      endDate = new Date();
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,8 +69,10 @@ public class ProjectFragment extends Fragment {
 
   private void initLayout() {
     saveButton = view.findViewById(R.id.project_save);
+
     projectName = view.findViewById(R.id.project_name);
     description = view.findViewById(R.id.project_description);
+
     startDateButton = view.findViewById(R.id.project_start_date);
     startDateButton.setTag("Start date");
     endDateButton = view.findViewById(R.id.project_end_date);
@@ -86,7 +91,7 @@ public class ProjectFragment extends Fragment {
         v -> {
           grabFields();
           if (!projectName.getText().toString().equals("")) {
-            MainActivity.getInstance().getProjects().add(project);
+            FrontendApplication.getMasterProjectSet().add(project);
             new InsertProject(MainActivity.getInstance()).execute(project);
             Toast.makeText(getContext(), "Project saved", Toast.LENGTH_SHORT).show();
             getFragmentManager().beginTransaction()
