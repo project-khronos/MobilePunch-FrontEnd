@@ -45,11 +45,11 @@ public class ProjectRecyclerViewAdapter extends
 
   @Override
   public void onBindViewHolder(@NonNull ProjectHolder projectHolder, int position) {
-    projectHolder.name.setText(data.get(position).getName());
-    projectHolder.description.setText(data.get(position).getDescription());
-    projectHolder.startDate.setText(data.get(position).getStartTime().toString());
-    projectHolder.endDate.setText(data.get(position).getEndTime().toString());
-    projectHolder.expectedEndDate.setText(data.get(position).getExpectedEndTime().toString());
+    projectHolder.name.setText("Project name: " + data.get(position).getName());
+    projectHolder.description.setText("Description: " + data.get(position).getDescription());
+    projectHolder.startDate.setText("Start date: " + data.get(position).getStartTime().toString());
+    projectHolder.endDate.setText("End date: " + data.get(position).getEndTime().toString());
+    projectHolder.expectedEndDate.setText("Expected end date: " + data.get(position).getExpectedEndTime().toString());
   }
 
 
