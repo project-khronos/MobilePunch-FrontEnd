@@ -6,59 +6,118 @@
   android:translationZ="8dp"
   app:cardCornerRadius="10dp"
   app:cardElevation="8dp"
+  android:layout_margin="10dp"
   app:cardBackgroundColor="@color/rallyBackground"
   xmlns:android="http://schemas.android.com/apk/res/android">
+
   <ImageView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/edit_text_style"/>
 
-  <LinearLayout
-    android:layout_height="match_parent"
+  <android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_margin="20dp">
+    android:layout_height="wrap_content"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.Guideline
+      android:id="@+id/half_guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_percent="0.35"/>
+
     <TextView
       android:id="@+id/li_project_name"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/project_name"
-
+      android:text="NAME"
       android:paddingBottom="4dp"
       android:textSize="24sp"
-      android:textColor="@color/rallyBlue"/>
+      android:textColor="@color/rallyBlue"
+      app:layout_constraintBottom_toTopOf="@id/li_project_start_date"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+      android:paddingBottom="4dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Start date"
+      android:textColor="@color/rallyBlue"
+      app:layout_constraintBottom_toTopOf="@id/li_project_end_date"/>
     <TextView
       android:id="@+id/li_project_start_date"
       android:paddingBottom="4dp"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/start_date_time"
-      android:textColor="@color/rallyBlue"/>
+      android:textColor="@color/rallyBlue"
+      app:layout_constraintLeft_toLeftOf="@id/half_guideline"
+      app:layout_constraintBottom_toTopOf="@id/li_project_end_date"/>
+
+
+    <TextView
+      android:paddingBottom="4dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="End date"
+      android:textColor="@color/rallyBlue"
+      app:layout_constraintBottom_toTopOf="@id/li_project_expected"/>
+
     <TextView
       android:id="@+id/li_project_end_date"
       android:paddingBottom="4dp"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/end_date_time"
-      android:textColor="@color/rallyBlue"/>
+      android:textColor="@color/rallyBlue"
+      app:layout_constraintLeft_toLeftOf="@id/half_guideline"
+      app:layout_constraintBottom_toTopOf="@id/li_project_expected"/>
+
+    <TextView
+      android:paddingBottom="4dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Expected end date"
+      android:textColor="@color/rallyBlue"
+      app:layout_constraintBottom_toTopOf="@id/li_project_description"/>
+
     <TextView
       android:id="@+id/li_project_expected"
       android:paddingBottom="4dp"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/expected_end_date"
-      android:textColor="@color/rallyBlue"/>
+      android:text="Expected end date"
+      android:textColor="@color/rallyBlue"
+      app:layout_constraintLeft_toLeftOf="@id/half_guideline"
+      app:layout_constraintBottom_toTopOf="@id/li_project_description"/>
+
+
+
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingBottom="4dp"
+      android:text="Description"
+      android:textColor="@color/rallyBlue"
+      app:layout_constraintTop_toBottomOf="@id/li_project_expected"
+      app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
       android:id="@+id/li_project_description"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:paddingBottom="4dp"
-      android:text="@string/description"
-      android:textColor="@color/rallyBlue"/>
+      android:textColor="@color/rallyBlue"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintLeft_toLeftOf="@id/half_guideline"/>
 
-
-  </LinearLayout>
+  </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>
