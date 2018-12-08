@@ -3,6 +3,7 @@ package edu.cnm.deepdive.mobilepunch.view.custom_widgets;
 import android.content.Context;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import edu.cnm.deepdive.mobilepunch.R;
 
 /**

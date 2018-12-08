@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.adapters.EventRecyclerViewAdapter.ItemClickListener;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
@@ -46,10 +47,11 @@ public class ProjectRecyclerViewAdapter extends
   @Override
   public void onBindViewHolder(@NonNull ProjectHolder projectHolder, int position) {
     projectHolder.name.setText(data.get(position).getName());
-    projectHolder.description.setText(":" + data.get(position).getDescription());
     projectHolder.startDate.setText(":" + data.get(position).getStartTime().toString());
-    projectHolder.endDate.setText(":" + data.get(position).getEndTime().toString());
     projectHolder.expectedEndDate.setText(":" + data.get(position).getExpectedEndTime().toString());
+    projectHolder.endDate.setText(":" + data.get(position).getEndTime().toString());
+    projectHolder.description.setText(":" + data.get(position).getDescription());
+  
   }
 
 
@@ -66,8 +68,8 @@ public class ProjectRecyclerViewAdapter extends
 
     private TextView name;
     private TextView startDate;
-    private TextView endDate;
     private TextView expectedEndDate;
+    private TextView endDate;
     private TextView description;
 
 
@@ -80,14 +82,14 @@ public class ProjectRecyclerViewAdapter extends
       super(itemView);
       name = itemView.findViewById(R.id.li_project_name);
       startDate = itemView.findViewById(R.id.li_project_start_date);
-      endDate = itemView.findViewById(R.id.li_project_end_date);
       expectedEndDate = itemView.findViewById(R.id.li_project_expected);
+      endDate = itemView.findViewById(R.id.li_project_end_date);
       description = itemView.findViewById(R.id.li_project_description);
     }
 
     @Override
-    public void onClick(View v) {
-
+    public void onClick(View v){
+      Toast.makeText(context, "Clicked!", Toast.LENGTH_SHORT).show();
     }
   }
 }

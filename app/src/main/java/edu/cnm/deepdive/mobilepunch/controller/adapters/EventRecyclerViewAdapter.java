@@ -49,13 +49,13 @@ public class EventRecyclerViewAdapter extends
   public void onBindViewHolder(@NonNull EventHolder eventHolder, int position) {
 
     eventHolder.startDate
-        .setText("Start date: " + setTimeFormat(data.get(position).getStartDate()));
-    eventHolder.endDate.setText("End date: " + setTimeFormat(data.get(position).getEndDate()));
-    eventHolder.expenses.setText("Expenses: " + String.valueOf(data.get(position).getExpenses()));
-    eventHolder.income.setText("Income: " + String.valueOf(data.get(position).getIncome()));
-    eventHolder.description.setText("Description: " + data.get(position).getDescription());
-    eventHolder.latitude.setText("Latitude: " + String.valueOf(data.get(position).getLatitude()));
-    eventHolder.longitude.setText("Longitude: " + String.valueOf(data.get(position).getLongitude()));
+        .setText(":" + setTimeFormat(data.get(position).getStartDate()));
+    eventHolder.endDate.setText(":" + setTimeFormat(data.get(position).getEndDate()));
+    eventHolder.expenses.setText(":" + String.valueOf(data.get(position).getExpenses()));
+    eventHolder.income.setText(":" + String.valueOf(data.get(position).getIncome()));
+    eventHolder.description.setText(":" + data.get(position).getDescription());
+    eventHolder.latitude.setText(":" + String.valueOf(data.get(position).getLatitude()));
+    eventHolder.longitude.setText(":" + String.valueOf(data.get(position).getLongitude()));
 
 
   }

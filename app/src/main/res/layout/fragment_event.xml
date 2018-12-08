@@ -11,10 +11,12 @@
   tools:context=".view.fragments.EventFragment">
 
 
+
   <Spinner
     android:id="@+id/project_spinner"
     android:layout_width="match_parent"
     android:layout_height="40dp"
+    style="@style/AppTheme"
     android:background="#1c1c1c"/>
 
 
@@ -30,8 +32,7 @@
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:layout_marginBottom="2dp"
-    android:background="@drawable/edit_text_style"
-    android:hint="@string/expenses"
+    android:hint="EXPENSES"
     android:inputType="numberDecimal"/>
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
@@ -40,8 +41,7 @@
     android:layout_width="match_parent"
     android:layout_height="40dp"
     android:layout_marginBottom="2dp"
-    android:background="@drawable/edit_text_style"
-    android:hint="@string/income"
+    android:hint="INCOME"
     android:inputType="numberDecimal"/>
 
 
@@ -52,7 +52,7 @@
     android:layout_height="40dp"
     android:layout_marginBottom="2dp"
     android:background="@drawable/edit_text_style"
-    android:hint="@string/description"
+    android:hint="DESCRIPTION"
     android:inputType="text"/>
 
   <Button
