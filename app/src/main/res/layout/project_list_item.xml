@@ -98,8 +98,6 @@
       app:layout_constraintBottom_toTopOf="@id/li_project_description"/>
 
 
-
-
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
