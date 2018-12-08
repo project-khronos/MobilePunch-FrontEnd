@@ -7,8 +7,6 @@ import android.widget.Toast;
  * The type Day of week helper.
  */
 public class DayOfWeekHelper {
-
-
   /**
    * Gets day of week from calendar day of week.
    *
@@ -19,6 +17,4 @@ public class DayOfWeekHelper {
     String[] days = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
     return days[dayOfWeek-1];
   }
-
-
 }
