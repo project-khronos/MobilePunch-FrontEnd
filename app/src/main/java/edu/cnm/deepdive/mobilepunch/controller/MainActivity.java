@@ -276,6 +276,9 @@ public class MainActivity extends AppCompatActivity
                             UUID equipmentID = event.getEquipment().getUuid();
                             event.setEquipmentId1(equipmentID.getMostSignificantBits());
                             event.setEquipmentId2(equipmentID.getLeastSignificantBits());
+                        } else {
+                            event.setEquipmentId1(0L);
+                            event.setEquipmentId2(0L);
                         }
                     }
 

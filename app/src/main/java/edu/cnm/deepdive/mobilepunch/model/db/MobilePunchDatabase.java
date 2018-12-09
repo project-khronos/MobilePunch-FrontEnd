@@ -50,6 +50,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
         return instance;
     }
 
+
     /**
      * Forget instance.
      */
