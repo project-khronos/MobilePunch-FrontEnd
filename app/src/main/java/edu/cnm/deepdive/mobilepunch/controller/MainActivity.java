@@ -13,8 +13,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.HashSet;
+import java.util.List;
+
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.dao.abstraction.ProjectHelper;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
@@ -25,8 +30,6 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
-import java.util.HashSet;
-import java.util.List;
 import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -257,13 +260,14 @@ public class MainActivity extends AppCompatActivity
         try {
           MobilePunchDatabase.fromUUIDProject(projects);
           List<EventEntity> events = MobilePunchDatabase.getEventsFromProject(projects);
-          dataBase.getProjectDao().insert(projects);
-
-          dataBase.getEventDao().insert(events);
           MobilePunchDatabase.fromUUIDClient(clients);
           dataBase.getClientDao().insert(clients);
+          dataBase.getProjectDao().insert(projects);
           MobilePunchDatabase.fromUUIDEquipment(equipment);
           dataBase.getEquipmentDao().insert(equipment);
+          dataBase.getEventDao().insert(events);
+
+
         } catch (Exception e) {
           // FIXME do what
           Log.d(TAG, "insert method failed: " + e.getLocalizedMessage());
