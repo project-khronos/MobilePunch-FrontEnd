@@ -272,9 +272,11 @@ public class MainActivity extends AppCompatActivity
                     MobilePunchDatabase.fromUUIDEquipment(equipment);
                     dataBase.getEquipmentDao().insert(equipment);
                     for (EventEntity event : events) {
-                        UUID equipmentID = event.getEquipment().getUuid();
-                        event.setEquipmentId1(equipmentID.getMostSignificantBits());
-                        event.setEquipmentId2(equipmentID.getLeastSignificantBits());
+                        if (event.getEquipment() != null) {
+                            UUID equipmentID = event.getEquipment().getUuid();
+                            event.setEquipmentId1(equipmentID.getMostSignificantBits());
+                            event.setEquipmentId2(equipmentID.getLeastSignificantBits());
+                        }
                     }
 
                     dataBase.getEventDao().insert(events);
