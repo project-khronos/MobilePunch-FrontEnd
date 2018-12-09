@@ -128,8 +128,6 @@ public class ProjectFragment extends Fragment {
               button.getTag().toString() + ": " + day + " " + cal.get(Calendar.DAY_OF_MONTH) + "/"
                   + (
                   cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR));
-
-
       });
     });
   }

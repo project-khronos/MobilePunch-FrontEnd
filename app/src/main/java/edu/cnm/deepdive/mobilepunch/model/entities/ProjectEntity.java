@@ -2,19 +2,26 @@ package edu.cnm.deepdive.mobilepunch.model.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
+
 import com.google.gson.annotations.Expose;
-import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
+
 /**
  * The type Project entity.
  */
 @Entity(
-    primaryKeys = {"project_id1", "project_id2"}
+        primaryKeys = {"project_id1", "project_id2"},
+        foreignKeys = @ForeignKey(entity = ClientEntity.class,
+                parentColumns = {"client_id1", "client_id2"},
+                childColumns = {"client_id1", "client_id2"})
 )
 public class ProjectEntity implements UuidHaver {
 
@@ -27,6 +34,26 @@ public class ProjectEntity implements UuidHaver {
 
   @ColumnInfo(name = "project_id2")
   private long id2;
+
+    @ColumnInfo(name = "client_id1")
+    private long clientId1;
+    @ColumnInfo(name = "client_id2")
+    private long clientId2;
+    @Ignore
+    @Expose
+    private ClientEntity clients;
+
+    public long getClientId1() {
+        return clientId1;
+    }
+
+    public void setClientId1(long clientId1) {
+        this.clientId1 = clientId1;
+    }
+
+    public long getClientId2() {
+        return clientId2;
+    }
 
   @Expose
   private String name;
@@ -50,9 +77,9 @@ public class ProjectEntity implements UuidHaver {
   @Expose
   private List<EventEntity> events;
 
-  @Ignore
-  @Expose
-  private List<ClientEntity> clients;
+    public void setClientId2(long clientId2) {
+        this.clientId2 = clientId2;
+    }
 
   /**
    * Gets uuid.
@@ -221,7 +248,7 @@ public class ProjectEntity implements UuidHaver {
    *
    * @return the clients
    */
-  public List<ClientEntity> getClients() {
+  public ClientEntity getClients() {
     return clients;
   }
 
@@ -230,7 +257,7 @@ public class ProjectEntity implements UuidHaver {
    *
    * @param clients the clients
    */
-  public void setClients(List<ClientEntity> clients) {
+  public void setClients(ClientEntity clients) {
     this.clients = clients;
   }
 

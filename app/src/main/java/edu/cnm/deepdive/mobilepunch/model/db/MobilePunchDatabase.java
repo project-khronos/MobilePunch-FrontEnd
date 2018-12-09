@@ -6,29 +6,26 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverter;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import edu.cnm.deepdive.mobilepunch.model.dao.ClientDao;
 import edu.cnm.deepdive.mobilepunch.model.dao.EquipmentDao;
 import edu.cnm.deepdive.mobilepunch.model.dao.EventDao;
-import edu.cnm.deepdive.mobilepunch.model.dao.EventEquipmentDao;
-import edu.cnm.deepdive.mobilepunch.model.dao.ProjectClientDao;
 import edu.cnm.deepdive.mobilepunch.model.dao.ProjectDao;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
-import edu.cnm.deepdive.mobilepunch.model.entities.EventEquipment;
-import edu.cnm.deepdive.mobilepunch.model.entities.ProjectClient;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * The type Mobile punch database.
  */
 @Database(
-    entities = {ProjectEntity.class, EventEntity.class, ClientEntity.class, EquipmentEntity.class,
-        EventEquipment.class, ProjectClient.class},
+        entities = {ProjectEntity.class, EventEntity.class, ClientEntity.class, EquipmentEntity.class},
     version = 1,
     exportSchema = true
 )
@@ -99,7 +96,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
   private static void toUUIDProject(ProjectEntity project) {
     if (project != null) {
       UuidSetter.setUuidFromIds(project);
-      toUUIDCLient(project.getClients());
+      toUUIDClient(project.getClients());
       toUUIDEvent(project.getEvents());
     }
   }
@@ -126,7 +123,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
   public static void fromUUIDEvent(EventEntity event) {
     if (event != null) {
       UuidSetter.setIdsFromUuid(event);
-      fromUUIDEquipment(event.getEquipmentList());
+      fromUUIDEquipment(event.getEquipment());
     }
   }
 
@@ -138,7 +135,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
   public static void toUUIDEvent(EventEntity event) {
     if (event != null) {
       UuidSetter.setUuidFromIds(event);
-      toUUIDEquipment(event.getEquipmentList());
+      toUUIDEquipment(event.getEquipment());
     }
   }
 
@@ -187,7 +184,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
    *
    * @param clients the clients
    */
-  public static void toUUIDCLient(List<ClientEntity> clients) {
+  public static void toUUIDClient(List<ClientEntity> clients) {
     if (clients != null) {
       for (int i = 0; i < clients.size(); i++) {
         ClientEntity client = clients.get(i);
@@ -319,20 +316,6 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
    */
   public abstract EventDao getEventDao();
 
-
-  /**
-   * Gets event equipment dao.
-   *
-   * @return the event equipment dao
-   */
-  public abstract EventEquipmentDao getEventEquipmentDao();
-
-  /**
-   * Gets project client dao.
-   *
-   * @return the project client dao
-   */
-  public abstract ProjectClientDao getProjectClientDao();
 
 
   /**

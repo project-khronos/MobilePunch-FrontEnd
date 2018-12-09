@@ -258,7 +258,7 @@ public class EventFragment extends Fragment {
     eventEndDateButton.setTag("End date");
     projectSpinner = view.findViewById(R.id.project_spinner);
     ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getContext(),
-        android.R.layout.simple_spinner_item, android.R.id.text1);
+        R.layout.spinner_item, android.R.id.text1);
     spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     projectSpinner.setAdapter(spinnerAdapter);
     localList = new ArrayList<>(FrontendApplication.getMasterProjectSet());
