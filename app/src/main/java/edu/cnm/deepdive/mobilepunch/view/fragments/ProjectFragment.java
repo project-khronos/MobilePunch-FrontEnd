@@ -194,6 +194,7 @@ public class ProjectFragment extends Fragment {
 
             MobilePunchDatabase.getInstance(mainActivity.get()).getProjectDao()
                     .insert(projectEntities[0]);
+            FrontendApplication.getMasterProjectSet().add(projectEntities[0]);
             return null;
         }
     }

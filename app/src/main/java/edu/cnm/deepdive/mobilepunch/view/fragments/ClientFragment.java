@@ -15,6 +15,7 @@ import java.lang.ref.WeakReference;
 import java.util.UUID;
 
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.controller.FrontendApplication;
 import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
@@ -111,6 +112,7 @@ public class ClientFragment extends Fragment {
         protected Void doInBackground(ClientEntity... clientEntities) {
             MobilePunchDatabase.getInstance(mainActivity.get()).getClientDao()
                     .insert(clientEntities[0]);
+            FrontendApplication.getMasterClientSet().add(clientEntities[0]);
             return null;
         }
     }

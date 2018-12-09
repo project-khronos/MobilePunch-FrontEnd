@@ -403,6 +403,8 @@ public class EventFragment extends Fragment {
             }
             projectEntity.getEvents().add(eventEntity[0]);
             MobilePunchDatabase.getInstance(mainActivity.get()).getEventDao().insert(eventEntity[0]);
+            FrontendApplication.getMasterProjectSet().remove(projectEntity);
+            FrontendApplication.getMasterProjectSet().add(projectEntity);
             return null;
         }
     }
