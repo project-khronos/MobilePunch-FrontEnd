@@ -8,12 +8,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
@@ -21,6 +26,7 @@ import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
 import edu.cnm.deepdive.mobilepunch.controller.FrontendApplication;
 import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
+import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 import edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText;
@@ -35,6 +41,10 @@ public class ProjectFragment extends Fragment {
     private String TAG = "tag";
 
     private ProjectEntity project;
+
+    private List<ClientEntity> localClientList;
+    private ClientEntity selectedClient;
+    private Spinner clientSpinner;
 
     private Button saveButton,
             startDateButton,
@@ -81,6 +91,38 @@ public class ProjectFragment extends Fragment {
         endDateButton.setTag("End date");
         expectedEndDate = view.findViewById(R.id.project_expected_date);
         expectedEndDate.setTag("Expected end date");
+
+        clientSpinner = view.findViewById(R.id.client_spinner);
+        ArrayAdapter<String> clientSpinnerAdapter = new ArrayAdapter<>(getContext(),
+                R.layout.spinner_item, android.R.id.text1);
+
+        clientSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        clientSpinner.setAdapter(clientSpinnerAdapter);
+
+
+        localClientList = new ArrayList<>(FrontendApplication.getMasterClientSet());
+        List<String> getClientNames = new ArrayList<>();
+        for (ClientEntity client : localClientList) {
+            getClientNames.add(client.getName());
+        }
+        clientSpinnerAdapter.addAll(getClientNames);
+        clientSpinnerAdapter.notifyDataSetChanged();
+
+        clientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ProjectFragment.this.selectedClient = localClientList.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
     }
 
     private void initListeners() {
