@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.mobilepunch.controller;
 
 import android.app.Application;
+
 import com.facebook.stetho.Stetho;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -12,11 +13,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
+
+import java.util.Set;
+
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
-import java.util.Set;
 
 /**
  * The type Frontend application.
@@ -85,7 +88,7 @@ public class FrontendApplication extends Application {
       }
       FrontendApplication.getInstance().refreshClient.disconnect();
       if (result == null) {
-        MainActivity.getInstance().runOnUiThread(() -> MainActivity.signOut());
+        MainActivity.getInstance().runOnUiThread(MainActivity::signOut);
         return;
       }
       instance.account = result.getSignInAccount();
