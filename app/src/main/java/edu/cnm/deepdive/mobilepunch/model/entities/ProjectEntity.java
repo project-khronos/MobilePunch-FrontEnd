@@ -41,7 +41,7 @@ public class ProjectEntity implements UuidHaver {
     private long clientId2;
     @Ignore
     @Expose
-    private ClientEntity clients;
+    private ClientEntity client;
     @Expose
     private String name;
     @Expose
@@ -243,7 +243,7 @@ public class ProjectEntity implements UuidHaver {
      * @return the clients
      */
     public ClientEntity getClients() {
-        return clients;
+        return client;
     }
 
     /**
@@ -252,7 +252,7 @@ public class ProjectEntity implements UuidHaver {
      * @param clients the clients
      */
     public void setClients(ClientEntity clients) {
-        this.clients = clients;
+        this.client = clients;
     }
 
 
@@ -284,7 +284,7 @@ public class ProjectEntity implements UuidHaver {
                 ", expectedEndTime=" + expectedEndTime +
                 ", description='" + description + '\'' +
                 ", events=" + events +
-                ", clients=" + clients +
+                ", clients=" + client +
                 '}';
     }
 }
