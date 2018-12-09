@@ -17,12 +17,11 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
 import edu.cnm.deepdive.mobilepunch.R;
-import edu.cnm.deepdive.mobilepunch.model.dao.abstraction.ProjectHelper;
+import edu.cnm.deepdive.mobilepunch.model.dao.abstraction.DaoHelper;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
@@ -128,7 +127,7 @@ public class MainActivity extends AppCompatActivity
         ApiTask apiTask = new ApiTask();
         apiTask.execute();
         instance = this;
-        //new ProjectHelper.ProjectGetterTask().execute();
+        //new DaoHelper.ProjectGetterTask().execute();
 
     }
 
@@ -227,10 +226,9 @@ public class MainActivity extends AppCompatActivity
             FrontendApplication.refreshToken();
             Log.d(TAG, "Token Refreshed");
             FrontendApplication
-                    .setMasterProjectSet(new HashSet<>(ProjectHelper.getProjects(MainActivity.this)));
-            if (FrontendApplication.getMasterProjectSet() == null) {
-                FrontendApplication.setMasterProjectSet(new HashSet<>());
-            }
+                    .setMasterProjectSet(DaoHelper.getProjects(MainActivity.this));
+            FrontendApplication.setMasterClientSet(DaoHelper.getClients(MainActivity.this));
+            FrontendApplication.setMasterEquipmentSet(DaoHelper.getEquipment(MainActivity.this));
             try {
                 String token = getString(
                         R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
@@ -291,6 +289,12 @@ public class MainActivity extends AppCompatActivity
                     e.printStackTrace();
                 }
             }
+            FrontendApplication.getMasterProjectSet().removeAll(projects);
+            FrontendApplication.getMasterClientSet().removeAll(clients);
+            FrontendApplication.getMasterEquipmentSet().removeAll(equipment);
+            FrontendApplication.getMasterProjectSet().addAll(projects);
+            FrontendApplication.getMasterClientSet().addAll(clients);
+            FrontendApplication.getMasterEquipmentSet().addAll(equipment);
             return projects;
         }
 
@@ -298,7 +302,6 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(List<ProjectEntity> projectEntities) {
             //FIXME Move this so its called no matter the status of APITask
-            FrontendApplication.getMasterProjectSet().addAll(projectEntities);
             QueryTask queryTask = new QueryTask();
             queryTask.execute();
             Toast.makeText(MainActivity.this, "Database Updated",

@@ -46,6 +46,7 @@ import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
 import edu.cnm.deepdive.mobilepunch.controller.FrontendApplication;
 import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
+import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
@@ -66,12 +67,14 @@ public class EventFragment extends Fragment {
             eventEndDateButton,
             saveButton;
     private ProjectEntity pickedProject;
+    private EquipmentEntity pickedEquipment;
     private Date startDate = new Date(), endDate = new Date();
 
     private String TAG = "tag";
     private Spinner projectSpinner;
     private Spinner equipmentSpinner;
-    private List<ProjectEntity> localList;
+    private List<ProjectEntity> localProjectList;
+    private List<EquipmentEntity> localEquipmentList;
     private View view;
 
     private MapView mapView;
@@ -260,22 +263,37 @@ public class EventFragment extends Fragment {
         eventEndDateButton = view.findViewById(R.id.event_end_date);
         eventEndDateButton.setTag("End date");
         projectSpinner = view.findViewById(R.id.project_spinner);
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getContext(),
+        equipmentSpinner = view.findViewById(R.id.equipment_spinner);
+        ArrayAdapter<String> projectSpinnerAdapter = new ArrayAdapter<>(getContext(),
                 R.layout.spinner_item, android.R.id.text1);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        projectSpinner.setAdapter(spinnerAdapter);
-        localList = new ArrayList<>(FrontendApplication.getMasterProjectSet());
+        ArrayAdapter<String> equipmentSpinnerAdapter = new ArrayAdapter<>(getContext(),
+                R.layout.spinner_item, android.R.id.text1);
+        projectSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        projectSpinner.setAdapter(projectSpinnerAdapter);
+        equipmentSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        equipmentSpinner.setAdapter(equipmentSpinnerAdapter);
+
+        localProjectList = new ArrayList<>(FrontendApplication.getMasterProjectSet());
         List<String> getProjectNames = new ArrayList<>();
-        for (ProjectEntity project : localList) {
+        for (ProjectEntity project : localProjectList) {
             getProjectNames.add(project.getName());
         }
-        spinnerAdapter.addAll(getProjectNames);
-        spinnerAdapter.notifyDataSetChanged();
+        projectSpinnerAdapter.addAll(getProjectNames);
+        projectSpinnerAdapter.notifyDataSetChanged();
+
+        localEquipmentList = new ArrayList<>(FrontendApplication.getMasterEquipmentSet());
+        List<String> getEquipmentNames = new ArrayList<>();
+        for (EquipmentEntity equipment : localEquipmentList) {
+            getEquipmentNames.add(equipment.getName());
+        }
+        equipmentSpinnerAdapter.addAll(getEquipmentNames);
+        equipmentSpinnerAdapter.notifyDataSetChanged();
+
 
         projectSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                EventFragment.this.pickedProject = localList.get(position);
+                EventFragment.this.pickedProject = localProjectList.get(position);
             }
 
             @Override
@@ -283,6 +301,20 @@ public class EventFragment extends Fragment {
 
             }
         });
+
+        equipmentSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                EventFragment.this.pickedEquipment = localEquipmentList.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         saveButton = view.findViewById(R.id.event_save);
     }
 

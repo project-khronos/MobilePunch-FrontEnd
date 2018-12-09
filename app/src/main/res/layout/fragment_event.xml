@@ -19,12 +19,13 @@
     style="@style/AppTheme"
     android:background="#1c1c1c"/>
 
-
   <Spinner
-    android:id="@+id/equipment_spinner"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/rallyBackground"/>
+      android:id="@+id/equipment_spinner"
+      style="@style/AppTheme"
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:background="#1c1c1c" />
+
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
     android:id="@+id/event_expenses"

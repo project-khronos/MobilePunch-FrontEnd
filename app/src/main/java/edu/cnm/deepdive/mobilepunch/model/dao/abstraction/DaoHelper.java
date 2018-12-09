@@ -19,7 +19,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 /**
  * The type Project helper.
  */
-public class ProjectHelper {
+public class DaoHelper {
 
     /**
      * Gets projects.
@@ -46,6 +46,16 @@ public class ProjectHelper {
             project.setClients(clients);
         }
         return new HashSet<>(projects);
+    }
+
+    public static Set<EquipmentEntity> getEquipment(Context context) {
+        List<EquipmentEntity> equipmentEntities = MobilePunchDatabase.getInstance(context).getEquipmentDao().selectAll();
+        return new HashSet<>(equipmentEntities);
+    }
+
+    public static Set<ClientEntity> getClients(Context context) {
+        List<ClientEntity> clientEntities = MobilePunchDatabase.getInstance(context).getClientDao().selectAll();
+        return new HashSet<>(clientEntities);
     }
 
     /**
