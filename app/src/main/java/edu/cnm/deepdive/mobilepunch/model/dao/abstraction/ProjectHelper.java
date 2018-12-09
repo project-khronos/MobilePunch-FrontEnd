@@ -21,50 +21,50 @@ import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
  */
 public class ProjectHelper {
 
-  /**
-   * Gets projects.
-   *
-   * @param context the context
-   * @return the projects
-   */
+    /**
+     * Gets projects.
+     *
+     * @param context the context
+     * @return the projects
+     */
 
-  public static Set<ProjectEntity> getProjects(Context context) {
+    public static Set<ProjectEntity> getProjects(Context context) {
 
-    List<ProjectEntity> projects = MobilePunchDatabase.getInstance(context).getProjectDao()
-        .select();
-    for (ProjectEntity project : projects) {
-      UuidSetter.setUuidFromIds(project);
-      project.setEvents(MobilePunchDatabase.getEventsFromProject(project));
-      if (project.getEvents() != null) {
-        for (EventEntity event : project.getEvents()) {
-          UuidSetter.setUuidFromIds(event);
-          EquipmentEntity equipment = MobilePunchDatabase.getInstance(context).getEquipmentDao().select(event.getEquipmentId1(), event.getEquipmentId2());
-          event.setEquipment(equipment);
+        List<ProjectEntity> projects = MobilePunchDatabase.getInstance(context).getProjectDao()
+                .select();
+        for (ProjectEntity project : projects) {
+            UuidSetter.setUuidFromIds(project);
+            project.setEvents(MobilePunchDatabase.getEventsFromProject(project));
+            if (project.getEvents() != null) {
+                for (EventEntity event : project.getEvents()) {
+                    UuidSetter.setUuidFromIds(event);
+                    EquipmentEntity equipment = MobilePunchDatabase.getInstance(context).getEquipmentDao().select(event.getEquipmentId1(), event.getEquipmentId2());
+                    event.setEquipment(equipment);
+                }
+            }
+            ClientEntity clients = MobilePunchDatabase.getInstance(context).getClientDao().select(project.getClientId1(), project.getClientId2());
+            project.setClients(clients);
         }
-      }
-      ClientEntity clients = MobilePunchDatabase.getInstance(context).getClientDao().select(project.getClientId1(), project.getClientId2());
-      project.setClients(clients);
+        return new HashSet<>(projects);
     }
-    return new HashSet<>(projects);
-  }
 
-  /**
-   * The type Project getter task.
-   */
+    /**
+     * The type Project getter task.
+     */
 
-  public static class ProjectGetterTask extends AsyncTask<Void, Void, Set<ProjectEntity>> {
+    public static class ProjectGetterTask extends AsyncTask<Void, Void, Set<ProjectEntity>> {
 
 
-    @Override
-    protected Set<ProjectEntity> doInBackground(Void... voids) {
-      Set<ProjectEntity> projects = getProjects(MainActivity.getInstance());
-      if (FrontendApplication.getMasterProjectSet() == null) {
-        FrontendApplication.setMasterProjectSet(new HashSet<>());
-      }
-      FrontendApplication.getMasterProjectSet().addAll(projects);
-      return projects;
+        @Override
+        protected Set<ProjectEntity> doInBackground(Void... voids) {
+            Set<ProjectEntity> projects = getProjects(MainActivity.getInstance());
+            if (FrontendApplication.getMasterProjectSet() == null) {
+                FrontendApplication.setMasterProjectSet(new HashSet<>());
+            }
+            FrontendApplication.getMasterProjectSet().addAll(projects);
+            return projects;
+        }
     }
-  }
 
 
 }
