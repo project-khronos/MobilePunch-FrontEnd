@@ -1,7 +1,6 @@
 package edu.cnm.deepdive.mobilepunch.controller;
 
 import android.os.AsyncTask;
-
 import java.util.List;
 
 /**
@@ -10,68 +9,68 @@ import java.util.List;
 public class QueryTasks {
 
 
-    /**
-     * The interface Query executor.
-     *
-     * @param <T> the type parameter
-     */
-    public interface QueryExecutor<T> {
-
-        /**
-         * Query list.
-         *
-         * @return the list
-         */
-        List<T> query();
-    }
+  /**
+   * The interface Query executor.
+   *
+   * @param <T> the type parameter
+   */
+  public interface QueryExecutor<T> {
 
     /**
-     * The interface Query result handler.
+     * Query list.
      *
-     * @param <T> the type parameter
+     * @return the list
      */
-    public interface QueryResultHandler<T> {
+    List<T> query();
+  }
 
-        /**
-         * Handle.
-         *
-         * @param values the values
-         */
-        void handle(List<T> values);
-    }
+  /**
+   * The interface Query result handler.
+   *
+   * @param <T> the type parameter
+   */
+  public interface QueryResultHandler<T> {
 
     /**
-     * The type List query.
+     * Handle.
      *
-     * @param <T> the type parameter
+     * @param values the values
      */
-    public class ListQuery<T> extends AsyncTask<Void, Void, List<T>> {
+    void handle(List<T> values);
+  }
 
-        private QueryExecutor<T> queryExecutor;
-        private QueryResultHandler<T> resultHandler;
+  /**
+   * The type List query.
+   *
+   * @param <T> the type parameter
+   */
+  public class ListQuery<T> extends AsyncTask<Void, Void, List<T>> {
 
-        /**
-         * Instantiates a new List query.
-         *
-         * @param queryExecutor the query executor
-         * @param resultHandler the result handler
-         */
-        public ListQuery(QueryExecutor<T> queryExecutor, QueryResultHandler<T> resultHandler) {
-            this.queryExecutor = queryExecutor;
-            this.resultHandler = resultHandler;
-        }
+    private QueryExecutor<T> queryExecutor;
+    private QueryResultHandler<T> resultHandler;
 
-
-        @Override
-        protected List<T> doInBackground(Void... voids) {
-            FrontendApplication.refreshToken();
-            return queryExecutor.query();
-        }
-
-        @Override
-        protected void onPostExecute(List<T> values) {
-            resultHandler.handle(values);
-        }
+    /**
+     * Instantiates a new List query.
+     *
+     * @param queryExecutor the query executor
+     * @param resultHandler the result handler
+     */
+    public ListQuery(QueryExecutor<T> queryExecutor, QueryResultHandler<T> resultHandler) {
+      this.queryExecutor = queryExecutor;
+      this.resultHandler = resultHandler;
     }
+
+
+    @Override
+    protected List<T> doInBackground(Void... voids) {
+      FrontendApplication.refreshToken();
+      return queryExecutor.query();
+    }
+
+    @Override
+    protected void onPostExecute(List<T> values) {
+      resultHandler.handle(values);
+    }
+  }
 
 }

@@ -7,114 +7,112 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.List;
-
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
+import java.util.List;
 
 /**
  * The type Equipment recycler view adapter.
  */
 public class EquipmentRecyclerViewAdapter extends
-        RecyclerView.Adapter<EquipmentRecyclerViewAdapter.EquipmentHolder> {
+    RecyclerView.Adapter<EquipmentRecyclerViewAdapter.EquipmentHolder> {
 
-    private List<EquipmentEntity> data;
-    private LayoutInflater layoutinflater;
-    private ItemClickListener itemClickListener;
+  private List<EquipmentEntity> data;
+  private LayoutInflater layoutinflater;
+  private ItemClickListener itemClickListener;
+
+  /**
+   * Instantiates a new Equipment recycler view adapter.
+   *
+   * @param context the context
+   * @param data the data
+   */
+  public EquipmentRecyclerViewAdapter(Context context, List<EquipmentEntity> data) {
+    this.layoutinflater = LayoutInflater.from(context);
+    this.data = data;
+  }
+
+  @NonNull
+  @Override
+  public EquipmentHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
+    View view = layoutinflater.inflate(R.layout.equipment_list_item, viewGroup, false);
+    return new EquipmentHolder(view);
+  }
+
+  @Override
+  public void onBindViewHolder(@NonNull EquipmentHolder equipmentHolder, int position) {
+    equipmentHolder.name.setText("Equipment Name: " + data.get(position).getName());
+    equipmentHolder.identification.setText("ID: " + data.get(position).getIdentification());
+    equipmentHolder.make.setText("Make: " + data.get(position).getMake());
+    equipmentHolder.model.setText("Model: " + data.get(position).getModel());
+    equipmentHolder.year.setText("Year: " + data.get(position).getMfcyear());
+    equipmentHolder.description.setText("Description: " + data.get(position).getDescription());
+
+  }
+
+
+  @Override
+  public int getItemCount() {
+    return data.size();
+  }
+
+  /**
+   * Sets item click listener.
+   *
+   * @param itemClickListener the item click listener
+   */
+  void setItemClickListener(ItemClickListener itemClickListener) {
+    this.itemClickListener = itemClickListener;
+
+  }
+
+
+  /**
+   * The interface Item click listener.
+   */
+  public interface ItemClickListener {
 
     /**
-     * Instantiates a new Equipment recycler view adapter.
+     * On item click.
      *
-     * @param context the context
-     * @param data    the data
+     * @param view the view
+     * @param position the position
      */
-    public EquipmentRecyclerViewAdapter(Context context, List<EquipmentEntity> data) {
-        this.layoutinflater = LayoutInflater.from(context);
-        this.data = data;
-    }
+    void onItemClick(View view, int position);
 
-    @NonNull
-    @Override
-    public EquipmentHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
-        View view = layoutinflater.inflate(R.layout.equipment_list_item, viewGroup, false);
-        return new EquipmentHolder(view);
-    }
+  }
 
-    @Override
-    public void onBindViewHolder(@NonNull EquipmentHolder equipmentHolder, int position) {
-        equipmentHolder.name.setText("Equipment Name: " + data.get(position).getName());
-        equipmentHolder.identification.setText("ID: " + data.get(position).getIdentification());
-        equipmentHolder.make.setText("Make: " + data.get(position).getMake());
-        equipmentHolder.model.setText("Model: " + data.get(position).getModel());
-        equipmentHolder.year.setText("Year: " + data.get(position).getMfcyear());
-        equipmentHolder.description.setText("Description: " + data.get(position).getDescription());
+  /**
+   * The type Equipment holder.
+   */
+  public class EquipmentHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    }
-
-
-    @Override
-    public int getItemCount() {
-        return data.size();
-    }
+    private TextView name;
+    private TextView identification;
+    private TextView make;
+    private TextView model;
+    private TextView year;
+    private TextView description;
 
     /**
-     * Sets item click listener.
+     * Instantiates a new Equipment holder.
      *
-     * @param itemClickListener the item click listener
+     * @param itemView the item view
      */
-    void setItemClickListener(ItemClickListener itemClickListener) {
-        this.itemClickListener = itemClickListener;
+    public EquipmentHolder(@NonNull View itemView) {
+      super(itemView);
+      name = itemView.findViewById(R.id.li_equipment_name);
+      identification = itemView.findViewById(R.id.li_equipment_id);
+      make = itemView.findViewById(R.id.li_equipment_make);
+      model = itemView.findViewById(R.id.li_equipment_model);
+      year = itemView.findViewById(R.id.li_equipment_year);
+      description = itemView.findViewById(R.id.li_equipment_description);
+    }
+
+    @Override
+    public void onClick(View view) {
 
     }
 
-
-    /**
-     * The interface Item click listener.
-     */
-    public interface ItemClickListener {
-
-        /**
-         * On item click.
-         *
-         * @param view     the view
-         * @param position the position
-         */
-        void onItemClick(View view, int position);
-
-    }
-
-    /**
-     * The type Equipment holder.
-     */
-    public class EquipmentHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        private TextView name;
-        private TextView identification;
-        private TextView make;
-        private TextView model;
-        private TextView year;
-        private TextView description;
-
-        /**
-         * Instantiates a new Equipment holder.
-         *
-         * @param itemView the item view
-         */
-        public EquipmentHolder(@NonNull View itemView) {
-            super(itemView);
-            name = itemView.findViewById(R.id.li_equipment_name);
-            identification = itemView.findViewById(R.id.li_equipment_id);
-            make = itemView.findViewById(R.id.li_equipment_make);
-            model = itemView.findViewById(R.id.li_equipment_model);
-            year = itemView.findViewById(R.id.li_equipment_year);
-            description = itemView.findViewById(R.id.li_equipment_description);
-        }
-
-        @Override
-        public void onClick(View view) {
-
-        }
-
-    }
+  }
 }
