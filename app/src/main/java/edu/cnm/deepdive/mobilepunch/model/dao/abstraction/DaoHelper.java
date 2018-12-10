@@ -2,11 +2,6 @@ package edu.cnm.deepdive.mobilepunch.model.dao.abstraction;
 
 import android.content.Context;
 import android.os.AsyncTask;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import edu.cnm.deepdive.mobilepunch.controller.FrontendApplication;
 import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
@@ -15,6 +10,9 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * The type Project helper.
@@ -43,7 +41,7 @@ public class DaoHelper {
                 }
             }
             ClientEntity clients = MobilePunchDatabase.getInstance(context).getClientDao().select(project.getClientId1(), project.getClientId2());
-            project.setClients(clients);
+          project.setClient(clients);
         }
         return new HashSet<>(projects);
     }

@@ -4,15 +4,12 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
-
 import com.google.gson.annotations.Expose;
-
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-
-import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
 
 /**
  * The type Project entity.
@@ -242,7 +239,7 @@ public class ProjectEntity implements UuidHaver {
      *
      * @return the clients
      */
-    public ClientEntity getClients() {
+    public ClientEntity getClient() {
         return client;
     }
 
@@ -251,7 +248,7 @@ public class ProjectEntity implements UuidHaver {
      *
      * @param clients the clients
      */
-    public void setClients(ClientEntity clients) {
+    public void setClient(ClientEntity clients) {
         this.client = clients;
     }
 

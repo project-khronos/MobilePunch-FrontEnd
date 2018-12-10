@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -33,13 +32,6 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
@@ -51,6 +43,11 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 import edu.cnm.deepdive.mobilepunch.view.fragments.helpers.DayOfWeekHelper;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 /**
  * The type Event fragment.
@@ -330,7 +327,8 @@ public class EventFragment extends Fragment {
             grabFields();
 
             if (!descriptionField.getText().toString().equals("")) {
-                new InsertEvent(MainActivity.getInstance(), pickedProject).execute(event);
+                new InsertEvent(MainActivity.getInstance(), pickedProject, pickedEquipment)
+                    .execute(event);
                 Toast.makeText(getContext(), "Event saved", Toast.LENGTH_SHORT).show();
                 getFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, new ProjectFragment()).commit();
@@ -382,6 +380,7 @@ public class EventFragment extends Fragment {
 
         private WeakReference<MainActivity> mainActivity;
         private ProjectEntity projectEntity;
+        private EquipmentEntity equipmentEntity;
 
         /**
          * Instantiates a new Insert event.
@@ -389,8 +388,10 @@ public class EventFragment extends Fragment {
          * @param mainActivity  the main activity
          * @param projectEntity the project entity
          */
-        public InsertEvent(MainActivity mainActivity, ProjectEntity projectEntity) {
+        public InsertEvent(MainActivity mainActivity, ProjectEntity projectEntity,
+            EquipmentEntity equipmentEntity) {
             this.projectEntity = projectEntity;
+            this.equipmentEntity = equipmentEntity;
             this.mainActivity = new WeakReference<>(mainActivity);
         }
 
@@ -398,6 +399,8 @@ public class EventFragment extends Fragment {
         protected Void doInBackground(EventEntity... eventEntity) {
             eventEntity[0].setProjectId1(projectEntity.getId1());
             eventEntity[0].setProjectId2(projectEntity.getId2());
+            eventEntity[0].setEquipmentId1(equipmentEntity.getId1());
+            eventEntity[0].setEquipmentId2(equipmentEntity.getId2());
             if (projectEntity.getEvents() == null) {
                 projectEntity.setEvents(new ArrayList<>());
             }

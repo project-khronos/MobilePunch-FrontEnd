@@ -4,15 +4,12 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
-
-import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidHaver;
 
 /**
  * The type Event entity.
@@ -75,6 +72,7 @@ public class EventEntity implements UuidHaver {
 
     @ColumnInfo(name = "equipment_id2")
     private long equipmentId2;
+
     @Ignore
     @Expose
     private EquipmentEntity equipment;

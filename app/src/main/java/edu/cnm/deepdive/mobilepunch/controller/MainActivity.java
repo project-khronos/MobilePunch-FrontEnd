@@ -13,13 +13,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.util.List;
-import java.util.UUID;
-
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.dao.abstraction.DaoHelper;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
@@ -30,6 +25,8 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
+import java.util.List;
+import java.util.UUID;
 import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -262,7 +259,7 @@ public class MainActivity extends AppCompatActivity
                     MobilePunchDatabase.fromUUIDClient(clients);
                     dataBase.getClientDao().insert(clients);
                     for (ProjectEntity project : projects) {
-                        UUID clientID = project.getClients().getUuid();
+                        UUID clientID = project.getClient().getUuid();
                         project.setClientId1(clientID.getMostSignificantBits());
                         project.setClientId2(clientID.getLeastSignificantBits());
                     }

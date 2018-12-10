@@ -6,11 +6,6 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverter;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import edu.cnm.deepdive.mobilepunch.model.dao.ClientDao;
 import edu.cnm.deepdive.mobilepunch.model.dao.EquipmentDao;
 import edu.cnm.deepdive.mobilepunch.model.dao.EventDao;
@@ -20,6 +15,9 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * The type Mobile punch database.
@@ -81,7 +79,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
         if (project != null) {
             UuidSetter.setIdsFromUuid(project);
             fromUUIDEvent(project.getEvents());
-            fromUUIDClient(project.getClients());
+            fromUUIDClient(project.getClient());
         }
     }
 
@@ -97,7 +95,7 @@ public abstract class MobilePunchDatabase extends RoomDatabase {
     private static void toUUIDProject(ProjectEntity project) {
         if (project != null) {
             UuidSetter.setUuidFromIds(project);
-            toUUIDClient(project.getClients());
+            toUUIDClient(project.getClient());
             toUUIDEvent(project.getEvents());
         }
     }
