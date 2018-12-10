@@ -18,7 +18,7 @@
     android:layout_height="40dp"
     android:layout_marginBottom="2dp"
     android:background="@drawable/edit_text_style"
-    android:hint="@string/client_name"
+    android:hint="Name"
     android:inputType="text"/>
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
@@ -28,7 +28,7 @@
     android:layout_height="40dp"
     android:layout_marginBottom="2dp"
     android:background="@drawable/edit_text_style"
-    android:hint="@string/clients_number"
+    android:hint="Number"
     android:inputType="phone"/>
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
@@ -38,7 +38,7 @@
     android:layout_height="40dp"
     android:layout_marginBottom="2dp"
     android:background="@drawable/edit_text_style"
-    android:hint="@string/alternate_number"
+    android:hint="Alternate number"
     android:inputType="phone"/>
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
@@ -49,7 +49,7 @@
     android:layout_marginBottom="2dp"
 
     android:background="@drawable/edit_text_style"
-    android:hint="@string/address"
+    android:hint="Billing address"
     android:inputType="text"/>
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
@@ -60,7 +60,7 @@
     android:layout_marginBottom="2dp"
 
     android:background="@drawable/edit_text_style"
-    android:hint="@string/alternate_address"
+    android:hint="Mailing address"
     android:inputType="text"/>
 
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
@@ -70,7 +70,7 @@
     android:layout_height="40dp"
     android:layout_marginBottom="2dp"
     android:background="@drawable/edit_text_style"
-    android:hint="@string/clients_email"
+    android:hint="Email"
     android:inputType="text"/>
   <edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText
     android:id="@+id/client_note"
@@ -79,10 +79,8 @@
     android:layout_height="40dp"
     android:layout_marginBottom="2dp"
     android:background="@drawable/edit_text_style"
-    android:hint="@string/client_notes"
+    android:hint="Notes"
     android:inputType="text"/>
-
-
 
   <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
