@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 
 /**
- * The type Date time picker fragment.
+ * The type Date time picker fragment. Show calender to user to allow a date to be picked and saved.
  */
 public class DateTimePickerFragment extends DialogFragment
     implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {

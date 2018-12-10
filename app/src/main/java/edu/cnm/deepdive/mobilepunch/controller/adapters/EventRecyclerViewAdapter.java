@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The type Event recycler view adapter.
+ * The type Event recycler view adapter. Inflates event list to UI from database.
  */
 public class EventRecyclerViewAdapter extends
     RecyclerView.Adapter<EventRecyclerViewAdapter.EventHolder> {

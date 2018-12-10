@@ -12,7 +12,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import java.util.List;
 
 /**
- * The type Equipment recycler view adapter.
+ * The type Equipment recycler view adapter. Inflates equipment list to UI from database.
  */
 public class EquipmentRecyclerViewAdapter extends
     RecyclerView.Adapter<EquipmentRecyclerViewAdapter.EquipmentHolder> {
@@ -41,6 +41,7 @@ public class EquipmentRecyclerViewAdapter extends
 
   @Override
   public void onBindViewHolder(@NonNull EquipmentHolder equipmentHolder, int position) {
+    
     equipmentHolder.name.setText(":" + data.get(position).getName());
     equipmentHolder.identification.setText(":" + data.get(position).getIdentification());
     equipmentHolder.make.setText(":" + data.get(position).getMake());

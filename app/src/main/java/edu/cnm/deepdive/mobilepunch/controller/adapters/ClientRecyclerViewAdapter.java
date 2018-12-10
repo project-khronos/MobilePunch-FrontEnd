@@ -13,7 +13,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import java.util.List;
 
 /**
- * The type Client recycler view adapter. inflates
+ * The type Client recycler view adapter. Inflates client list to UI from the data base.
  */
 public class ClientRecyclerViewAdapter extends
     RecyclerView.Adapter<ClientRecyclerViewAdapter.ClientHolder> {

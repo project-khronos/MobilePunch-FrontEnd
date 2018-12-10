@@ -19,7 +19,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.Set;
 
 /**
- * The type Frontend application.
+ * The type Frontend application. This class sets up  FrontEnd Application as a whole. Also, sets ups Google sign in.
  */
 public class FrontendApplication extends Application {
 

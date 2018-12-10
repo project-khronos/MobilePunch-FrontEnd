@@ -14,7 +14,7 @@ import com.google.android.gms.tasks.Task;
 import edu.cnm.deepdive.mobilepunch.R;
 
 /**
- * The type Login activity.
+ * The type Login activity. Sets up Google login and also allows user to skip login.
  */
 public class LoginActivity extends AppCompatActivity {
 

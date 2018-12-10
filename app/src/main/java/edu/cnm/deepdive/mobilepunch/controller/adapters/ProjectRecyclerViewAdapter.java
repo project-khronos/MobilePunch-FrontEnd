@@ -14,7 +14,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.List;
 
 /**
- * The type Project recycler view adapter.
+ * The type Project recycler view adapter. Inflates the project list to the UI from the database.
  */
 public class ProjectRecyclerViewAdapter extends
     RecyclerView.Adapter<ProjectRecyclerViewAdapter.ProjectHolder> {
