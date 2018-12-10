@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.lang.ref.WeakReference;
 
 import edu.cnm.deepdive.mobilepunch.R;
+import edu.cnm.deepdive.mobilepunch.controller.FrontendApplication;
 import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
@@ -108,6 +109,7 @@ public class EquipmentFragment extends Fragment {
 
             MobilePunchDatabase.getInstance(mainActivity.get()).getEquipmentDao()
                     .insert(equipmentEntities[0]);
+            FrontendApplication.getMasterEquipmentSet().add(equipmentEntities[0]);
             return null;
         }
     }

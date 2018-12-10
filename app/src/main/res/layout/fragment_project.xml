@@ -21,6 +21,13 @@
     android:hint="Project Name"
     android:inputType="text"/>
 
+  <Spinner
+      android:id="@+id/client_spinner"
+      style="@style/AppTheme"
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:background="#1c1c1c" />
+
   <Button
     android:id="@+id/project_start_date"
     android:layout_width="match_parent"
