@@ -41,12 +41,13 @@ public class EquipmentRecyclerViewAdapter extends
 
   @Override
   public void onBindViewHolder(@NonNull EquipmentHolder equipmentHolder, int position) {
-    equipmentHolder.name.setText("Equipment Name: " + data.get(position).getName());
-    equipmentHolder.identification.setText("ID: " + data.get(position).getIdentification());
-    equipmentHolder.make.setText("Make: " + data.get(position).getMake());
-    equipmentHolder.model.setText("Model: " + data.get(position).getModel());
-    equipmentHolder.year.setText("Year: " + data.get(position).getMfcyear());
-    equipmentHolder.description.setText("Description: " + data.get(position).getDescription());
+    
+    equipmentHolder.name.setText(":" + data.get(position).getName());
+    equipmentHolder.identification.setText(":" + data.get(position).getIdentification());
+    equipmentHolder.make.setText(":" + data.get(position).getMake());
+    equipmentHolder.model.setText(":" + data.get(position).getModel());
+    equipmentHolder.year.setText(":" + data.get(position).getMfcyear());
+    equipmentHolder.description.setText(":" + data.get(position).getDescription());
 
   }
 
