@@ -16,50 +16,106 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="@drawable/edit_text_style"/>
 
-  <LinearLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
+  <android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
+
+  <android.support.constraint.Guideline
+    android:id="@+id/half_guideline"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="20dp">
+    app:layout_constraintGuide_percent="0.35"/>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/equipment_name"
+      app:layout_constraintTop_toTopOf="parent"
+      android:textColor="@color/rallyBlue"/>
     <TextView
       android:id="@+id/li_equipment_name"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/equipment_name"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintLeft_toLeftOf="@id/half_guideline"
+      android:textColor="@color/rallyBlue"/>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/identification"
+      app:layout_constraintTop_toBottomOf="@id/li_equipment_name"
       android:textColor="@color/rallyBlue"/>
     <TextView
       android:id="@+id/li_equipment_id"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/identification"
+      app:layout_constraintTop_toBottomOf="@id/li_equipment_name"
+      app:layout_constraintLeft_toLeftOf="@id/half_guideline"
+      android:textColor="@color/rallyBlue"/>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/make"
+      app:layout_constraintTop_toBottomOf="@id/li_equipment_id"
       android:textColor="@color/rallyBlue"/>
     <TextView
       android:id="@+id/li_equipment_make"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/make"
+      app:layout_constraintTop_toBottomOf="@id/li_equipment_id"
+      app:layout_constraintLeft_toLeftOf="@id/half_guideline"
+      android:textColor="@color/rallyBlue"/>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/model"
+      app:layout_constraintTop_toBottomOf="@id/li_equipment_make"
       android:textColor="@color/rallyBlue"/>
     <TextView
       android:id="@+id/li_equipment_model"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/model"
+      app:layout_constraintTop_toBottomOf="@id/li_equipment_make"
+      app:layout_constraintLeft_toLeftOf="@id/half_guideline"
+      android:textColor="@color/rallyBlue"/>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/year"
+      app:layout_constraintTop_toBottomOf="@id/li_equipment_model"
       android:textColor="@color/rallyBlue"/>
     <TextView
       android:id="@+id/li_equipment_year"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/year"
+      app:layout_constraintTop_toBottomOf="@id/li_equipment_model"
+      app:layout_constraintLeft_toLeftOf="@id/half_guideline"
+      android:textColor="@color/rallyBlue"/>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/description"
+      app:layout_constraintTop_toBottomOf="@id/li_equipment_year"
       android:textColor="@color/rallyBlue"/>
     <TextView
       android:id="@+id/li_equipment_description"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/description"
+      app:layout_constraintTop_toBottomOf="@id/li_equipment_year"
+      app:layout_constraintLeft_toLeftOf="@id/half_guideline"
       android:textColor="@color/rallyBlue"/>
 
-
-  </LinearLayout>
+  </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>
