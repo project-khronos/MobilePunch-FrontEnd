@@ -45,13 +45,13 @@ public class ClientRecyclerViewAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull ClientHolder clientHolder, int position) {
-        clientHolder.name.setText("Client name: " + data.get(position).getName());
-        clientHolder.phone.setText("Phone number: " + data.get(position).getPhone());
-        clientHolder.altPhone.setText("Alternate number: " + data.get(position).getAltPhone());
-        clientHolder.email.setText("Email: " + data.get(position).getEmail());
-        clientHolder.billingAddress.setText("Billing address: " + data.get(position).getAddress());
-        clientHolder.mailingAddress.setText("Mailing address: " + data.get(position).getAltAddress());
-        clientHolder.notes.setText("Notes: " + data.get(position).getNotes());
+        clientHolder.name.setText(":" + data.get(position).getName());
+        clientHolder.phone.setText(":" + data.get(position).getPhone());
+        clientHolder.altPhone.setText(":" + data.get(position).getAltPhone());
+        clientHolder.email.setText(":" + data.get(position).getEmail());
+        clientHolder.billingAddress.setText(":" + data.get(position).getAddress());
+        clientHolder.mailingAddress.setText(":" + data.get(position).getAltAddress());
+        clientHolder.notes.setText(":" + data.get(position).getNotes());
 
     }
 
@@ -88,7 +88,6 @@ public class ClientRecyclerViewAdapter extends
             billingAddress = itemView.findViewById(R.id.li_client_billing_address);
             mailingAddress = itemView.findViewById(R.id.li_client_mailing_address);
             notes = itemView.findViewById(R.id.li_client_notes);
-
 
         }
 
