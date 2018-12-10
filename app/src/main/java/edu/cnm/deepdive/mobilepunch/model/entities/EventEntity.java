@@ -73,6 +73,17 @@ public class EventEntity implements UuidHaver {
     @ColumnInfo(name = "equipment_id2")
     private long equipmentId2;
 
+    public EventEntity(ProjectEntity projectEntity, EquipmentEntity equipment) {
+        this.equipment = equipment;
+        this.equipmentId1 = equipment.getId1();
+        this.equipmentId2 = equipment.getId2();
+        this.projectId1 = projectEntity.getId1();
+        this.projectId2 = projectEntity.getId2();
+    }
+
+    public EventEntity() {
+    }
+
     @Ignore
     @Expose
     private EquipmentEntity equipment;
@@ -333,7 +344,6 @@ public class EventEntity implements UuidHaver {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(uuid);
     }
 

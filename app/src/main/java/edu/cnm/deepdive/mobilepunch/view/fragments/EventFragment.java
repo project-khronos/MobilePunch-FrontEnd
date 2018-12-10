@@ -88,7 +88,7 @@ public class EventFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        event = new EventEntity();
+        //event = new EventEntity();
         this.bundle = savedInstanceState;
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -324,10 +324,11 @@ public class EventFragment extends Fragment {
         setButton(eventEndDateButton, picker, endDate);
 
         saveButton.setOnClickListener(v -> {
+            event = new EventEntity(pickedProject, pickedEquipment);
             grabFields();
 
             if (!descriptionField.getText().toString().equals("")) {
-                new InsertEvent(MainActivity.getInstance(), pickedProject, pickedEquipment)
+                new InsertEvent(MainActivity.getInstance(), pickedProject)
                     .execute(event);
                 Toast.makeText(getContext(), "Event saved", Toast.LENGTH_SHORT).show();
                 getFragmentManager().beginTransaction()
@@ -380,7 +381,6 @@ public class EventFragment extends Fragment {
 
         private WeakReference<MainActivity> mainActivity;
         private ProjectEntity projectEntity;
-        private EquipmentEntity equipmentEntity;
 
         /**
          * Instantiates a new Insert event.
@@ -388,19 +388,13 @@ public class EventFragment extends Fragment {
          * @param mainActivity  the main activity
          * @param projectEntity the project entity
          */
-        public InsertEvent(MainActivity mainActivity, ProjectEntity projectEntity,
-            EquipmentEntity equipmentEntity) {
-            this.projectEntity = projectEntity;
-            this.equipmentEntity = equipmentEntity;
+        public InsertEvent(MainActivity mainActivity, ProjectEntity projectEntity) {
             this.mainActivity = new WeakReference<>(mainActivity);
+            this.projectEntity = projectEntity;
         }
 
         @Override
         protected Void doInBackground(EventEntity... eventEntity) {
-            eventEntity[0].setProjectId1(projectEntity.getId1());
-            eventEntity[0].setProjectId2(projectEntity.getId2());
-            eventEntity[0].setEquipmentId1(equipmentEntity.getId1());
-            eventEntity[0].setEquipmentId2(equipmentEntity.getId2());
             if (projectEntity.getEvents() == null) {
                 projectEntity.setEvents(new ArrayList<>());
             }

@@ -59,7 +59,7 @@ public class ProjectFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        project = new ProjectEntity();
+        //project = new ProjectEntity();
 
     }
 
@@ -133,10 +133,10 @@ public class ProjectFragment extends Fragment {
 
         saveButton.setOnClickListener(
                 v -> {
+                    project = new ProjectEntity(selectedClient);
                     grabFields();
                     if (!projectName.getText().toString().equals("")) {
-                        FrontendApplication.getMasterProjectSet().add(project);
-                        new InsertProject(MainActivity.getInstance(), selectedClient)
+                        new InsertProject(MainActivity.getInstance())
                             .execute(project);
                         Toast.makeText(getContext(), "Project saved", Toast.LENGTH_SHORT).show();
                         getFragmentManager().beginTransaction()
@@ -178,21 +178,17 @@ public class ProjectFragment extends Fragment {
     private static class InsertProject extends AsyncTask<ProjectEntity, Void, Void> {
 
         private WeakReference<MainActivity> mainActivity;
-        private ClientEntity selectedClient;
         /**
          * Instantiates a new Insert project.
          *
          * @param mainActivity the main activity
          */
-        public InsertProject(MainActivity mainActivity, ClientEntity selectedClient) {
+        public InsertProject(MainActivity mainActivity) {
             this.mainActivity = new WeakReference<>(mainActivity);
-            this.selectedClient = selectedClient;
         }
 
         @Override
         protected Void doInBackground(ProjectEntity... projectEntities) {
-            projectEntities[0].setClientId1(selectedClient.getId1());
-            projectEntities[0].setClientId2(selectedClient.getId2());
             MobilePunchDatabase.getInstance(mainActivity.get()).getProjectDao()
                     .insert(projectEntities[0]);
             FrontendApplication.getMasterProjectSet().add(projectEntities[0]);

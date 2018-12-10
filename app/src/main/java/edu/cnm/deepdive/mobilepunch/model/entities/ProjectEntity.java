@@ -56,6 +56,15 @@ public class ProjectEntity implements UuidHaver {
     @Expose
     private List<EventEntity> events;
 
+    public ProjectEntity(ClientEntity client) {
+        this.client = client;
+        this.clientId1 = client.getId1();
+        this.clientId2 = client.getId2();
+    }
+
+    public ProjectEntity() {
+    }
+
     public long getClientId1() {
         return clientId1;
     }
