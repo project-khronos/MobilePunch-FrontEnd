@@ -4,7 +4,8 @@ import android.os.AsyncTask;
 import java.util.List;
 
 /**
- * The type Query tasks.
+ * The type Query tasks. Handles queries to and results from database. Also, refreshes the Oauth2
+ * token.
  */
 public class QueryTasks {
 

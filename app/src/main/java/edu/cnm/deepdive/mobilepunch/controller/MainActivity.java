@@ -32,7 +32,8 @@ import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * The type Main activity.
+ * The type Main activity. This class inflates the main menu and the navigation drawer. Also, sets
+ * up the database api task and replaces fragment container.
  */
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
