@@ -27,6 +27,7 @@ import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
 import java.util.List;
 import java.util.UUID;
+import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -124,6 +125,9 @@ public class MainActivity extends AppCompatActivity
     dataBase = MobilePunchDatabase.getInstance(this);
     ApiTask apiTask = new ApiTask();
     apiTask.execute();
+//    String token = getString(
+//        R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
+//    Log.d(TAG, token.toString());
     instance = this;
     //new DaoHelper.ProjectGetterTask().execute();
 
@@ -173,7 +177,7 @@ public class MainActivity extends AppCompatActivity
         .create();
     service = new Builder()
         // TODO change base_url value.
-        .baseUrl("http://10.0.2.2:8080/")
+        .baseUrl("https://straylense.space/projectkhronos/")
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
         .create(MobilePunchService.class);
@@ -234,9 +238,9 @@ public class MainActivity extends AppCompatActivity
         Response<List<ClientEntity>> clientsResponse = service.getClients(token).execute();
         Response<List<EquipmentEntity>> equipmentResponse = service.getEquipment(token).execute();
 
-        // Response<ResponseBody> eqJson = service.getEquipmentJson(token).execute();
+        Response<ResponseBody> eqJson = service.getClientsJson(token).execute();
         //Use this to see raw response, needs a jsoncall.
-        // Log.d(TAG, "RAW JSON: " + eqJson.body().string());
+        Log.d(TAG, "RAW JSON: " + eqJson.code());
         if (projectsResponse.isSuccessful()
             && clientsResponse.isSuccessful()
             && equipmentResponse.isSuccessful()) {
