@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * The type Event entity.
+ * The type Event entity. Creates a template for the Event in the database.
  */
 @Entity(
     primaryKeys = {"event_id1", "event_id2"},

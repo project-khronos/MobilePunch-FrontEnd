@@ -8,7 +8,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import java.util.List;
 
 /**
- * The interface Event dao.
+ * The interface Event dao. Maps Application calls to the persistence layer.
  */
 @Dao
 public interface EventDao {

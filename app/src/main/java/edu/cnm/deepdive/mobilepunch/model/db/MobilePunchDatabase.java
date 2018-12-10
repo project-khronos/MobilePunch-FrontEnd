@@ -20,7 +20,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The type Mobile punch database.
+ * The type Mobile punch database. Creates the class mobile punch saves data in local database using
+ * Room.
  */
 @Database(
     entities = {ProjectEntity.class, EventEntity.class, ClientEntity.class, EquipmentEntity.class},

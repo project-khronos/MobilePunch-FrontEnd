@@ -14,7 +14,7 @@ import java.util.UUID;
 
 
 /**
- * The type Client entity.
+ * The type Client entity. Creates template for client in database.
  */
 @Entity(
     primaryKeys = {"client_id1", "client_id2"}

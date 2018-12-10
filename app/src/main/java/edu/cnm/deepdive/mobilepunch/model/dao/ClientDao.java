@@ -8,7 +8,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import java.util.List;
 
 /**
- * The interface Client dao.
+ * The interface Client dao. Maps application calls to the persistence layer.
  */
 @Dao
 public interface ClientDao {

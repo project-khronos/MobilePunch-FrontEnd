@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * The type Project entity.
+ * The type Project entity. Creates a template for the Project in the database.
  */
 @Entity(
     primaryKeys = {"project_id1", "project_id2"},
