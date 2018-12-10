@@ -8,7 +8,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import java.util.List;
 
 /**
- * The interface Equipment dao.
+ * The interface Equipment dao.  Maps Application calls to the persistence layer.
  */
 @Dao
 public interface EquipmentDao {

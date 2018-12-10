@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The type Project helper.
+ * The type Project helper. Gets Project,Event, Equipment, Client and sets ProjectEntity,
+ * EquipmentEntity and ClientEntity.
  */
 public class DaoHelper {
 
