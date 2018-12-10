@@ -50,7 +50,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The type Event fragment.
+ * The type Event fragment. This class inflates the Event fragment. This is where user can edit text fields and
+ * save information applied to database.
  */
 public class EventFragment extends Fragment {
 

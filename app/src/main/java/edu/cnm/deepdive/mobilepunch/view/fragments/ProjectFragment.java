@@ -32,7 +32,8 @@ import java.util.List;
 
 
 /**
- * The type Project fragment.
+ * The type Project fragment. This class inflates the Project fragment. This is where user can edit
+ * text fields and save information to the database.
  */
 public class ProjectFragment extends Fragment {
 
