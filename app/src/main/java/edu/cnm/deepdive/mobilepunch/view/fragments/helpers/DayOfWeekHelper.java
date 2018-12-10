@@ -1,7 +1,7 @@
 package edu.cnm.deepdive.mobilepunch.view.fragments.helpers;
 
 /**
- * The type Day of week helper.
+ * The type Day of week helper. Gets and returns day of the week from calender.
  */
 public class DayOfWeekHelper {
 

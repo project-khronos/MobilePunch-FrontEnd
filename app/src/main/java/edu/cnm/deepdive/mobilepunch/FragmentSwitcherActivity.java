@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * The type Fragment switcher activity.
+ * The type Fragment switcher activity.  Uses fragment manager to switch between fragments.
  */
 public class FragmentSwitcherActivity extends AppCompatActivity {
 
