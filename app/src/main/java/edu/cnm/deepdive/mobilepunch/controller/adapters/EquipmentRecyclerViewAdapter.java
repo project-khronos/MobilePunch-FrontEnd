@@ -48,7 +48,6 @@ public class EquipmentRecyclerViewAdapter extends
     equipmentHolder.model.setText(":" + data.get(position).getModel());
     equipmentHolder.year.setText(":" + data.get(position).getMfcyear());
     equipmentHolder.description.setText(":" + data.get(position).getDescription());
-
   }
 
 
