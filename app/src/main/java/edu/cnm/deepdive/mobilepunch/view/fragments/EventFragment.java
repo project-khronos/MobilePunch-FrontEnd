@@ -354,6 +354,8 @@ public class EventFragment extends Fragment {
         event.setIncome(income);
         event.setExpenses(expenses);
         event.setDescription(descriptionField.getText().toString());
+        event.setEndDate(endDate);
+        event.setStartDate(startDate);
     }
 
 
@@ -363,9 +365,9 @@ public class EventFragment extends Fragment {
             picker.setListener((cal) -> {
 
                 if (button.getTag().equals("Start date")) {
-                    event.setStartDate(cal.getTime());
+                    startDate = cal.getTime();
                 } else {
-                    event.setEndDate(cal.getTime());
+                    endDate = (cal.getTime());
                 }
 
                 String dateFormat = button.getTag().toString() + ": " +
