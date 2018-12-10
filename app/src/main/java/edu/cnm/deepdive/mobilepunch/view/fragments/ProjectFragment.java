@@ -13,13 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
@@ -31,6 +24,11 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 import edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText;
 import edu.cnm.deepdive.mobilepunch.view.fragments.helpers.DayOfWeekHelper;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -138,7 +136,8 @@ public class ProjectFragment extends Fragment {
                     grabFields();
                     if (!projectName.getText().toString().equals("")) {
                         FrontendApplication.getMasterProjectSet().add(project);
-                        new InsertProject(MainActivity.getInstance()).execute(project);
+                        new InsertProject(MainActivity.getInstance(), selectedClient)
+                            .execute(project);
                         Toast.makeText(getContext(), "Project saved", Toast.LENGTH_SHORT).show();
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.fragment_container, new ProjectFragment()).commit();
@@ -179,19 +178,21 @@ public class ProjectFragment extends Fragment {
     private static class InsertProject extends AsyncTask<ProjectEntity, Void, Void> {
 
         private WeakReference<MainActivity> mainActivity;
-
+        private ClientEntity selectedClient;
         /**
          * Instantiates a new Insert project.
          *
          * @param mainActivity the main activity
          */
-        public InsertProject(MainActivity mainActivity) {
+        public InsertProject(MainActivity mainActivity, ClientEntity selectedClient) {
             this.mainActivity = new WeakReference<>(mainActivity);
+            this.selectedClient = selectedClient;
         }
 
         @Override
         protected Void doInBackground(ProjectEntity... projectEntities) {
-
+            projectEntities[0].setClientId1(selectedClient.getId1());
+            projectEntities[0].setClientId2(selectedClient.getId2());
             MobilePunchDatabase.getInstance(mainActivity.get()).getProjectDao()
                     .insert(projectEntities[0]);
             FrontendApplication.getMasterProjectSet().add(projectEntities[0]);
