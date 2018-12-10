@@ -17,7 +17,7 @@ import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 
 /**
- * The type Event recycler view adapter.
+ * The type Event recycler view adapter. Inflates event list to UI from database.
  */
 public class EventRecyclerViewAdapter extends
         RecyclerView.Adapter<EventRecyclerViewAdapter.EventHolder> {

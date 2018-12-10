@@ -7,15 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.List;
-
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.adapters.EventRecyclerViewAdapter.ItemClickListener;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 
 /**
- * The type Client recycler view adapter. inflates
+ * The type Client recycler view adapter. Inflates client list to UI from the data base.
  */
 public class ClientRecyclerViewAdapter extends
         RecyclerView.Adapter<ClientRecyclerViewAdapter.ClientHolder> {
