@@ -1,5 +1,5 @@
 # Project Kronos - FrontEnd
-A repository for hosting the front end of mobile punch.
+A repository for hosting the front end of Project Kronos.
 
 ## Motivation
 * Project management and event tracking all in one place
