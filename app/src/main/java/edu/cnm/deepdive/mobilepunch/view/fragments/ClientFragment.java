@@ -15,8 +15,8 @@ import edu.cnm.deepdive.mobilepunch.controller.FrontendApplication;
 import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
+import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 import java.lang.ref.WeakReference;
-import java.util.UUID;
 
 
 /**
@@ -45,15 +45,9 @@ public class ClientFragment extends Fragment {
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     view = inflater.inflate(R.layout.fragment_client, container, false);
-    generateIds();
     initLayout();
     initListeners();
     return view;
-  }
-
-  private void generateIds() {
-    client.setId1(UUID.randomUUID().getMostSignificantBits());
-    client.setId2(UUID.randomUUID().getLeastSignificantBits());
   }
 
   private void initLayout() {
@@ -83,6 +77,7 @@ public class ClientFragment extends Fragment {
   }
 
   private void grabFields() {
+    UuidSetter.setNewRandomUuid(client);
     client.setName(nameField.getText().toString());
     client.setPhone(phoneField.getText().toString());
     client.setAltPhone(altNumberField.getText().toString());
@@ -112,7 +107,12 @@ public class ClientFragment extends Fragment {
           .insert(clientEntities[0]);
       String token = mainActivity.get().getString(
           R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
-      mainActivity.get().getService().putClient(token, clientEntities[0]);
+      try {
+        mainActivity.get().getService().postClient(token, clientEntities[0]);
+      } catch (Exception e) {
+        e.printStackTrace();
+        // Do nothing, out of scope
+      }
 
       FrontendApplication.getMasterClientSet().add(clientEntities[0]);
       return null;

@@ -10,7 +10,7 @@ import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.PUT;
+import retrofit2.http.POST;
 
 
 /**
@@ -32,12 +32,12 @@ public interface MobilePunchService {
    * Put projects response.
    *
    * @param authorization the authorization
-   * @param projects the projects
+   * @param project the project
    * @return the response
    */
-  @PUT("projects")
-  Response<List<ProjectEntity>> putProjects(
-      @Header("Authorization") String authorization, @Body List<ProjectEntity> projects);
+  @POST("projects")
+  Response<ProjectEntity> postProject(
+      @Header("Authorization") String authorization, @Body ProjectEntity project);
 
   /**
    * Gets projects json.
@@ -66,8 +66,8 @@ public interface MobilePunchService {
    * @param clients the clients
    * @return the response
    */
-  @PUT("clients")
-  Response<ClientEntity> putClient(
+  @POST("clients")
+  Response<ClientEntity> postClient(
       @Header("Authorization") String authorization, @Body ClientEntity clients);
 
   /**
@@ -94,12 +94,12 @@ public interface MobilePunchService {
    * Put equipment response.
    *
    * @param authorization the authorization
-   * @param equipmentList the equipment list
+   * @param equipment the equipment list
    * @return the response
    */
-  @PUT("equipment")
-  Response<List<EquipmentEntity>> putEquipment(
-      @Header("Authorization") String authorization, @Body List<EquipmentEntity> equipmentList);
+  @POST("equipment")
+  Response<EquipmentEntity> postEquipment(
+      @Header("Authorization") String authorization, @Body EquipmentEntity equipment);
 
   /**
    * Gets equipment json.

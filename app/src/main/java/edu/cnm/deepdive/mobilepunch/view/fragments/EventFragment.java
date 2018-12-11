@@ -406,9 +406,13 @@ public class EventFragment extends Fragment {
       FrontendApplication.getMasterProjectSet().add(projectEntity);
       String token = mainActivity.get().getString(
           R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
-      List<ProjectEntity> project = new ArrayList<>();
-      project.add(projectEntity);
-      MainActivity.getInstance().getService().putProjects(token, project);
+
+      try {
+        MainActivity.getInstance().getService().postProject(token, projectEntity);
+      } catch (Exception e) {
+        e.printStackTrace();
+        // Do nothing, out of scope
+      }
       return null;
     }
   }

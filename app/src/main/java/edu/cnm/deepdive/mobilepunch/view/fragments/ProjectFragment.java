@@ -26,7 +26,6 @@ import edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText;
 import edu.cnm.deepdive.mobilepunch.view.fragments.helpers.DayOfWeekHelper;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -56,7 +55,7 @@ public class ProjectFragment extends Fragment {
       description;
 
   private Date startDate = new Date(),
-      endDate = new Date();
+      endDate = new Date(), expectedDate = new Date();
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -149,7 +148,9 @@ public class ProjectFragment extends Fragment {
     generateIds();
     project.setName(projectName.getText().toString());
     project.setDescription(description.getText().toString());
-
+    project.setStartTime(startDate);
+    project.setEndTime(endDate);
+    project.setExpectedEndTime(expectedDate);
   }
 
   private void setButton(Button button, DateTimePickerFragment picker, Date date) {
@@ -158,11 +159,11 @@ public class ProjectFragment extends Fragment {
       picker.setListener((cal) -> {
 
         if (button.getTag().equals("Start date")) {
-          project.setStartTime(cal.getTime());
+          startDate = (cal.getTime());
         } else if (button.getTag().equals("End date")) {
-          project.setEndTime(cal.getTime());
+          endDate = (cal.getTime());
         } else {
-          project.setExpectedEndTime(cal.getTime());
+          expectedDate = (cal.getTime());
         }
         String day = DayOfWeekHelper
             .getDayOfWeekFromCalendarDayOfWeek(cal.get(Calendar.DAY_OF_WEEK));
@@ -193,7 +194,12 @@ public class ProjectFragment extends Fragment {
           .insert(projectEntities[0]);
       String token = mainActivity.get().getString(
           R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
-      MainActivity.getInstance().getService().putProjects(token, Arrays.asList(projectEntities));
+      try {
+        MainActivity.getInstance().getService().postProject(token, projectEntities[0]);
+      } catch (Exception e) {
+        e.printStackTrace();
+        // Do nothing, out of scope
+      }
       FrontendApplication.getMasterProjectSet().add(projectEntities[0]);
       return null;
     }
