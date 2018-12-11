@@ -2,6 +2,8 @@
 A repository for hosting the front end of mobile punch.
 
 ## Motivation
+* Project management and event tracking all in one place
+
 * Accessable, up to date logs
 
 * Quick and easy to use interface
