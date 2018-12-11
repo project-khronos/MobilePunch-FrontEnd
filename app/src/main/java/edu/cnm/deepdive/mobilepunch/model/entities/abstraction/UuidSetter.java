@@ -3,7 +3,7 @@ package edu.cnm.deepdive.mobilepunch.model.entities.abstraction;
 import java.util.UUID;
 
 /**
- * The type Uuid setter.
+ * The type Uuid setter. Utility that helps convert longs to UUIDs and UUIDs to longs.
  */
 public class UuidSetter {
 

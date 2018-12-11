@@ -3,7 +3,7 @@ package edu.cnm.deepdive.mobilepunch.model.entities.abstraction;
 import java.util.UUID;
 
 /**
- * The interface Uuid haver.
+ * The interface Uuid haver. Interface that states entities has getters and setters and can be accessed.
  */
 public interface UuidHaver {
 
