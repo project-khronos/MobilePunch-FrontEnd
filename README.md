@@ -11,13 +11,13 @@ A repository for hosting the front end of mobile punch.
 * Accurate and with you all the time
 
 ## Project Kronos Team Members
-* Alex Benedict - Back end
+* Alex Benedict - Database OAuth2 
 
-* Travis Decker - Back end
+* Travis Decker - Retrofit, Database, Google maps implementation
 
-* JR O'Grady - Front end
+* JR O'Grady - UI, Database, 
 
-* Eve Robles - Front end
+* Eve Robles - UI, Documentation
 
 ## Accessible Server
   https://straylense.space/projectkhronos
@@ -32,3 +32,4 @@ A repository for hosting the front end of mobile punch.
 * Report generation
 * Investigate adding Permissioned Blockchain backend to store project and events in an immutable distributed ledger with COW-    semantics to allow for trustless time tracking
 
+[WireFrames](Capstonewireframes.pdf)
