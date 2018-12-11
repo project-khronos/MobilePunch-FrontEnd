@@ -11,13 +11,13 @@ A repository for hosting the front end of mobile punch.
 * Accurate and with you all the time
 
 ## Project Kronos Team Members
-* Alex Benedict - Database OAuth2 
+* Alex Benedict - Database and OAuth2 
 
-* Travis Decker - Retrofit, Database, Google maps implementation
+* Travis Decker - Retrofit, database, and Google maps implementation
 
-* JR O'Grady - UI, Database, 
+* JR O'Grady - UI and database
 
-* Eve Robles - UI, Documentation
+* Eve Robles - UI and documentation
 
 ## Accessible Server
   https://straylense.space/projectkhronos
