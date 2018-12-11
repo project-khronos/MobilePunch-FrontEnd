@@ -42,6 +42,9 @@ A repository for hosting the front end of mobile punch.
 
 ## Licenses
 [Project Khronos](LICENSE)
+
 [Retrofit](https://libraries.io/github/square/retrofit)
+
 [GSON](https://github.com/google/gson/blob/master/LICENSE)
+
 [Stetho](https://github.com/facebook/stetho/blob/master/LICENSE)
