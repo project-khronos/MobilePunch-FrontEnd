@@ -25,7 +25,6 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import retrofit2.Response;
@@ -243,15 +242,6 @@ public class MainActivity extends AppCompatActivity
         Response<List<ClientEntity>> clientsResponse = service.getClients(token).execute();
         Response<List<EquipmentEntity>> equipmentResponse = service.getEquipment(token).execute();
 
-        if (!FrontendApplication.getMasterClientSet().isEmpty()) {
-          service.putClients(token, new ArrayList<>(FrontendApplication.getMasterClientSet()));
-        }
-        if (!FrontendApplication.getMasterEquipmentSet().isEmpty()) {
-          service.putEquipment(token, new ArrayList<>(FrontendApplication.getMasterEquipmentSet()));
-        }
-        if (!FrontendApplication.getMasterProjectSet().isEmpty()) {
-          service.putProjects(token, new ArrayList<>(FrontendApplication.getMasterProjectSet()));
-        }
         // Response<ResponseBody> eqJson = service.getEquipmentJson(token).execute();
         //Use this to see raw response, needs a jsoncall.
         // Log.d(TAG, "RAW JSON: " + eqJson.body().string());
