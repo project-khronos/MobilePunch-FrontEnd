@@ -10,7 +10,6 @@ import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
 
@@ -61,15 +60,15 @@ public interface MobilePunchService {
       @Header("Authorization") String authorization);
 
   /**
-   * Post a client to the API.
+   * Put clients response.
    *
    * @param authorization the authorization
-   * @param client the client
+   * @param clients the clients
    * @return the response
    */
-  @POST("clients")
-  Response<ClientEntity> postClient(
-      @Header("Authorization") String authorization, @Body ClientEntity client);
+  @PUT("clients")
+  Response<ClientEntity> putClient(
+      @Header("Authorization") String authorization, @Body ClientEntity clients);
 
   /**
    * Gets clients json.
