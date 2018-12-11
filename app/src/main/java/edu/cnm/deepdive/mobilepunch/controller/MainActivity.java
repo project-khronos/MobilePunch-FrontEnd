@@ -25,6 +25,7 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.BottomNav;
 import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import retrofit2.Response;
@@ -43,6 +44,14 @@ public class MainActivity extends AppCompatActivity
   private MobilePunchDatabase dataBase;
   private String TAG = "tag";
 
+  /**
+   * Gets the current service
+   *
+   * @return the service
+   */
+  public MobilePunchService getService() {
+    return service;
+  }
 
   /**
    * Gets instance.
@@ -173,7 +182,7 @@ public class MainActivity extends AppCompatActivity
         .create();
     service = new Builder()
         // TODO change base_url value.
-        .baseUrl("http://10.0.2.2:8080/")
+        .baseUrl("https://straylense.space/pojectkhronos")
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
         .create(MobilePunchService.class);
@@ -234,6 +243,10 @@ public class MainActivity extends AppCompatActivity
         Response<List<ClientEntity>> clientsResponse = service.getClients(token).execute();
         Response<List<EquipmentEntity>> equipmentResponse = service.getEquipment(token).execute();
 
+        service.putClients(token, new ArrayList<>(FrontendApplication.getMasterClientSet()));
+        service.putEquipment(token, new ArrayList<>(FrontendApplication.getMasterEquipmentSet()));
+        service.putProjects(token, new ArrayList<>(FrontendApplication.getMasterProjectSet()));
+
         // Response<ResponseBody> eqJson = service.getEquipmentJson(token).execute();
         //Use this to see raw response, needs a jsoncall.
         // Log.d(TAG, "RAW JSON: " + eqJson.body().string());
@@ -293,6 +306,7 @@ public class MainActivity extends AppCompatActivity
       FrontendApplication.getMasterProjectSet().addAll(projects);
       FrontendApplication.getMasterClientSet().addAll(clients);
       FrontendApplication.getMasterEquipmentSet().addAll(equipment);
+
       return projects;
     }
 

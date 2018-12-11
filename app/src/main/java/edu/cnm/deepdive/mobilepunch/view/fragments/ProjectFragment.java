@@ -26,6 +26,7 @@ import edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText;
 import edu.cnm.deepdive.mobilepunch.view.fragments.helpers.DayOfWeekHelper;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -190,6 +191,9 @@ public class ProjectFragment extends Fragment {
     protected Void doInBackground(ProjectEntity... projectEntities) {
       MobilePunchDatabase.getInstance(mainActivity.get()).getProjectDao()
           .insert(projectEntities[0]);
+      String token = mainActivity.get().getString(
+          R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
+      MainActivity.getInstance().getService().putProjects(token, Arrays.asList(projectEntities));
       FrontendApplication.getMasterProjectSet().add(projectEntities[0]);
       return null;
     }

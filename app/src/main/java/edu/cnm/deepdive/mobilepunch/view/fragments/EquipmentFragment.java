@@ -17,6 +17,7 @@ import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.EquipmentEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 import java.lang.ref.WeakReference;
+import java.util.Arrays;
 
 
 /**
@@ -108,6 +109,9 @@ public class EquipmentFragment extends Fragment {
 
       MobilePunchDatabase.getInstance(mainActivity.get()).getEquipmentDao()
           .insert(equipmentEntities[0]);
+      String token = mainActivity.get().getString(
+          R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
+      mainActivity.get().getService().putEquipment(token, Arrays.asList(equipmentEntities));
       FrontendApplication.getMasterEquipmentSet().add(equipmentEntities[0]);
       return null;
     }

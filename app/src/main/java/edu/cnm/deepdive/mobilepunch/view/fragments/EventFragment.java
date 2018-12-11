@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -33,13 +32,6 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
 import edu.cnm.deepdive.mobilepunch.R;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment;
 import edu.cnm.deepdive.mobilepunch.controller.DateTimePickerFragment.Mode;
@@ -51,6 +43,11 @@ import edu.cnm.deepdive.mobilepunch.model.entities.EventEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 import edu.cnm.deepdive.mobilepunch.view.fragments.helpers.DayOfWeekHelper;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 /**
  * The type Event fragment. This class inflates the Event fragment. This is where user can edit text fields and
@@ -407,6 +404,11 @@ public class EventFragment extends Fragment {
       MobilePunchDatabase.getInstance(mainActivity.get()).getEventDao().insert(eventEntity[0]);
       FrontendApplication.getMasterProjectSet().remove(projectEntity);
       FrontendApplication.getMasterProjectSet().add(projectEntity);
+      String token = mainActivity.get().getString(
+          R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
+      List<ProjectEntity> project = new ArrayList<>();
+      project.add(projectEntity);
+      MainActivity.getInstance().getService().putProjects(token, project);
       return null;
     }
   }
