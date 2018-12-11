@@ -19,12 +19,35 @@ A repository for hosting the front end of mobile punch.
 
 * Eve Robles - UI and documentation
 
-## Accessible Server
+## Accessible Server Endpoints
   https://straylense.space/projectkhronos
+* /clients
+* /clients/{clientId}
+* /clients/{clientId}/projects
+* /equipment
+* /equipment/{equipmentId}
+* /events/{eventId}
+* /events/{eventId}/equipment
+* /projects
+* /projects/{projectId}
+* /projects/{projectId}/clients
+* /projects/{projectId}/events
+
   
 ## External Services Used
 * Google Sign In
 * Google Maps API
+
+
+## Third Party Libraries
+* Squareup.retrofit2:retrofit:2.4.0
+* Google.code.gson:gson:2.8.5'
+* Google.android.gms:play-services-auth:16.0.1
+* Facebook.stetho:stetho:1.5.0
+* Google.android.gms:play-services-maps:16.0.0
+* Google.android.gms:play-services-location:16.0.0
+
+
 
 ## Stretch Goals
 * Integrating reminders for future tasks
@@ -48,6 +71,7 @@ A repository for hosting the front end of mobile punch.
 ## [ERD](DetailedERD.pdf)
 
 ## [DDL](ddl.sql)
+## [Build Instructions](Build2.pdf)
 
 
   
