@@ -37,6 +37,11 @@ A repository for hosting the front end of mobile punch.
 ## [User Story](UserStory.md)
 
 ## [ERD](DetailedERD.pdf)
-## [DDL](ddl.sql)
-## [Java Docs](docs/api)
 
+## [DDL](ddl.sql)
+
+## Licenses
+[Project Khronos](LICENSE)
+[Retrofit](https://libraries.io/github/square/retrofit)
+[GSON](https://github.com/google/gson/blob/master/LICENSE)
+[Stetho](https://github.com/facebook/stetho/blob/master/LICENSE)
