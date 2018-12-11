@@ -33,4 +33,5 @@ A repository for hosting the front end of mobile punch.
 * Investigate adding Permissioned Blockchain backend to store project and events in an immutable distributed ledger with COW-    semantics to allow for trustless time tracking
 
 ## [WireFrames](capstonewireframes.pdf)
-## [User Story](https://github.com/project-khronos/DesignDocuments-UserStories-RequirementsSpecifications/blob/master/UserStory.md)
+## [User Story](UserStory.md)
+## [ERDs](DetailedERD.pdf)
