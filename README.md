@@ -90,4 +90,4 @@ A repository for hosting the front end of Project Kronos.
 [Stetho](https://github.com/facebook/stetho/blob/master/LICENSE)
 
 ## Current State
-Project Khronos is still in the development stage with a few things being added as we go. Our main focus is to ensure user satisfaction and maintain consistency within the app. We are definetly open to suggestions and any requests can be sent to [Project Khronos email here]. As for functionality <a name="function">click here</a> for a fairly current answer. 
+Project Khronos is still in the development stage with a few things being added as we go. Our main focus is to ensure user satisfaction and maintain consistency within the app. We are definetly open to suggestions and any requests can be sent to [Project Khronos email here]. As for functionality [click here](#function) for a fairly current answer. 
