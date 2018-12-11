@@ -37,4 +37,6 @@ A repository for hosting the front end of mobile punch.
 ## [User Story](UserStory.md)
 
 ## [ERD](DetailedERD.pdf)
+## [DDL](ddl.sql)
+## [Java Docs](docs/api)
 
