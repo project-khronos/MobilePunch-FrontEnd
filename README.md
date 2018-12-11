@@ -43,7 +43,7 @@ A repository for hosting the front end of mobile punch.
 
 ## [WireFrames](capstonewireframes.pdf)
 
-## [User Story](UserStory.md)
+## [User Story](Userstory.pdf)
 
 ## [ERD](DetailedERD.pdf)
 
