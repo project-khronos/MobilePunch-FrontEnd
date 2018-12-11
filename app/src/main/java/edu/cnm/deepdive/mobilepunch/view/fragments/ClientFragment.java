@@ -16,7 +16,6 @@ import edu.cnm.deepdive.mobilepunch.controller.MainActivity;
 import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import java.lang.ref.WeakReference;
-import java.util.Arrays;
 import java.util.UUID;
 
 
@@ -113,7 +112,7 @@ public class ClientFragment extends Fragment {
           .insert(clientEntities[0]);
       String token = mainActivity.get().getString(
           R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
-      mainActivity.get().getService().putClients(token, Arrays.asList(clientEntities));
+      mainActivity.get().getService().putClient(token, clientEntities[0]);
 
       FrontendApplication.getMasterClientSet().add(clientEntities[0]);
       return null;

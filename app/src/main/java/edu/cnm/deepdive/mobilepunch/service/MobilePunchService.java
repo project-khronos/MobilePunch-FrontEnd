@@ -67,8 +67,8 @@ public interface MobilePunchService {
    * @return the response
    */
   @PUT("clients")
-  Response<List<ClientEntity>> putClients(
-      @Header("Authorization") String authorization, @Body List<ClientEntity> clients);
+  Response<ClientEntity> putClient(
+      @Header("Authorization") String authorization, @Body ClientEntity clients);
 
   /**
    * Gets clients json.
