@@ -15,7 +15,7 @@ A repository for hosting the front end of mobile punch.
 
 * Travis Decker - Retrofit, database, and Google maps implementation
 
-* JR O'Grady - UI and database
+* JR O'Grady - Styling, database, and UI interaction.
 
 * Eve Robles - UI and documentation
 
@@ -33,5 +33,8 @@ A repository for hosting the front end of mobile punch.
 * Investigate adding Permissioned Blockchain backend to store project and events in an immutable distributed ledger with COW-    semantics to allow for trustless time tracking
 
 ## [WireFrames](capstonewireframes.pdf)
+
 ## [User Story](UserStory.md)
-## [ERDs](DetailedERD.pdf)
+
+## [ERD](DetailedERD.pdf)
+
