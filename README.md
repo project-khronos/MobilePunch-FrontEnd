@@ -48,6 +48,7 @@ A repository for hosting the front end of mobile punch.
 ## [ERD](DetailedERD.pdf)
 
 ## [DDL](ddl.sql)
+## [Build Instructions](Build2.pdf)
 
 
   
