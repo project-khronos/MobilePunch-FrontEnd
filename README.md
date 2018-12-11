@@ -10,6 +10,8 @@ A repository for hosting the front end of Project Kronos.
 
 * Accurate and with you all the time
 
+<a name="function"></a>
+
 ## Functional inventory
   So far, everything is completely functional. You can save an event, project, client, or equipment to the database on your device. You can successfully link clients to projects, and equipment to events. If you restart your app with an empty database and sign back in. You will notice that any data you had previously had will be reinserted into your database to match the records that it is known to have for a given user on the back end. That covers the main goal of the app. Project Khronos would like to implement a working mapview into the event section to enable current geolocation tracking (as we had difficulty getting the API keys to work), as well as an ability to delete and update data. We would also like to add an option to delete an account and to be able to invite other people. These are implementations that we have been working towards, but have not yet integrated. 
 
@@ -78,10 +80,14 @@ A repository for hosting the front end of Project Kronos.
 
   
 ## Licenses
+
 [Project Khronos](LICENSE)
 
-[Retrofit](Retrofitlicense.pdf)
+[Retrofit](Stetholicense.pdf)
 
 [GSON](https://github.com/google/gson/blob/master/LICENSE)
 
 [Stetho](https://github.com/facebook/stetho/blob/master/LICENSE)
+
+## Current State
+Project Khronos is still in the development stage with a few things being added as we go. Our main focus is to ensure user satisfaction and maintain consistency within the app. We are definetly open to suggestions and any requests can be sent to [Project Khronos email here]. As for functionality <a>click here</a> for a fairly current answer. 
