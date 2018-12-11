@@ -10,7 +10,7 @@ A repository for hosting the front end of mobile punch.
 
 * Accurate and with you all the time
 
-## Project Kronos Team 
+## Project Kronos Team Members
 * Alex Benedict - Back end
 
 * Travis Decker - Back end
