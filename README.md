@@ -21,3 +21,7 @@ A repository for hosting the front end of mobile punch.
 
 ## Accessible Server
   https://straylense.space/projectkhronos
+  
+## External Services Used
+* Google Sign In
+* Google Maps API
