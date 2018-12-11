@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import edu.cnm.deepdive.mobilepunch.R;
 
 /**
- * The type Basic edit text.
+ * The type Basic edit text. Helps facilitate consistent styling in App.
  */
 public class BasicEditText extends android.support.v7.widget.AppCompatEditText {
 

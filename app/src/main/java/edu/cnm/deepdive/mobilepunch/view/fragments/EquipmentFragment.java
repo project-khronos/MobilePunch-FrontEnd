@@ -20,7 +20,8 @@ import java.lang.ref.WeakReference;
 
 
 /**
- * The type Equipment fragment.
+ * The type Equipment fragment. This class inflates the equipment fragment.
+ * This is where the user can edit edit text fields and save information to the database.
  */
 public class EquipmentFragment extends Fragment {
 

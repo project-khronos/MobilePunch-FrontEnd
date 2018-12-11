@@ -12,7 +12,7 @@ import edu.cnm.deepdive.mobilepunch.view.fragments.EventFragment;
 import edu.cnm.deepdive.mobilepunch.view.fragments.ProjectFragment;
 
 /**
- * The type Bottom nav.
+ * The type Bottom nav. Switches bottom navigation activities.
  */
 public class BottomNav extends FragmentSwitcherActivity {
 

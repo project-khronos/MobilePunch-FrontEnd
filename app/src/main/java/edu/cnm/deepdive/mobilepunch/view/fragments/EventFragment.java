@@ -53,7 +53,8 @@ import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
 import edu.cnm.deepdive.mobilepunch.view.fragments.helpers.DayOfWeekHelper;
 
 /**
- * The type Event fragment.
+ * The type Event fragment. This class inflates the Event fragment. This is where user can edit text fields and
+ * save information applied to database.
  */
 public class EventFragment extends Fragment {
 

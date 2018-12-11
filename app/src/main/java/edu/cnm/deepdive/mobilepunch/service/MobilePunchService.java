@@ -14,7 +14,7 @@ import retrofit2.http.PUT;
 
 
 /**
- * The interface Mobile punch service.
+ * The interface Mobile punch service. Defines all the http requests.
  */
 public interface MobilePunchService {
 

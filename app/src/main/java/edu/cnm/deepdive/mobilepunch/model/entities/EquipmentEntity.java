@@ -11,7 +11,7 @@ import java.util.UUID;
 
 
 /**
- * The type Equipment entity. Creates  template for Equipment in database.
+ * The type Equipment entity. Creates a template for Equipment in database.
  */
 @Entity(
     primaryKeys = {

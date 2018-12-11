@@ -20,7 +20,8 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.List;
 
 /**
- * The type Main fragment.
+ * The type Main fragment. This class inflates the card view that is the opening page for the app.
+ * Also, shows the number of items for Event, Project, Client, and equipment stored in the database.
  */
 public class MainFragment extends Fragment {
 

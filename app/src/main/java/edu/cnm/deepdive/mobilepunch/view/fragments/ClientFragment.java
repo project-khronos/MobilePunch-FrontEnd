@@ -20,7 +20,8 @@ import java.util.UUID;
 
 
 /**
- * The type Client fragment.
+ * The type Client fragment. This class inflates the Client fragment. This is where user can edit text fields and
+ * save information applied to database.
  */
 public class ClientFragment extends Fragment {
 
