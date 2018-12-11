@@ -91,7 +91,6 @@ public class ClientFragment extends Fragment {
     client.setAddress(addressField.getText().toString());
     client.setAltAddress(altAddressField.getText().toString());
     client.setNotes(notesField.getText().toString());
-
   }
 
   private static class InsertClient extends AsyncTask<ClientEntity, Void, Void> {

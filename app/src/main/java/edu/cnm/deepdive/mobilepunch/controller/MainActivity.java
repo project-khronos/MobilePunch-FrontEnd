@@ -132,11 +132,6 @@ public class MainActivity extends AppCompatActivity
 
     setupService();
     dataBase = MobilePunchDatabase.getInstance(this);
-
-//    String token = getString(
-//        R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
-//
-//    Log.d(TAG,  token.toString());
     ApiTask apiTask = new ApiTask();
     apiTask.execute();
     instance = this;
