@@ -15,7 +15,7 @@ A repository for hosting the front end of mobile punch.
 
 * Travis Decker - Retrofit, database, and Google maps implementation
 
-* JR O'Grady - Styling, database, and UI interaction.
+* JR O'Grady - Styling, database, and UI interaction
 
 * Eve Robles - UI and documentation
 
