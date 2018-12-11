@@ -4,7 +4,7 @@ A repository for hosting the front end of mobile punch.
 ## Motivation
 * Project management and event tracking all in one place
 
-* Accessable, up to date logs
+* Accessable up to date logs
 
 * Quick and easy to use interface
 
@@ -25,3 +25,10 @@ A repository for hosting the front end of mobile punch.
 ## External Services Used
 * Google Sign In
 * Google Maps API
+
+## Stretch Goals
+* Integrating reminders for future tasks
+* Multi-user interactions(sharing projects and events)
+* Report generation
+* Investigate adding Permissioned Blockchain backend to store project and events in an immutable distributed ledger with COW-    semantics to allow for trustless time tracking
+
