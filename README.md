@@ -40,6 +40,9 @@ A repository for hosting the front end of mobile punch.
 
 ## [DDL](ddl.sql)
 
+## Functional inventory
+  So far, everything is completely functional. You can save an event, project, client, or equipment to the database on your device. You can successfully link clients to projects, and equipment to events. If you restart your app with an empty database and sign back in. You will notice that any data you had previously had will be reinserted into your database to match the records that it is known to have for a given user on the back end. That covers the main goal of the app. Project Khronos would like to implement a working mapview into the event section to enable current geolocation tracking (as we had difficulty getting the API keys to work), as well as an ability to delete and update data. We would also like to add an option to delete an account and to be able to invite other people. These are implementations that we have been working towards, but have not yet integrated. 
+  
 ## Licenses
 [Project Khronos](LICENSE)
 
