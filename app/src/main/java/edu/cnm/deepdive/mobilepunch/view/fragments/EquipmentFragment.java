@@ -46,7 +46,6 @@ public class EquipmentFragment extends Fragment {
       Bundle savedInstanceState) {
 
     view = inflater.inflate(R.layout.fragment_equipment, container, false);
-    generateIds();
     initLayout();
     initListeners();
     return view;
@@ -83,6 +82,7 @@ public class EquipmentFragment extends Fragment {
   }
 
   private void grabFields() {
+    generateIds();
     equipment.setName(nameField.getText().toString());
     equipment.setMake(makeField.getText().toString());
     equipment.setModel(modelField.getText().toString());

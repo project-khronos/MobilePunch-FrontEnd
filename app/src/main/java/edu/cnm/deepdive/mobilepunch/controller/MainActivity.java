@@ -28,6 +28,7 @@ import edu.cnm.deepdive.mobilepunch.view.fragments.MainFragment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.Retrofit.Builder;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -131,6 +132,11 @@ public class MainActivity extends AppCompatActivity
 
     setupService();
     dataBase = MobilePunchDatabase.getInstance(this);
+
+//    String token = getString(
+//        R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
+//
+//    Log.d(TAG,  token.toString());
     ApiTask apiTask = new ApiTask();
     apiTask.execute();
     instance = this;
@@ -243,18 +249,18 @@ public class MainActivity extends AppCompatActivity
         Response<List<ClientEntity>> clientsResponse = service.getClients(token).execute();
         Response<List<EquipmentEntity>> equipmentResponse = service.getEquipment(token).execute();
 
-        if (!FrontendApplication.getMasterClientSet().isEmpty()) {
-          service.putClients(token, new ArrayList<>(FrontendApplication.getMasterClientSet()));
-        }
+//        if (!FrontendApplication.getMasterClientSet().isEmpty()) {
+//          service.postClient(token, new ArrayList<>(FrontendApplication.getMasterClientSet()));
+//        }
         if (!FrontendApplication.getMasterEquipmentSet().isEmpty()) {
           service.putEquipment(token, new ArrayList<>(FrontendApplication.getMasterEquipmentSet()));
         }
         if (!FrontendApplication.getMasterProjectSet().isEmpty()) {
           service.putProjects(token, new ArrayList<>(FrontendApplication.getMasterProjectSet()));
         }
-        // Response<ResponseBody> eqJson = service.getEquipmentJson(token).execute();
+        Response<ResponseBody> eqJson = service.getClientsJson(token).execute();
         //Use this to see raw response, needs a jsoncall.
-        // Log.d(TAG, "RAW JSON: " + eqJson.body().string());
+        Log.d(TAG, "RAW JSON: " + eqJson.body().string());
         if (projectsResponse.isSuccessful()
             && clientsResponse.isSuccessful()
             && equipmentResponse.isSuccessful()) {
@@ -273,31 +279,41 @@ public class MainActivity extends AppCompatActivity
           cancel(true);
         }
         try {
-          MobilePunchDatabase.fromUUIDProject(projects);
-          List<EventEntity> events = MobilePunchDatabase.getEventsFromProject(projects);
-          MobilePunchDatabase.fromUUIDClient(clients);
-          dataBase.getClientDao().insert(clients);
-          for (ProjectEntity project : projects) {
-            UUID clientID = project.getClient().getUuid();
-            project.setClientId1(clientID.getMostSignificantBits());
-            project.setClientId2(clientID.getLeastSignificantBits());
-          }
-          dataBase.getProjectDao().insert(projects);
-          MobilePunchDatabase.fromUUIDEquipment(equipment);
-          dataBase.getEquipmentDao().insert(equipment);
-          for (EventEntity event : events) {
-            if (event.getEquipment() != null) {
-              UUID equipmentID = event.getEquipment().getUuid();
-              event.setEquipmentId1(equipmentID.getMostSignificantBits());
-              event.setEquipmentId2(equipmentID.getLeastSignificantBits());
-            } else {
-              event.setEquipmentId1(0L);
-              event.setEquipmentId2(0L);
+          if (projects != null) {
+            MobilePunchDatabase.fromUUIDProject(projects);
+            for (ProjectEntity project : projects) {
+              if (project.getClient() != null) {
+                UUID clientID = project.getClient().getUuid();
+                project.setClientId1(clientID.getMostSignificantBits());
+                project.setClientId2(clientID.getLeastSignificantBits());
+              }
             }
           }
 
-          dataBase.getEventDao().insert(events);
+          if (clients != null) {
+            MobilePunchDatabase.fromUUIDClient(clients);
+            dataBase.getClientDao().insert(clients);
+          }
 
+          if (equipment != null) {
+            MobilePunchDatabase.fromUUIDEquipment(equipment);
+            dataBase.getEquipmentDao().insert(equipment);
+          }
+
+          if (projects != null) {
+            List<EventEntity> events = MobilePunchDatabase.getEventsFromProject(projects);
+            for (EventEntity event : events) {
+              if (event.getEquipment() != null) {
+                UUID equipmentID = event.getEquipment().getUuid();
+                event.setEquipmentId1(equipmentID.getMostSignificantBits());
+                event.setEquipmentId2(equipmentID.getLeastSignificantBits());
+              } else {
+                event.setEquipmentId1(0L);
+                event.setEquipmentId2(0L);
+              }
+            }
+            dataBase.getEventDao().insert(events);
+          }
 
         } catch (Exception e) {
           // FIXME do what

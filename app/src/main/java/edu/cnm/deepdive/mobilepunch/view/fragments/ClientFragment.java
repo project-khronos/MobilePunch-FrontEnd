@@ -46,7 +46,6 @@ public class ClientFragment extends Fragment {
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     view = inflater.inflate(R.layout.fragment_client, container, false);
-    generateIds();
     initLayout();
     initListeners();
     return view;
@@ -84,6 +83,7 @@ public class ClientFragment extends Fragment {
   }
 
   private void grabFields() {
+    generateIds();
     client.setName(nameField.getText().toString());
     client.setPhone(phoneField.getText().toString());
     client.setAltPhone(altNumberField.getText().toString());
@@ -114,7 +114,7 @@ public class ClientFragment extends Fragment {
           .insert(clientEntities[0]);
       String token = mainActivity.get().getString(
           R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
-      mainActivity.get().getService().putClients(token, Arrays.asList(clientEntities));
+      mainActivity.get().getService().postClient(token, Arrays.asList(clientEntities));
 
       FrontendApplication.getMasterClientSet().add(clientEntities[0]);
       return null;
