@@ -1,0 +1,13 @@
+edu.cnm.deepdive.mobilepunch
+edu.cnm.deepdive.mobilepunch.controller
+edu.cnm.deepdive.mobilepunch.controller.adapters
+edu.cnm.deepdive.mobilepunch.model.dao
+edu.cnm.deepdive.mobilepunch.model.dao.abstraction
+edu.cnm.deepdive.mobilepunch.model.db
+edu.cnm.deepdive.mobilepunch.model.entities
+edu.cnm.deepdive.mobilepunch.model.entities.abstraction
+edu.cnm.deepdive.mobilepunch.service
+edu.cnm.deepdive.mobilepunch.view
+edu.cnm.deepdive.mobilepunch.view.custom_widgets
+edu.cnm.deepdive.mobilepunch.view.fragments
+edu.cnm.deepdive.mobilepunch.view.fragments.helpers
