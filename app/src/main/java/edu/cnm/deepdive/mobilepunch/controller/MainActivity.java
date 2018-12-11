@@ -243,10 +243,15 @@ public class MainActivity extends AppCompatActivity
         Response<List<ClientEntity>> clientsResponse = service.getClients(token).execute();
         Response<List<EquipmentEntity>> equipmentResponse = service.getEquipment(token).execute();
 
-        service.putClients(token, new ArrayList<>(FrontendApplication.getMasterClientSet()));
-        service.putEquipment(token, new ArrayList<>(FrontendApplication.getMasterEquipmentSet()));
-        service.putProjects(token, new ArrayList<>(FrontendApplication.getMasterProjectSet()));
-
+        if (!FrontendApplication.getMasterClientSet().isEmpty()) {
+          service.putClients(token, new ArrayList<>(FrontendApplication.getMasterClientSet()));
+        }
+        if (!FrontendApplication.getMasterEquipmentSet().isEmpty()) {
+          service.putEquipment(token, new ArrayList<>(FrontendApplication.getMasterEquipmentSet()));
+        }
+        if (!FrontendApplication.getMasterProjectSet().isEmpty()) {
+          service.putProjects(token, new ArrayList<>(FrontendApplication.getMasterProjectSet()));
+        }
         // Response<ResponseBody> eqJson = service.getEquipmentJson(token).execute();
         //Use this to see raw response, needs a jsoncall.
         // Log.d(TAG, "RAW JSON: " + eqJson.body().string());
