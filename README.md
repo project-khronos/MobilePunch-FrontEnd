@@ -80,7 +80,7 @@ A repository for hosting the front end of Project Kronos.
 ## Licenses
 [Project Khronos](LICENSE)
 
-[Retrofit](https://libraries.io/github/square/retrofit)
+[Retrofit](Stetholicense.pdf)
 
 [GSON](https://github.com/google/gson/blob/master/LICENSE)
 
