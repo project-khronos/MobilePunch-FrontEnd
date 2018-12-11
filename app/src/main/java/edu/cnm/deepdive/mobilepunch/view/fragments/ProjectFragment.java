@@ -69,7 +69,6 @@ public class ProjectFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.fragment_project, container, false);
-    //generateIds();
     initLayout();
     initListeners();
     return view;
@@ -147,9 +146,10 @@ public class ProjectFragment extends Fragment {
   }
 
   private void grabFields() {
+    generateIds();
     project.setName(projectName.getText().toString());
     project.setDescription(description.getText().toString());
-    generateIds();
+
   }
 
   private void setButton(Button button, DateTimePickerFragment picker, Date date) {
