@@ -19,8 +19,20 @@ A repository for hosting the front end of mobile punch.
 
 * Eve Robles - UI and documentation
 
-## Accessible Server
+## Accessible Server Endpoints
   https://straylense.space/projectkhronos
+* /clients
+* /clients/{clientId}
+* /clients/{clientId}/projects
+* /equipment
+* /equipment/{equipmentId}
+* /events/{eventId}
+* /events/{eventId}/equipment
+* /projects
+* /projects/{projectId}
+* /projects/{projectId}/clients
+* /projects/{projectId}/events
+
   
 ## External Services Used
 * Google Sign In
