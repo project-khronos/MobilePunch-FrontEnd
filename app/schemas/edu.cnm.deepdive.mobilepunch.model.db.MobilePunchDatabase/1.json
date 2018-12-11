@@ -1,54 +1,348 @@
-CREATE TABLE IF NOT EXISTS ProjectEntity (`project_id1` INTEGER NOT NULL,
-`project_id2` INTEGER NOT NULL,
-`client_id1` INTEGER NOT NULL,
-`client_id2` INTEGER NOT NULL,
-`name` TEXT,
-`start_time` INTEGER,
-`end_time` INTEGER,
-`expected_end_time` INTEGER,
-`description` TEXT,
-PRIMARY KEY(`project_id1`,
-`project_id2`),
-FOREIGN KEY(`client_id1`,
-`client_id2`) REFERENCES `ClientEntity`(`client_id1`,
-`client_id2`) ON UPDATE NO ACTION ON DELETE NO ACTION )
-
-
-CREATE TABLE IF NOT EXISTS EventEntity (`event_id1` INTEGER NOT NULL,
-`event_id2` INTEGER NOT NULL,
-`event_start_date` INTEGER,
-`event_end_date` INTEGER,
-`expenses` REAL, `income` REAL,
-`description` TEXT,
-`longitude` REAL NOT NULL,
-`latitude` REAL NOT NULL,
-`project_id1` INTEGER NOT NULL,
-`project_id2` INTEGER NOT NULL,
-`equipment_id1` INTEGER NOT NULL,
-`equipment_id2` INTEGER NOT NULL,
-PRIMARY KEY(`event_id1`, `event_id2`),
-FOREIGN KEY(`project_id1`,
-`project_id2`) REFERENCES `ProjectEntity`(`project_id1`,
-`project_id2`) ON UPDATE NO ACTION ON DELETE NO ACTION ,
-FOREIGN KEY(`equipment_id1`,
-`equipment_id2`) REFERENCES `EquipmentEntity`(`equipment_id1`,
-`equipment_id2`) ON UPDATE NO ACTION ON DELETE NO ACTION )
-
-
-CREATE TABLE IF NOT EXISTS ClientEntity (`client_id1` INTEGER NOT NULL,
-`client_id2` INTEGER NOT NULL,
-`name` TEXT, `email` TEXT,
-`alt_phone` TEXT, `phone` TEXT,
-`address` TEXT, `alt_address` TEXT,
-`notes` TEXT, PRIMARY KEY(`client_id1`,
-`client_id2`))
-
-CREATE TABLE IF NOT EXISTS EquipmentEntity (`equipment_id1` INTEGER NOT NULL,
-`equipment_id2` INTEGER NOT NULL, `name` TEXT,
-`make` TEXT, `model` TEXT, `mfcyear` TEXT,
-`identification` TEXT NOT NULL, `description` TEXT,
-PRIMARY KEY(`equipment_id1`, `equipment_id2`))
-
-CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)
-
-INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"f3d01c7dca42c05c1c516bdd26be0c29\")
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "f3d01c7dca42c05c1c516bdd26be0c29",
+    "entities": [
+      {
+        "tableName": "ProjectEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`project_id1` INTEGER NOT NULL, `project_id2` INTEGER NOT NULL, `client_id1` INTEGER NOT NULL, `client_id2` INTEGER NOT NULL, `name` TEXT, `start_time` INTEGER, `end_time` INTEGER, `expected_end_time` INTEGER, `description` TEXT, PRIMARY KEY(`project_id1`, `project_id2`), FOREIGN KEY(`client_id1`, `client_id2`) REFERENCES `ClientEntity`(`client_id1`, `client_id2`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id1",
+            "columnName": "project_id1",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id2",
+            "columnName": "project_id2",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "clientId1",
+            "columnName": "client_id1",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "clientId2",
+            "columnName": "client_id2",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "startTime",
+            "columnName": "start_time",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "endTime",
+            "columnName": "end_time",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "expectedEndTime",
+            "columnName": "expected_end_time",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "project_id1",
+            "project_id2"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "ClientEntity",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "client_id1",
+              "client_id2"
+            ],
+            "referencedColumns": [
+              "client_id1",
+              "client_id2"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "EventEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`event_id1` INTEGER NOT NULL, `event_id2` INTEGER NOT NULL, `event_start_date` INTEGER, `event_end_date` INTEGER, `expenses` REAL, `income` REAL, `description` TEXT, `longitude` REAL NOT NULL, `latitude` REAL NOT NULL, `project_id1` INTEGER NOT NULL, `project_id2` INTEGER NOT NULL, `equipment_id1` INTEGER NOT NULL, `equipment_id2` INTEGER NOT NULL, PRIMARY KEY(`event_id1`, `event_id2`), FOREIGN KEY(`project_id1`, `project_id2`) REFERENCES `ProjectEntity`(`project_id1`, `project_id2`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`equipment_id1`, `equipment_id2`) REFERENCES `EquipmentEntity`(`equipment_id1`, `equipment_id2`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "id2",
+            "columnName": "event_id1",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id1",
+            "columnName": "event_id2",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startDate",
+            "columnName": "event_start_date",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "endDate",
+            "columnName": "event_end_date",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "expenses",
+            "columnName": "expenses",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "income",
+            "columnName": "income",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "projectId1",
+            "columnName": "project_id1",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "projectId2",
+            "columnName": "project_id2",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "equipmentId1",
+            "columnName": "equipment_id1",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "equipmentId2",
+            "columnName": "equipment_id2",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "event_id1",
+            "event_id2"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "ProjectEntity",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "project_id1",
+              "project_id2"
+            ],
+            "referencedColumns": [
+              "project_id1",
+              "project_id2"
+            ]
+          },
+          {
+            "table": "EquipmentEntity",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "equipment_id1",
+              "equipment_id2"
+            ],
+            "referencedColumns": [
+              "equipment_id1",
+              "equipment_id2"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "ClientEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`client_id1` INTEGER NOT NULL, `client_id2` INTEGER NOT NULL, `name` TEXT, `email` TEXT, `alt_phone` TEXT, `phone` TEXT, `address` TEXT, `alt_address` TEXT, `notes` TEXT, PRIMARY KEY(`client_id1`, `client_id2`))",
+        "fields": [
+          {
+            "fieldPath": "id1",
+            "columnName": "client_id1",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id2",
+            "columnName": "client_id2",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "altPhone",
+            "columnName": "alt_phone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "phone",
+            "columnName": "phone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "altAddress",
+            "columnName": "alt_address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "notes",
+            "columnName": "notes",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "client_id1",
+            "client_id2"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "EquipmentEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`equipment_id1` INTEGER NOT NULL, `equipment_id2` INTEGER NOT NULL, `name` TEXT, `make` TEXT, `model` TEXT, `mfcyear` TEXT, `identification` TEXT NOT NULL, `description` TEXT, PRIMARY KEY(`equipment_id1`, `equipment_id2`))",
+        "fields": [
+          {
+            "fieldPath": "id1",
+            "columnName": "equipment_id1",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id2",
+            "columnName": "equipment_id2",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "make",
+            "columnName": "make",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "model",
+            "columnName": "model",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mfcyear",
+            "columnName": "mfcyear",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "identification",
+            "columnName": "identification",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "equipment_id1",
+            "equipment_id2"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"f3d01c7dca42c05c1c516bdd26be0c29\")"
+    ]
+  }
+}

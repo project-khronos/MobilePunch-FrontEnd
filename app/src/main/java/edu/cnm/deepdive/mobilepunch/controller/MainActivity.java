@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity
         .create();
     service = new Builder()
         // TODO change base_url value.
-        .baseUrl("https://straylense.space/pojectkhronos")
+        .baseUrl("https://straylense.space/projectkhronos/")
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
         .create(MobilePunchService.class);
