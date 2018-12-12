@@ -6,7 +6,6 @@ import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -36,7 +35,7 @@ public interface MobilePunchService {
    * @return the response
    */
   @POST("projects")
-  Response<ProjectEntity> postProject(
+  Call<ResponseBody> postProject(
       @Header("Authorization") String authorization, @Body ProjectEntity project);
 
   /**
@@ -67,7 +66,7 @@ public interface MobilePunchService {
    * @return the response
    */
   @POST("clients")
-  Response<ClientEntity> postClient(
+  Call<ResponseBody> postClient(
       @Header("Authorization") String authorization, @Body ClientEntity clients);
 
   /**
@@ -98,7 +97,7 @@ public interface MobilePunchService {
    * @return the response
    */
   @POST("equipment")
-  Response<EquipmentEntity> postEquipment(
+  Call<ResponseBody> postEquipment(
       @Header("Authorization") String authorization, @Body EquipmentEntity equipment);
 
   /**

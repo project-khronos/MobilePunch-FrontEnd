@@ -408,7 +408,8 @@ public class EventFragment extends Fragment {
           R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
 
       try {
-        MainActivity.getInstance().getService().postProject(token, projectEntity);
+
+        MainActivity.getInstance().getService().postProject(token, projectEntity).execute();
       } catch (Exception e) {
         e.printStackTrace();
         // Do nothing, out of scope

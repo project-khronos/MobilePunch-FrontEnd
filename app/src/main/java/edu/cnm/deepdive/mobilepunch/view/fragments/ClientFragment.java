@@ -108,7 +108,7 @@ public class ClientFragment extends Fragment {
       String token = mainActivity.get().getString(
           R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
       try {
-        mainActivity.get().getService().postClient(token, clientEntities[0]);
+        mainActivity.get().getService().postClient(token, clientEntities[0]).execute();
       } catch (Exception e) {
         e.printStackTrace();
         // Do nothing, out of scope

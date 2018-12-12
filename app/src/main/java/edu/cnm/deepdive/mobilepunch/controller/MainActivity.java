@@ -179,6 +179,7 @@ public class MainActivity extends AppCompatActivity
   private void setupService() {
     Gson gson = new GsonBuilder()
         .excludeFieldsWithoutExposeAnnotation()
+        .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
         .create();
     service = new Builder()
         // TODO change base_url value.
@@ -243,7 +244,7 @@ public class MainActivity extends AppCompatActivity
         Response<List<ClientEntity>> clientsResponse = service.getClients(token).execute();
         Response<List<EquipmentEntity>> equipmentResponse = service.getEquipment(token).execute();
 
-        Response<ResponseBody> eqJson = service.getClientsJson(token).execute();
+        Response<ResponseBody> eqJson = service.getProjectsJson(token).execute();
         //Use this to see raw response, needs a jsoncall.
         Log.d(TAG, "RAW JSON: " + eqJson.body().string());
         if (projectsResponse.isSuccessful()
@@ -286,6 +287,7 @@ public class MainActivity extends AppCompatActivity
           }
 
           if (projects != null) {
+            dataBase.getProjectDao().insert(projects);
             List<EventEntity> events = MobilePunchDatabase.getEventsFromProject(projects);
             for (EventEntity event : events) {
               if (event.getEquipment() != null) {

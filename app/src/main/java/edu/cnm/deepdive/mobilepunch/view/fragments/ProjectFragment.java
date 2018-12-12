@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import edu.cnm.deepdive.mobilepunch.model.db.MobilePunchDatabase;
 import edu.cnm.deepdive.mobilepunch.model.entities.ClientEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.ProjectEntity;
 import edu.cnm.deepdive.mobilepunch.model.entities.abstraction.UuidSetter;
+import edu.cnm.deepdive.mobilepunch.service.MobilePunchService;
 import edu.cnm.deepdive.mobilepunch.view.custom_widgets.BasicEditText;
 import edu.cnm.deepdive.mobilepunch.view.fragments.helpers.DayOfWeekHelper;
 import java.lang.ref.WeakReference;
@@ -29,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 
 /**
@@ -178,6 +182,7 @@ public class ProjectFragment extends Fragment {
   private static class InsertProject extends AsyncTask<ProjectEntity, Void, Void> {
 
     private WeakReference<MainActivity> mainActivity;
+    private String TAG = "tag";
 
     /**
      * Instantiates a new Insert project.
@@ -195,7 +200,9 @@ public class ProjectFragment extends Fragment {
       String token = mainActivity.get().getString(
           R.string.oauth2_header, FrontendApplication.getInstance().getAccount().getIdToken());
       try {
-        MainActivity.getInstance().getService().postProject(token, projectEntities[0]);
+        MobilePunchService service = MainActivity.getInstance().getService();
+        Response<ResponseBody> respons = service.postProject(token, projectEntities[0]).execute();
+        Log.d(TAG, respons.raw().toString());
       } catch (Exception e) {
         e.printStackTrace();
         // Do nothing, out of scope
