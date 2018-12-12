@@ -93,17 +93,17 @@ A repository for hosting the front end of Project Kronos.
 Project Khronos is still in the development stage with a few things being added as we go. Our main focus is to ensure user satisfaction and maintain consistency within the app. We are definetly open to suggestions and any requests can be sent to [Project Khronos email here]. As for functionality [click here](#function) for a fairly current answer. Main points and known bugs would be:
 
 ##### Future Elements
-*Implement working map 
-*Make UI easier to navigate possibly using the "two click" rule
-*Add a project field along with displaying all attributes of an event in the recycler view
+* Implement working map 
+* Make UI easier to navigate possibly using the "two click" rule
+* Add a project field along with displaying all attributes of an event in the recycler view
 
 ##### Known Bugs
-*When clicking date picker rapidly, it will crash due to an instance of the widget already being open
+* When clicking date picker rapidly, it will crash due to an instance of the widget already being open
 
 ## Client Side Components Improvements
 Project Khronos has many complex and in our opinion, beautiful, widgets, textfields, and UI interactives as a whole. However, we do feel that there could be improvements. We do feel that the color scheme does fit most of the needs of the clients, but there could be a little more diversity and creativity within the app. Some subtle, yet effective enhancements would include:
 
-*Better transistions between fragements
-*More customization within the ammount of available colors
-*Allow users to scale for work with gloves
-*Add a more responsive UI to notify the user of successful additions to the database
+* Better transistions between fragements
+* More customization within the ammount of available colors
+* Allow users to scale for work with gloves
+* Add a more responsive UI to notify the user of successful additions to the database
