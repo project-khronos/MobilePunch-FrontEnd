@@ -105,5 +105,5 @@ Project Khronos has many complex and in our opinion, beautiful, widgets, textfie
 
 * Better transistions between fragements
 * More customization within the ammount of available colors
-* Allow users to scale for work with gloves
+* Allow users to scale UI for work with gloves
 * Add a more responsive UI to notify the user of successful additions to the database
