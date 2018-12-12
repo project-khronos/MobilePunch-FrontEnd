@@ -65,14 +65,6 @@ Project Khronos is still in the development stage with a few things being added 
 * Google.android.gms:play-services-maps:16.0.0
 * Google.android.gms:play-services-location:16.0.0
 
-## User Instructions
-Upon successful installation of the app follow these steps:
-1. Sign in to the app using your google account
-2. Once signed in, click the overflow menu on the top left side. From here you are able to add a neccessary component to your task at hand. 
-3. Click any of the four options and fill the fields out as needed. If anything is required that was left blank you will be notified to fix it with a message box appearing from the bottom. 
-4. Navigate to the home screen which you can identify with four cards displaying the four available options (projects, clients, equipment, events. 
-5. Click any one of them and you will be presented with a list of all the submissions that you have done. If none have been submitted you will see a message again, letting you know that it could not find any records that met your search. 
-6. Enjoy!
 
 ## External Services Used
 * Google Sign In
@@ -105,7 +97,7 @@ Project Khronos has many complex and in our opinion, beautiful, widgets, textfie
 ## [DDL](ddl.sql)
 ## [Build Instructions](Build2.pdf)
 
-
+## [User Instructions]
   
 ## Licenses
 
